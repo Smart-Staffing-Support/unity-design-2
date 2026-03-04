@@ -164,7 +164,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
 import { Plus, Printer } from 'lucide-vue-next'
 import DateField from './shared/DateField.vue'
@@ -172,27 +172,17 @@ import SelectField from './shared/SelectField.vue'
 import InputField from './shared/InputField.vue'
 import SummaryStat from './shared/SummaryStat.vue'
 
-export default {
-  name: 'Financials',
+const props = defineProps({
+  theme: { type: String, default: 'light' },
+})
 
-  components: { Plus, Printer, DateField, SelectField, InputField, SummaryStat },
+const isDark = computed(() => props.theme === 'dark')
 
-  props: {
-    theme: { type: String, default: 'light' },
-  },
-
-  setup(props) {
-    const isDark = computed(() => props.theme === 'dark')
-
-    const tableHeaders = [
-      'Date', 'Description', 'ID', 'Note', 'Collector',
-      'Amount', 'Principal', 'Interest', 'Costs', 'Atty Fees',
-      '3rd Party', 'Agency', 'Client', 'Balance', 'Action',
-    ]
-
-    return { isDark, tableHeaders }
-  },
-}
+const tableHeaders = [
+  'Date', 'Description', 'ID', 'Note', 'Collector',
+  'Amount', 'Principal', 'Interest', 'Costs', 'Atty Fees',
+  '3rd Party', 'Agency', 'Client', 'Balance', 'Action',
+]
 </script>
 
 <style scoped>

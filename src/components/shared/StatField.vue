@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-column ga-2">
     <span class="text-body-2 text-capitalize text-fields_label">
-      {{ props.label }}
+      {{ label }}
     </span>
     <span
       :class="[
@@ -11,30 +11,32 @@
         isDark ? 'text-white' : 'text-blue-grey-darken-4',
       ]"
     >
-      {{ props.value }}
+      {{ value }}
     </span>
   </div>
 </template>
 
 <script setup>
 import { computed } from 'vue'
-import { useTheme } from 'vuetify';
+import { useTheme } from 'vuetify'
 
+const props = defineProps({
+  label: {
+    type: String,
+    required: true,
+  },
+  value: {
+    type: String,
+    required: true,
+  },
+  isMono: {
+    type: Boolean,
+    default: false,
+  },
+})
 
-  const props = defineProps({
-    label: {
-      type: String,
-      required: true,
-    },
-    value: {
-      type: String,
-      required: true,
-    },
-  })
-
-  const theme = useTheme()
-  const isDark = computed(() => theme.global.current.value.dark)
-
+const theme = useTheme()
+const isDark = computed(() => theme.global.current.value.dark)
 </script>
 
 <style scoped>

@@ -23,22 +23,15 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
 
-export default {
-  name: 'SummaryStat',
+const props = defineProps({
+  label: { type: String, required: true },
+  value: { type: String, required: true },
+  isTotal: { type: Boolean, default: false },
+  theme: { type: String, default: 'light' },
+})
 
-  props: {
-    label: { type: String, required: true },
-    value: { type: String, required: true },
-    isTotal: { type: Boolean, default: false },
-    theme: { type: String, default: 'light' },
-  },
-
-  setup(props) {
-    const isDark = computed(() => props.theme === 'dark')
-    return { isDark }
-  },
-}
+const isDark = computed(() => props.theme === 'dark')
 </script>
