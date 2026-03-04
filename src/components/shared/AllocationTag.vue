@@ -44,23 +44,23 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
 
-export default {
-  name: 'AllocationTag',
+//export default {
+  //name: 'AllocationTag',
 
-  props: {
+  const props = defineProps ({
     label: { type: String, required: true },
     order: { type: Number, required: true },
     theme: { type: String, default: 'light' },
-  },
+  })
 
-  setup(props) {
+  //setup(props) {
     const isDark = computed(() => props.theme === 'dark')
-    return { isDark }
-  },
-}
+    //return { isDark }
+  //},
+//}
 </script>
 
 <style scoped>
