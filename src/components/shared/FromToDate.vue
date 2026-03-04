@@ -23,23 +23,16 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
 
-export default {
-  name: 'FromToDate',
+defineProps({
+  label: { type: String, required: true },
+  theme: { type: String, default: 'light' },
+  className: { type: String, default: '' },
+})
 
-  props: {
-    label: { type: String, required: true },
-    theme: { type: String, default: 'light' },
-    className: { type: String, default: '' },
-  },
-
-  setup(props) {
-    const isDark = computed(() => props.theme === 'dark')
-    return { isDark }
-  },
-}
+const isDark = computed(() => props.theme === 'dark')
 </script>
 
 <style scoped>

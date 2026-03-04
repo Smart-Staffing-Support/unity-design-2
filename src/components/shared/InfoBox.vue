@@ -25,22 +25,22 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
 
-export default {
-  name: 'InfoBox',
+defineProps({
+  label: { type: String, required: true },
+  value: { type: String, default: null },
+  subValue: { type: String, default: null },
+  theme: { type: String, default: 'light' },
+})
 
-  props: {
-    label: { type: String, required: true },
-    value: { type: String, default: null },
-    subValue: { type: String, default: null },
-    theme: { type: String, default: 'light' },
-  },
+const props = defineProps({
+  label: { type: String, required: true },
+  value: { type: String, default: null },
+  subValue: { type: String, default: null },
+  theme: { type: String, default: 'light' },
+})
 
-  setup(props) {
-    const isDark = computed(() => props.theme === 'dark')
-    return { isDark }
-  },
-}
+const isDark = computed(() => props.theme === 'dark')
 </script>

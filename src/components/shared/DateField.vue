@@ -15,6 +15,21 @@
 import { computed } from 'vue'
 import { useTheme } from 'vuetify'
 
+const props = defineProps({
+  label: {
+    type: String,
+    required: true,
+  }
+})
+
+const theme = useTheme()
+const isDark = computed(() => theme.global.current.value.dark)
+</script>
+
+<script setup>
+import { computed } from 'vue'
+import { useTheme } from 'vuetify'
+
   const props = defineProps({
     label: {
       type: String,

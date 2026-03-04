@@ -20,17 +20,15 @@
 import { computed } from 'vue'
 import { useTheme } from 'vuetify'
 
-  const props = defineProps({
-    label: { type: String, required: true },
-    placeholder: { type: String, default: '' },
-    type: { type: String, default: 'text' },
-    className: { type: String, default: '' },
-  })
+const props = defineProps({
+  label: { type: String, required: true },
+  placeholder: { type: String, default: '' },
+  type: { type: String, default: 'text' },
+  className: { type: String, default: '' },
+})
 
-  const theme = useTheme()
-  const isDark = computed(() => theme.global.current.value.dark)
-
-
+const theme = useTheme()
+const isDark = computed(() => theme.global.current.value.dark)
 </script>
 
 <style scoped>

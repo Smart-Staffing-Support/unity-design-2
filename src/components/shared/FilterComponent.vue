@@ -259,7 +259,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
 import { RotateCcw } from 'lucide-vue-next'
 import SelectField from './SelectField.vue'
@@ -269,42 +269,28 @@ import CheckboxField from './CheckboxField.vue'
 import FromToDate from './FromToDate.vue'
 import DateField from './DateField.vue'
 
-export default {
-  name: 'FilterComponent',
+const props = defineProps({
+  theme: { type: String, default: 'light' },
+})
 
-  components: { RotateCcw, SelectField, InputField, MultiSearchSelect, CheckboxField, FromToDate, DateField },
+const isDark = computed(() => props.theme === 'dark')
 
-  props: {
-    theme: { type: String, default: 'light' },
-  },
+const multiSelects = [
+  'Collectors', 'Co-Collectors', 'Creditors', 'Clients',
+  'Action Codes', 'Legal Status', 'Main Status', 'Sub-Status',
+  'Sub-Sub-Status', 'Queues', 'Collection Status', 'Sales Rep', 'State/Province',
+]
 
-  setup(props) {
-    const isDark = computed(() => props.theme === 'dark')
+const statusSelects = [
+  { label: 'Account Type' }, { label: 'Email Type' },
+  { label: 'Letter Flows' }, { label: 'Generated Documents' },
+  { label: 'Skip Trace Type' }, { label: 'Debtor Type' },
+]
 
-    const multiSelects = [
-      'Collectors', 'Co-Collectors', 'Creditors', 'Clients',
-      'Action Codes', 'Legal Status', 'Main Status', 'Sub-Status',
-      'Sub-Sub-Status', 'Queues', 'Collection Status', 'Sales Rep', 'State/Province',
-    ]
+const consentGroup1 = ['Email Consent', 'Address Consent', 'Phone Voice Consent', 'Phone SMS Consent']
+const consentGroup2 = ['Cell Voice Consent', 'Cell SMS Consent', 'Work Phone Voice Consent', 'Work Phone SMS Consent', 'Skip Trace is Marked']
+const consentGroup3 = ['OTH Phone Voice Consent', 'OTH Phone SMS Consent', 'Fax Voice Consent', 'Fax SMS Consent']
+const consentGroup4 = ['Overdue Work Date', 'Has Not Generated Docs', 'No Active Reminders', 'Overdue Reminders', 'Report to Credit Bureau']
 
-    const statusSelects = [
-      { label: 'Account Type' }, { label: 'Email Type' },
-      { label: 'Letter Flows' }, { label: 'Generated Documents' },
-      { label: 'Skip Trace Type' }, { label: 'Debtor Type' },
-    ]
-
-    const consentGroup1 = ['Email Consent', 'Address Consent', 'Phone Voice Consent', 'Phone SMS Consent']
-    const consentGroup2 = ['Cell Voice Consent', 'Cell SMS Consent', 'Work Phone Voice Consent', 'Work Phone SMS Consent', 'Skip Trace is Marked']
-    const consentGroup3 = ['OTH Phone Voice Consent', 'OTH Phone SMS Consent', 'Fax Voice Consent', 'Fax SMS Consent']
-    const consentGroup4 = ['Overdue Work Date', 'Has Not Generated Docs', 'No Active Reminders', 'Overdue Reminders', 'Report to Credit Bureau']
-
-    const fromToDates = ['Originated Date', 'Account Received', 'Next Work Date', 'Last Updated', 'Last Skip Traced', 'Reminder Due']
-
-    return {
-      isDark, multiSelects, statusSelects,
-      consentGroup1, consentGroup2, consentGroup3, consentGroup4,
-      fromToDates,
-    }
-  },
-}
+const fromToDates = ['Originated Date', 'Account Received', 'Next Work Date', 'Last Updated', 'Last Skip Traced', 'Reminder Due']
 </script>

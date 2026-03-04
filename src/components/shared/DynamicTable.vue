@@ -225,89 +225,75 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref, computed } from 'vue'
 import { Download, Mail } from 'lucide-vue-next'
 
-export default {
-  name: 'DynamicTable',
+const props = defineProps({
+  theme:           { type: String,  default: 'light'              },
+  data:            { type: Array,   required: true                },
+  columns:         { type: Array,   required: true                },
+  rowKey:          { type: String,  default: 'id'                 },
+  title:           { type: String,  default: 'Filter Results'     },
+  subtitle:        { type: String,  default: null                 },
+  icon:            { type: Object,  default: null                 },
+  expandedFields:  { type: Array,   default: () => []             },
+  bulkActionLabel: { type: String,  default: 'Apply Bulk Actions' },
+})
 
-  components: { Download, Mail },
+const emit = defineEmits(['export', 'email-results', 'bulk-action'])
 
-  props: {
-    theme:           { type: String,  default: 'light'              },
-    data:            { type: Array,   required: true                },
-    columns:         { type: Array,   required: true                },
-    rowKey:          { type: String,  default: 'id'                 },
-    title:           { type: String,  default: 'Filter Results'     },
-    subtitle:        { type: String,  default: null                 },
-    icon:            { type: Object,  default: null                 },
-    expandedFields:  { type: Array,   default: () => []             },
-    bulkActionLabel: { type: String,  default: 'Apply Bulk Actions' },
-  },
+const isDark = computed(() => props.theme === 'dark')
 
-  emits: ['export', 'email-results', 'bulk-action'],
+const selectedIds = ref(new Set())
+const expandedRow = ref(null)
 
-  setup(props, { emit }) {
-    const isDark = computed(() => props.theme === 'dark')
+const isExpandable = computed(() =>
+  Array.isArray(props.expandedFields) && props.expandedFields.length > 0
+)
 
-    const selectedIds  = ref(new Set())
-    const expandedRow  = ref(null)
+const getRowId = (row) => row[props.rowKey]
 
-    const isExpandable = computed(() =>
-      Array.isArray(props.expandedFields) && props.expandedFields.length > 0
-    )
+const isSelected = (row) => selectedIds.value.has(getRowId(row))
 
-    const getRowId = (row) => row[props.rowKey]
+const toggleSelectAll = () => {
+  if (selectedIds.value.size === props.data.length) {
+    selectedIds.value = new Set()
+  } else {
+    selectedIds.value = new Set(props.data.map(getRowId))
+  }
+}
 
-    const isSelected = (row) => selectedIds.value.has(getRowId(row))
+const toggleRow = (id) => {
+  const next = new Set(selectedIds.value)
+  next.has(id) ? next.delete(id) : next.add(id)
+  selectedIds.value = next
+}
 
-    const toggleSelectAll = () => {
-      if (selectedIds.value.size === props.data.length) {
-        selectedIds.value = new Set()
-      } else {
-        selectedIds.value = new Set(props.data.map(getRowId))
-      }
-    }
+const toggleExpand = (id) => {
+  if (!isExpandable.value) return
+  expandedRow.value = expandedRow.value === id ? null : id
+}
 
-    const toggleRow = (id) => {
-      const next = new Set(selectedIds.value)
-      next.has(id) ? next.delete(id) : next.add(id)
-      selectedIds.value = next
-    }
+const handleBulkAction = () => {
+  const selectedRows = props.data.filter((row) => selectedIds.value.has(getRowId(row)))
+  emit('bulk-action', selectedRows)
+}
 
-    const toggleExpand = (id) => {
-      if (!isExpandable.value) return
-      expandedRow.value = expandedRow.value === id ? null : id
-    }
+const getNestedValue = (obj, key) =>
+  key.split('.').reduce((acc, k) => (acc && typeof acc === 'object' ? acc[k] : undefined), obj)
 
-    const handleBulkAction = () => {
-      const selectedRows = props.data.filter((row) => selectedIds.value.has(getRowId(row)))
-      emit('bulk-action', selectedRows)
-    }
-
-    const getNestedValue = (obj, key) =>
-      key.split('.').reduce((acc, k) => (acc && typeof acc === 'object' ? acc[k] : undefined), obj)
-
-    const renderCell = (value) => {
-      if (value === null || value === undefined)
-        return '<span style="color:#64748b;">—</span>'
-      if (typeof value === 'boolean')
-        return `<span style="display:inline-flex;align-items:center;gap:6px;font-size:0.75rem;font-weight:700;text-transform:uppercase;color:${value ? '#4ade80' : '#f87171'}">
-                  <span style="width:6px;height:6px;border-radius:50%;background:${value ? '#4ade80' : '#f87171'};"></span>
-                  ${value ? 'Yes' : 'No'}
-                </span>`
-      if (typeof value === 'object')
-        return `<code style="font-size:11px;background:rgba(30,41,59,0.8);color:#4ade80;padding:2px 6px;border-radius:4px;font-family:monospace;">${JSON.stringify(value)}</code>`
-      return String(value)
-    }
-
-    return {
-      isDark, selectedIds, expandedRow, isExpandable,
-      getRowId, isSelected, toggleSelectAll, toggleRow,
-      toggleExpand, handleBulkAction, getNestedValue, renderCell,
-    }
-  },
+const renderCell = (value) => {
+  if (value === null || value === undefined)
+    return '<span style="color:#64748b;">—</span>'
+  if (typeof value === 'boolean')
+    return `<span style="display:inline-flex;align-items:center;gap:6px;font-size:0.75rem;font-weight:700;text-transform:uppercase;color:${value ? '#4ade80' : '#f87171'}">
+              <span style="width:6px;height:6px;border-radius:50%;background:${value ? '#4ade80' : '#f87171'};"></span>
+              ${value ? 'Yes' : 'No'}
+            </span>`
+  if (typeof value === 'object')
+    return `<code style="font-size:11px;background:rgba(30,41,59,0.8);color:#4ade80;padding:2px 6px;border-radius:4px;font-family:monospace;">${JSON.stringify(value)}</code>`
+  return String(value)
 }
 </script>
 
