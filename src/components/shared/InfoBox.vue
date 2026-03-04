@@ -28,13 +28,6 @@
 <script setup>
 import { computed } from 'vue'
 
-defineProps({
-  label: { type: String, required: true },
-  value: { type: String, default: null },
-  subValue: { type: String, default: null },
-  theme: { type: String, default: 'light' },
-})
-
 const props = defineProps({
   label: { type: String, required: true },
   value: { type: String, default: null },
