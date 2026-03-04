@@ -179,32 +179,22 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
 import SelectField from './shared/SelectField.vue'
 import InfoBox from './shared/InfoBox.vue'
 import BalanceRow from './shared/BalanceRow.vue'
 
-export default {
-  name: 'ExperianReports',
+const props = defineProps({
+  theme: { type: String, default: 'light' },
+})
 
-  components: { SelectField, InfoBox, BalanceRow },
+const isDark = computed(() => props.theme === 'dark')
 
-  props: {
-    theme: { type: String, default: 'light' },
-  },
-
-  setup(props) {
-    const isDark = computed(() => props.theme === 'dark')
-
-    const delinquencyItems = [
-      { label: '30 Days',      value: '0',     colorClass: 'text-blue'          },
-      { label: '60 Days',      value: '0',     colorClass: 'text-orange'        },
-      { label: '90 Days',      value: '6,380', colorClass: 'text-red'           },
-      { label: '120-180 Days', value: '6,380', colorClass: 'text-red-darken-3'  },
-    ]
-
-    return { isDark, delinquencyItems }
-  },
-}
+const delinquencyItems = [
+  { label: '30 Days',      value: '0',     colorClass: 'text-blue'          },
+  { label: '60 Days',      value: '0',     colorClass: 'text-orange'        },
+  { label: '90 Days',      value: '6,380', colorClass: 'text-red'           },
+  { label: '120-180 Days', value: '6,380', colorClass: 'text-red-darken-3'  },
+]
 </script>

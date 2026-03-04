@@ -196,27 +196,17 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref, computed } from 'vue'
 import { Save } from 'lucide-vue-next'
 import SelectField from './shared/SelectField.vue'
 import DateField from './shared/DateField.vue'
 import InputField from './shared/InputField.vue'
 
-export default {
-  name: 'LegalDetails',
+const props = defineProps({
+  theme: { type: String, default: 'light' },
+})
 
-  components: { Save, SelectField, DateField, InputField },
-
-  props: {
-    theme: { type: String, default: 'light' },
-  },
-
-  setup(props) {
-    const isDark = computed(() => props.theme === 'dark')
-    const judgementEntered = ref(false)
-
-    return { isDark, judgementEntered }
-  },
-}
+const isDark = computed(() => props.theme === 'dark')
+const judgementEntered = ref(false)
 </script>

@@ -148,34 +148,24 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref, computed } from 'vue'
 import { MessageSquare, Send, Star } from 'lucide-vue-next'
 
-export default {
-  name: 'GlobalNotes',
+const props = defineProps({
+  theme: { type: String, default: 'light' },
+})
 
-  components: { MessageSquare, Send, Star },
+const isDark = computed(() => props.theme === 'dark')
+const newNote = ref('')
 
-  props: {
-    theme: { type: String, default: 'light' },
-  },
-
-  setup(props) {
-    const isDark = computed(() => props.theme === 'dark')
-    const newNote = ref('')
-
-    const mockNotes = [
-      { id: 1, time: '2h ago',      author: 'Sarah J.', text: 'Called debtor, promised to pay $500 by Friday.'       },
-      { id: 2, time: '1d ago',      author: 'System',   text: 'Auto-reminder sent via SMS.'                          },
-      { id: 3, time: '3d ago',      author: 'Sarah J.', text: 'Hard refusal during initial contact. Escalating.'     },
-      { id: 4, time: '4d ago',      author: 'System',   text: 'Account transferred to legal review queue.'           },
-      { id: 5, time: '1 week ago',  author: 'Admin',    text: 'Initial claim documentation verified.'                },
-    ]
-
-    return { isDark, newNote, mockNotes }
-  },
-}
+const mockNotes = [
+  { id: 1, time: '2h ago',      author: 'Sarah J.', text: 'Called debtor, promised to pay $500 by Friday.'       },
+  { id: 2, time: '1d ago',      author: 'System',   text: 'Auto-reminder sent via SMS.'                          },
+  { id: 3, time: '3d ago',      author: 'Sarah J.', text: 'Hard refusal during initial contact. Escalating.'     },
+  { id: 4, time: '4d ago',      author: 'System',   text: 'Account transferred to legal review queue.'           },
+  { id: 5, time: '1 week ago',  author: 'Admin',    text: 'Initial claim documentation verified.'                },
+]
 </script>
 
 <style scoped>
