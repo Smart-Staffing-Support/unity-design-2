@@ -47,8 +47,6 @@
 <script setup>
 import { computed } from 'vue'
 
-//export default {
-  //name: 'AllocationTag',
 
   const props = defineProps ({
     label: { type: String, required: true },
@@ -56,11 +54,7 @@ import { computed } from 'vue'
     theme: { type: String, default: 'light' },
   })
 
-  //setup(props) {
     const isDark = computed(() => props.theme === 'dark')
-    //return { isDark }
-  //},
-//}
 </script>
 
 <style scoped>

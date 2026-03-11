@@ -52,15 +52,11 @@
 <script setup>
 import { computed } from 'vue'
 
-//export default {
-  //name: 'AllocationRow',
-
   const props = defineProps ({
     label: { type: String, required: true },
     theme: { type: String, default: 'light' },
   })
 
-  //setup(props) {
     const isDark = computed(() => props.theme === 'dark')
 
     const fields = [
@@ -69,9 +65,6 @@ import { computed } from 'vue'
       { prefix: 'age %' },
     ]
 
-    //return { isDark, fields }
-  //},
-//}
 </script>
 
 <style scoped>
