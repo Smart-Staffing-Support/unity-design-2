@@ -5,7 +5,7 @@
       style="letter-spacing: 0.15em;"
       :class="isDark ? 'text-cyan-lighten-2' : 'text-blue-darken-1'"
     >
-      {{ props.label }}
+      {{ label }}
     </label>
     <div class="d-flex align-center ga-2">
       <input
@@ -26,13 +26,13 @@
 <script setup>
 import { computed } from 'vue'
 
-  const props = defineProps({
-    label: { type: String, required: true },
-    theme: { type: String, default: 'light' },
-    className: { type: String, default: '' },
-  })
+defineProps({
+  label: { type: String, required: true },
+  theme: { type: String, default: 'light' },
+  className: { type: String, default: '' },
+})
 
-  const isDark = computed(() => props.theme === 'dark')
+const isDark = computed(() => props.theme === 'dark')
 </script>
 
 <style scoped>
