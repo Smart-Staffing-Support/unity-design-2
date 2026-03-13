@@ -27,7 +27,7 @@ coverage
 *.tsbuildinfo
 
 .eslintcache
-
+/temporary_files/
 # Cypress
 /cypress/videos/
 /cypress/screenshots/
