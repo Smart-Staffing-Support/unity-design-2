@@ -1,11 +1,11 @@
 <template>
-  <div class="d-flex flex-column ga-2 w-100" :class="props.className">
+  <div class="d-flex flex-column ga-2 w-100" :class="className">
     <label class="text-body-2 text-capitalize text-fields_label ls-widest">
-      {{ props.label }}
+      {{ label }}
     </label>
     <div class="position-relative select-wrapper">
       <select
-        :value="props.modelValue ?? props.defaultValue"
+        :value="modelValue ?? defaultValue"
         @change="handleChange"
         :class="[
           'select-field',
@@ -20,7 +20,7 @@
       >
         
         <option
-          v-for="opt in props.options"
+          v-for="opt in options"
           :key="opt.value"
           :value="opt.value"
           :class="isDark ? 'bg-grey-darken-4 text-white' : 'bg-white text-blue-grey-darken-4'"
@@ -45,39 +45,37 @@
 import { computed } from 'vue'
 import { useTheme } from 'vuetify'
 
+const props = defineProps({
+  label: {
+    type: String,
+    required: true,
+  },
+  options: {
+    type: Array,
+    required: true,
+  },
+  defaultValue: {
+    type: String,
+    default: undefined,
+  },
+  modelValue: {
+    type: String,
+    default: undefined,
+  },
+  className: {
+    type: String,
+    default: '',
+  },
+})
 
-  const props = defineProps({
-    label: {
-      type: String,
-      required: true,
-    },
-    options: {
-      type: Array,
-      required: true,
-    },
-    defaultValue: {
-      type: String,
-      default: undefined,
-    },
-    modelValue: {
-      type: String,
-      default: undefined,
-    },
-    className: {
-      type: String,
-      default: '',
-    },
-  })
+const emit = defineEmits(['update:modelValue', 'change'])
+const theme = useTheme()
+const isDark = computed(() => theme.global.current.value.dark)
 
-  const emit = defineEmits(['update:modelValue', 'change'])
-  const theme = useTheme()
-  const isDark = computed(() => theme.global.current.value.dark)
-
-  const handleChange = (e) => {
-    emit('update:modelValue', e.target.value)
-    emit('change', e.target.value)
-  }
-
+const handleChange = (e) => {
+  emit('update:modelValue', e.target.value)
+  emit('change', e.target.value)
+}
 </script>
 
 <style scoped>

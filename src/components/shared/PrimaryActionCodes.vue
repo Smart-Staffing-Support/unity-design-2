@@ -20,36 +20,28 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
 
-export default {
-  name: 'PrimaryActionCodes',
-
-  props: {
-    theme: {
-      type: String,
-      default: 'light',
-    },
-    className: {
-      type: String,
-      default: '',
-    },
+const props = defineProps({
+  theme: {
+    type: String,
+    default: 'light',
   },
-
-  setup(props) {
-    const isDark = computed(() => props.theme === 'dark')
-
-    const primaryActionCodes = [
-      { code: 'CALL',  label: 'DO NOT CALL',        color: 'red-darken-2'   },
-      { code: 'SMS',   label: 'EMAILS ONLY',         color: 'lime-darken-1'  },
-      { code: 'EMAIL', label: 'ENFORCE JUDGEMENT',   color: 'amber-darken-1' },
-      { code: 'PTP',   label: 'ABC',                 color: 'green-darken-2' },
-    ]
-
-    return { isDark, primaryActionCodes }
+  className: {
+    type: String,
+    default: '',
   },
-}
+})
+
+const isDark = computed(() => props.theme === 'dark')
+
+const primaryActionCodes = [
+  { code: 'CALL',  label: 'DO NOT CALL',        color: 'red-darken-2'   },
+  { code: 'SMS',   label: 'EMAILS ONLY',         color: 'lime-darken-1'  },
+  { code: 'EMAIL', label: 'ENFORCE JUDGEMENT',   color: 'amber-darken-1' },
+  { code: 'PTP',   label: 'ABC',                 color: 'green-darken-2' },
+]
 </script>
 
 <style scoped>

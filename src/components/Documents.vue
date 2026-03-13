@@ -120,53 +120,43 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref, computed } from 'vue'
 import { Folder, FileText, ChevronLeft, HardDrive } from 'lucide-vue-next'
 
-export default {
-  name: 'Documents',
+const props = defineProps({
+  theme: { type: String, default: 'light' },
+})
 
-  components: { Folder, FileText, ChevronLeft, HardDrive },
+const isDark = computed(() => props.theme === 'dark')
 
-  props: {
-    theme: { type: String, default: 'light' },
+const directory = ref([
+  {
+    id: '1',
+    name: 'Client agreements',
+    type: 'folder',
+    files: [
+      { id: 'f1', name: 'Standard_contract.pdf',        type: 'file', size: '1.2mb' },
+      { id: 'f2', name: 'Service_level_agreement.docx', type: 'file', size: '850kb' },
+    ],
   },
-
-  setup(props) {
-    const isDark = computed(() => props.theme === 'dark')
-
-    const directory = ref([
-      {
-        id: '1',
-        name: 'Client agreements',
-        type: 'folder',
-        files: [
-          { id: 'f1', name: 'Standard_contract.pdf',        type: 'file', size: '1.2mb' },
-          { id: 'f2', name: 'Service_level_agreement.docx', type: 'file', size: '850kb' },
-        ],
-      },
-      {
-        id: '2',
-        name: 'Financial reports',
-        type: 'folder',
-        files: [
-          { id: 'f3', name: 'Q1_earnings.csv', type: 'file', size: '2.4mb' },
-        ],
-      },
-      {
-        id: '3',
-        name: 'Legal notices',
-        type: 'folder',
-        files: [],
-      },
-    ])
-
-    const activeFolder = ref(null)
-
-    return { isDark, directory, activeFolder }
+  {
+    id: '2',
+    name: 'Financial reports',
+    type: 'folder',
+    files: [
+      { id: 'f3', name: 'Q1_earnings.csv', type: 'file', size: '2.4mb' },
+    ],
   },
-}
+  {
+    id: '3',
+    name: 'Legal notices',
+    type: 'folder',
+    files: [],
+  },
+])
+
+const activeFolder = ref(null)
 </script>
 
 <style scoped>

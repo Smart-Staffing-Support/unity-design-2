@@ -147,55 +147,42 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref, computed } from 'vue'
 import { Calendar, Clock, CheckCircle2, MoreHorizontal, StickyNote, User, Plus } from 'lucide-vue-next'
 import ImportancePill from './shared/ImportancePill.vue'
 import AddReminder from './AddReminder.vue'
 
-export default {
-  name: 'RemindersFeed',
+const props = defineProps({
+  theme: { type: String, default: 'light' },
+})
 
-  components: {
-    Calendar, Clock, CheckCircle2, MoreHorizontal, StickyNote, User, Plus,
-    ImportancePill, AddReminder,
+const isDark = computed(() => props.theme === 'dark')
+const isFiltersModalOpen = ref(false)
+
+const reminders = [
+  {
+    id: '1',
+    dueDate: '02/20/2026',
+    timeOfDay: '10:30 am',
+    accountRef: '#882019',
+    description: 'Follow up on settlement',
+    notes: 'Client mentioned they would have funds by friday afternoon.',
+    importance: 'urgent',
+    collector: 'Jacob King',
   },
-
-  props: {
-    theme: { type: String, default: 'light' },
+  {
+    id: '2',
+    dueDate: '02/22/2026',
+    timeOfDay: '02:00 pm',
+    accountRef: '#774012',
+    description: 'Verify bank wire',
+    notes: 'Check if the $500.00 posted to account via the portal.',
+    importance: 'medium',
+    collector: 'Jonathan Oswald',
+    dateCompleted: '02/18/2026',
   },
-
-  setup(props) {
-    const isDark = computed(() => props.theme === 'dark')
-    const isFiltersModalOpen = ref(false)
-
-    const reminders = [
-      {
-        id: '1',
-        dueDate: '02/20/2026',
-        timeOfDay: '10:30 am',
-        accountRef: '#882019',
-        description: 'Follow up on settlement',
-        notes: 'Client mentioned they would have funds by friday afternoon.',
-        importance: 'urgent',
-        collector: 'Jacob King',
-      },
-      {
-        id: '2',
-        dueDate: '02/22/2026',
-        timeOfDay: '02:00 pm',
-        accountRef: '#774012',
-        description: 'Verify bank wire',
-        notes: 'Check if the $500.00 posted to account via the portal.',
-        importance: 'medium',
-        collector: 'Jonathan Oswald',
-        dateCompleted: '02/18/2026',
-      },
-    ]
-
-    return { isDark, isFiltersModalOpen, reminders }
-  },
-}
+]
 </script>
 
 <style scoped>

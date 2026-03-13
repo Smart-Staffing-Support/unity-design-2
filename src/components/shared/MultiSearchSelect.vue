@@ -27,26 +27,17 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
 import { ChevronDown } from 'lucide-vue-next'
 
-export default {
-  name: 'MultiSearchSelect',
+const props = defineProps({
+  label: { type: String, required: true },
+  theme: { type: String, default: 'light' },
+  isFilter: { type: Boolean, default: false },
+})
 
-  components: { ChevronDown },
-
-  props: {
-    label: { type: String, required: true },
-    theme: { type: String, default: 'light' },
-    isFilter: { type: Boolean, default: false },
-  },
-
-  setup(props) {
-    const isDark = computed(() => props.theme === 'dark')
-    return { isDark }
-  },
-}
+const isDark = computed(() => props.theme === 'dark')
 </script>
 
 <style scoped>

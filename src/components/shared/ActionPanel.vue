@@ -35,21 +35,16 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
 import { Hash } from 'lucide-vue-next'
 
-export default {
-  name: 'ActionPanel',
 
-  components: { Hash },
-
-  props: {
+  const props = defineProps( {
     theme: { type: String, default: 'light' },
     className: { type: String, default: '' },
-  },
+  })
 
-  setup(props) {
     const isDark = computed(() => props.theme === 'dark')
 
     const actionCodes = computed(() => [
@@ -91,9 +86,6 @@ export default {
       },
     ])
 
-    return { isDark, actionCodes }
-  },
-}
 </script>
 
 <style scoped>

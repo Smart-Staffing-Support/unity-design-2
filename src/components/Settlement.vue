@@ -29,17 +29,13 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import DateField from './shared/DateField.vue'
 import InputField from './shared/InputField.vue';
 
-export default {
-  name: 'Settlement',
+defineOptions({ name: 'Settlement' });
 
-  components: { DateField, InputField },
-
-  props: {
-    theme: { type: String, default: 'light' },
-  },
-}
+const props = defineProps({
+  theme: { type: String, default: 'light' },
+});
 </script>

@@ -303,30 +303,20 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref, computed } from 'vue'
 import { CheckCircle2, Save, Scale } from 'lucide-vue-next'
 import DateField from './shared/DateField.vue'
 import InputField from './shared/InputField.vue'
 import SelectField from './shared/SelectField.vue'
 
-export default {
-  name: 'Judgment',
+const props = defineProps({
+  theme: { type: String, default: 'light' },
+})
 
-  components: { CheckCircle2, Save, Scale, DateField, InputField, SelectField },
-
-  props: {
-    theme: { type: String, default: 'light' },
-  },
-
-  setup(props) {
-    const isDark = computed(() => props.theme === 'dark')
-    const postJudgmentInterest = ref(false)
-    const preJudgmentPayments = ref(false)
-
-    return { isDark, postJudgmentInterest, preJudgmentPayments }
-  },
-}
+const isDark = computed(() => props.theme === 'dark')
+const postJudgmentInterest = ref(false)
+const preJudgmentPayments = ref(false)
 </script>
 
 <style scoped>

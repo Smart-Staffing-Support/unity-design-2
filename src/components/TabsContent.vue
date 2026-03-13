@@ -67,13 +67,7 @@
 
     <!-- Tab Content -->
     <div class="d-flex position-relative" style="flex: 1; min-height: 0;">
-      <div
-        v-for="tab in tabs"
-        v-show="activeTab === tab.id"
-        :key="tab.id"
-        class="d-flex w-100"
-        style="flex: 1;"
-      >
+      <div class="d-flex w-100" style="flex: 1;">
         <div
           class="overflow-y-auto rounded-xl w-100"
           style="flex: 1; border: 1px solid; backdrop-filter: blur(12px); transition: all 0.3s;"
@@ -88,52 +82,52 @@
                 class="rounded-lg d-flex align-center justify-center"
                 style="width: 40px; height: 40px; background: rgba(37,99,235,0.2);"
               >
-                <LayoutGrid v-if="tab.id === 'details'" :size="20" class="text-blue" />
-                <FileSearch v-else-if="tab.id === 'financials'" :size="20" class="text-blue" />
+                <LayoutGrid v-if="activeTab === 'details'" :size="20" class="text-blue" />
+                <FileSearch v-else-if="activeTab === 'financials'" :size="20" class="text-blue" />
                 <History v-else :size="20" class="text-blue" />
               </div>
               <h2
                 :class="['text-h6 font-weight-bold text-uppercase', isDark ? 'text-white' : 'text-grey-darken-3']"
                 style="letter-spacing: 0.02em;"
               >
-                {{ tab.label }} / {{ activeCategory }}
+                {{ tabs.find(t => t.id === activeTab)?.label }} / {{ activeCategory }}
               </h2>
             </div>
 
             <!-- Details Tab -->
-            <template v-if="tab.id === 'details'">
+            <template v-if="activeTab === 'details'">
               <CategoryView :category="activeCategory" :theme="theme" :active-creditor="activeCreditor" />
             </template>
 
             <!-- Financials Tab -->
-            <template v-else-if="tab.id === 'financials'">
+            <template v-else-if="activeTab === 'financials'">
               <Financials :theme="theme" />
             </template>
 
             <!-- Plan Tab -->
-            <template v-else-if="tab.id === 'plan'">
+            <template v-else-if="activeTab === 'plan'">
               <Plan :theme="theme" />
             </template>
 
             <!-- Folder Tab -->
-            <template v-else-if="tab.id === 'folder'">
+            <template v-else-if="activeTab === 'folder'">
               <div class="d-flex flex-column ga-8">
                 <Documents :theme="theme" />
               </div>
             </template>
 
             <!-- Judgment Tab -->
-            <template v-else-if="tab.id === 'judgment'">
+            <template v-else-if="activeTab === 'judgment'">
               <Judgment :theme="theme" />
             </template>
 
             <!-- Legal Tab -->
-            <template v-else-if="tab.id === 'legal'">
+            <template v-else-if="activeTab === 'legal'">
               <LegalDetails :theme="theme" />
             </template>
 
             <!-- Allocations Tab -->
-            <template v-else-if="tab.id === 'allocations'">
+            <template v-else-if="activeTab === 'allocations'">
               <div class="d-flex flex-column ga-8">
                 <TransactionAllocations :theme="theme" />
                 <div class="d-flex justify-end pt-8" style="border-top: 1px solid rgba(255,255,255,0.05)">
@@ -146,14 +140,14 @@
             </template>
 
             <!-- Reminders Tab -->
-            <template v-else-if="tab.id === 'reminders'">
+            <template v-else-if="activeTab === 'reminders'">
               <div class="d-flex flex-column ga-8">
                 <RemindersFeed :theme="theme" />
               </div>
             </template>
 
             <!-- Audit Logs Tab -->
-            <template v-else-if="tab.id === 'logs'">
+            <template v-else-if="activeTab === 'logs'">
               <div class="d-flex flex-column ga-8">
                 <AuditLogs :theme="theme" />
               </div>
@@ -167,7 +161,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref, computed } from 'vue'
 import { useTheme } from 'vuetify'
 import {
@@ -190,74 +184,55 @@ import Plan from './Plan.vue'
 import Financials from './Financials.vue'
 import CategoryView from './shared/CategoryView.vue'
 
-export default {
-  name: 'TabContent',
+const props = defineProps({
+  theme: { type: String, default: 'light' },
+  activeCreditor: { type: String, default: 'creditor 1' },
+})
 
-  components: {
-    FileText, CreditCard, Calendar, Folder, ClipboardList,
-    Activity, LayoutGrid, FileSearch, History, Scale, Percent, Save,
-    TransactionAllocations, RemindersFeed, AuditLogs, Documents,
-    Settlement, ExperianReports, Dispute, ContactInfoMenu,
-    SkipTracing, LegalDetails, Judgment, Plan, Financials, CategoryView,
-  },
+const vuetifyTheme = useTheme()
+const isDark = computed(() => vuetifyTheme.global.current.value.dark)
 
-  props: {
-    theme: { type: String, default: 'light' },
-    activeCreditor: { type: String, default: 'creditor 1' },
-  },
+const activeTab = ref('details')
+const activeCategory = ref('Contact Info')
+const hoveredTab = ref(null)
+const hoverTimeoutRef = ref(null)
 
-  setup(props) {
-    const vuetifyTheme = useTheme()
-    const isDark = computed(() => vuetifyTheme.global.current.value.dark)
+const tabs = [
+  { id: 'details',     label: 'Account Details',          icon: FileText     },
+  { id: 'financials',  label: 'Financials',               icon: CreditCard   },
+  { id: 'plan',        label: 'Payment Plan',             icon: Calendar     },
+  { id: 'folder',      label: 'Doc Folder',               icon: Folder       },
+  { id: 'judgment',    label: 'Judgment',                 icon: Scale        },
+  { id: 'legal',       label: 'Legal Details',            icon: FileText     },
+  { id: 'allocations', label: 'Transactions Allocations', icon: Percent      },
+  { id: 'reminders',   label: 'Reminders',                icon: ClipboardList},
+  { id: 'logs',        label: 'Audit Logs',               icon: Activity     },
+]
 
-    const activeTab = ref('details')
-    const activeCategory = ref('Contact Info')
-    const hoveredTab = ref(null)
-    const hoverTimeoutRef = ref(null)
+const submenus = {
+  details:     ['Contact Info', 'Skip Tracing', 'dispute', 'experian reports', 'settlement'],
+  financials:  [],
+  plan:        [],
+  folder:      ['Uploaded Files', 'Generated Docs', 'Templates', 'Archives'],
+  judgment:    [],
+  legal:       [],
+  allocations: [],
+  reminders:   [],
+  logs:        [],
+}
 
-    const tabs = [
-      { id: 'details',     label: 'Account Details',          icon: FileText     },
-      { id: 'financials',  label: 'Financials',               icon: CreditCard   },
-      { id: 'plan',        label: 'Payment Plan',             icon: Calendar     },
-      { id: 'folder',      label: 'Doc Folder',               icon: Folder       },
-      { id: 'judgment',    label: 'Judgment',                 icon: Scale        },
-      { id: 'legal',       label: 'Legal Details',            icon: FileText     },
-      { id: 'allocations', label: 'Transactions Allocations', icon: Percent      },
-      { id: 'reminders',   label: 'Reminders',                icon: ClipboardList},
-      { id: 'logs',        label: 'Audit Logs',               icon: Activity     },
-    ]
+const handleMouseEnter = (tabId) => {
+  if (hoverTimeoutRef.value) {
+    clearTimeout(hoverTimeoutRef.value)
+    hoverTimeoutRef.value = null
+  }
+  hoveredTab.value = tabId
+}
 
-    const submenus = {
-      details:     ['Contact Info', 'Skip Tracing', 'dispute', 'experian reports', 'settlement'],
-      financials:  [],
-      plan:        [],
-      folder:      ['Uploaded Files', 'Generated Docs', 'Templates', 'Archives'],
-      judgment:    [],
-      legal:       [],
-      allocations: [],
-      reminders:   [],
-      logs:        [],
-    }
-
-    const handleMouseEnter = (tabId) => {
-      if (hoverTimeoutRef.value) {
-        clearTimeout(hoverTimeoutRef.value)
-        hoverTimeoutRef.value = null
-      }
-      hoveredTab.value = tabId
-    }
-
-    const handleMouseLeave = () => {
-      hoverTimeoutRef.value = setTimeout(() => {
-        hoveredTab.value = null
-      }, 200)
-    }
-
-    return {
-      isDark, activeTab, activeCategory, hoveredTab,
-      tabs, submenus, handleMouseEnter, handleMouseLeave,
-    }
-  },
+const handleMouseLeave = () => {
+  hoverTimeoutRef.value = setTimeout(() => {
+    hoveredTab.value = null
+  }, 200)
 }
 </script>
 

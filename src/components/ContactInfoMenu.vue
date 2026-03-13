@@ -1,8 +1,8 @@
 <template>
-  <div class="d-flex flex-column ga-8">
+  <div class="d-flex flex-column ga-4">
 
     <!-- Section: Primary Locations -->
-    <section class="d-flex flex-column ga-4">
+    <section class="d-flex flex-column ga-0">
       <div class="d-flex align-center ga-2 mb-2">
         <div class="rounded-pill bg-blue-darken-1" style="height: 20px; width: 4px;" />
         <h4
@@ -66,7 +66,7 @@
 
       <!-- Phone Numbers -->
       <v-col cols="12" lg="6">
-        <section class="d-flex flex-column ga-4">
+        <section class="d-flex flex-column ga-2">
           <div class="d-flex align-center ga-2 mb-2">
             <div class="rounded-pill bg-orange-darken-1" style="height: 20px; width: 4px;" />
             <h4
@@ -127,7 +127,7 @@
 
       <!-- Email Addresses -->
       <v-col cols="12" lg="6">
-        <section class="d-flex flex-column ga-4">
+        <section class="d-flex flex-column ga-2">
           <div class="d-flex align-center ga-2 mb-2">
             <div class="rounded-pill bg-teal-darken-1" style="height: 20px; width: 4px;" />
             <h4
@@ -228,46 +228,36 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
 import { Briefcase, PenLine, Phone, Smartphone, User } from 'lucide-vue-next'
 
-export default {
-  name: 'ContactInfoMenu',
+const props = defineProps({
+  theme: { type: String, default: 'light' },
+})
 
-  components: { Briefcase, PenLine, Phone, Smartphone, User },
+const isDark = computed(() => props.theme === 'dark')
 
-  props: {
-    theme: { type: String, default: 'light' },
+const addresses = [
+  { id: 'home1', addr: '498 Elm Ave, San Bruno, CA 94066',              status: 'Good',    type: 'Home' },
+  { id: 'home2', addr: '269 EL Camino Real, San Francisco, CA 94080',   status: 'Unknown', type: 'Work' },
+]
+
+const phones = computed(() => [
+  {
+    id: 'ph1', label: 'From Experian', num: '415-310-1981', status: 'Bad',
+    icon: Phone,
+    colorStyle: isDark.value ? 'color: #48c78e;' : 'color: #16a34a;',
   },
-
-  setup(props) {
-    const isDark = computed(() => props.theme === 'dark')
-
-    const addresses = [
-      { id: 'home1', addr: '498 Elm Ave, San Bruno, CA 94066',              status: 'Good',    type: 'Home' },
-      { id: 'home2', addr: '269 EL Camino Real, San Francisco, CA 94080',   status: 'Unknown', type: 'Work' },
-    ]
-
-    const phones = computed(() => [
-      {
-        id: 'ph1', label: 'From Experian', num: '415-310-1981', status: 'Bad',
-        icon: Phone,
-        colorStyle: isDark.value ? 'color: #48c78e;' : 'color: #16a34a;',
-      },
-      {
-        id: 'ph2', label: 'From IDI', num: '415-310-4188', status: 'Good',
-        icon: Smartphone,
-        colorStyle: isDark.value ? 'color: #fb923c;' : 'color: #ea580c;',
-      },
-    ])
-
-    const emails = [
-      { id: 'em1', mail: 'boracaygarden@att.net',  status: 'Good' },
-      { id: 'em2', mail: 'hyattgirl55@yahoo.com',  status: 'Bad'  },
-    ]
-
-    return { isDark, addresses, phones, emails }
+  {
+    id: 'ph2', label: 'From IDI', num: '415-310-4188', status: 'Good',
+    icon: Smartphone,
+    colorStyle: isDark.value ? 'color: #fb923c;' : 'color: #ea580c;',
   },
-}
+])
+
+const emails = [
+  { id: 'em1', mail: 'boracaygarden@att.net',  status: 'Good' },
+  { id: 'em2', mail: 'hyattgirl55@yahoo.com',  status: 'Bad'  },
+]
 </script>

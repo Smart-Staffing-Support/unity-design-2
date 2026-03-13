@@ -165,33 +165,23 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
 import { AlertCircle, Download, Mail, Paperclip, Plus, Printer, Trash2 } from 'lucide-vue-next'
 import DateField from './shared/DateField.vue'
 import SelectField from './shared/SelectField.vue'
 
-export default {
-  name: 'Dispute',
+const props = defineProps({
+  theme: { type: String, default: 'light' },
+})
 
-  components: { AlertCircle, Download, Mail, Paperclip, Plus, Printer, Trash2, DateField, SelectField },
+const isDark = computed(() => props.theme === 'dark')
 
-  props: {
-    theme: { type: String, default: 'light' },
-  },
-
-  setup(props) {
-    const isDark = computed(() => props.theme === 'dark')
-
-    const utilityButtons = [
-      { icon: Mail },
-      { icon: Printer },
-      { icon: Download },
-    ]
-
-    return { isDark, utilityButtons }
-  },
-}
+const utilityButtons = [
+  { icon: Mail },
+  { icon: Printer },
+  { icon: Download },
+]
 </script>
 
 <style scoped>

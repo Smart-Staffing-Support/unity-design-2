@@ -19,21 +19,17 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
 
-export default {
-  name: 'BalanceRow',
 
-  props: {
+
+  const props = defineProps ({
     label: { type: String, required: true },
     value: { type: String, required: true },
     theme: { type: String, default: 'light' },
-  },
+  })
 
-  setup(props) {
     const isDark = computed(() => props.theme === 'dark')
-    return { isDark }
-  },
-}
+
 </script>

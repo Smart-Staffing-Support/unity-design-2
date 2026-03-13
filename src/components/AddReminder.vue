@@ -120,7 +120,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
 import { RotateCcw } from 'lucide-vue-next'
 import SelectField from './shared/SelectField.vue'
@@ -128,20 +128,11 @@ import InputField from './shared/InputField.vue'
 import MultiSearchSelect from './shared/MultiSearchSelect.vue'
 import DateField from './shared/DateField.vue'
 
-export default {
-  name: 'AddReminder',
+const props = defineProps({
+  theme: { type: String, default: 'light' },
+})
 
-  components: { RotateCcw, SelectField, InputField, MultiSearchSelect, DateField },
-
-  props: {
-    theme: { type: String, default: 'light' },
-  },
-
-  setup(props) {
-    const isDark = computed(() => props.theme === 'dark')
-    return { isDark }
-  },
-}
+const isDark = computed(() => props.theme === 'dark')
 </script>
 
 <style scoped>

@@ -40,28 +40,19 @@
   </label>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
 import { Check } from 'lucide-vue-next'
 
-export default {
-  name: 'CheckboxField',
-
-  components: { Check },
-
-  props: {
+  const props = defineProps ({
     label:   { type: String,  required: true  },
     checked: { type: Boolean, default: false  },
     theme:   { type: String,  default: 'light'},
-  },
+  })
 
-  emits: ['update:checked'],
+  const emits = defineEmits (['update:checked'])
 
-  setup(props) {
     const isDark = computed(() => props.theme === 'dark')
-    return { isDark }
-  },
-}
 </script>
 
 <style scoped>

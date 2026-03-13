@@ -21,22 +21,17 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
 
-export default {
-  name: 'AssetStat',
 
-  props: {
+  const props = defineProps ({
     label: { type: String, required: true },
     value: { type: String, default: null },
     highlight: { type: Boolean, default: false },
     theme: { type: String, default: 'light' },
-  },
+  })
 
-  setup(props) {
     const isDark = computed(() => props.theme === 'dark')
-    return { isDark }
-  },
-}
+
 </script>

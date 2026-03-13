@@ -140,26 +140,17 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
 import { Activity } from 'lucide-vue-next'
 import SelectField from './shared/SelectField.vue'
 import AssetStat from './shared/AssetStat.vue'
 
-export default {
-  name: 'SkipTracing',
+const props = defineProps({
+  theme: { type: String, default: 'light' },
+})
 
-  components: { Activity, SelectField, AssetStat },
-
-  props: {
-    theme: { type: String, default: 'light' },
-  },
-
-  setup(props) {
-    const isDark = computed(() => props.theme === 'dark')
-    return { isDark }
-  },
-}
+const isDark = computed(() => props.theme === 'dark')
 </script>
 
 <style scoped>

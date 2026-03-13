@@ -266,7 +266,7 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
 import { CreditCard, Plus } from 'lucide-vue-next'
 import SelectField from './shared/SelectField.vue'
@@ -274,18 +274,9 @@ import InputField from './shared/InputField.vue'
 import DateField from './shared/DateField.vue'
 import AllocationTag from './shared/AllocationTag.vue'
 
-export default {
-  name: 'Plan',
+const props = defineProps({
+  theme: { type: String, default: 'light' },
+})
 
-  components: { CreditCard, Plus, SelectField, InputField, DateField, AllocationTag },
-
-  props: {
-    theme: { type: String, default: 'light' },
-  },
-
-  setup(props) {
-    const isDark = computed(() => props.theme === 'dark')
-    return { isDark }
-  },
-}
+const isDark = computed(() => props.theme === 'dark')
 </script>

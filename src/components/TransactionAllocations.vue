@@ -58,35 +58,25 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { computed } from 'vue'
 import { Calculator } from 'lucide-vue-next'
 import AllocationRow from './shared/AllocationRow.vue'
 
-export default {
-  name: 'TransactionAllocations',
+const props = defineProps({
+  theme: { type: String, default: 'light' },
+})
 
-  components: { Calculator, AllocationRow },
+const isDark = computed(() => props.theme === 'dark')
 
-  props: {
-    theme: { type: String, default: 'light' },
-  },
-
-  setup(props) {
-    const isDark = computed(() => props.theme === 'dark')
-
-    const categories = [
-      'Principal',
-      'Interest',
-      'Cost',
-      'Attorney fees',
-      'Over payment',
-      'Payment convenience fee',
-      'Legal costs',
-      'Collector Percentage',
-    ]
-
-    return { isDark, categories }
-  },
-}
+const categories = [
+  'Principal',
+  'Interest',
+  'Cost',
+  'Attorney fees',
+  'Over payment',
+  'Payment convenience fee',
+  'Legal costs',
+  'Collector Percentage',
+]
 </script>
