@@ -37,3 +37,4 @@ __screenshots__/
 
 # Vite
 *.timestamp-*-*.mjs
+/temporary_files/
