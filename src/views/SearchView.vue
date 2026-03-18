@@ -78,33 +78,10 @@
     </v-sheet>
 
     <!-- ADVANCED FILTERS DIALOG -->
-    <v-dialog v-model="isFiltersModalOpen" max-width="800" :scrim-opacity="0.6" :style="'backdrop-filter: blur(8px);'">
-      <v-sheet class="rounded-xl pa-6" :color="theme === 'dark' ? 'grey-darken-4' : 'white'">
-        <!-- Dialog header -->
-        <div class="d-flex justify-space-between align-center mb-6">
-          <h2 class="text-h6 font-weight-black text-uppercase" style="letter-spacing: 0.1em;"
-            :style="theme === 'dark' ? 'color: white;' : 'color: #0f172a;'">
-            Advanced Filters
-          </h2>
-          <v-btn icon="mdi-close" variant="text" size="small" @click="isFiltersModalOpen = false"
-            :color="theme === 'dark' ? 'white' : 'grey-darken-2'" />
-        </div>
+    <v-dialog v-model="isFiltersModalOpen" max-width="1600" :scrim-opacity="0.6" :style="'backdrop-filter: blur(8px);'">
 
-        <!-- FilterComponent placeholder — replace with your actual filter component -->
-        <FilterComponent :theme="theme" />
+      <FilterComponent :theme="theme" />
 
-        <!-- Dialog actions -->
-        <div class="d-flex justify-end ga-3 mt-6">
-          <v-btn variant="outlined" class="font-weight-bold text-uppercase rounded-xl" style="letter-spacing: 0.1em;"
-            :color="theme === 'dark' ? 'white' : 'grey-darken-2'" @click="isFiltersModalOpen = false">
-            Cancel
-          </v-btn>
-          <v-btn color="blue-darken-1" class="font-weight-black text-uppercase rounded-xl"
-            style="letter-spacing: 0.1em;" elevation="0" @click="applyFilters">
-            Apply Filters
-          </v-btn>
-        </div>
-      </v-sheet>
     </v-dialog>
   </v-sheet>
 </template>
@@ -127,10 +104,6 @@ const firstName = ref('');
 const lastName = ref('');
 const accountNumber = ref('');
 
-function applyFilters() {
-  // Handle filter application logic here
-  isFiltersModalOpen.value = false;
-}
 </script>
 
 <style scoped>

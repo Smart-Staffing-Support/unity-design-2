@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, provide } from 'vue';
 import { useTheme } from 'vuetify';
 // import 'globals.css'
 import Sidebar from '../components/shared/Sidebar.vue';
@@ -11,8 +11,6 @@ import GlobalNotes from '../components/GlobalNotes.vue';
 
 const activeTab = ref('home');
 
-const theme = useTheme();
-const isDark = computed(() => theme.global.current.value.dark);
 </script>
 
 <template>
@@ -59,7 +57,7 @@ const isDark = computed(() => theme.global.current.value.dark);
             <TabsContent :theme="theme" :active-creditor="activeCreditor" />
 
             <!-- Right Side Action Panel -->
-            <ActionPanel :theme="theme" class-name="action-panel-width" />
+            <ActionPanel  class-name="action-panel-width" />
           </div>
           <GlobalNotes :theme="theme" />
         </div>

@@ -122,7 +122,7 @@ const navItems = [
             <template #prepend>
               <span
                 class="d-inline-flex align-center justify-center text-sidebarIcons"
-                :class="isHovered ? 'me-4' : ''"
+                :class="isHovered ? 'me-4' : 'ml-1'"
               >
                 <component :is="item.icon" size="24" />
               </span>
