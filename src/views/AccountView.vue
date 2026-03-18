@@ -47,7 +47,7 @@ const activeTab = ref('home');
           </div>
         </template>
       </v-app-bar>
-      <PrimaryActionCodes :theme="theme" className="mt-4" />
+      <PrimaryActionCodes className="mt-4" />
       <div class="flex-1 overflow-y-auto pa-8 pt-4 custom-scrollbar">
         <div class="mx-auto pb-12 d-flex flex-column ga-8" style="max-width: 1800px;">
           <DashboardHeader :activeTab="activeTab" />

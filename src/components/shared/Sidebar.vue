@@ -116,7 +116,7 @@ const navItems = [
             :active="activeTab === item.id"
             base-color="sidebarItem"
             active-class="bg-sidebarActive text-sidebarActiveText"
-            class="my-7 rounded-xl d-flex align-center"
+            class="my-7 rounded-lg d-flex align-center"
             @click="emit('update:activeTab', item.id)"
           >
             <template #prepend>
@@ -142,7 +142,7 @@ const navItems = [
               <v-list-item
                 v-bind="props"
                 base-color="sidebarItem"
-                class="my-7 rounded-xl d-flex align-center"
+                class="my-7 rounded-lg d-flex align-center"
               >
                 <template #prepend>
                   <span

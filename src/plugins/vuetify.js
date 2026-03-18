@@ -21,6 +21,25 @@ const lucideIconSet = {
   },
 }
 
+{/*
+  dark
+    main container bg rgba(15,23,43,0.6) 
+    main container border rgba(255,255,255,0.1)
+    secondary container bg rgba(255,255,255,0.05)
+    secondary container border rgba(255,255,255,0.1)
+    secondary container border hover rgba(43, 127, 255, 0.5)
+    main labels color #b8e6fe
+  
+  light
+    main container bg #fff
+    main container border #e2e8f0
+    secondary container bg #f0f9ff
+    secondary container border rgba(43, 127, 255, 0.5)
+    secondary container border hover rgba(43, 127, 255, 0.5)
+    main labels color #005ea3
+*/} 
+
+
 export default createVuetify({
   components,
   directives,
@@ -34,6 +53,9 @@ export default createVuetify({
           main_background: '#ffffff',
           container: '#ffffff',
           container_border: '#e2e8f0',
+          secondary_container_bg: '#f0f9ff',
+          secondary_container_border: 'rgba(43, 127, 255, 0.5)',
+          secondary_container_border_hover: 'rgba(43, 127, 255, 0.5)',
           toggle_theme_icon: '#005ea3',
           fields_label: '#005ea3',
           fields_bg: '#f8fafc',
@@ -504,6 +526,9 @@ export default createVuetify({
           main_background: '#020618',
           container: 'rgba(15,23,43,0.6)',
           container_border: 'rgba(255,255,255,0.1)',
+          secondary_container_bg: 'rgba(255,255,255,0.05)',
+          secondary_container_border: 'rgba(255,255,255,0.1)',
+          secondary_container_border_hover: 'rgba(43, 127, 255, 0.5)',
           toggle_theme_icon: '#e17100',
           fields_label: '#b8e6fe',
           fields_bg: 'rgba(255,255,255,0.05)',

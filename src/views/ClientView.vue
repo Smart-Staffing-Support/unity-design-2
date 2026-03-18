@@ -54,7 +54,7 @@
     </div>
 
     <!-- Primary Action Codes -->
-    <PrimaryActionCodes :theme="theme" class="mt-7 rounded-xl" />
+    <PrimaryActionCodes class="mt-7 rounded-xl" />
 
     <!-- tabs section -->
     <Tabs
