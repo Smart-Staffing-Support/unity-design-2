@@ -1,70 +1,50 @@
 <template>
   <div
-    class="overflow-hidden"
-    style="border-radius: 35px; border: 1px solid;"
-    :style="isDark
-      ? 'background: rgba(15,23,42,0.4); border-color: rgba(255,255,255,0.05);'
-      : 'background: transparent; border-color: #cbd5e1; box-shadow: 0 4px 24px rgba(15,23,42,0.15);'"
+    class="overflow-hidden border bg-table_container_bg text-table_container_border"
+    style="border-radius: 35px;  box-shadow: 0 4px 24px rgba(15,23,42,0.15);"
   >
 
     <!-- Header -->
-    <div
-      class="px-10 py-6 d-flex align-center justify-space-between"
-      style="border-bottom: 1px solid;"
-      :style="isDark
-        ? 'border-color: rgba(255,255,255,0.05); background: rgba(30,41,59,0.5);'
-        : 'border-color: #e2e8f0; background: rgba(240,249,255,0.5);'"
-    >
+    <div class="px-10 py-1 d-flex align-center justify-space-between border-b bg-table_header_bg text-table_header_border">
       <div class="d-flex align-center ga-4">
-        <div class="pa-3 rounded-xl" style="background: rgba(34,197,94,0.1);">
-          <component :is="icon" v-if="icon" class="text-green" :size="22" />
+        <div class="pa-3 rounded-xl" :style="`background: ${iconBg};`">
+          <component :is="icon" v-if="icon" :style="`color: ${iconColor};`" :size="22" />
         </div>
         <div>
           <h3
-            class="text-h6 font-weight-black text-uppercase"
+            class="text-h6 font-weight-bold text-table_title text-uppercase"
             style="letter-spacing: -0.01em;"
-            :class="isDark ? 'text-white' : 'text-grey-darken-4'"
           >
             {{ title }}
           </h3>
-          <p class="font-weight-bold text-uppercase text-grey mt-1" style="font-size: 10px; letter-spacing: 0.05em;">
-            {{ subtitle ?? `${data.length} accounts match your criteria` }}
+          <p class="font-weight-bold text-uppercase text-body-medium text-grey mt-1">
+            {{ subtitle ?? `${data.length} results` }}
           </p>
         </div>
       </div>
-      <div class="d-flex ga-3">
+      <div v-if="actions.length" class="d-flex ga-3">
         <v-btn
-          variant="tonal"
-          :color="isDark ? 'white' : 'grey-darken-1'"
-          class="rounded-xl font-weight-black text-uppercase"
-          style="font-size: 0.7rem; letter-spacing: 0.1em; border-radius: 16px;"
-          @click="$emit('export')"
+          v-for="action in actions"
+          :key="action.id"
+          :disabled="!!action.disabled"
+          :variant="action.variant ?? 'tonal'"
+          :color="action.color"
+          class="rounded-xl text-label-medium table_btn_bg text-table_title font-weight-bold text-uppercase"
+          style="border-radius: 16px;"
+          @click="$emit('action', action.id)"
         >
-          <Download :size="16" class="mr-2" /> Export
-        </v-btn>
-        <v-btn
-          variant="tonal"
-          :color="isDark ? 'white' : 'grey-darken-1'"
-          class="rounded-xl font-weight-black text-uppercase"
-          style="font-size: 0.7rem; letter-spacing: 0.1em; border-radius: 16px;"
-          @click="$emit('email-results')"
-        >
-          <Mail :size="16" class="mr-2" /> Email Results
+          <component v-if="action.icon" :is="action.icon" :size="16" class="mr-2" />
+          {{ action.label }}
         </v-btn>
       </div>
     </div>
 
     <!-- Table -->
-    <div class="overflow-x-auto">
+    <div class="overflow-x-auto" style="max-width: 90vw;">
       <table class="w-100" style="border-collapse: collapse;">
         <thead>
-          <tr
-            style="border-bottom: 1px solid;"
-            :style="isDark
-              ? 'border-color: rgba(255,255,255,0.05); background: rgba(255,255,255,0.02);'
-              : 'border-color: #e2e8f0; background: rgba(255,255,255,0.5);'"
-          >
-            <th class="px-6 py-4 text-left" style="width: 40px;">
+          <tr class="border-b bg-table_header_row_bg text-table_header_row_border">
+            <th class="px-6 py-4 text-center" style="width: 40px;">
               <input
                 type="checkbox"
                 :checked="data.length > 0 && selectedIds.size === data.length"
@@ -75,12 +55,21 @@
             <th
               v-for="col in columns"
               :key="col.key"
-              class="px-6 py-4 text-caption font-weight-black text-uppercase"
+              class="px-6 py-4 text-center text-caption font-weight-bold text-body-medium text-table_cols_title text-uppercase"
               style="white-space: nowrap; letter-spacing: 0.1em;"
-              :style="{ textAlign: col.align ?? 'left' }"
-              :class="isDark ? 'text-cyan-lighten-2' : 'text-blue-darken-1'"
+              :style="{ textAlign: col.align ?? 'center' }"
             >
               {{ col.title }}
+            </th>
+            <th 
+              v-if="showDialogButton" 
+              class="px-6 py-4 text-center text-caption font-weight-bold text-table_cols_title text-uppercase" 
+              style="width: 100px; letter-spacing: 0.1em;"
+            >
+              Details
+            </th>
+            <th v-if="showActionsDropDown" class="px-6 py-4 text-right text-caption font-weight-bold text-table_cols_title text-uppercase" style="width: 80px; letter-spacing: 0.1em;">
+              Actions
             </th>
             <th v-if="isExpandable" style="width: 40px;" />
           </tr>
@@ -90,7 +79,7 @@
           <!-- Empty State -->
           <tr v-if="data.length === 0">
             <td
-              :colspan="columns.length + (isExpandable ? 2 : 1)"
+              :colspan="totalColumns"
               class="px-6 py-16 text-center text-sm font-weight-bold text-uppercase"
               style="letter-spacing: 0.1em;"
               :class="isDark ? 'text-grey-darken-1' : 'text-grey-lighten-1'"
@@ -104,15 +93,16 @@
 
             <!-- Main Row -->
             <tr
-              style="border-bottom: 1px solid; transition: background 0.15s;"
+              style="transition: background 0.15s;;"
               :style="[
                 isDark ? 'border-color: rgba(255,255,255,0.05);' : 'border-color: #e2e8f0;',
                 isSelected(row)
                   ? (isDark ? 'background: rgba(59,130,246,0.1);' : 'background: rgba(219,234,254,0.3);')
                   : idx % 2 === 0
-                    ? (isDark ? 'background: rgba(255,255,255,0.02);' : 'background: #e5e7eb;')
-                    : ''
+                    ? (isDark ? 'background: rgba(0, 94, 163, 0.12);' : 'background: #ffffff;')
+                    : (isDark ? 'background: rgba(255,255,255,0.01);' : 'background: #f1f5f9;')
               ]"
+              class="fixed-height-row border-b"
               :class="isExpandable ? 'expandable-row' : 'hoverable-row'"
               @click="toggleExpand(getRowId(row))"
             >
@@ -128,13 +118,52 @@
               <td
                 v-for="col in columns"
                 :key="col.key"
-                class="px-6 py-4 text-sm font-weight-bold"
-                :style="{ textAlign: col.align ?? 'left' }"
-                :class="isDark ? 'text-white' : 'text-grey-darken-4'"
+                class="px-6 py-4 text-sm text-table_cell_text font-weight-bold text-truncate-custom"
+                :style="{ textAlign: col.align ?? 'center' }"
                 v-html="col.render
                   ? col.render(getNestedValue(row, col.key), row, theme)
                   : renderCell(getNestedValue(row, col.key))"
               />
+              <td v-if="showDialogButton" class="px-6 py-4 text-center" @click.stop>
+                <v-btn
+                  size="x-small"
+                  variant="flat"
+                  color="primary"
+                  class="rounded-lg font-weight-bold"
+                  @click="$emit('open-dialog', row)"
+                >
+                  {{ dialogButtonLabel }}
+                </v-btn>
+              </td>
+              <td v-if="showActionsDropDown" class="px-6 py-4 text-right" @click.stop>
+                <v-menu location="bottom end" transition="scale-transition">
+                  <template v-slot:activator="{ props }">
+                    <v-btn
+                      v-bind="props"
+                      :icon="EllipsisVertical"
+                      variant="text"
+                      density="comfortable"
+                      color="grey-darken-1"
+                    ></v-btn>
+                  </template>
+
+                  <v-list class="rounded-lg border bg-main_background" elevation="4" density="compact">
+                    <v-list-item
+                      :prepend-icon="Pencil"
+                      title="Edit"
+                      value="edit"
+                      @click="$emit('edit', row)"
+                    ></v-list-item>
+                    <v-list-item
+                      :prepend-icon="TrashIcon"
+                      title="Delete"
+                      value="delete"
+                      class="text-error"
+                      @click="$emit('delete', row)"
+                    ></v-list-item>
+                  </v-list>
+                </v-menu>
+              </td>
               <td v-if="isExpandable" class="px-4 py-4 text-right">
                 <span
                   class="text-grey"
@@ -148,15 +177,15 @@
             <tr
               v-if="isExpandable"
               :style="expandedRow === getRowId(row)
-                ? (isDark ? 'background: rgba(255,255,255,0.1);' : 'background: rgba(59,130,246,0.6);')
+                ? (isDark ? 'background: rgba(255,255,255,0.1);' : 'background: rgba(59,130,246,0.4);')
                 : 'pointer-events: none; opacity: 0;'"
             >
-              <td :colspan="columns.length + 2" class="pa-0">
+              <td :colspan="totalColumns" class="pa-0">
                 <div
                   style="overflow: hidden; transition: max-height 0.3s;"
-                  :style="expandedRow === getRowId(row) ? 'max-height: 500px;' : 'max-height: 0;'"
+                  :style="expandedRow === getRowId(row) ? 'max-height: 200px;' : 'max-height: 0;'"
                 >
-                  <div class="px-6 py-5">
+                  <div class="px-6 py-0">
                     <div
                       class="d-flex ga-4 text-sm"
                       style="display: grid;"
@@ -169,15 +198,14 @@
                         :style="field.separator ? 'border-left: 1px solid rgba(255,255,255,0.3); padding-left: 16px;' : ''"
                       >
                         <p
-                          class="text-caption font-weight-bold text-uppercase"
+                          class="text-caption font-weight-bold text-uppercase text-body-medium text-table_cols_title"
                           style="white-space: nowrap; letter-spacing: 0.05em;"
-                          :style="field.color ? `color: ${field.color}` : ''"
-                          :class="!field.color ? (isDark ? 'text-cyan-lighten-2' : 'text-grey-darken-3') : ''"
+
                         >
                           {{ field.label }}
                         </p>
                         <p
-                          class="text-white text-center text-sm font-weight-semi-bold"
+                          class="text-table_cell_text text-center text-sm font-weight-semi-bold"
                           v-html="field.render
                             ? field.render(getNestedValue(row, field.key), row, theme)
                             : renderCell(getNestedValue(row, field.key))"
@@ -195,17 +223,10 @@
     </div>
 
     <!-- Footer -->
-    <div
-      class="px-10 py-6 d-flex align-center justify-space-between"
-      style="border-top: 1px solid;"
-      :style="isDark
-        ? 'border-color: rgba(255,255,255,0.05); background: rgba(255,255,255,0.02);'
-        : 'border-color: #e2e8f0; background: rgba(255,255,255,0.3);'"
-    >
+    <div class="px-10 py-6 d-flex align-center justify-space-between border-t bg-table_footer_bg text-table_header_border">
       <span
-        class="text-caption font-weight-bold text-uppercase"
+        class="text-caption font-weight-bold text-grey-darken-1 text-body-small text-uppercase"
         style="letter-spacing: 0.05em;"
-        :class="isDark ? 'text-grey-lighten-1' : 'text-grey-darken-1'"
       >
         {{ selectedIds.size }} of {{ data.length }} selected
       </span>
@@ -227,23 +248,31 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { Download, Mail } from 'lucide-vue-next'
+import { EllipsisVertical, Pencil, TrashIcon } from 'lucide-vue-next'
+import { useTheme } from 'vuetify'
 
 const props = defineProps({
-  theme:           { type: String,  default: 'light'              },
-  data:            { type: Array,   required: true                },
-  columns:         { type: Array,   required: true                },
-  rowKey:          { type: String,  default: 'id'                 },
-  title:           { type: String,  default: 'Filter Results'     },
-  subtitle:        { type: String,  default: null                 },
-  icon:            { type: Object,  default: null                 },
-  expandedFields:  { type: Array,   default: () => []             },
-  bulkActionLabel: { type: String,  default: 'Apply Bulk Actions' },
+  theme: { type: String, default: 'light' },
+  data: { type: Array, required: true },
+  columns: { type: Array, required: true },
+  rowKey: { type: String, default: 'id' },
+  title: { type: String, default: null },
+  subtitle: { type: String, default: null },
+  icon: { type: Object, default: null },
+  iconBg: { type: String, default: null },
+  iconColor: { type: String, default: null },
+  expandedFields: { type: Array, default: () => [] },
+  bulkActionLabel: { type: String, default: 'Apply Bulk Actions' },
+  actions: { type: Array, default: () => [] },
+  showActionsDropDown: { type: Boolean, default: false },
+  showDialogBtn: { type: Boolean, default: false },
+  showDialogButton: { type: Boolean, default: false }, 
+  dialogButtonLabel: { type: String, default: 'View' },
 })
 
-const emit = defineEmits(['export', 'email-results', 'bulk-action'])
-
-const isDark = computed(() => props.theme === 'dark')
+const emit = defineEmits(['action', 'bulk-action', 'edit', 'delete'])
+const theme = useTheme()
+const isDark = computed(() => theme.global.current.value.dark)
 
 const selectedIds = ref(new Set())
 const expandedRow = ref(null)
@@ -251,6 +280,14 @@ const expandedRow = ref(null)
 const isExpandable = computed(() =>
   Array.isArray(props.expandedFields) && props.expandedFields.length > 0
 )
+
+const totalColumns = computed(() => {
+  let count = props.columns.length + 1; // Base columns + checkbox column
+  if (isExpandable.value) count += 1;
+  if (props.showActionsDropDown) count += 1;
+  if (props.showDialogButton) count += 1;
+  return count;
+});
 
 const getRowId = (row) => row[props.rowKey]
 
@@ -280,8 +317,10 @@ const handleBulkAction = () => {
   emit('bulk-action', selectedRows)
 }
 
-const getNestedValue = (obj, key) =>
-  key.split('.').reduce((acc, k) => (acc && typeof acc === 'object' ? acc[k] : undefined), obj)
+const getNestedValue = (obj, key) => {
+  if (!key) return undefined;
+  return key.split('.').reduce((acc, k) => (acc && typeof acc === 'object' ? acc[k] : undefined), obj)
+}  
 
 const renderCell = (value) => {
   if (value === null || value === undefined)
@@ -298,7 +337,22 @@ const renderCell = (value) => {
 </script>
 
 <style scoped>
+.text-truncate-custom {
+  white-space: nowrap;      /* Prevents text from stacking vertically */
+  overflow: hidden;         /* Hides the text that goes past the width */
+  text-overflow: ellipsis;  /* Adds '...' if the text is too long */
+  max-width: 300px;         /* Optional: Set a max width so one cell doesn't take the whole screen */
+}
+
+/* Ensure every row has the exact same height */
+.fixed-height-row td {
+  height: 64px;             /* Adjust this number to your preferred height */
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  vertical-align: middle;
+}
+
 .expandable-row { cursor: pointer; }
 .expandable-row:hover { background: rgba(255,255,255,0.05) !important; }
-.hoverable-row:hover  { background: rgba(255,255,255,0.05) !important; }
+.hoverable-row:hover  { background: rgba(107, 107, 107, 0.2) !important; }
 </style>

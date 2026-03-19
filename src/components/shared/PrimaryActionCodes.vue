@@ -1,17 +1,12 @@
 <template>
-  <div
-    :class="['d-flex justify-center align-center ga-3 overflow-x-auto bg-container text-container_border flex-shrink-0 px-8 py-3', className]"
-    style="border-top: 1px solid; border-bottom: 1px solid; flex-shrink: 0;"
-    
-  >
+  <div :class="['d-flex justify-center align-center ga-3 overflow-x-auto border-b border-t bg-container text-container_border flex-shrink-0 px-8 py-3', className]">
     <v-btn
       v-for="action in primaryActionCodes"
       :key="action.code"
       :color="action.color"
       variant="flat"
       rounded="pill"
-      class="text-white font-weight-black text-uppercase action-btn"
-      style="letter-spacing: 0.15em; font-size: 1.1rem;"
+      class="text-white font-weight-bold text-title-medium text-uppercase action-btn"
     >
       {{ action.label }}
     </v-btn>
@@ -31,10 +26,10 @@ const props = defineProps({
 
 
 const primaryActionCodes = [
-  { code: 'CALL',  label: 'DO NOT CALL',        color: 'red-darken-2'   },
-  { code: 'SMS',   label: 'EMAILS ONLY',         color: 'lime-darken-1'  },
-  { code: 'EMAIL', label: 'ENFORCE JUDGEMENT',   color: 'amber-darken-1' },
-  { code: 'PTP',   label: 'ABC',                 color: 'green-darken-2' },
+  { code: 'CALL', label: 'DO NOT CALL', color: 'red-darken-2'   },
+  { code: 'SMS', label: 'EMAILS ONLY', color: 'lime-darken-1'  },
+  { code: 'EMAIL', label: 'ENFORCE JUDGEMENT', color: 'amber-darken-1' },
+  { code: 'PTP', label: 'ABC', color: 'green-darken-2' },
 ]
 </script>
 

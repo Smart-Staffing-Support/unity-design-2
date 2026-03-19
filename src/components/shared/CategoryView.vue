@@ -1,4 +1,4 @@
-<!-- CategoryView.vue -->
+
 <template>
   <ContactInfoMenu v-if="category === 'Contact Info'" :theme="theme" />
   <SkipTracing     v-else-if="category === 'Skip Tracing'" :theme="theme" />

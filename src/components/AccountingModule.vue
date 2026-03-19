@@ -161,99 +161,24 @@
       <!-- ═══ LEGAL BILLING TAB ═══ -->
       <template v-else>
 
-        <!-- Legal Table -->
-        <div style="border-radius: 30px; overflow: auto;">
-          <table style="width: 100%; border-collapse: collapse; text-align: center;">
-            <thead>
-              <tr :style="theme === 'dark' ? 'background: rgba(255,255,255,0.05);' : 'background: #e0f2fe;'">
-                <th v-for="col in legalColumns" :key="col"
-                  class="pa-4 text-caption font-weight-bold"
-                  style="min-width: 140px; letter-spacing: 0.12em; white-space: nowrap;"
-                  :style="[
-                    theme === 'dark' ? 'color: #7dd3fc;' : 'color: #2563eb;',
-                    theme === 'dark' ? 'border-bottom: 1px solid rgba(255,255,255,0.05);' : 'border-bottom: 1px solid #e2e8f0;'
-                  ]"
-                >{{ col }}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <template v-for="i in 2" :key="i">
-                <!-- Main Row -->
-                <tr
-                  class="cursor-pointer"
-                  style="transition: background 0.15s ease;"
-                  :style="theme === 'dark' ? 'background: #0f172a;' : 'background: white;'"
-                  @click="expandedRow = expandedRow === i ? null : i"
-                  @mouseover="$event.currentTarget.style.background = theme === 'dark' ? '#1e293b' : '#f1f5f9'"
-                  @mouseleave="$event.currentTarget.style.background = theme === 'dark' ? '#0f172a' : 'white'"
-                >
-                  <td class="pa-4"><input type="checkbox" @click.stop /></td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">65487-9201</td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">David and Fisher</td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">Law Suit Pending</td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">$85.00</td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">2-25-2023</td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">$500.00</td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">$400.00</td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">$270.00</td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">$370.00</td>
-                  <td class="pa-4">
-                    <select
-                      class="rounded-lg pa-1 text-caption"
-                      :style="theme === 'dark'
-                        ? 'background: #1e293b; color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);'
-                        : 'background: white; color: #334155; border: 1px solid #e2e8f0;'"
-                      @click.stop
-                    >
-                      <option value="edit">Edit</option>
-                      <option value="delete">Delete</option>
-                    </select>
-                  </td>
-                  <td class="pa-4">
-                    <button
-                      class="px-4 py-1 rounded-pill text-caption font-weight-bold text-white"
-                      style="background: #2563eb; border: none; cursor: pointer; transition: background 0.15s;"
-                      @click.stop="isPaymentModalOpen = true"
-                      @mouseover="$event.currentTarget.style.background = '#1d4ed8'"
-                      @mouseleave="$event.currentTarget.style.background = '#2563eb'"
-                    >Add Payment</button>
-                  </td>
-                </tr>
+        <DynamicTable
+          :theme="theme"
+          :data="legalData"
+          title="Legal Accounting"
+          :icon="ListFilterPlus"
+          icon-bg="rgba(34,197,94,0.1)"
+          icon-color="rgb(34,197,94)"
+          :columns="legalColumns"
+          row-key="id"
+          :expanded-fields="legalExpandedDetails"
+          show-actions-drop-down
+          show-dialog-button
+          dialog-button-label="Details"
+          @open-dialog="selectedItem = $event; dialogVisible = true"
+        />
 
-                <!-- Expanded Row -->
-                <tr
-                  v-if="expandedRow === i"
-                  :style="theme === 'dark'
-                    ? 'background: rgba(255,255,255,0.08);'
-                    : 'background: rgba(37,99,235,0.55);'"
-                >
-                  <td colspan="12" class="pa-6">
-                    <div class="d-flex justify-space-around flex-wrap ga-4 text-body-2">
-                      <div v-for="detail in legalExpandedDetails" :key="detail.label" class="d-flex flex-column align-center">
-                        <span :style="theme === 'dark' ? `color: ${detail.color};` : `color: ${detail.colorLight}; font-weight: bold;`">
-                          {{ detail.label }}
-                        </span>
-                        <span style="color: white;" class="text-center">{{ detail.value }}</span>
-                      </div>
-                      <div class="d-flex flex-column align-center" style="border-left: 1px solid white; padding-left: 24px;">
-                        <span :style="theme === 'dark' ? 'color: #22c55e;' : 'color: #86efac; font-weight: bold;'">Agency</span>
-                        <span style="color: white;">$150.00</span>
-                      </div>
-                      <div class="d-flex flex-column align-center">
-                        <span :style="theme === 'dark' ? 'color: #eab308;' : 'color: #fde047; font-weight: bold;'">Client</span>
-                        <span style="color: white;">$100.00</span>
-                      </div>
-                      <div class="d-flex flex-column align-center">
-                        <span :style="theme === 'dark' ? 'color: #f87171;' : 'color: #fca5a5; font-weight: bold;'">Total</span>
-                        <span style="color: white;">$200.00</span>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </template>
-            </tbody>
-          </table>
-        </div>
+        <!-- Legal Table -->
+        
 
         <!-- Footer: Icon Buttons + Totals -->
         <div class="d-flex flex-column flex-md-row justify-space-between align-start ga-6">
@@ -489,11 +414,12 @@ import {
   FileDown, Mail, Printer, MessageCircle, Link2,
   CircleDollarSign, X, Plus, Minus,
 } from 'lucide-vue-next';
-import IconButton    from './shared/IconButton.vue';
-import SelectField   from './shared/SelectField.vue';
-import InputField    from './shared/InputField.vue';
-import DateField     from './shared/DateField.vue';
+import IconButton from './shared/IconButton.vue';
+import SelectField from './shared/SelectField.vue';
+import InputField from './shared/InputField.vue';
+import DateField from './shared/DateField.vue';
 import CheckboxField from './shared/CheckboxField.vue';
+import DynamicTable from './shared/DynamicTable.vue';
 
 defineProps({
   theme: {
@@ -503,10 +429,10 @@ defineProps({
   },
 });
 
-const activeTab          = ref('account');
-const expandedRow        = ref(null);
+const activeTab = ref('account');
+const expandedRow = ref(null);
 const isPaymentModalOpen = ref(false);
-const paymentType        = ref('');
+const paymentType = ref('');
 
 // ── Table column headers ───────────────────────────────────────────────────────
 const accountColumns = [
@@ -516,24 +442,56 @@ const accountColumns = [
 ];
 
 const legalColumns = [
-  '', 'Account Number', 'Full Name/Company', 'Status', 'Current Balance Due',
-  'Statute of Limitation', 'Client Sent', 'Agency Spent',
-  'Total Pending', 'Trust Balance', 'Actions', 'Payments',
+  { title: 'Account Number', key: 'accNum' },
+  { title: 'Full Name/Company', key: 'name' },
+  { title: 'Status', key: 'status' },
+  { title: 'Current Balance Due', key: 'balance' },
+  { title: 'Statute of Limitation', key: 'sol' },
+  { title: 'Client Sent', key: 'clientSent' },
+  { title: 'Agency Spent', key: 'agencySpent' },
+  { title: 'Total Pending', key: 'pending' },
+  { title: 'Trust Balance', key: 'trust' }
 ];
+
+const legalData = [
+  {
+    id: 1,
+    accNum: '#65487-9201',
+    name: 'David and Fisher',
+    status: 'Law Suit Pending',
+    balance: '$85.00',
+    sol: '2-25-2023',
+    clientSent: '$500.00',
+    agencySent: '$400.00',
+    pending: '$270.00',
+    trust: '$370.00',
+    date: '02/18/26',
+    description: 'Payment',
+    checkNum: '#9902',
+    note: 'payment',
+    agent: 'John Doe',
+    amount: '$50.00',
+    agency: '$50.00',
+    client: '$450.00',
+    clientSent: '$350.00',
+    agencySpent: '$50.00',
+    convenienceFees: '$250.00'
+  }
+]
 
 // ── Legal expanded row detail cells ───────────────────────────────────────────
 const legalExpandedDetails = [
-  { label: 'Date',             value: '02/18/26',  color: '#7dd3fc', colorLight: '#1e293b' },
-  { label: 'Description',      value: 'Payment',   color: '#7dd3fc', colorLight: '#1e293b' },
-  { label: 'ID/Check Number',  value: '#9902',     color: '#7dd3fc', colorLight: '#1e293b' },
-  { label: 'Note',             value: 'payment',   color: '#7dd3fc', colorLight: '#1e293b' },
-  { label: 'Agent',            value: 'John Doe',  color: '#7dd3fc', colorLight: '#1e293b' },
-  { label: 'Amount',           value: '$50.00',    color: '#7dd3fc', colorLight: '#1e293b' },
-  { label: 'Agency',           value: '$50.00',    color: '#7dd3fc', colorLight: '#1e293b' },
-  { label: 'Client',           value: '$450.00',   color: '#7dd3fc', colorLight: '#1e293b' },
-  { label: 'Client Sent',      value: '$350.00',   color: '#7dd3fc', colorLight: '#1e293b' },
-  { label: 'Agency Spent',     value: '$50.00',    color: '#7dd3fc', colorLight: '#1e293b' },
-  { label: 'Convenience Fees', value: '$250.00',   color: '#7dd3fc', colorLight: '#1e293b' },
+  { key: 'date', label: 'Date', color: '#7dd3fc', colorLight: '#1e293b' },
+  { key: 'description', label: 'Description', color: '#7dd3fc', colorLight: '#1e293b' },
+  { key: 'checkNum', label: 'ID/Check Number', color: '#7dd3fc', colorLight: '#1e293b' },
+  { key: 'note', label: 'Note', color: '#7dd3fc', colorLight: '#1e293b' },
+  { key: 'agent', label: 'Agent', color: '#7dd3fc', colorLight: '#1e293b' },
+  { key: 'amount', label: 'Amount', color: '#7dd3fc', colorLight: '#1e293b' },
+  { key: 'agency', label: 'Agency', color: '#7dd3fc', colorLight: '#1e293b' },
+  { key: 'client', label: 'Client', color: '#7dd3fc', colorLight: '#1e293b' },
+  { key: 'clientSent', label: 'Client Sent', color: '#7dd3fc', colorLight: '#1e293b' },
+  { key: 'agencySpent', label: 'Agency Spent', color: '#7dd3fc', colorLight: '#1e293b' },
+  { key: 'convenienceFees', label: 'Convenience Fees', color: '#7dd3fc', colorLight: '#1e293b' },
 ];
 </script>
 
