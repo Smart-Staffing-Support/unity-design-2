@@ -11,10 +11,7 @@
           <component :is="icon" v-if="icon" :style="`color: ${iconColor};`" :size="22" />
         </div>
         <div>
-          <h3
-            class="text-h6 font-weight-bold text-table_title text-uppercase"
-            style="letter-spacing: -0.01em;"
-          >
+          <h3 class="text-h6 font-weight-bold text-table_title text-uppercase">
             {{ title }}
           </h3>
           <p class="font-weight-bold text-uppercase text-body-medium text-grey mt-1">
@@ -40,7 +37,7 @@
     </div>
 
     <!-- Table -->
-    <div class="overflow-x-auto" style="max-width: 90vw;">
+    <div class="overflow-x-auto custom-scrollbar" style="max-width: 90vw;">
       <table class="w-100" style="border-collapse: collapse;">
         <thead>
           <tr class="border-b bg-table_header_row_bg text-table_header_row_border">
@@ -63,12 +60,12 @@
             </th>
             <th 
               v-if="showDialogButton" 
-              class="px-6 py-4 text-center text-caption font-weight-bold text-table_cols_title text-uppercase" 
+              class="px-6 py-4 text-center text-caption font-weight-bold text-body-medium text-table_cols_title text-uppercase" 
               style="width: 100px; letter-spacing: 0.1em;"
             >
               Details
             </th>
-            <th v-if="showActionsDropDown" class="px-6 py-4 text-right text-caption font-weight-bold text-table_cols_title text-uppercase" style="width: 80px; letter-spacing: 0.1em;">
+            <th v-if="showActionsDropDown" class="px-6 py-4 text-right text-caption font-weight-bold text-body-medium text-table_cols_title text-uppercase" style="width: 80px; letter-spacing: 0.1em;">
               Actions
             </th>
             <th v-if="isExpandable" style="width: 40px;" />
@@ -89,7 +86,7 @@
           </tr>
 
           <!-- Data Rows -->
-          <template v-else v-for="(row, idx) in data" :key="String(getRowId(row))">
+          <template v-else v-for="(row, idx) in paginatedData" :key="String(getRowId(row))">
 
             <!-- Main Row -->
             <tr
@@ -223,32 +220,56 @@
     </div>
 
     <!-- Footer -->
-    <div class="px-10 py-6 d-flex align-center justify-space-between border-t bg-table_footer_bg text-table_header_border">
-      <span
-        class="text-caption font-weight-bold text-grey-darken-1 text-body-small text-uppercase"
-        style="letter-spacing: 0.05em;"
-      >
-        {{ selectedIds.size }} of {{ data.length }} selected
+    <div class="px-10 py-4 d-flex align-center justify-space-between border-t bg-table_footer_bg">
+  
+      <div class="d-flex align-center ga-4">
+        <span class="text-caption font-weight-bold text-grey-darken-1 text-uppercase">
+          {{ selectedIds.size }} of {{ data.length }} selected
+        </span>
+        <v-btn
+          v-if="selectedIds.size > 0"
+          size="x-small"
+          color="blue-darken-1"
+          class="rounded-pill"
+          @click="handleBulkAction"
+        >
+          {{ bulkActionLabel }}
+        </v-btn>
+      </div>
+
+      <div v-if="data.length > rowsPerPage" class="d-flex align-center ga-2">
+        <v-btn
+          :icon="ChevronLeft"
+          variant="text"
+          density="comfortable"
+          :disabled="currentPage === 1"
+          @click="currentPage--"
+        ></v-btn>
+        
+        <span class="text-caption font-weight-black text-table_cell_text">
+          PAGE {{ currentPage }} OF {{ totalPages }}
+        </span>
+
+        <v-btn
+          :icon="ChevronRight"
+          variant="text"
+          density="comfortable"
+          :disabled="currentPage === totalPages"
+          @click="currentPage++"
+        ></v-btn>
+      </div>
+
+      <span class="text-caption font-weight-bold text-grey-darken-1">
+        SHOWING {{ data.length > 0 ? startRange : 0 }}-{{ endRange }} OF {{ data.length }}
       </span>
-      <v-btn
-        :disabled="selectedIds.size === 0"
-        :color="selectedIds.size > 0 ? 'blue-darken-1' : (isDark ? 'grey-darken-2' : 'grey-lighten-2')"
-        variant="elevated"
-        class="rounded-xl font-weight-black text-uppercase"
-        style="font-size: 0.7rem; letter-spacing: 0.1em; border-radius: 16px;"
-        :style="selectedIds.size > 0 ? 'box-shadow: 0 4px 16px rgba(37,99,235,0.2);' : ''"
-        @click="handleBulkAction"
-      >
-        {{ bulkActionLabel }}
-      </v-btn>
     </div>
 
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { EllipsisVertical, Pencil, TrashIcon } from 'lucide-vue-next'
+import { ref, computed, watch } from 'vue'
+import { EllipsisVertical, Pencil, TrashIcon, ChevronLeft, ChevronRight } from 'lucide-vue-next'
 import { useTheme } from 'vuetify'
 
 const props = defineProps({
@@ -269,6 +290,30 @@ const props = defineProps({
   showDialogButton: { type: Boolean, default: false }, 
   dialogButtonLabel: { type: String, default: 'View' },
 })
+
+//pagination
+const currentPage = ref(1)
+const rowsPerPage = ref(25)
+
+// Reset to page 1 if data changes (e.g., after a filter)
+watch(() => props.data, () => {
+  currentPage.value = 1
+})
+
+// Total pages calculation
+const totalPages = computed(() => Math.ceil(props.data.length / rowsPerPage.value))
+
+// The actual data to show on the current page
+const paginatedData = computed(() => {
+  const start = (currentPage.value - 1) * rowsPerPage.value
+  const end = start + rowsPerPage.value
+  return props.data.slice(start, end)
+})
+
+// UI Helpers
+const startRange = computed(() => (currentPage.value - 1) * rowsPerPage.value + 1)
+const endRange = computed(() => Math.min(currentPage.value * rowsPerPage.value, props.data.length))
+
 
 const emit = defineEmits(['action', 'bulk-action', 'edit', 'delete'])
 const theme = useTheme()
