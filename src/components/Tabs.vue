@@ -80,7 +80,7 @@
         :style="theme === 'dark' ? '' : 'box-shadow: 0 10px 30px rgba(30,41,59,0.15);'"
       >
         <div class="pa-8">
-          <div class="d-flex flex-column justify-start align-start ga-3 mb-6">
+          <div class="d-flex  justify-start align-start ga-12 mb-6">
             <div class="d-flex align-center ga-2">
               <div
                 class="rounded-xl d-flex align-center justify-center"
@@ -97,7 +97,7 @@
               </h2>
             </div>
 
-            <div v-if="entityTitle || entityId || entityStatus" class="d-flex flex-column ga-2 mt-6">
+            <div v-if="entityTitle || entityId || entityStatus" class="d-flex align-center ga-2">
               <h2
                 v-if="entityTitle"
                 class="text-h4 mr-10"
@@ -106,17 +106,17 @@
               >
                 {{ entityTitle }}
               </h2>
-              <div class="d-flex flex-column ga-2">
+              <div class="d-flex align-center ga-6">
                 <span
                   v-if="entityId"
-                  class="text-h6 text-decoration-underline"
+                  class="text-title-large text-decoration-underline"
                   :style="theme === 'dark' ? 'color: white;' : 'color: #1e293b;'"
                 >
                   {{ entityId }}
                 </span>
                 <span
                   v-if="entityStatus"
-                  class="text-body-1 text-center rounded-pill px-6 py-1 align-self-start"
+                  class="text-title-large text-center rounded-pill px-6 py-1 align-self-start"
                   :style="
                     entityStatus.color === 'green'
                       ? theme === 'dark'
