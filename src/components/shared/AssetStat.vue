@@ -1,20 +1,14 @@
 <template>
   <div class="d-flex flex-column ga-1">
     <span
-      class="font-weight-black text-uppercase mb-1"
+      class="font-weight-black text-uppercase mb-1 text-asset_stat_label"
       style="font-size: 12px; letter-spacing: 0.15em;"
-      :class="isDark ? 'text-cyan-lighten-2' : 'text-blue-darken-1'"
     >
       {{ label }}
     </span>
     <span
       class="text-subtitle-1 font-weight-black"
-      :style="!value
-        ? (isDark ? 'color: rgba(255,255,255,0.1);' : 'color: #94a3b8;')
-        : highlight
-          ? 'color: #48c78e;'
-          : (isDark ? '' : '')"
-      :class="!value || highlight ? '' : (isDark ? 'text-white' : 'text-grey-darken-4')"
+      :class="!value ? 'text-asset_stat_value_empty' : highlight ? 'text-asset_stat_value_highlight' : 'text-asset_stat_value'"
     >
       {{ value || '—' }}
     </span>
@@ -22,21 +16,10 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-
-//export default {
-  //name: 'AssetStat',
-
   const props = defineProps ({
     label: { type: String, required: true },
     value: { type: String, default: null },
     highlight: { type: Boolean, default: false },
     theme: { type: String, default: 'light' },
   })
-
-  //setup(props) {
-    const isDark = computed(() => props.theme === 'dark')
-    //return { isDark }
-  //},
-//}
 </script>
