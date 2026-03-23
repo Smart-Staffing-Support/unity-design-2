@@ -58,9 +58,14 @@ export default createVuetify({
           secondary_container_border_hover: 'rgba(43, 127, 255, 0.5)',
           toggle_theme_icon: '#005ea3',
           fields_label: '#005ea3',
-          fields_bg: '#f8fafc',
+          /*  fill #f1f5f9, focus ring #83a8fa, value/placeholder #868e9a */
+          fields_bg: '#f1f5f9',
           fields_border: '#cad5e2',
           fields_text: '#1d293d',
+          fields_placeholder: '#868e9a',
+          fields_hover_bg: '#e2e8f0',
+          fields_hover_border: '#a4b2c6',
+          fields_focus_border: '#83a8fa',
 
           // Sidebar-specific colors (used by Sidebar.vue)
           sidebar: '#005ea3',
@@ -72,6 +77,13 @@ export default createVuetify({
           // Checkbox
           checkbox_border_unchecked: '#cbd5e1',
           checkbox_hover_border: '#60a5fa',
+
+          // RadioField colors  (Light)
+          rf_label: '#475569',
+          rf_border: '#cbd5e1',
+          rf_bg: '#ffffff',
+          rf_accent: '#2563eb',
+          rf_focus: 'rgba(37, 99, 235, 0.4)',
 
 
           // Datefield
@@ -313,13 +325,19 @@ export default createVuetify({
           importance_none_bg: 'rgba(100,116,139,0.1)',
 
           // InfoBox colors (Light)
-          infobox_label: '#334155',    
+          infobox_label: '#334155',
 
           // InputField colors (Light)
           inputfield_border: '#94a3b8', 
           inputfield_focus_border: 'rgba(37,99,235,0.5)',
 
           // MultiSearchSelect colors (Light)
+          mss_label: '#145CFC',
+          mss_trigger_bg: '#F1F5F9',
+          mss_trigger_border: '#90A0B8',
+          mss_trigger_text: '#1e293b',
+          mss_placeholder: '#90A0B8',
+          mss_filter_badge: '#f97316',
 
           // SelectField colors (Light)
 
@@ -531,9 +549,14 @@ export default createVuetify({
           secondary_container_border_hover: 'rgba(43, 127, 255, 0.5)',
           toggle_theme_icon: '#e17100',
           fields_label: '#b8e6fe',
-          fields_bg: 'rgba(255,255,255,0.05)',
-          fields_border: 'rgba(255,255,255,0.1)',
+          fields_bg: '#171c2f',
+          fields_border: '#3b3c4c',
           fields_text: '#fff',
+          fields_placeholder: '#8b8d98',
+          fields_hover_bg: '#23293a',
+          fields_hover_border: '#343a4a',
+          /* Dark focus: muted navy-blue ( #2196F3) */
+          fields_focus_border: '#23498e',
 
           // Sidebar-specific colors (used by Sidebar.vue)
           sidebar: 'rgba(255, 255, 255, 0.05)',
@@ -580,6 +603,13 @@ export default createVuetify({
           // Checkbox
           checkbox_border_unchecked: 'rgba(255,255,255,0.1)',
           checkbox_hover_border: 'rgba(59,130,246,0.5)',
+
+          // RadioField colors  (Dark)
+          rf_label: '#cbd5e1',
+          rf_border: '#e2e8f0',
+          rf_bg: '#f8fafc',
+          rf_accent: '#2563eb',
+          rf_focus: 'rgba(37, 99, 235, 0.4)',
 
 
           // Settlement
@@ -791,8 +821,14 @@ export default createVuetify({
           inputfield_focus_border: 'rgba(59,130,246,0.5)',
 
           // MultiSearchSelect colors (Dark)
- 
-            // SelectField colors (Dark)
+          mss_label: '#74D4FF',
+          mss_trigger_bg: '#1B2336',
+          mss_trigger_border: '#303848',
+          mss_trigger_text: '#ffffff',
+          mss_placeholder: '#90A0B8',
+          mss_filter_badge: '#f97316',
+
+          // SelectField colors (Dark)
 
 
           // NewExperianReports colors (Dark)
