@@ -27,13 +27,9 @@ import Dispute from '../Dispute.vue'
 import ExperianReports from '../ExperianReports.vue'
 import Settlement from '../Settlement.vue'
 
-//export default {
-  //name: 'CategoryView',
-  //components: { Activity, ContactInfoMenu, SkipTracing, Dispute, ExperianReports, Settlement },
   const props = defineProps({
     category: { type: String, required: true },
     theme: { type: String, default: 'light' },
     activeCreditor: { type: String, default: 'creditor 1' },
   })
-//}
 </script>

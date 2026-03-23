@@ -1,4 +1,5 @@
 <template>
+  <v-app :theme="theme">
   <v-sheet class="pa-8 animate-fade" :color="theme === 'dark' ? 'grey-darken-4' : 'white'"
     :style="theme === 'dark' ? 'background: #020617 !important;' : 'background: rgba(255,255,255,0.7) !important;'"
     height="100%">
@@ -84,6 +85,7 @@
 
     </v-dialog>
   </v-sheet>
+  </v-app>
 </template>
 
 <script setup>

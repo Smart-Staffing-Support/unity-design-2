@@ -68,6 +68,10 @@ export default createVuetify({
           sidebarIcons: 'rgba(255, 255, 255, 0.8)',
           sidebarActive: '#e0e0e0',
           sidebarActiveText: '#005ea3',
+          toggleThemeIcon: '#005ea3',
+              //
+              
+              
 
           // Checkbox
           checkbox_border_unchecked: '#cbd5e1',
@@ -82,6 +86,8 @@ export default createVuetify({
           checkbox_field_label_checked: '#0f172a',
           checkbox_field_label_hover: '#0f172a',
 
+          //iconbutton
+          icon_btn_icon_color: '#475569',
           // DateField
           date_field_label: '#2563eb',
           date_field_bg: '#f1f5f9',
@@ -121,6 +127,7 @@ export default createVuetify({
           filter_card_shadow: 'rgba(0, 0, 0, 0.08)',
 
           // FromToDate
+          
 
           // Settlement
           settlement_placeholder: '#94a3b8',
@@ -135,6 +142,7 @@ export default createVuetify({
           summary_stat_total_label: '#ffffff',
           summary_stat_total_value: '#ffffff',
           summary_stat_value: '#334155',
+
 
           // Accounting Module
           billing_tab_active: '#0ea5e9',
@@ -164,6 +172,7 @@ export default createVuetify({
           billing_expanded_total: '#fca5a5',
 
           uni_yellow: '#fde047',
+
 
           // Accounts Module
           accounts_export_bg: '#0f766e',
@@ -577,6 +586,7 @@ export default createVuetify({
           date_field_hover_bg: 'rgba(255, 255, 255, 0.1)',
           date_field_focus_border: 'rgba(59, 130, 246, 0.5)',
 
+
           // Dynamic Contact List
           contact_border: 'rgba(255, 255, 255, 0.01)',
           contact_focus_border: 'rgba(59, 130, 246, 0.5)',
@@ -607,7 +617,13 @@ export default createVuetify({
           filter_section_dot_amber: '#fbbf24',
           filter_card_shadow: 'none',
 
+
+          
           // FromToDate
+
+          //icon button
+          icon_btn_icon_color: '#bfdbfe',
+
 
           // Checkbox
           checkbox_border_unchecked: 'rgba(255,255,255,0.1)',
@@ -620,6 +636,7 @@ export default createVuetify({
           checkbox_field_label: '#ffffff',
           checkbox_field_label_checked: '#ffffff',
           checkbox_field_label_hover: '#ffffff',
+
 
 
           // Settlement
@@ -635,6 +652,7 @@ export default createVuetify({
           summary_stat_total_label: '#7dd3fc',
           summary_stat_total_value: '#ffffff',
           summary_stat_value: '#ffffff',
+
 
           // Accounting Module
           billing_tab_active: '#0ea5e9',
@@ -776,10 +794,12 @@ export default createVuetify({
           legal_judgement_title: '#c084fc',
           legal_garnish_title: '#fcd34d',
 
+
           // Action Codes
           action_panel_bg: 'rgba(255, 255, 255, 0.1)',
           action_panel_border: 'rgba(255, 255, 255, 0.2)',
           action_panel_shadow: 'none',
+
 
           // New Contact Menu
           contact_menu_header_orange_text: '#fb923c',
@@ -791,6 +811,7 @@ export default createVuetify({
           contact_menu_footer_icon_bg_blue: 'rgba(59, 130, 246, 0.1)',
           contact_menu_footer_icon_bg_violet: 'rgba(139, 92, 246, 0.1)',
           contact_menu_footer_icon_violet: '#a78bfa',
+
 
           // New Dashboard
           debtor_header_bg: 'rgba(15, 23, 42, 0.6)',
