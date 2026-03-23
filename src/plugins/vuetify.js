@@ -21,7 +21,8 @@ const lucideIconSet = {
   },
 }
 
-{/*
+{
+  /*
   dark
     main container bg rgba(15,23,43,0.6) 
     main container border rgba(255,255,255,0.1)
@@ -37,14 +38,14 @@ const lucideIconSet = {
     secondary container border rgba(43, 127, 255, 0.5)
     secondary container border hover rgba(43, 127, 255, 0.5)
     main labels color #005ea3
-*/} 
-
+*/
+}
 
 export default createVuetify({
   components,
   directives,
   theme: {
-    defaultTheme: 'light',
+    defaultTheme: 'system',
     themes: {
       light: {
         dark: false,
@@ -56,7 +57,7 @@ export default createVuetify({
           secondary_container_bg: '#f0f9ff',
           secondary_container_border: 'rgba(43, 127, 255, 0.5)',
           secondary_container_border_hover: 'rgba(43, 127, 255, 0.5)',
-          toggle_theme_icon: '#005ea3',
+          toggle_theme_icon: '#fff',
           fields_label: '#005ea3',
           fields_bg: '#f8fafc',
           fields_border: '#cad5e2',
@@ -76,23 +77,39 @@ export default createVuetify({
           checkbox_border_unchecked: '#cbd5e1',
           checkbox_hover_border: '#60a5fa',
 
-
           // Datefield
+          // CheckboxField
+          checkbox_field_box_bg: '#f1f5f9',
+          checkbox_field_box_border_unchecked: '#cbd5e1',
+          checkbox_field_box_checked: '#2563eb',
+          checkbox_field_label: '#334155',
+          checkbox_field_label_checked: '#0f172a',
+          checkbox_field_label_hover: '#0f172a',
 
           //iconbutton
           icon_btn_icon_color: '#475569',
+          // DateField
+          date_field_label: '#2563eb',
+          date_field_bg: '#f1f5f9',
+          date_field_border: '#94a3b8',
+          date_field_text: '#1e293b',
+          date_field_hover_bg: '#e2e8f0',
+          date_field_focus_border: 'rgba(37, 99, 235, 0.5)',
 
           // Dynamic Contact List
           contact_border: '#94a3b8',
           contact_focus_border: 'rgba(37, 99, 235, 0.5)',
 
-
           // Dynamic Table
-          table_container_bg: 'transparent',
-          table_header_bg: '#ffffff',
+          table_container_bg: '#fff',
+          table_container_border: '#cbd5e1',
+          table_header_border: '#e2e8f0',
+          table_header_bg: 'rgba(240, 249, 255, 0.5)',
+          table_title: '#0f172b',
           table_btn_bg: '#2563eb',
           table_header_row_bg: 'rgba(255, 255, 255, 0.5)',
           table_header_row_border: '#eceef1',
+          table_cols_title: '#155dfc',
           table_row_even_bg: '#f1f5f9',
           table_row_hover: 'rgba(37, 99, 235, 0.1)',
           table_row_selected: 'rgba(3, 24, 52, 0.3)',
@@ -103,30 +120,28 @@ export default createVuetify({
           table_code_bg: 'rgba(30, 41, 59, 0.8)',
           table_btn_disabled_text: '#1a1b1b',
 
-
           // Filter Component
           filter_topbar_bg: '#ffffff',
           filter_section_dot_green: '#22c55e',
           filter_section_dot_amber: '#f59e0b',
           filter_card_shadow: 'rgba(0, 0, 0, 0.08)',
 
-
-
           // FromToDate
           
-
 
           // Settlement
           settlement_placeholder: '#94a3b8',
 
-
-
           // Stat Field
-
-
-
-          // Summary Stat
-
+          stat_field_label: '#2563eb',
+          stat_field_value: '#1e293b',
+          // Summary Stat*
+          summary_stat_total_bg: '#2563eb',
+          summary_stat_card_bg: '#f0f9ff',
+          summary_stat_card_border: '#93c5fd',
+          summary_stat_total_label: '#ffffff',
+          summary_stat_total_value: '#ffffff',
+          summary_stat_value: '#334155',
 
 
           // Accounting Module
@@ -155,8 +170,8 @@ export default createVuetify({
           billing_expanded_agency: '#4ade80',
           billing_expanded_client: '#fde047',
           billing_expanded_total: '#fca5a5',
-          
-          uni_yellow: "#fde047",
+
+          uni_yellow: '#fde047',
 
 
           // Accounts Module
@@ -191,7 +206,6 @@ export default createVuetify({
           accounts_checkbox_border: '#d1d5db',
           accounts_checkbox_checked: '#2563eb',
 
-
           // Add Reminder
           add_reminder_container_bg: '#ffffff',
           add_reminder_container_border: '#e2e8f0',
@@ -205,8 +219,6 @@ export default createVuetify({
           add_reminder_cancel_text: '#374151',
           add_reminder_cancel_hover: 'rgba(0,0,0,0.05)',
 
-
-
           // Audit Logs
           audit_logs_table_bg: '#ffffff',
           audit_logs_header_bg: '#e0f2fe',
@@ -216,8 +228,6 @@ export default createVuetify({
           audit_logs_legal_nolegal: '#64748b',
           audit_logs_legal_litigation: '#8b5cf6',
           audit_logs_legal_judgment: '#3b82f6',
-
-
 
           // Client Info
           client_drawer_bg: '#e0f2fe',
@@ -254,7 +264,6 @@ export default createVuetify({
           client_scrollbar: 'rgba(148, 163, 184, 0.3)',
           client_scrollbar_hover: 'rgba(148, 163, 184, 0.6)',
 
-
           // Contact Menu
           contact_menu_header_orange_text: '#ea580c',
           contact_menu_header_teal_bar: '#14b8a6',
@@ -268,28 +277,20 @@ export default createVuetify({
           contact_menu_footer_bg: 'rgba(248, 250, 252, 0.5)',
           contact_menu_footer_label: '#64748b',
 
-
-
           // Judgment
           judgment_icon_bg_violet: 'rgba(139, 92, 246, 0.1)',
           judgment_checkbox_border: '#cbd5e1',
           judgment_composition_bg: 'rgba(59, 130, 246, 0.05)',
           judgment_composition_border: '#93c5fd',
 
-
-
           // Legal Details
           legal_judgement_title: '#7c3aed',
           legal_garnish_title: '#d97706',
-
-
 
           // New Action Codes
           action_panel_bg: 'transparent',
           action_panel_border: '#cbd5e1',
           action_panel_shadow: 'rgba(30, 41, 59, 0.4)',
-
-
 
           // New Contact Menu
           contact_menu_header_orange_text: '#ea580c',
@@ -301,8 +302,6 @@ export default createVuetify({
           contact_menu_footer_icon_bg_blue: '#eff6ff',
           contact_menu_footer_icon_bg_violet: '#f5f3ff',
           contact_menu_footer_icon_violet: '#8b5cf6',
-
-
 
           // New Dashboard
           debtor_header_bg: 'transparent',
@@ -320,7 +319,7 @@ export default createVuetify({
 
           // IconButton colors (Light)
           iconbtn_border: '#e2e8f0',
-          iconbtn_icon_hover: '#2563eb', 
+          iconbtn_icon_hover: '#2563eb',
 
           // ImportancePill colors (Light)
           importance_urgent_bg: '#000000',
@@ -331,16 +330,25 @@ export default createVuetify({
           importance_none_bg: 'rgba(100,116,139,0.1)',
 
           // InfoBox colors (Light)
-          infobox_label: '#334155',    
+          infobox_label: '#334155',
 
           // InputField colors (Light)
-          inputfield_border: '#94a3b8', 
+          inputfield_border: '#94a3b8',
           inputfield_focus_border: 'rgba(37,99,235,0.5)',
 
           // MultiSearchSelect colors (Light)
 
           // SelectField colors (Light)
 
+          select_field_label: '#2563eb',
+          select_field_bg: '#f1f5f9',
+          select_field_border: '#94a3b8',
+          select_field_text: '#334155',
+          select_field_hover_bg: '#e2e8f0',
+          select_field_focus_border: 'rgba(37, 99, 235, 0.5)',
+          select_field_option_bg: '#ffffff',
+          select_field_option_text: '#1e293b',
+          select_field_chevron: '#94a3b8',
 
           // NewExperianReports colors (Light)
           newexperianreports_bg: '#f0f9ff',
@@ -407,7 +415,7 @@ export default createVuetify({
           remindersfeed_heading_secondary: '#2563eb',
           remindersfeed_body: '#374151',
           remindersfeed_meta: '#6b7280',
-          remindersfeed_green_text: '#15803d',  
+          remindersfeed_green_text: '#15803d',
           remindersfeed_hover_bg: '#bfdbfe',
           remindersfeed_dialog_overlay: 'rgba(0,0,0,0.60)',
 
@@ -417,7 +425,7 @@ export default createVuetify({
 
           // Settlement colors (Light)
           settlement_input_focus_border: 'rgba(37, 99, 235, 0.50)',
-          
+
           // ActionPanel
           action_panel_bg: '#bbdcfd',
           action_panel_border: '#e2e8f0',
@@ -443,7 +451,9 @@ export default createVuetify({
 
           // AllocationTag
           alloc_tag_bg: '#f1f5f9',
-          alloc_tag_border: '#cbd5e1',
+          alloc_tag_hover_bg: '#e2e8f0',
+          alloc_tag_focus_border: 'rgba(37, 99, 235, 0.5)',
+          alloc_tag_surface_text: '#1e293b',
           alloc_tag_drag: '#94a3b8',
           alloc_tag_order_text: '#94a3b8',
           alloc_tag_label: '#64748b',
@@ -455,11 +465,19 @@ export default createVuetify({
           alloc_input_bg: '#ffffff',
           alloc_input_border: '#94a3b8',
           alloc_input_focus: '#60a5fa',
+          alloc_input_text: '#334155',
           alloc_prefix: '#94a3b8',
 
           // AssetStat
+          asset_stat_label: '#2563eb',
+          asset_stat_value_empty: '#94a3b8',
+          asset_stat_value: '#0f172a',
+          asset_stat_value_highlight: '#22c55e',
 
           // BalanceRow
+          balance_row_border: '#e2e8f0',
+          balance_row_label: '#334155',
+          balance_row_value: '#0f172a',
 
           // PrimaryActionCodes
           pac_bg: 'transparent',
@@ -558,23 +576,31 @@ export default createVuetify({
           sidebarIcons: '#93c5fd',
           sidebarActive: 'rgba(255, 255, 255, 0.1)',
           sidebarActiveText: '#ffffff',
-          toggleThemeIcon: '#e17100',
 
-          // Datefield
 
+          // DateField
+          date_field_label: '#7dd3fc',
+          date_field_bg: 'rgba(255, 255, 255, 0.05)',
+          date_field_border: 'rgba(255, 255, 255, 0.1)',
+          date_field_text: '#ffffff',
+          date_field_hover_bg: 'rgba(255, 255, 255, 0.1)',
+          date_field_focus_border: 'rgba(59, 130, 246, 0.5)',
 
 
           // Dynamic Contact List
           contact_border: 'rgba(255, 255, 255, 0.01)',
           contact_focus_border: 'rgba(59, 130, 246, 0.5)',
 
-
           // Dynamic Table
           table_container_bg: 'rgba(15, 23, 42, 0.4)',
+          table_container_border: 'rgba(255,255,255,0.05)',
+          table_header_border: 'rgba(255,255,255,0.05)',
+          table_title: '#fff',
           table_header_bg: 'rgba(30, 41, 59, 0.5)',
           table_btn_bg: 'rgba(255, 255, 255, 0.05)',
           table_header_row_bg: 'rgba(255, 255, 255, 0.02)',
           table_header_row_border: 'rgba(255, 255, 255, 0.05)',
+          table_cols_title: '#74d4ff',
           table_row_even_bg: 'rgba(255, 255, 255, 0.02)',
           table_row_hover: 'rgba(255, 255, 255, 0.05)',
           table_row_selected: 'rgba(59, 130, 246, 0.1)',
@@ -584,7 +610,6 @@ export default createVuetify({
           table_footer_bg: 'rgba(255, 255, 255, 0.02)',
           table_code_bg: 'rgba(30, 41, 59, 0.8)',
           table_btn_disabled_text: '#64748b',
-
 
           // Filter Component
           filter_topbar_bg: 'rgba(100, 116, 139, 0.05)',
@@ -604,19 +629,29 @@ export default createVuetify({
           checkbox_border_unchecked: 'rgba(255,255,255,0.1)',
           checkbox_hover_border: 'rgba(59,130,246,0.5)',
 
+          // CheckboxField
+          checkbox_field_box_bg: 'rgba(255, 255, 255, 0.05)',
+          checkbox_field_box_border_unchecked: 'rgba(255, 255, 255, 0.1)',
+          checkbox_field_box_checked: '#2563eb',
+          checkbox_field_label: '#ffffff',
+          checkbox_field_label_checked: '#ffffff',
+          checkbox_field_label_hover: '#ffffff',
+
 
 
           // Settlement
           settlement_placeholder: 'rgba(255, 255, 255, 0.5)',
 
-
-
           // Stat Field
 
-
-
-          // Summary Stat
-
+          stat_field_label: '#7dd3fc',
+          stat_field_value: '#ffffff',
+          summary_stat_total_bg: '#2563eb',
+          summary_stat_card_bg: 'rgba(255, 255, 255, 0.05)',
+          summary_stat_card_border: '#60a5fa',
+          summary_stat_total_label: '#7dd3fc',
+          summary_stat_total_value: '#ffffff',
+          summary_stat_value: '#ffffff',
 
 
           // Accounting Module
@@ -645,7 +680,6 @@ export default createVuetify({
           billing_expanded_agency: '#22c55e',
           billing_expanded_client: '#eab308',
           billing_expanded_total: '#f87171',
-
 
           // Accounts Module
           accounts_export_bg: '#0f766e',
@@ -679,7 +713,6 @@ export default createVuetify({
           accounts_checkbox_border: '#4b5563',
           accounts_checkbox_checked: '#2563eb',
 
-
           // Add Reminder
           add_reminder_container_bg: '#0f172a',
           add_reminder_container_border: 'rgba(255, 255, 255, 0.1)',
@@ -693,8 +726,6 @@ export default createVuetify({
           add_reminder_cancel_text: '#94a3b8',
           add_reminder_cancel_hover: 'rgba(255, 255, 255, 0.05)',
 
-
-
           // Audit Logs
           audit_logs_table_bg: 'rgba(15, 23, 42, 0.4)',
           audit_logs_header_bg: 'rgba(255, 255, 255, 0.05)',
@@ -704,8 +735,6 @@ export default createVuetify({
           audit_logs_legal_nolegal: '#94a3b8',
           audit_logs_legal_litigation: '#c084fc',
           audit_logs_legal_judgment: '#60a5fa',
-
-
 
           // Client Info
           client_drawer_bg: 'rgba(15, 23, 42, 0.4)',
@@ -742,7 +771,6 @@ export default createVuetify({
           client_scrollbar: 'rgba(148, 163, 184, 0.3)',
           client_scrollbar_hover: 'rgba(148, 163, 184, 0.6)',
 
-
           // Contact Menu
           contact_menu_header_orange_text: '#fb923c',
           contact_menu_header_teal_bar: '#14b8a6',
@@ -756,15 +784,11 @@ export default createVuetify({
           contact_menu_footer_bg: 'rgba(255, 255, 255, 0.02)',
           contact_menu_footer_label: 'rgba(255, 255, 255, 0.4)',
 
-
-
           // Judgment
           judgment_icon_bg_violet: 'rgba(139, 92, 246, 0.1)',
           judgment_checkbox_border: '#4b5563',
           judgment_composition_bg: 'rgba(59, 130, 246, 0.05)',
           judgment_composition_border: 'rgba(59, 130, 246, 0.2)',
-
-
 
           // Legal Details
           legal_judgement_title: '#c084fc',
@@ -800,14 +824,12 @@ export default createVuetify({
           debtor_modal_teal_bg: '#0d9488',
           debtor_modal_teal_shadow: 'rgba(13, 148, 136, 0.2)',
 
-          
-
           // Utility greys for text
           text_strong_light: '#f9fafb',
 
           // IconButton colors (Dark)
-          iconbtn_border: '#1e293b',  
-          iconbtn_icon_hover: '#ffffff',  
+          iconbtn_border: '#1e293b',
+          iconbtn_icon_hover: '#ffffff',
 
           // ImportancePill colors (Dark)
           importance_urgent_bg: '#000000',
@@ -818,20 +840,27 @@ export default createVuetify({
           importance_none_bg: 'rgba(100,116,139,0.1)',
 
           // InfoBox colors (Dark)
-          infobox_label: '#94a3b8',  
+          infobox_label: '#94a3b8',
 
           // InputField colors (Dark)
-          inputfield_border: '#1e293b',  
+          inputfield_border: '#1e293b',
           inputfield_focus_border: 'rgba(59,130,246,0.5)',
 
           // MultiSearchSelect colors (Dark)
- 
-            // SelectField colors (Dark)
 
+          select_field_label: '#7dd3fc',
+          select_field_bg: 'rgba(255, 255, 255, 0.05)',
+          select_field_border: 'rgba(255, 255, 255, 0.1)',
+          select_field_text: '#ffffff',
+          select_field_hover_bg: 'rgba(255, 255, 255, 0.1)',
+          select_field_focus_border: 'rgba(59, 130, 246, 0.5)',
+          select_field_option_bg: '#0f172a',
+          select_field_option_text: '#ffffff',
+          select_field_chevron: 'rgba(255, 255, 255, 0.4)',
 
           // NewExperianReports colors (Dark)
-          newexperianreports_bg: '#1e293b', 
-          newexperianreports_border: '#1e293b',  
+          newexperianreports_bg: '#1e293b',
+          newexperianreports_border: '#1e293b',
           newexperianreports_shadow: '',
           newexperianreports_derogatory_bg: 'rgba(239,68,68,0.05)',
           newexperianreports_button: '#2563eb',
@@ -858,11 +887,11 @@ export default createVuetify({
           newskiptracing_bg: 'rgba(37,99,236,0.10)',
           newskiptracing_border: 'rgba(59,130,246,0.20)',
           newskiptracing_iconbg: 'rgba(59,130,246,0.10)',
-          newskiptracing_config_border: '#1e293b',  
+          newskiptracing_config_border: '#1e293b',
 
           // NewTabsContent colors (Dark)
-          newtabscontent_tabbar_bg: '#1e293b',  
-          newtabscontent_tabbar_border: '#1e293b', 
+          newtabscontent_tabbar_bg: '#1e293b',
+          newtabscontent_tabbar_border: '#1e293b',
           newtabscontent_active_tab_shadow: '0 8px 24px rgba(37,99,235,0.3)',
           newtabscontent_inactive_tab_color: '#bfdbfe',
           newtabscontent_dropdown_bg: 'rgba(15,23,42,0.98)',
@@ -894,17 +923,16 @@ export default createVuetify({
           remindersfeed_heading_secondary: '#f1f5f9',
           remindersfeed_body: '#d1d5db',
           remindersfeed_meta: '#9ca3af',
-          remindersfeed_green_text: '#22c55e',      
+          remindersfeed_green_text: '#22c55e',
           remindersfeed_hover_bg: 'rgba(255,255,255,0.10)',
           remindersfeed_dialog_overlay: 'rgba(0,0,0,0.60)',
 
           // Settingsmodule colors (Dark)
-          settingsmodule_divider: '#1e293b',  
+          settingsmodule_divider: '#1e293b',
           settingsmodule_button_shadow: '0 1px 4px rgba(37,99,235,0.20)',
 
           // Settlement colors (Dark)
           settlement_input_focus_border: 'rgba(37, 99, 235, 0.50)',
-
 
           // ActionPanel
           action_panel_bg: 'rgba(255, 255, 255, 0.1)',
@@ -931,24 +959,33 @@ export default createVuetify({
 
           // AllocationTag
           alloc_tag_bg: 'rgba(255, 255, 255, 0.05)',
-          alloc_tag_border: 'rgba(255, 255, 255, 0.1)',
+          alloc_tag_hover_bg: 'rgba(255, 255, 255, 0.1)',
+          alloc_tag_focus_border: 'rgba(59, 130, 246, 0.5)',
+          alloc_tag_surface_text: '#ffffff',
           alloc_tag_drag: 'rgba(255, 255, 255, 0.3)',
           alloc_tag_order_text: 'rgba(255, 255, 255, 0.4)',
           alloc_tag_label: '#ffffff',
 
           // AllocationRow
           alloc_row_hover: 'rgba(255, 255, 255, 0.05)',
-          alloc_row_border: 'rgba(255, 255, 255, 0.1)',
+          alloc_row_border: '#d1d5db',
           alloc_label: '#cbd5e1',
           alloc_input_bg: 'rgba(255, 255, 255, 0.05)',
           alloc_input_border: 'rgba(255, 255, 255, 0.1)',
           alloc_input_focus: 'rgba(59, 130, 246, 0.5)',
+          alloc_input_text: '#ffffff',
           alloc_prefix: '#94a3b8',
 
           // AssetStat
+          asset_stat_label: '#7dd3fc',
+          asset_stat_value_empty: 'rgba(255, 255, 255, 0.1)',
+          asset_stat_value: '#ffffff',
+          asset_stat_value_highlight: '#22c55e',
 
           // BalanceRow
-
+          balance_row_border: '#e2e8f0',
+          balance_row_label: '#ffffff',
+          balance_row_value: '#ffffff',
           // PrimaryActionCodes
           pac_bg: 'rgba(255, 255, 255, 0.05)',
           pac_btn_lime: '#84cc16',

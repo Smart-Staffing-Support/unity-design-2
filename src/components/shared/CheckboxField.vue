@@ -4,19 +4,16 @@
     <input
       type="checkbox"
       :checked="checked"
-      class="sr-only"
+      class="position-absolute overflow-hidden pa-0 border-0"
+      style="width: 1px; height: 1px; margin: -1px; clip: rect(0, 0, 0, 0); white-space: nowrap;"
       @change="$emit('update:checked', $event.target.checked)"
     />
 
     <!-- Custom Checkbox -->
     <div
-      class="d-flex align-center justify-center rounded-lg checkbox-box"
-      style="width: 20px; height: 20px; border: 2px solid; border-radius: 6px; flex-shrink: 0; transition: background 0.15s, border-color 0.15s;"
-      :style="checked
-        ? 'background: #2563eb; border-color: #2563eb;'
-        : isDark
-          ? 'background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);'
-          : 'background: #f1f5f9; border-color: #cbd5e1;'"
+      class="d-flex align-center justify-center rounded-lg flex-shrink-0 checkbox-box"
+      style="width: 20px; height: 20px; border: 2px solid; border-radius: 6px; transition: background 0.15s, border-color 0.15s;"
+      :class="checked ? 'bg-checkbox_field_box_checked border-checkbox_field_box_checked' : 'bg-checkbox_field_box_bg border-checkbox_field_box_border_unchecked'"
     >
       <Check
         :size="12"
@@ -31,9 +28,7 @@
     <span
       class="checkbox-text"
       style="font-size: 14px; letter-spacing: 0.1em; transition: color 0.15s;"
-      :style="checked
-        ? (isDark ? 'color: #ffffff;' : 'color: #0f172a;')
-        : (isDark ? 'color: #ffffff;' : 'color: #334155;')"
+      :class="checked ? 'text-checkbox_field_label_checked' : 'text-checkbox_field_label'"
     >
       {{ label }}
     </span>
@@ -41,38 +36,23 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
 import { Check } from 'lucide-vue-next'
 
   const props = defineProps ({
     label:   { type: String,  required: true  },
     checked: { type: Boolean, default: false  },
-    theme:   { type: String,  default: 'light'},
   })
 
   const emits = defineEmits (['update:checked'])
 
-    const isDark = computed(() => props.theme === 'dark')
 </script>
 
 <style scoped>
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
-
 .checkbox-label:hover .checkbox-box {
-  border-color: rgba(59, 130, 246, 0.5) !important;
+  border-color: rgb(var(--v-theme-checkbox_hover_border));
 }
 
 .checkbox-label:hover .checkbox-text {
-  color: #0f172a;
+  color: rgb(var(--v-theme-checkbox_field_label_hover));
 }
 </style>
