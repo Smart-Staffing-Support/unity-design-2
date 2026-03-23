@@ -2,8 +2,7 @@
   <div class="d-flex flex-column overflow-hidden bg-main_background"
     style="min-height: 100vh; font-family: sans-serif; transition: background 0.5s ease, color 0.5s ease;">
     <!-- Sidebar -->
-    <Sidebar :active-tab="activeNav" :theme="theme" @update:active-tab="activeNav = $event"
-      @toggle-theme="toggleTheme" />
+    <Sidebar v-model:activeTab="activeTab" />
 
     <!-- Main Content -->
     <main class="d-flex flex-column" style="padding-left: 80px; height: 100vh; position: relative; z-index: 10;">

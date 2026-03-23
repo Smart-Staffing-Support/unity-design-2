@@ -44,7 +44,7 @@ export default createVuetify({
   components,
   directives,
   theme: {
-    defaultTheme: 'light',
+    defaultTheme: 'system',
     themes: {
       light: {
         dark: false,
@@ -56,7 +56,7 @@ export default createVuetify({
           secondary_container_bg: '#f0f9ff',
           secondary_container_border: 'rgba(43, 127, 255, 0.5)',
           secondary_container_border_hover: 'rgba(43, 127, 255, 0.5)',
-          toggle_theme_icon: '#005ea3',
+          toggle_theme_icon: '#fff',
           fields_label: '#005ea3',
           fields_bg: '#f8fafc',
           fields_border: '#cad5e2',
@@ -67,7 +67,6 @@ export default createVuetify({
           sidebarIcons: 'rgba(255, 255, 255, 0.8)',
           sidebarActive: '#e0e0e0',
           sidebarActiveText: '#005ea3',
-          toggleThemeIcon: '#005ea3',
 
           // Checkbox
           checkbox_border_unchecked: '#cbd5e1',
@@ -95,11 +94,15 @@ export default createVuetify({
 
 
           // Dynamic Table
-          table_container_bg: 'transparent',
-          table_header_bg: '#ffffff',
+          table_container_bg: '#fff',
+          table_container_border: '#cbd5e1',
+          table_header_border: '#e2e8f0', 
+          table_header_bg: 'rgba(240, 249, 255, 0.5)',
+          table_title: '#0f172b',
           table_btn_bg: '#2563eb',
           table_header_row_bg: 'rgba(255, 255, 255, 0.5)',
           table_header_row_border: '#eceef1',
+          table_cols_title: '#155dfc',
           table_row_even_bg: '#f1f5f9',
           table_row_hover: 'rgba(37, 99, 235, 0.1)',
           table_row_selected: 'rgba(3, 24, 52, 0.3)',
@@ -562,7 +565,6 @@ export default createVuetify({
           sidebarIcons: '#93c5fd',
           sidebarActive: 'rgba(255, 255, 255, 0.1)',
           sidebarActiveText: '#ffffff',
-          toggleThemeIcon: '#e17100',
 
 
           // DateField
@@ -580,10 +582,14 @@ export default createVuetify({
 
           // Dynamic Table
           table_container_bg: 'rgba(15, 23, 42, 0.4)',
+          table_container_border: 'rgba(255,255,255,0.05)',
+          table_header_border: 'rgba(255,255,255,0.05)',
+          table_title: '#fff',
           table_header_bg: 'rgba(30, 41, 59, 0.5)',
           table_btn_bg: 'rgba(255, 255, 255, 0.05)',
           table_header_row_bg: 'rgba(255, 255, 255, 0.02)',
           table_header_row_border: 'rgba(255, 255, 255, 0.05)',
+          table_cols_title: '#74d4ff',
           table_row_even_bg: 'rgba(255, 255, 255, 0.02)',
           table_row_hover: 'rgba(255, 255, 255, 0.05)',
           table_row_selected: 'rgba(59, 130, 246, 0.1)',

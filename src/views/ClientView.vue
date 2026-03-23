@@ -1,7 +1,6 @@
 <template>
   <div class="pa-8 animate-fade custom-scrollbar bg-main_background" style="padding-left: 96px; min-height: 100vh;">
-    <Sidebar :active-tab="activeNav" :theme="theme" @update:active-tab="activeNav = $event"
-      @toggle-theme="toggleTheme" />
+    <Sidebar v-model:activeTab="activeTab" />
 
     <!-- Search & Filter Bar -->
     <div class="position-relative pa-6 mb-10 rounded-xl bg-client_header_bg border-sm text-client_header_border rounded-xl"
@@ -90,12 +89,7 @@
 
 <script setup>
 import { ref } from 'vue';
-import {
-  FileText, CreditCard, NotebookPen, Folder, ClipboardList,
-  SlidersHorizontal, LayoutGrid, FileSearch, History,
-  Search, Download,
-} from 'lucide-vue-next';
-
+import { FileText, CreditCard, NotebookPen, Folder, ClipboardList, SlidersHorizontal, Search, Download } from 'lucide-vue-next';
 import Sidebar from '../components/shared/Sidebar.vue';
 import SelectField from '../components/shared/SelectField.vue';
 import FromToDate from '../components/shared/FromToDate.vue';
@@ -111,11 +105,7 @@ import Tabs from '@/components/Tabs.vue';
 
 // ── State ─────────────────────────────────────────────────────────────────────
 const activeTab = ref('client');
-const activeNav = ref('crm');
 const theme = ref('dark');
-const activeCategory = ref('Contact Info');
-const hoveredTab = ref(null);
-let hoverTimeout = null;
 
 // ── Tabs definition ───────────────────────────────────────────────────────────
 const tabs = [
@@ -127,28 +117,7 @@ const tabs = [
   { id: 'settings', label: 'Settings', icon: SlidersHorizontal },
 ];
 
-const submenus = {
-  client: [],
-  accounts: [],
-  documents: [],
-  accounting: [],
-  reminders: [],
-  settings: [],
-};
 
-// ── Methods ───────────────────────────────────────────────────────────────────
-function toggleTheme() {
-  theme.value = theme.value === 'dark' ? 'light' : 'dark';
-}
-
-function handleMouseEnter(tabId) {
-  if (hoverTimeout) { clearTimeout(hoverTimeout); hoverTimeout = null; }
-  hoveredTab.value = tabId;
-}
-
-function handleMouseLeave() {
-  hoverTimeout = setTimeout(() => { hoveredTab.value = null; }, 200);
-}
 </script>
 
 <style scoped>
