@@ -16,9 +16,8 @@
 </template>
 
 <script setup>
-  const props = defineProps ({
+  defineProps ({
     label: { type: String, required: true },
     value: { type: String, required: true },
-    theme: { type: String, default: 'light' },
   })
 </script>

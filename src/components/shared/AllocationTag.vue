@@ -1,28 +1,25 @@
 <template>
   <div
-    class="d-flex align-center ga-3 pa-3 rounded-xl allocation-tag bg-alloc_tag_bg border-sm border-alloc_tag_border text-alloc_tag_surface_text"
-    style="cursor: grab; transition: background 0.2s, border-color 0.2s;"
+    class="d-flex align-center ga-3 pa-3 allocation-tag bg-alloc_tag_bg border-sm border-balance_row_border text-alloc_tag_surface_text"
+    style="cursor: grab;"
   >
     <!-- Drag Handle -->
-    <div class="d-flex flex-column ga-1">
+    <div class="d-flex flex-column allocation-tag__drag">
       <div
-        class="rounded-pill bg-alloc_tag_drag"
-        style="height: 2px; width: 12px;"
+        class="allocation-tag__drag-line bg-alloc_tag_drag"
       />
       <div
-        class="rounded-pill bg-alloc_tag_drag"
-        style="height: 2px; width: 12px;"
+        class="allocation-tag__drag-line bg-alloc_tag_drag"
       />
       <div
-        class="rounded-pill bg-alloc_tag_drag"
-        style="height: 2px; width: 12px;"
+        class="allocation-tag__drag-line bg-alloc_tag_drag"
       />
     </div>
 
     <!-- Order -->
     <span
       class="font-weight-black text-uppercase text-alloc_tag_order_text"
-      style="font-size: 10px; letter-spacing: 0.15em;"
+      style="font-size: 10px; letter-spacing: 0.1em;"
     >
       {{ order }}
     </span>
@@ -38,15 +35,28 @@
 
 <script setup>
 
-const props = defineProps({
+defineProps({
   label: { type: String, required: true },
   order: { type: Number, required: true },
-  theme: { type: String, default: 'light' },
 })
 
 </script>
 
 <style scoped>
+.allocation-tag {
+  transition: background-color 0.2s, border-color 0.2s;
+  border-radius: 12px;
+}
+
+.allocation-tag__drag {
+  gap: 2px;
+}
+
+.allocation-tag__drag-line {
+  width: 12px;
+  height: 2px;
+}
+
 .allocation-tag:hover {
   background-color: rgb(var(--v-theme-alloc_tag_hover_bg));
 }

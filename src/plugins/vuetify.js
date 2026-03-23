@@ -437,7 +437,6 @@ export default createVuetify({
 
           // AllocationTag
           alloc_tag_bg: '#f1f5f9',
-          alloc_tag_border: '#cbd5e1',
           alloc_tag_hover_bg: '#e2e8f0',
           alloc_tag_focus_border: 'rgba(37, 99, 235, 0.5)',
           alloc_tag_surface_text: '#1e293b',
@@ -934,7 +933,6 @@ export default createVuetify({
 
           // AllocationTag
           alloc_tag_bg: 'rgba(255, 255, 255, 0.05)',
-          alloc_tag_border: 'rgba(255, 255, 255, 0.1)',
           alloc_tag_hover_bg: 'rgba(255, 255, 255, 0.1)',
           alloc_tag_focus_border: 'rgba(59, 130, 246, 0.5)',
           alloc_tag_surface_text: '#ffffff',
@@ -944,7 +942,7 @@ export default createVuetify({
 
           // AllocationRow
           alloc_row_hover: 'rgba(255, 255, 255, 0.05)',
-          alloc_row_border: 'rgba(255, 255, 255, 0.1)',
+          alloc_row_border: '#d1d5db',
           alloc_label: '#cbd5e1',
           alloc_input_bg: 'rgba(255, 255, 255, 0.05)',
           alloc_input_border: 'rgba(255, 255, 255, 0.1)',
@@ -959,7 +957,7 @@ export default createVuetify({
           asset_stat_value_highlight: '#22c55e',
 
           // BalanceRow
-          balance_row_border: 'rgba(255, 255, 255, 0.05)',
+          balance_row_border: '#e2e8f0',
           balance_row_label: '#ffffff',
           balance_row_value: '#ffffff',
           // PrimaryActionCodes
