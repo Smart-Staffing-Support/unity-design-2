@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, provide } from 'vue';
 import { useTheme } from 'vuetify';
 // import 'globals.css'
 import Sidebar from '../components/shared/Sidebar.vue';
@@ -11,8 +11,6 @@ import GlobalNotes from '../components/GlobalNotes.vue';
 
 const activeTab = ref('home');
 
-const theme = useTheme();
-const isDark = computed(() => theme.global.current.value.dark);
 </script>
 
 <template>
@@ -49,7 +47,7 @@ const isDark = computed(() => theme.global.current.value.dark);
           </div>
         </template>
       </v-app-bar>
-      <PrimaryActionCodes :theme="theme" className="mt-4" />
+      <PrimaryActionCodes className="mt-4" />
       <div class="flex-1 overflow-y-auto pa-8 pt-4 custom-scrollbar">
         <div class="mx-auto pb-12 d-flex flex-column ga-8" style="max-width: 1800px;">
           <DashboardHeader :activeTab="activeTab" />
@@ -59,7 +57,7 @@ const isDark = computed(() => theme.global.current.value.dark);
             <TabsContent :theme="theme" :active-creditor="activeCreditor" />
 
             <!-- Right Side Action Panel -->
-            <ActionPanel :theme="theme" class-name="action-panel-width" />
+            <ActionPanel  class-name="action-panel-width" />
           </div>
           <GlobalNotes :theme="theme" />
         </div>

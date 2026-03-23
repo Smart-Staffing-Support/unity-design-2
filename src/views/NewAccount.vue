@@ -1,8 +1,6 @@
 <template>
-  <div class="d-flex flex-column overflow-hidden"
-    style="min-height: 100vh; font-family: sans-serif; transition: background 0.5s ease, color 0.5s ease;" :style="theme === 'dark'
-      ? 'background: #020617; color: #f1f5f9;'
-      : 'background: white; color: #0f172a;'">
+  <div class="d-flex flex-column overflow-hidden bg-main_background"
+    style="min-height: 100vh; font-family: sans-serif; transition: background 0.5s ease, color 0.5s ease;">
     <!-- Sidebar -->
     <Sidebar :active-tab="activeNav" :theme="theme" @update:active-tab="activeNav = $event"
       @toggle-theme="toggleTheme" />

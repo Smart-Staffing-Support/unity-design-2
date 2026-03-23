@@ -1,10 +1,8 @@
 <template>
   <div
-    :class="['d-flex justify-center align-center ga-3 overflow-x-auto flex-shrink-0 px-8 py-3', className]"
+    :class="['d-flex justify-center align-center ga-3 overflow-x-auto bg-container text-container_border flex-shrink-0 px-8 py-3', className]"
     style="border-top: 1px solid; border-bottom: 1px solid; flex-shrink: 0;"
-    :style="isDark
-      ? 'background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.05);'
-      : 'background: transparent; border-color: #cbd5e1; box-shadow: 0 4px 16px rgba(15,23,42,0.15);'"
+    
   >
     <v-btn
       v-for="action in primaryActionCodes"
@@ -21,20 +19,16 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+
 
 const props = defineProps({
-  theme: {
-    type: String,
-    default: 'light',
-  },
   className: {
     type: String,
     default: '',
   },
 })
 
-const isDark = computed(() => props.theme === 'dark')
+
 
 const primaryActionCodes = [
   { code: 'CALL',  label: 'DO NOT CALL',        color: 'red-darken-2'   },
