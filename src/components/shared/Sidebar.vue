@@ -121,13 +121,13 @@ const navItems = [
           >
             <template #prepend>
               <span
-                class="d-inline-flex align-center justify-center text-sidebarIcons"
-                :class="isHovered ? 'me-4' : 'ml-1'"
+                class="d-inline-flex align-center justify-center text-sidebarIcons ml-1"
+                :class="isHovered ? 'me-4' : '', activeTab === item.id && 'text-sidebarActiveText'"
               >
                 <component :is="item.icon" size="24" />
               </span>
             </template>
-            <span v-if="isHovered">
+            <span v-if="isHovered" class="text-sidebarIcons" :class="activeTab === item.id && 'text-sidebarActiveText'">
               {{ item.label }}
             </span>
           </v-list-item>
@@ -147,16 +147,16 @@ const navItems = [
                 <template #prepend>
                   <span
                     class="d-inline-flex align-center justify-center text-sidebarIcons"
-                    :class="isHovered ? 'me-4' : ''"
+                    :class="isHovered ? 'me-4' : '', activeTab === item.id && 'text-sidebarActiveText'"
                   >
                     <component :is="item.icon" size="24" />
                   </span>
                 </template>
-                <span v-if="isHovered">
+                <span v-if="isHovered" class="text-sidebarIcons" :class="activeTab === item.id && 'text-sidebarActiveText'">
                   {{ item.label }}
                 </span>
                 <template #append>
-                  <span class="ms-auto d-inline-flex align-center" v-if="isHovered">
+                  <span class="ms-auto d-inline-flex align-center text-sidebarIcons" :class="activeTab === item.id && 'text-sidebarActiveText'" v-if="isHovered">
                     <component :is="isOpen ? ChevronDown : ChevronRight" size="20" />
                   </span>
                 </template>
@@ -171,11 +171,11 @@ const navItems = [
               class="my-1 rounded-lg d-flex align-center"
             >
               <template #prepend>
-                <span class="d-inline-flex align-center justify-center me-3 text-sidebarIcons">
+                <span class="d-inline-flex align-center justify-center me-3 text-sidebarIcons" :class="activeTab === item.id && 'text-sidebarActiveText'">
                   <component :is="sub.icon" size="24" />
                 </span>
               </template>
-              <span>
+              <span class="text-sidebarIcons" :class="activeTab === item.id && 'text-sidebarActiveText'">
                 {{ sub.text }}
               </span>
             </v-list-item>
@@ -185,12 +185,12 @@ const navItems = [
     </div>
 
     <template #append>
-      <div class="pa-3 d-flex flex-column align-center ga-4">
+      <div class="pa-3 d-flex flex-column align-start ga-4">
         <v-btn
           icon
           variant="text"
           rounded="xl"
-          color="toggleThemeIcon"
+          color="toggle_theme_icon"
           @click="toggleTheme"
         >
           <component :is="isDark ? Sun : Moon" size="24" />

@@ -46,92 +46,24 @@
       <!-- ═══ ACCOUNT BILLING TAB ═══ -->
       <template v-if="activeTab === 'account'">
 
-        <!-- Ledger Table -->
-        <div
-          style="border-radius: 30px; overflow: hidden;"
-          :style="theme === 'dark'
-            ? 'background: rgba(15,23,42,0.4); border: 1px solid rgba(255,255,255,0.05);'
-            : 'background: white; border: 1px solid #e2e8f0;'"
-        >
-          <!-- Table Header Bar -->
-          <div
-            class="pa-4 d-flex justify-space-between align-center"
-            :style="theme === 'dark' ? 'background: #1e3a8a;' : 'background: #60a5fa;'"
-          >
-            <span class="text-body-2 text-white">Account Billing Ledger</span>
-            <span
-              class="text-caption font-weight-bold text-white px-4 py-1 rounded-pill"
-              style="background: #16a34a; cursor: pointer;"
-            >Offset Selected Accounts</span>
-          </div>
-
-          <!-- Table -->
-          <div style="overflow-x: auto;">
-            <table style="width: 100%; border-collapse: collapse; text-align: center;">
-              <thead>
-                <tr :style="theme === 'dark' ? 'background: rgba(255,255,255,0.05);' : 'background: #e0f2fe;'">
-                  <th v-for="col in accountColumns" :key="col"
-                    class="pa-4 text-caption font-weight-bold"
-                    style="min-width: 140px; letter-spacing: 0.12em; white-space: nowrap;"
-                    :style="[
-                      theme === 'dark' ? 'color: #7dd3fc;' : 'color: #2563eb;',
-                      theme === 'dark' ? 'border-bottom: 1px solid rgba(255,255,255,0.05);' : 'border-bottom: 1px solid #e2e8f0;'
-                    ]"
-                  >
-                    <input v-if="col === 'cb'" type="checkbox" />
-                    <span v-else>{{ col }}</span>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr
-                  v-for="i in 2" :key="i"
-                  class="cursor-pointer"
-                  style="transition: background 0.15s ease;"
-                  :style="theme === 'dark' ? 'background: #0f172a;' : 'background: white;'"
-                  @mouseover="$event.currentTarget.style.background = theme === 'dark' ? '#1e293b' : '#f1f5f9'"
-                  @mouseleave="$event.currentTarget.style.background = theme === 'dark' ? '#0f172a' : 'white'"
-                >
-                  <td class="pa-4"><input type="checkbox" @click.stop /></td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">#882019</td>
-                  <td class="pa-4">
-                    <span class="text-caption font-weight-bold" style="color: #22c55e;">Active</span>
-                  </td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">Ck-4402</td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">Monthly pmt</td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">$0.00</td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">$25.00</td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">$75.00</td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">$5.00</td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">$0.00</td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">$25.00</td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">$450.00</td>
-                  <td class="pa-4">
-                    <select
-                      class="rounded-lg pa-1 text-caption"
-                      :style="theme === 'dark'
-                        ? 'background: #1e293b; color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);'
-                        : 'background: white; color: #334155; border: 1px solid #e2e8f0;'"
-                      @click.stop
-                    >
-                      <option value="edit">Edit</option>
-                      <option value="delete">Delete</option>
-                    </select>
-                  </td>
-                  <td class="pa-4">
-                    <button
-                      class="px-4 py-1 rounded-pill text-caption font-weight-bold text-white"
-                      style="background: #2563eb; border: none; cursor: pointer; transition: background 0.15s;"
-                      @click.stop="isPaymentModalOpen = true"
-                      @mouseover="$event.currentTarget.style.background = '#1d4ed8'"
-                      @mouseleave="$event.currentTarget.style.background = '#2563eb'"
-                    >Add Payment</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <DynamicTable
+          :theme="theme"
+          :data="accountData"
+          title="Account Billing"
+          :icon="ListFilterPlus"
+          icon-bg="rgba(34,197,94,0.1)"
+          icon-color="rgb(34,197,94)"
+          :columns="accountColumns"
+          row-key="id"
+          :actions="[
+            { id: 'offset', label: 'Offset Selected Accounts', icon: ArrowRightLeft },
+          ]"
+          @action="onTableAction"
+          show-actions-drop-down
+          show-dialog-button
+          dialog-button-label="Details"
+          @open-dialog="selectedItem = $event; dialogVisible = true"
+        />
 
         <!-- Footer: Icon Buttons + Totals -->
         <div class="d-flex flex-column flex-md-row justify-space-between align-start ga-6">
@@ -161,99 +93,22 @@
       <!-- ═══ LEGAL BILLING TAB ═══ -->
       <template v-else>
 
-        <!-- Legal Table -->
-        <div style="border-radius: 30px; overflow: auto;">
-          <table style="width: 100%; border-collapse: collapse; text-align: center;">
-            <thead>
-              <tr :style="theme === 'dark' ? 'background: rgba(255,255,255,0.05);' : 'background: #e0f2fe;'">
-                <th v-for="col in legalColumns" :key="col"
-                  class="pa-4 text-caption font-weight-bold"
-                  style="min-width: 140px; letter-spacing: 0.12em; white-space: nowrap;"
-                  :style="[
-                    theme === 'dark' ? 'color: #7dd3fc;' : 'color: #2563eb;',
-                    theme === 'dark' ? 'border-bottom: 1px solid rgba(255,255,255,0.05);' : 'border-bottom: 1px solid #e2e8f0;'
-                  ]"
-                >{{ col }}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <template v-for="i in 2" :key="i">
-                <!-- Main Row -->
-                <tr
-                  class="cursor-pointer"
-                  style="transition: background 0.15s ease;"
-                  :style="theme === 'dark' ? 'background: #0f172a;' : 'background: white;'"
-                  @click="expandedRow = expandedRow === i ? null : i"
-                  @mouseover="$event.currentTarget.style.background = theme === 'dark' ? '#1e293b' : '#f1f5f9'"
-                  @mouseleave="$event.currentTarget.style.background = theme === 'dark' ? '#0f172a' : 'white'"
-                >
-                  <td class="pa-4"><input type="checkbox" @click.stop /></td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">65487-9201</td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">David and Fisher</td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">Law Suit Pending</td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">$85.00</td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">2-25-2023</td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">$500.00</td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">$400.00</td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">$270.00</td>
-                  <td class="pa-4 text-body-2" :style="theme === 'dark' ? 'color: white;' : 'color: #475569;'">$370.00</td>
-                  <td class="pa-4">
-                    <select
-                      class="rounded-lg pa-1 text-caption"
-                      :style="theme === 'dark'
-                        ? 'background: #1e293b; color: #cbd5e1; border: 1px solid rgba(255,255,255,0.1);'
-                        : 'background: white; color: #334155; border: 1px solid #e2e8f0;'"
-                      @click.stop
-                    >
-                      <option value="edit">Edit</option>
-                      <option value="delete">Delete</option>
-                    </select>
-                  </td>
-                  <td class="pa-4">
-                    <button
-                      class="px-4 py-1 rounded-pill text-caption font-weight-bold text-white"
-                      style="background: #2563eb; border: none; cursor: pointer; transition: background 0.15s;"
-                      @click.stop="isPaymentModalOpen = true"
-                      @mouseover="$event.currentTarget.style.background = '#1d4ed8'"
-                      @mouseleave="$event.currentTarget.style.background = '#2563eb'"
-                    >Add Payment</button>
-                  </td>
-                </tr>
-
-                <!-- Expanded Row -->
-                <tr
-                  v-if="expandedRow === i"
-                  :style="theme === 'dark'
-                    ? 'background: rgba(255,255,255,0.08);'
-                    : 'background: rgba(37,99,235,0.55);'"
-                >
-                  <td colspan="12" class="pa-6">
-                    <div class="d-flex justify-space-around flex-wrap ga-4 text-body-2">
-                      <div v-for="detail in legalExpandedDetails" :key="detail.label" class="d-flex flex-column align-center">
-                        <span :style="theme === 'dark' ? `color: ${detail.color};` : `color: ${detail.colorLight}; font-weight: bold;`">
-                          {{ detail.label }}
-                        </span>
-                        <span style="color: white;" class="text-center">{{ detail.value }}</span>
-                      </div>
-                      <div class="d-flex flex-column align-center" style="border-left: 1px solid white; padding-left: 24px;">
-                        <span :style="theme === 'dark' ? 'color: #22c55e;' : 'color: #86efac; font-weight: bold;'">Agency</span>
-                        <span style="color: white;">$150.00</span>
-                      </div>
-                      <div class="d-flex flex-column align-center">
-                        <span :style="theme === 'dark' ? 'color: #eab308;' : 'color: #fde047; font-weight: bold;'">Client</span>
-                        <span style="color: white;">$100.00</span>
-                      </div>
-                      <div class="d-flex flex-column align-center">
-                        <span :style="theme === 'dark' ? 'color: #f87171;' : 'color: #fca5a5; font-weight: bold;'">Total</span>
-                        <span style="color: white;">$200.00</span>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </template>
-            </tbody>
-          </table>
-        </div>
+        <DynamicTable
+          :theme="theme"
+          :data="legalData"
+          title="Legal Accounting"
+          :icon="ListFilterPlus"
+          icon-bg="rgba(34,197,94,0.1)"
+          icon-color="rgb(34,197,94)"
+          :columns="legalColumns"
+          row-key="id"
+          :expanded-fields="legalExpandedDetails"
+          show-actions-drop-down
+          show-dialog-button
+          dialog-button-label="Details"
+          @open-dialog="selectedItem = $event; dialogVisible = true"
+        />
+        
 
         <!-- Footer: Icon Buttons + Totals -->
         <div class="d-flex flex-column flex-md-row justify-space-between align-start ga-6">
@@ -485,15 +340,14 @@
 
 <script setup>
 import { ref } from 'vue';
-import {
-  FileDown, Mail, Printer, MessageCircle, Link2,
-  CircleDollarSign, X, Plus, Minus,
-} from 'lucide-vue-next';
-import IconButton    from './shared/IconButton.vue';
-import SelectField   from './shared/SelectField.vue';
-import InputField    from './shared/InputField.vue';
-import DateField     from './shared/DateField.vue';
+import { FileDown, Mail, Printer, MessageCircle, Link2, CircleDollarSign, X, Plus, Minus,ArrowRightLeft } from 'lucide-vue-next';
+import IconButton from './shared/IconButton.vue';
+import SelectField from './shared/SelectField.vue';
+import InputField from './shared/InputField.vue';
+import DateField from './shared/DateField.vue';
 import CheckboxField from './shared/CheckboxField.vue';
+import DynamicTable from './shared/DynamicTable.vue';
+import FooterStat from './shared/FooterStat.vue';
 
 defineProps({
   theme: {
@@ -503,62 +357,137 @@ defineProps({
   },
 });
 
-const activeTab          = ref('account');
-const expandedRow        = ref(null);
+const activeTab = ref('account');
+const expandedRow = ref(null);
 const isPaymentModalOpen = ref(false);
-const paymentType        = ref('');
+const paymentType = ref('');
 
 // ── Table column headers ───────────────────────────────────────────────────────
 const accountColumns = [
-  'cb', 'Account Number', 'Status', 'ID/Check Number', 'Description',
-  'Attorney Fees', 'Agency Fee', 'Client Fee', 'Conv. Fee',
-  'Attorney Owes', 'Agency Owes', 'Client Owes', 'Actions', 'Payments',
+  { title: 'Account Number', key: 'accountNumber' },
+  { title: 'status', key: 'status' },
+  { title: 'ID/Check Number', key: 'checkNum' },
+  { title: 'Description', key: 'desc' },
+  { title: 'Attorney Fees', key: 'attFees' },
+  { title: 'Agency Fees', key: 'agencyFees' },
+  { title: 'Client Fees', key: 'clientFees' },
+  { title: 'convenience Fees', key: 'convFees' },
+  { title: 'Attorney Owes', key: 'attOwes' },
+  { title: 'Agency Owes', key: 'agencyOwes' },
+  { title: 'Client Owes', key: 'clientOwes' },
 ];
 
+const accountData = [
+  {
+    id: 1,
+    accountNumber: '#882019',
+    status: 'active',
+    checkNum: 'Ck-4402',
+    desc: 'Monthly Payment',
+    attFees: '$25.00',
+    agencyFees: '$75.00',
+    clientFees: '$5.00',
+    convFees: '$0.00',
+    attOwes: '$25.00',
+    agencyOwes: '$450.00',
+    clientOwes: '$550.00',
+  },
+  {
+    id: 2,
+    accountNumber: '#654987321',
+    status: 'active',
+    checkNum: 'Ck-4402',
+    desc: 'Monthly Payment',
+    attFees: '$25.00',
+    agencyFees: '$75.00',
+    clientFees: '$5.00',
+    convFees: '$0.00',
+    attOwes: '$25.00',
+    agencyOwes: '$450.00',
+    clientOwes: '$550.00',
+  },
+]
+
 const legalColumns = [
-  '', 'Account Number', 'Full Name/Company', 'Status', 'Current Balance Due',
-  'Statute of Limitation', 'Client Sent', 'Agency Spent',
-  'Total Pending', 'Trust Balance', 'Actions', 'Payments',
+  { title: 'Account Number', key: 'accNum' },
+  { title: 'Full Name/Company', key: 'name' },
+  { title: 'Status', key: 'status' },
+  { title: 'Current Balance Due', key: 'balance' },
+  { title: 'Statute of Limitation', key: 'sol' },
+  { title: 'Client Sent', key: 'clientSent' },
+  { title: 'Agency Spent', key: 'agencySpent' },
+  { title: 'Total Pending', key: 'pending' },
+  { title: 'Trust Balance', key: 'trust' }
 ];
+
+const legalData = [
+  {
+    id: 1,
+    accNum: '#65487-9201',
+    name: 'David and Fisher',
+    status: 'Law Suit Pending',
+    balance: '$85.00',
+    sol: '2-25-2023',
+    clientSent: '$500.00',
+    agencySent: '$400.00',
+    pending: '$270.00',
+    trust: '$370.00',
+    date: '02/18/26',
+    description: 'Payment',
+    checkNum: '#9902',
+    note: 'payment',
+    agent: 'John Doe',
+    amount: '$50.00',
+    agency: '$50.00',
+    client: '$450.00',
+    clientSent: '$350.00',
+    agencySpent: '$50.00',
+    convenienceFees: '$250.00'
+  },
+  {
+    id: 2,
+    accNum: '#31878-9201',
+    name: 'David and Fisher',
+    status: 'Law Suit Pending',
+    balance: '$85.00',
+    sol: '2-25-2023',
+    clientSent: '$500.00',
+    agencySent: '$400.00',
+    pending: '$270.00',
+    trust: '$370.00',
+    date: '02/18/26',
+    description: 'Payment',
+    checkNum: '#9902',
+    note: 'payment',
+    agent: 'John Doe',
+    amount: '$50.00',
+    agency: '$50.00',
+    client: '$450.00',
+    clientSent: '$350.00',
+    agencySpent: '$50.00',
+    convenienceFees: '$250.00'
+  }
+]
 
 // ── Legal expanded row detail cells ───────────────────────────────────────────
 const legalExpandedDetails = [
-  { label: 'Date',             value: '02/18/26',  color: '#7dd3fc', colorLight: '#1e293b' },
-  { label: 'Description',      value: 'Payment',   color: '#7dd3fc', colorLight: '#1e293b' },
-  { label: 'ID/Check Number',  value: '#9902',     color: '#7dd3fc', colorLight: '#1e293b' },
-  { label: 'Note',             value: 'payment',   color: '#7dd3fc', colorLight: '#1e293b' },
-  { label: 'Agent',            value: 'John Doe',  color: '#7dd3fc', colorLight: '#1e293b' },
-  { label: 'Amount',           value: '$50.00',    color: '#7dd3fc', colorLight: '#1e293b' },
-  { label: 'Agency',           value: '$50.00',    color: '#7dd3fc', colorLight: '#1e293b' },
-  { label: 'Client',           value: '$450.00',   color: '#7dd3fc', colorLight: '#1e293b' },
-  { label: 'Client Sent',      value: '$350.00',   color: '#7dd3fc', colorLight: '#1e293b' },
-  { label: 'Agency Spent',     value: '$50.00',    color: '#7dd3fc', colorLight: '#1e293b' },
-  { label: 'Convenience Fees', value: '$250.00',   color: '#7dd3fc', colorLight: '#1e293b' },
+  { key: 'date', label: 'Date' },
+  { key: 'description', label: 'Description' },
+  { key: 'checkNum', label: 'ID/Check Number' },
+  { key: 'note', label: 'Note' },
+  { key: 'agent', label: 'Agent' },
+  { key: 'amount', label: 'Amount' },
+  { key: 'agency', label: 'Agency' },
+  { key: 'client', label: 'Client' },
+  { key: 'clientSent', label: 'Client Sent' },
+  { key: 'agencySpent', label: 'Agency Spent' },
+  { key: 'convenienceFees', label: 'Convenience Fees' },
 ];
-</script>
 
-<!-- ── Inline FooterStat sub-component ──────────────────────────────────────── -->
-<script>
-const FooterStat = {
-  props: {
-    label:     { type: String, required: true },
-    value:     { type: String, required: true },
-    theme:     { type: String, default: 'dark' },
-    highlight: { type: Boolean, default: false },
-  },
-  template: `
-    <div class="d-flex flex-column">
-      <span class="text-body-2" style="color: #3b82f6;">{{ label }}</span>
-      <span
-        class="text-body-2 font-weight-bold"
-        :style="highlight
-          ? 'color: #22c55e;'
-          : theme === 'dark' ? 'color: white;' : 'color: #1e293b;'"
-      >{{ value }}</span>
-    </div>
-  `,
-};
-export default { components: { FooterStat } };
+function onTableAction(id) {
+  if (id === 'offset') return 
+}
+
 </script>
 
 <style scoped>

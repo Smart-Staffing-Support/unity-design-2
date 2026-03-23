@@ -74,6 +74,21 @@ export default createVuetify({
           checkbox_hover_border: '#60a5fa',
 
           // Datefield
+          // CheckboxField
+          checkbox_field_box_bg: '#f1f5f9',
+          checkbox_field_box_border_unchecked: '#cbd5e1',
+          checkbox_field_box_checked: '#2563eb',
+          checkbox_field_label: '#334155',
+          checkbox_field_label_checked: '#0f172a',
+          checkbox_field_label_hover: '#0f172a',
+
+          // DateField
+          date_field_label: '#2563eb',
+          date_field_bg: '#f1f5f9',
+          date_field_border: '#94a3b8',
+          date_field_text: '#1e293b',
+          date_field_hover_bg: '#e2e8f0',
+          date_field_focus_border: 'rgba(37, 99, 235, 0.5)',
 
           // Dynamic Contact List
           contact_border: '#94a3b8',
@@ -427,7 +442,9 @@ export default createVuetify({
 
           // AllocationTag
           alloc_tag_bg: '#f1f5f9',
-          alloc_tag_border: '#cbd5e1',
+          alloc_tag_hover_bg: '#e2e8f0',
+          alloc_tag_focus_border: 'rgba(37, 99, 235, 0.5)',
+          alloc_tag_surface_text: '#1e293b',
           alloc_tag_drag: '#94a3b8',
           alloc_tag_order_text: '#94a3b8',
           alloc_tag_label: '#64748b',
@@ -439,11 +456,19 @@ export default createVuetify({
           alloc_input_bg: '#ffffff',
           alloc_input_border: '#94a3b8',
           alloc_input_focus: '#60a5fa',
+          alloc_input_text: '#334155',
           alloc_prefix: '#94a3b8',
 
           // AssetStat
+          asset_stat_label: '#2563eb',
+          asset_stat_value_empty: '#94a3b8',
+          asset_stat_value: '#0f172a',
+          asset_stat_value_highlight: '#22c55e',
 
           // BalanceRow
+          balance_row_border: '#e2e8f0',
+          balance_row_label: '#334155',
+          balance_row_value: '#0f172a',
 
           // PrimaryActionCodes
           pac_bg: 'transparent',
@@ -543,7 +568,14 @@ export default createVuetify({
           sidebarActive: 'rgba(255, 255, 255, 0.1)',
           sidebarActiveText: '#ffffff',
 
-          // Datefield
+
+          // DateField
+          date_field_label: '#7dd3fc',
+          date_field_bg: 'rgba(255, 255, 255, 0.05)',
+          date_field_border: 'rgba(255, 255, 255, 0.1)',
+          date_field_text: '#ffffff',
+          date_field_hover_bg: 'rgba(255, 255, 255, 0.1)',
+          date_field_focus_border: 'rgba(59, 130, 246, 0.5)',
 
           // Dynamic Contact List
           contact_border: 'rgba(255, 255, 255, 0.01)',
@@ -580,6 +612,15 @@ export default createVuetify({
           // Checkbox
           checkbox_border_unchecked: 'rgba(255,255,255,0.1)',
           checkbox_hover_border: 'rgba(59,130,246,0.5)',
+
+          // CheckboxField
+          checkbox_field_box_bg: 'rgba(255, 255, 255, 0.05)',
+          checkbox_field_box_border_unchecked: 'rgba(255, 255, 255, 0.1)',
+          checkbox_field_box_checked: '#2563eb',
+          checkbox_field_label: '#ffffff',
+          checkbox_field_label_checked: '#ffffff',
+          checkbox_field_label_hover: '#ffffff',
+
 
           // Settlement
           settlement_placeholder: 'rgba(255, 255, 255, 0.5)',
@@ -897,24 +938,33 @@ export default createVuetify({
 
           // AllocationTag
           alloc_tag_bg: 'rgba(255, 255, 255, 0.05)',
-          alloc_tag_border: 'rgba(255, 255, 255, 0.1)',
+          alloc_tag_hover_bg: 'rgba(255, 255, 255, 0.1)',
+          alloc_tag_focus_border: 'rgba(59, 130, 246, 0.5)',
+          alloc_tag_surface_text: '#ffffff',
           alloc_tag_drag: 'rgba(255, 255, 255, 0.3)',
           alloc_tag_order_text: 'rgba(255, 255, 255, 0.4)',
           alloc_tag_label: '#ffffff',
 
           // AllocationRow
           alloc_row_hover: 'rgba(255, 255, 255, 0.05)',
-          alloc_row_border: 'rgba(255, 255, 255, 0.1)',
+          alloc_row_border: '#d1d5db',
           alloc_label: '#cbd5e1',
           alloc_input_bg: 'rgba(255, 255, 255, 0.05)',
           alloc_input_border: 'rgba(255, 255, 255, 0.1)',
           alloc_input_focus: 'rgba(59, 130, 246, 0.5)',
+          alloc_input_text: '#ffffff',
           alloc_prefix: '#94a3b8',
 
           // AssetStat
+          asset_stat_label: '#7dd3fc',
+          asset_stat_value_empty: 'rgba(255, 255, 255, 0.1)',
+          asset_stat_value: '#ffffff',
+          asset_stat_value_highlight: '#22c55e',
 
           // BalanceRow
-
+          balance_row_border: '#e2e8f0',
+          balance_row_label: '#ffffff',
+          balance_row_value: '#ffffff',
           // PrimaryActionCodes
           pac_bg: 'rgba(255, 255, 255, 0.05)',
           pac_btn_lime: '#84cc16',
