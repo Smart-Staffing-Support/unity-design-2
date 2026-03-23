@@ -3,12 +3,11 @@
     <input
       type="radio"
       :name="name"
-      class="radio-input"
+      class="radio-input w-4 h-4 rounded-circle flex-shrink-0 ma-0 cursor-pointer border-sm border-rf_border bg-rf_bg"
     />
-    <span
-      class="text-body-2"
-      :style="theme === 'dark' ? 'color: #94a3b8;' : 'color: #475569;'"
-    >{{ label }}</span>
+    <span class="text-body-2 text-rf_label">
+      {{ label }}
+    </span>
   </label>
 </template>
 
@@ -16,21 +15,17 @@
 defineProps({
   label: { type: String, required: true },
   name:  { type: String, required: true },
-  theme: { type: String, default: 'dark' },
 });
 </script>
 
 <style scoped>
-.cursor-pointer { cursor: pointer; }
-
 .radio-input {
-  width: 16px;
-  height: 16px;
-  border: 1px solid #cbd5e1;
-  border-radius: 50%;
   accent-color: #2563eb;
-  cursor: pointer;
-  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.radio-input:checked {
+  border-color: #2563eb;
 }
 
 .radio-input:focus {

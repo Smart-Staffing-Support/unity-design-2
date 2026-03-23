@@ -1,0 +1,16 @@
+.hover\:bg-fields_hover_bg:hover {
+  background-color: rgb(var(--v-theme-fields_hover_bg));
+}
+
+.hover\:border-fields_hover_border:hover {
+  border-color: rgb(var(--v-theme-fields_hover_border));
+}
+
+.placeholder\:text-fields_placeholder::placeholder {
+  color: rgb(var(--v-theme-fields_placeholder));
+}
+
+.focus\:border-fields_focus_border:focus,
+.focus\:border-fields_focus_border:focus-visible {
+  border-color: rgb(var(--v-theme-fields_focus_border));
+}
