@@ -54,142 +54,27 @@
     </v-sheet>
 
     <!-- Expandable Table -->
-    <div
-      style="overflow: hidden; border-radius: 30px; border: 1px solid rgba(37,99,235,0.4); box-shadow: 0 1px 4px rgba(0,0,0,0.06);"
-    >
-      <table class="w-100 table-fixed" style="border-collapse: collapse; text-align: left;">
-        <!-- Head -->
-        <thead>
-          <tr :style="theme === 'dark' ? 'background: rgba(255,255,255,0.05);' : 'background: #e0f2fe;'">
-            <th
-              v-for="col in columns"
-              :key="col.key"
-              class="pa-4"
-              style="min-width: 120px; letter-spacing: 0.1em; font-size: 13px;"
-              :style="[
-                theme === 'dark' ? 'color: #7dd3fc;' : 'color: #2563eb;',
-                theme === 'dark' ? 'border-bottom: 1px solid rgba(255,255,255,0.05);' : 'border-bottom: 1px solid #e2e8f0;'
-              ]"
-            >
-              <input v-if="col.key === 'checkbox'" type="checkbox" class="w-4 h-4" />
-              <span v-else>{{ col.label }}</span>
-            </th>
-          </tr>
-        </thead>
-
-        <!-- Body -->
-        <tbody>
-          <template v-for="id in 6" :key="id">
-            <!-- Main Row -->
-            <tr
-              class="cursor-pointer"
-              style="transition: background 0.15s ease;"
-              :style="theme === 'dark' ? '' : ''"
-              @click="expandedRow = expandedRow === id ? null : id"
-              @mouseover="$event.currentTarget.style.background = theme === 'dark' ? '#0f172a' : '#f1f5f9'"
-              @mouseleave="$event.currentTarget.style.background = ''"
-            >
-              <td
-                class="pa-4"
-                :style="[
-                  theme === 'dark' ? 'color: white;' : 'color: #334155;',
-                  theme === 'dark' ? 'border-top: 1px solid rgba(255,255,255,0.05);' : 'border-top: 1px solid #f1f5f9;'
-                ]"
-              >
-                <input type="checkbox" class="w-4 h-4" @click.stop />
-              </td>
-              <td
-                class="pa-4"
-                :style="theme === 'dark' ? 'border-top: 1px solid rgba(255,255,255,0.05);' : 'border-top: 1px solid #f1f5f9;'"
-              >
-                <span
-                  class="text-caption font-weight-bold px-2 py-1 rounded-pill"
-                  style="background: #d1fae5; color: #065f46;"
-                >Active</span>
-              </td>
-              <td
-                class="pa-4 text-body-2"
-                :style="[
-                  theme === 'dark' ? 'color: white;' : 'color: #334155;',
-                  theme === 'dark' ? 'border-top: 1px solid rgba(255,255,255,0.05);' : 'border-top: 1px solid #f1f5f9;'
-                ]"
-              >global logistics inc</td>
-              <td
-                class="pa-4 text-body-2"
-                :style="[
-                  theme === 'dark' ? 'color: white;' : 'color: #334155;',
-                  theme === 'dark' ? 'border-top: 1px solid rgba(255,255,255,0.05);' : 'border-top: 1px solid #f1f5f9;'
-                ]"
-              >$15,000</td>
-              <td
-                class="pa-4 text-body-2"
-                :style="[
-                  theme === 'dark' ? 'color: white;' : 'color: #334155;',
-                  theme === 'dark' ? 'border-top: 1px solid rgba(255,255,255,0.05);' : 'border-top: 1px solid #f1f5f9;'
-                ]"
-              >$5,200</td>
-              <td
-                class="pa-4 text-body-2"
-                :style="[
-                  theme === 'dark' ? 'color: white;' : 'color: #334155;',
-                  theme === 'dark' ? 'border-top: 1px solid rgba(255,255,255,0.05);' : 'border-top: 1px solid #f1f5f9;'
-                ]"
-              >$8,200</td>
-              <td
-                class="pa-4"
-                :style="theme === 'dark' ? 'border-top: 1px solid rgba(255,255,255,0.05);' : 'border-top: 1px solid #f1f5f9;'"
-              >
-                <button
-                  class="d-flex align-center justify-center rounded-pill"
-                  style="width: 28px; height: 28px; border: none; cursor: pointer; transition: opacity 0.15s ease;"
-                  :style="theme === 'dark' ? 'background: #60a5fa; color: white;' : 'background: #1d4ed8; color: white;'"
-                  @click.stop
-                >
-                  <ArrowUpRight :size="14" />
-                </button>
-              </td>
-            </tr>
-
-            <!-- Expanded Row -->
-            <tr
-              v-if="expandedRow === id"
-              :style="theme === 'dark'
-                ? 'background: rgba(255,255,255,0.08);'
-                : 'background: rgba(37,99,235,0.55);'"
-            >
-              <td colspan="7" class="pa-6">
-                <div class="d-flex justify-space-around flex-wrap ga-4 text-body-2 w-100">
-
-                  <!-- Left group -->
-                  <div
-                    v-for="detail in expandedDetails"
-                    :key="detail.label"
-                    class="d-flex flex-column align-center"
-                  >
-                    <span :style="theme === 'dark' ? `color: ${detail.color};` : `color: ${detail.colorLight}; font-weight: bold;`">
-                      {{ detail.label }}
-                    </span>
-                    <span style="color: white;" class="text-center">{{ detail.value }}</span>
-                  </div>
-
-                  <!-- View Check -->
-                  <div class="d-flex flex-column align-center" style="border-left: 1px solid white; padding-left: 24px;">
-                    <span :style="theme === 'dark' ? 'color: #f87171;' : 'color: #c084fc; font-weight: bold;'">View Check</span>
-                    <FileText :size="16" color="white" class="mt-1" />
-                  </div>
-                </div>
-              </td>
-            </tr>
-          </template>
-        </tbody>
-      </table>
-    </div>
+     <DynamicTable
+        :data="data"
+        title="Accounts"
+        :icon="ListFilterPlus"
+        icon-bg="rgba(34,197,94,0.1)"
+        icon-color="rgb(34,197,94)"
+        :columns="columns"
+        row-key="id"
+        :expanded-fields="expandedDetails"
+        show-dialog-button
+        dialog-button-label="Details"
+        @open-dialog="selectedItem = $event; dialogVisible = true"
+      />
+    
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import { FileDown, XCircle, ArrowUpRight, FileText } from 'lucide-vue-next';
+import DynamicTable from './shared/DynamicTable.vue';
 
 defineProps({
   theme: {
@@ -215,25 +100,45 @@ const summaryStats = [
 ];
 
 const columns = [
-  { key: 'checkbox',         label: '' },
-  { key: 'status',           label: 'Status' },
-  { key: 'name',             label: 'Name' },
-  { key: 'totalAmount',      label: 'Total Amount' },
-  { key: 'totalCollected',   label: 'Total Collected' },
-  { key: 'currentBalance',   label: 'Current Balance' },
-  { key: 'goToAccount',      label: 'Go to Account' },
+  { key: 'status', title: 'Status' },
+  { key: 'name',   title: 'Name' },
+  { key: 'totalAmount', title: 'Total Amount' },
+  { key: 'totalCollected', title: 'Total Collected' },
+  { key: 'currentBalance', title: 'Current Balance' },
 ];
 
+const data = [
+  { 
+    id: 1,
+    status: 'Active',
+    name: 'global logistics inc',
+    totalAmount: '$15,000',
+    totalCollected: '$10,000',
+    currentBalance: '$5,000',
+    date: '02/18/26',
+    checkNum: '#9902',
+    desc: 'Payment',
+    agency: '$50',
+    client: '$450',
+    convFees: '$250',
+    agencyFees: '$150',
+    clientFees: '$100',
+    attorneyFees: '$100'
+  }
+]
+
+
 const expandedDetails = [
-  { label: 'Date',             value: '02/18/26', color: '#7dd3fc', colorLight: '#1e293b' },
-  { label: 'ID/Check Number',  value: '#9902',    color: '#7dd3fc', colorLight: '#1e293b' },
-  { label: 'Description',      value: 'payment',  color: '#7dd3fc', colorLight: '#1e293b' },
-  { label: 'Agency',           value: '$50.00',   color: '#7dd3fc', colorLight: '#1e293b' },
-  { label: 'Client',           value: '$450.00',  color: '#7dd3fc', colorLight: '#1e293b' },
-  { label: 'Convenience Fees', value: '$250.00',  color: '#7dd3fc', colorLight: '#1e293b' },
-  { label: 'Agency',           value: '$150.00',  color: '#22c55e', colorLight: '#86efac' },
-  { label: 'Client',           value: '$100.00',  color: '#eab308', colorLight: '#fde047' },
-  { label: 'Attorney',         value: '$100.00',  color: '#60a5fa', colorLight: '#93c5fd' },
+  { key: 'date', label: 'Date' },
+  { key: 'desc', label: 'Description' },
+  { key: 'checkNum', label: 'ID/Check Number' },
+  { key: 'desc', label: 'Description' },
+  { key: 'agency', label: 'Agency' },
+  { key: 'client', label: 'Client' },
+  { key: 'convFees', label: 'Conv.Fees' },
+  { key: 'agencyFees', label: 'Agency Fees' },
+  { key: 'clientFees', label: 'Client Fees' },
+  { key: 'attorneyFees', label: 'Attorney Fees' },
 ];
 
 function handleCancelAccounts() {

@@ -1,4 +1,4 @@
-<!-- CategoryView.vue -->
+
 <template>
   <ContactInfoMenu v-if="category === 'Contact Info'" :theme="theme" />
   <SkipTracing     v-else-if="category === 'Skip Tracing'" :theme="theme" />
@@ -27,13 +27,9 @@ import Dispute from '../Dispute.vue'
 import ExperianReports from '../ExperianReports.vue'
 import Settlement from '../Settlement.vue'
 
-//export default {
-  //name: 'CategoryView',
-  //components: { Activity, ContactInfoMenu, SkipTracing, Dispute, ExperianReports, Settlement },
   const props = defineProps({
     category: { type: String, required: true },
     theme: { type: String, default: 'light' },
     activeCreditor: { type: String, default: 'creditor 1' },
   })
-//}
 </script>

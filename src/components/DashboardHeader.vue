@@ -174,8 +174,9 @@
         <StatField label="Account #" :value="topHeader.accountNumber" :theme="theme" />
         <StatField label="Client #" :value="topHeader.clientNumber" :theme="theme" />
         <StatField label="Court Case #" value="124-49872-320" :theme="theme" />
-        <v-img src="https://aoausa.com/wp-content/uploads/2020/10/credit-scale.png" alt="Credit Scale" />
-        <span class="text-h6 font-weight-bold ml-10">Credit score 450</span>
+        <Metric :value="563" :width="300" :height="150" />
+        <!-- <v-img src="https://aoausa.com/wp-content/uploads/2020/10/credit-scale.png" alt="Credit Scale" /> -->
+        <!-- <span class="text-h6 font-weight-bold ml-10">Credit score 450</span> -->
       </v-col>
 
       <!-- Col 2 -->
@@ -274,6 +275,7 @@ import SelectField from './shared/SelectField.vue'
 import DateField from './shared/DateField.vue'
 import StatField from './shared/StatField.vue'
 import { useTheme } from 'vuetify'
+import Metric from './Metric.vue'
 
   const theme = useTheme()
   const props = defineProps({
