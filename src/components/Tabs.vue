@@ -1,12 +1,12 @@
 <template>
   <div class="d-flex ga-8 mt-6">
-    <div class="flex-grow-1 d-flex flex-column" style="min-height: 600px;">
+    <div class="flex-grow-1 d-flex flex-column" style="min-height: 600px; max-width: 1500px;">
 
       <div class="mb-6 position-relative" style="z-index: 40;">
         <div
-          class="d-flex ga-2 pa-1 rounded-xl overflow-visible bg-client_header_bg border-sm text-client_header_border"
+          class="d-flex ga-2 pa-1 rounded-xl overflow-auto bg-client_header_bg border-sm text-client_header_border custom-scrollbar"
           style="backdrop-filter: blur(12px); transition: colors 0.3s ease;"
-          :style="theme === 'dark' ? '' : 'box-shadow: 0 10px 30px rgba(30,41,59,0.15);'"
+          :style="isDark ? '' : 'box-shadow: 0 10px 30px rgba(30,41,59,0.15);'"
         >
           <div
             v-for="tab in tabs"
@@ -21,7 +21,7 @@
               :style="
                 activeTab === tab.id
                   ? 'background: #2563eb; color: white; box-shadow: 0 8px 24px rgba(37,99,235,0.3);'
-                  : theme === 'dark'
+                  : isDark
                     ? 'background: transparent; color: #bfdbfe;'
                     : 'background: transparent; color: #475569;'
               "
@@ -36,7 +36,7 @@
               class="position-absolute"
               style="top: 100%; left: 0; min-width: max-content; border-radius: 16px; z-index: 50; overflow: hidden; animation: fadeInDown 0.2s ease-out; pointer-events: auto;"
               :style="
-                theme === 'dark'
+                isDark
                   ? 'background: rgba(15,23,42,0.98); border: 1px solid rgba(255,255,255,0.20); box-shadow: 0 24px 48px rgba(0,0,0,0.4);'
                   : 'background: rgba(255,255,255,0.98); border: 1px solid #cbd5e1; box-shadow: 0 24px 48px rgba(0,0,0,0.12);'
               "
@@ -50,18 +50,18 @@
                 style="letter-spacing: 0.08em; white-space: nowrap; border: none; cursor: pointer; outline: none; width: 100%;"
                 :style="[
                   idx > 0
-                    ? theme === 'dark'
+                    ? isDark
                       ? 'border-top: 1px solid rgba(255,255,255,0.05);'
                       : 'border-top: 1px solid #e2e8f0;'
                     : '',
                   activeCategory === item
                     ? 'background: #2563eb; color: white;'
-                    : theme === 'dark'
+                    : isDark
                       ? 'background: transparent; color: rgba(255,255,255,0.80);'
                       : 'background: transparent; color: #334155;'
                 ]"
                 @click="setTabAndCategory(tab.id, item)"
-                @mouseenter="e => { if (activeCategory !== item) e.currentTarget.style.background = theme === 'dark' ? 'rgba(255,255,255,0.1)' : '#eff6ff' }"
+                @mouseenter="e => { if (activeCategory !== item) e.currentTarget.style.background = isDark ? 'rgba(255,255,255,0.1)' : '#eff6ff' }"
                 @mouseleave="e => { if (activeCategory !== item) e.currentTarget.style.background = 'transparent' }"
               >
                 {{ item }}
@@ -77,7 +77,7 @@
         :key="tab.id"
         class="flex-grow-1 rounded-xl transition-all bg-client_header_bg border-sm text-client_header_border"
         style="border-radius: 24px !important; overflow-y: auto; backdrop-filter: blur(12px);"
-        :style="theme === 'dark' ? '' : 'box-shadow: 0 10px 30px rgba(30,41,59,0.15);'"
+        :style="isDark ? '' : 'box-shadow: 0 10px 30px rgba(30,41,59,0.15);'"
       >
         <div class="pa-8">
           <div class="d-flex  justify-start align-start ga-12 mb-6">
@@ -91,7 +91,7 @@
               <h2
                 class="text-h6"
                 style="letter-spacing: -0.3px;"
-                :style="theme === 'dark' ? 'color: white;' : 'color: #1e293b;'"
+                :style="isDark ? 'color: white;' : 'color: #1e293b;'"
               >
                 {{ tab.label }}<template v-if="activeCategory && tab.submenu?.length"> / {{ activeCategory }}</template>
               </h2>
@@ -102,7 +102,7 @@
                 v-if="entityTitle"
                 class="text-h4 mr-10"
                 style="letter-spacing: -0.5px;"
-                :style="theme === 'dark' ? 'color: white;' : 'color: #1e293b;'"
+                :style="isDark ? 'color: white;' : 'color: #1e293b;'"
               >
                 {{ entityTitle }}
               </h2>
@@ -110,7 +110,7 @@
                 <span
                   v-if="entityId"
                   class="text-title-large text-decoration-underline"
-                  :style="theme === 'dark' ? 'color: white;' : 'color: #1e293b;'"
+                  :style="isDark ? 'color: white;' : 'color: #1e293b;'"
                 >
                   {{ entityId }}
                 </span>
@@ -119,18 +119,18 @@
                   class="text-title-large text-center rounded-pill px-6 py-1 align-self-start"
                   :style="
                     entityStatus.color === 'green'
-                      ? theme === 'dark'
+                      ? isDark
                         ? 'background: rgba(34,197,94,0.20); color: #22c55e;'
                         : 'background: rgba(34,197,94,0.20); color: #16a34a;'
                       : entityStatus.color === 'red'
-                        ? theme === 'dark'
+                        ? isDark
                           ? 'background: rgba(239,68,68,0.20); color: #f87171;'
                           : 'background: rgba(239,68,68,0.20); color: #dc2626;'
                         : entityStatus.color === 'yellow'
-                          ? theme === 'dark'
+                          ? isDark
                             ? 'background: rgba(234,179,8,0.20); color: #facc15;'
                             : 'background: rgba(234,179,8,0.20); color: #ca8a04;'
-                          : theme === 'dark'
+                          : isDark
                             ? 'background: rgba(148,163,184,0.20); color: #94a3b8;'
                             : 'background: rgba(148,163,184,0.20); color: #475569;'
                   "
@@ -143,13 +143,13 @@
 
           <slot
             :name="`tab-${tab.id}`"
-            :theme="theme"
+            :isDark="isDark"
             :active-category="activeCategory"
           >
             <component
               v-if="tab.component"
               :is="tab.component"
-              :theme="theme"
+              :isDark="isDark"
               :active-category="activeCategory"
               v-bind="tab.componentProps || {}"
               class="animate-content"
@@ -163,16 +163,13 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
+import { useTheme } from 'vuetify'
 
 const props = defineProps({
   tabs: {
     type: Array,
     required: true,
-  },
-  theme: {
-    type: String,
-    default: 'light',
   },
   entityTitle: {
     type: String,
@@ -191,6 +188,9 @@ const props = defineProps({
     default: null,
   },
 })
+
+const theme = useTheme()
+const isDark = computed(() => theme.global.current.value.dark)
 
 const emit = defineEmits(['tab-change', 'category-change'])
 const activeTab = ref(props.defaultTab ?? props.tabs[0]?.id ?? '')

@@ -1,13 +1,13 @@
 <template>
   <div
     class="overflow-hidden border bg-table_container_bg text-table_container_border"
-    style="border-radius: 35px;  box-shadow: 0 4px 24px rgba(15,23,42,0.15);"
+    style="border-radius: 35px;  border: 1px solid;  box-shadow: 0 4px 24px rgba(15,23,42,0.15);"
   >
 
     <!-- Header -->
     <div class="px-10 py-1 d-flex align-center justify-space-between border-b bg-table_header_bg text-table_header_border">
       <div class="d-flex align-center ga-4">
-        <div class="pa-3 rounded-xl" :style="`background: ${iconBg};`">
+        <div class="pt-3 pl-3 pr-3 pb-1 rounded-xl" :style="`background: ${iconBg};`">
           <component :is="icon" v-if="icon" :style="`color: ${iconColor};`" :size="22" />
         </div>
         <div>
@@ -186,7 +186,7 @@
                     <div
                       class="d-flex ga-4 text-sm"
                       style="display: grid;"
-                      :style="`grid-template-columns: repeat(${expandedFields.length}, minmax(0, 1fr));`"
+                      :style="`grid-template-columns: repeat(${showExpandableDialog ? expandedFields.length + 1 : expandedFields.length}, minmax(0, 1fr));`"
                     >
                       <div
                         v-for="field in expandedFields"
@@ -208,6 +208,17 @@
                             : renderCell(getNestedValue(row, field.key))"
                         />
                       </div>
+                      <p v-if="showExpandableDialog" class="px-6 py-4 text-center" @click.stop>
+                        <v-btn
+                          size="x-small"
+                          variant="flat"
+                          color="primary"
+                          class="rounded-lg font-weight-bold"
+                          @click="$emit('open-expandable-dialog', row)"
+                        >
+                          {{ expandableDialogBtn }}
+                        </v-btn>
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -286,9 +297,10 @@ const props = defineProps({
   bulkActionLabel: { type: String, default: 'Apply Bulk Actions' },
   actions: { type: Array, default: () => [] },
   showActionsDropDown: { type: Boolean, default: false },
-  showDialogBtn: { type: Boolean, default: false },
   showDialogButton: { type: Boolean, default: false }, 
   dialogButtonLabel: { type: String, default: 'View' },
+  showExpandableDialog: { type: Boolean, default: false }, 
+  expandableDialogBtn: { type: String, default: 'Show' },
 })
 
 //pagination
