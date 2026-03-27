@@ -72,9 +72,8 @@
             <v-col cols="12" md="4" class="d-flex align-end">
               <v-btn
                 variant="flat"
-                class="newjudgment-add-step-btn px-6 py-3 font-weight-black text-uppercase text-caption bg-newexperianreports_button hover:bg-billing_button_hover text-accounts_cancel_text transition-all"
+                class="newjudgment-add-step-btn w-100 font-weight-black text-uppercase text-caption bg-newexperianreports_button hover:bg-billing_button_hover text-accounts_cancel_text transition-all"
                 elevation="0"
-                block
               >
                 Add Step
               </v-btn>
@@ -319,7 +318,21 @@ const compositionSelection = reactive({
   letter-spacing: -0.05em;
 }
 
-.newjudgment-add-step-btn,
+.newjudgment-add-step-btn {
+  height: 40px !important;
+  min-height: 40px !important;
+  max-height: 40px;
+  padding: 0 16px !important;
+  border-radius: 12px !important;
+  box-shadow:
+    0 10px 15px -3px var(--v-newexperianreports_button_shadow),
+    0 4px 6px -4px var(--v-newexperianreports_button_shadow);
+}
+
+:deep(.newjudgment-add-step-btn .v-btn__content) {
+  line-height: 1;
+}
+
 .newjudgment-save-btn {
   border-radius: 16px;
   box-shadow:
