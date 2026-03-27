@@ -65,23 +65,23 @@
       @tab-change="onTabChange"
       @category-change="onCategoryChange"
     >
-      <template #tab-client="{ theme }">
-        <ClientInfo :theme="theme" />
+      <template #tab-client="{ isDark }">
+        <ClientInfo :theme="isDark ? 'dark' : 'light'" />
       </template>
-      <template #tab-accounts="{ theme, activeCategory }">
-        <AccountsModule :theme="theme" :category="activeCategory" />
+      <template #tab-accounts="{ isDark, activeCategory }">
+        <AccountsModule :theme="isDark ? 'dark' : 'light'" :category="activeCategory" />
       </template>
-      <template #tab-documents="{ theme }">
-        <Documents :theme="theme" />
+      <template #tab-documents="{ isDark }">
+        <Documents :theme="isDark ? 'dark' : 'light'" />
       </template>
-      <template #tab-accounting="{ theme }">
-        <AccountingModule :theme="theme" />
+      <template #tab-accounting="{ isDark }">
+        <AccountingModule :theme="isDark ? 'dark' : 'light'" />
       </template>
-      <template #tab-reminders="{ theme }">
-        <RemindersFeed :theme="theme" />
+      <template #tab-reminders="{ isDark }">
+        <RemindersFeed :theme="isDark ? 'dark' : 'light'" />
       </template>
-      <template #tab-settings="{ theme }">
-        <SettingsModule :theme="theme" />
+      <template #tab-settings="{ isDark }">
+        <SettingsModule :theme="isDark ? 'dark' : 'light'" />
       </template>
     </Tabs>
   </div>

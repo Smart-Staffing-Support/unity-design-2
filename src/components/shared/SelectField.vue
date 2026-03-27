@@ -1,5 +1,3 @@
-#
-
 <template>
   <div class="d-flex flex-column ga-2 w-100" :class="className">
     <label class="text-body-2 text-capitalize text-select_field_label ls-widest">
@@ -10,7 +8,7 @@
       <select
         :value="modelValue ?? defaultValue"
         @change="handleChange"
-        class="select-field py-2 px-4 w-100 text-caption font-weight-bold bg-select_field_bg text-select_field_text"
+        class="select-field w-100 text-caption font-weight-bold bg-select_field_bg text-select_field_text"
       >
         <option
           v-for="opt in options"
@@ -24,7 +22,7 @@
 
       <v-icon
         icon="mdi-chevron-down"
-        size="14"
+        size="18"
         class="chevron-icon position-absolute text-select_field_chevron"
       />
     </div>
@@ -81,6 +79,8 @@ const handleChange = (e) => {
 /* Native selects: border via theme tokens (same pattern as DateField). */
 
 .select-field {
+  position: relative;
+  z-index: 0;
   -webkit-appearance: none;
   appearance: none;
   box-sizing: border-box;
@@ -91,6 +91,9 @@ const handleChange = (e) => {
     background-color 0.2s,
     border-color 0.2s;
   border: 1px solid rgb(var(--v-theme-select_field_border));
+  padding: 0.5rem 2.5rem 0.5rem 1rem;
+  min-height: 40px;
+  line-height: 1.4;
 }
 
 .select-field:hover {
@@ -104,14 +107,12 @@ const handleChange = (e) => {
 }
 
 .chevron-icon {
-  right: 12px;
-
+  right: 14px;
   top: 50%;
-
   transform: translateY(-50%);
-
   pointer-events: none;
-
+  z-index: 2;
+  position: absolute;
   transition: transform 0.2s;
 }
 

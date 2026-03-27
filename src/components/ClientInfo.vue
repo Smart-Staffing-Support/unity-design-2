@@ -4,15 +4,19 @@
 
       <!-- LEFT: Collapsible Drawer -->
       <div
-        class="drawer-container d-flex flex-shrink-0 position-relative overflow-hidden"
+        class="drawer-container d-flex flex-shrink-0 position-relative"
         :class="[
-          isDrawerOpen ? 'drawer-container--open' : 'drawer-container--closed',
+          isDrawerOpen ? 'drawer-container--open overflow-hidden' : 'drawer-container--closed overflow-visible',
           `drawer-skin--${drawerSkin}`,
         ]"
       >
-        <!-- Toggle Handle -->
+        <!-- Toggle Handle (only visible UI when closed — tab flush left, rounded on the right) -->
         <button
+          type="button"
           class="drawer-handle position-absolute d-flex align-center justify-center transition-colors"
+          :class="isDrawerOpen ? 'drawer-handle--open' : 'drawer-handle--closed'"
+          :aria-expanded="isDrawerOpen"
+          aria-label="Toggle search results drawer"
           @click="isDrawerOpen = !isDrawerOpen"
         >
           <component :is="isDrawerOpen ? ChevronLeft : ChevronRight" :size="18" />
@@ -20,6 +24,7 @@
 
         <!-- Drawer Content -->
         <div
+          v-show="isDrawerOpen"
           class="w-100 d-flex flex-column overflow-hidden drawer-content"
         >
           <!-- Drawer Header -->
@@ -83,7 +88,9 @@
             </v-col>
             <v-col cols="12" md="4"><InputField label="Tax ID (Custom)" placeholder="XX-XXXXXXX" :theme="theme" /></v-col>
             <v-col cols="12" md="4"><InputField label="SSN (Custom)" placeholder="XX-XXX-XXXX" :theme="theme" /></v-col>
-            <v-col cols="12" md="4"><CheckboxField label="Enable Convenience Fee" :theme="theme" /></v-col>
+            <v-col cols="12" md="4">
+              <CheckboxField v-model:checked="convenienceFeeEnabled" label="Enable Convenience Fee" :theme="theme" />
+            </v-col>
           </v-row>
         </v-sheet>
 
@@ -255,13 +262,17 @@
             <h4 class="text-h6" style="letter-spacing: -0.3px;" :style="sectionTitleStyle">Client Portal Settings</h4>
           </div>
 
-          <CheckboxField label="Enable Client Portal Access" :theme="theme" @update:modelValue="portalEnabled = $event" />
+          <CheckboxField
+            v-model:checked="portalEnabled"
+            label="Enable Client Portal Access"
+            :theme="theme"
+          />
 
           <div v-if="portalEnabled" class="d-flex flex-column ga-6 mt-6">
 
             <!-- Portal User Account -->
             <v-sheet
-              class="pa-6 rounded-xl"
+              class="pa-6 rounded-xl portal-user-account-sheet"
               color="transparent"
               style="border-width: 2px; border-style: solid; border-radius: 16px;"
               :style="theme === 'dark'
@@ -275,17 +286,39 @@
               >Portal User Account</h5>
               <v-row align="end">
                 <v-col cols="12" md="6">
-                  <SelectField label="Portal View Type" :options="[{label:'Read-Only',value:'readonly'},{label:'Standard',value:'standard'},{label:'Full Access',value:'full'}]" :theme="theme" />
+                  <div class="d-flex flex-column ga-2 w-100 portal-view-type-select">
+                    <label class="text-body-2 text-capitalize text-select_field_label ls-widest">
+                      Portal View Type
+                    </label>
+                    <div ref="portalViewTypeSelectWrap" class="w-100">
+                      <v-select
+                        v-model="portalViewType"
+                        v-model:menu="portalViewTypeMenuOpen"
+                        :items="portalViewTypeItems"
+                        item-title="title"
+                        item-value="value"
+                        variant="outlined"
+                        density="comfortable"
+                        hide-details
+                        color="surface"
+                        menu-icon="chevron-down"
+                        :menu-props="portalViewTypeMenuProps"
+                        :list-props="portalViewTypeListProps"
+                        class="portal-view-type-vselect"
+                      />
+                    </div>
+                  </div>
                 </v-col>
                 <v-col cols="12" md="6"><InputField label="Email Address" placeholder="contact@example.com" :theme="theme" /></v-col>
                 <v-col cols="12" md="6"><InputField label="Username" placeholder="client_username" :theme="theme" /></v-col>
                 <v-col cols="12" md="6" class="d-flex align-end">
                   <v-btn
                     color="blue-darken-1"
-                    class="font-weight-medium rounded-xl"
+                    class="font-weight-medium portal-send-temp-password w-100"
                     style="font-size: 12px; box-shadow: 0 8px 24px rgba(37,99,235,0.2);"
                     elevation="0"
                     block
+                    rounded="0"
                   >Send Temporary Password</v-btn>
                 </v-col>
               </v-row>
@@ -294,7 +327,7 @@
             <!-- Accordion: Permissions / Show Fields / Show Reports -->
             <v-expansion-panels
               variant="accordion"
-              class="d-flex flex-column ga-3"
+              class="d-flex flex-column ga-3 client-info-portal-accordions"
               style="border-radius: 16px;"
             >
               <!-- Permissions -->
@@ -315,7 +348,14 @@
                     class="d-flex flex-column ga-4 pt-4"
                     :style="theme === 'dark' ? 'border-top: 1px solid rgba(255,255,255,0.05);' : 'border-top: 1px solid #e2e8f0;'"
                   >
-                    <CheckboxField v-for="perm in permissions" :key="perm" :label="perm" :theme="theme" />
+                    <CheckboxField
+                      v-for="perm in permissions"
+                      :key="perm"
+                      :checked="!!portalPermissionChecked[perm]"
+                      :label="perm"
+                      :theme="theme"
+                      @update:checked="(v) => (portalPermissionChecked[perm] = v)"
+                    />
                   </div>
                 </v-expansion-panel-text>
               </v-expansion-panel>
@@ -338,7 +378,14 @@
                     class="d-flex flex-column ga-4 pt-4"
                     :style="theme === 'dark' ? 'border-top: 1px solid rgba(255,255,255,0.05);' : 'border-top: 1px solid #e2e8f0;'"
                   >
-                    <CheckboxField v-for="field in showFields" :key="field" :label="field" :theme="theme" />
+                    <CheckboxField
+                      v-for="field in showFields"
+                      :key="field"
+                      :checked="!!portalShowFieldChecked[field]"
+                      :label="field"
+                      :theme="theme"
+                      @update:checked="(v) => (portalShowFieldChecked[field] = v)"
+                    />
                   </div>
                 </v-expansion-panel-text>
               </v-expansion-panel>
@@ -361,7 +408,14 @@
                     class="d-flex flex-column ga-4 pt-4"
                     :style="theme === 'dark' ? 'border-top: 1px solid rgba(255,255,255,0.05);' : 'border-top: 1px solid #e2e8f0;'"
                   >
-                    <CheckboxField v-for="report in showReports" :key="report" :label="report" :theme="theme" />
+                    <CheckboxField
+                      v-for="report in showReports"
+                      :key="report"
+                      :checked="!!portalShowReportChecked[report]"
+                      :label="report"
+                      :theme="theme"
+                      @update:checked="(v) => (portalShowReportChecked[report] = v)"
+                    />
                     <MultiSearchSelect label="Reports" :theme="theme" />
                   </div>
                 </v-expansion-panel-text>
@@ -371,10 +425,11 @@
             <!-- Add Portal User -->
             <v-btn
               color="indigo-darken-1"
-              class="font-weight-black text-uppercase rounded-xl"
-              style="letter-spacing: 0.15em; font-size: 11px; box-shadow: 0 8px 24px rgba(99,102,241,0.25);"
+              class="font-weight-black text-uppercase portal-add-user-btn w-100"
+              style="letter-spacing: 0.15em; font-size: 11px;"
               elevation="0"
               block
+              rounded="0"
             >
               <template #prepend><Plus :size="16" /></template>
               Add Portal User
@@ -389,7 +444,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, reactive, onMounted, onBeforeUnmount, nextTick, watch } from 'vue';
 import {
   ChevronLeft, ChevronRight,
   UserPlus, User,
@@ -421,6 +476,165 @@ const drawerSkin = computed(() => (vuetifyTheme.global.current.value.dark ? 'dar
 const isDrawerOpen = ref(false);
 const newNote      = ref('');
 const portalEnabled = ref(false);
+const convenienceFeeEnabled = ref(false);
+
+/** Checked state for portal accordion lists (must be bound or :checked never becomes true / blue). */
+const portalPermissionChecked = reactive({});
+const portalShowFieldChecked = reactive({});
+const portalShowReportChecked = reactive({});
+
+/** Portal View Type: v-select only so the open menu can be styled in dark mode (native select cannot). Field CSS matches SelectField tokens. */
+const portalViewType = ref('readonly');
+const portalViewTypeItems = [
+  { title: 'Read-Only', value: 'readonly' },
+  { title: 'Standard', value: 'standard' },
+  { title: 'Full Access', value: 'full' },
+];
+
+const portalViewTypeSelectWrap = ref(null);
+/** Synced with v-select menu open state so we can resize the teleported overlay reliably. */
+const portalViewTypeMenuOpen = ref(false);
+/** Portal menu width (px), light + dark; matches field + small extension — set from ResizeObserver. */
+const portalViewTypeMenuWidthPx = ref(null);
+
+function updatePortalViewTypeMenuWidth() {
+  const wrap = portalViewTypeSelectWrap.value;
+  if (!wrap) return;
+  const field = wrap.querySelector('.v-field');
+  const w = field instanceof HTMLElement ? field.offsetWidth : wrap.offsetWidth;
+  /** Align with header width and extend slightly (reference: menu a bit longer than tight text). */
+  portalViewTypeMenuWidthPx.value = w > 28 ? w + 12 : w;
+}
+
+/**
+ * Vuetify's connected overlay overwrites width/minWidth on every layout pass, so props
+ * and contentProps.style lose to `contentStyles` from the location strategy. A global
+ * CSS rule with !important + a CSS variable is what actually constrains the menu.
+ */
+function syncPortalViewTypeMenuWidthCssVar() {
+  const px = portalViewTypeMenuWidthPx.value;
+  if (px != null) {
+    document.documentElement.style.setProperty('--portal-view-type-menu-width', `${px}px`);
+  } else {
+    document.documentElement.style.removeProperty('--portal-view-type-menu-width');
+  }
+}
+
+/** Overlay content node (teleported) — query via data attr set in menu contentProps. */
+function portalViewTypeMenuContentEl() {
+  return document.querySelector('.v-overlay__content[data-portal-view-type-menu="1"]');
+}
+
+/**
+ * Vuetify's connected strategy rewrites inline width/minWidth every frame; stylesheet
+ * !important can still lose to timing. Inline `setProperty(..., 'important')` wins.
+ */
+function applyPortalViewTypeMenuDimensions() {
+  const el = portalViewTypeMenuContentEl();
+  const px = portalViewTypeMenuWidthPx.value;
+  if (!el || px == null) return;
+  const s = `${Math.round(px)}px`;
+  el.style.setProperty('width', s, 'important');
+  el.style.setProperty('min-width', s, 'important');
+  el.style.setProperty('max-width', s, 'important');
+  el.style.setProperty('box-sizing', 'border-box', 'important');
+}
+
+function clearPortalViewTypeMenuDimensions() {
+  const el = portalViewTypeMenuContentEl();
+  if (!el) return;
+  el.style.removeProperty('width');
+  el.style.removeProperty('min-width');
+  el.style.removeProperty('max-width');
+  el.style.removeProperty('box-sizing');
+}
+
+/** Re-apply for several frames — location strategy keeps resetting inline size after open. */
+function schedulePortalViewTypeMenuDimensions() {
+  let n = 0;
+  const run = () => {
+    updatePortalViewTypeMenuWidth();
+    syncPortalViewTypeMenuWidthCssVar();
+    applyPortalViewTypeMenuDimensions();
+    if (n++ < 12) requestAnimationFrame(run);
+  };
+  requestAnimationFrame(run);
+}
+
+/**
+ * Merge must include `v-select__content` — VSelect merges menuProps *after* a default
+ * contentClass; if we only pass our classes, the default is replaced and the menu breaks.
+ */
+const portalViewTypeMenuProps = computed(() => {
+  const isDark = vuetifyTheme.global.current.value.dark;
+  return {
+    contentClass: [
+      'v-select__content',
+      'portal-view-type-menu',
+      isDark ? 'portal-view-type-menu--dark' : 'portal-view-type-menu--light',
+    ].join(' '),
+    contentProps: {
+      'data-portal-view-type-menu': '1',
+    },
+  };
+});
+
+/** Tighter list rows inside the open menu (Read-Only / Standard / Full Access). */
+const portalViewTypeListProps = { density: 'compact', class: 'portal-view-type-vselect-list' };
+
+let portalViewTypeResizeObserver = null;
+
+onMounted(() => {
+  updatePortalViewTypeMenuWidth();
+  syncPortalViewTypeMenuWidthCssVar();
+  const el = portalViewTypeSelectWrap.value;
+  if (el && typeof ResizeObserver !== 'undefined') {
+    portalViewTypeResizeObserver = new ResizeObserver(() => {
+      updatePortalViewTypeMenuWidth();
+      syncPortalViewTypeMenuWidthCssVar();
+      applyPortalViewTypeMenuDimensions();
+    });
+    portalViewTypeResizeObserver.observe(el);
+  }
+});
+
+onBeforeUnmount(() => {
+  portalViewTypeResizeObserver?.disconnect();
+  clearPortalViewTypeMenuDimensions();
+  document.documentElement.style.removeProperty('--portal-view-type-menu-width');
+});
+
+watch(portalViewTypeMenuWidthPx, () => {
+  syncPortalViewTypeMenuWidthCssVar();
+  applyPortalViewTypeMenuDimensions();
+});
+
+watch(
+  () => vuetifyTheme.global.current.value.dark,
+  () => {
+    nextTick(updatePortalViewTypeMenuWidth);
+    syncPortalViewTypeMenuWidthCssVar();
+    applyPortalViewTypeMenuDimensions();
+  },
+);
+
+watch(portalViewTypeMenuOpen, (open) => {
+  if (open) {
+    nextTick(() => {
+      updatePortalViewTypeMenuWidth();
+      syncPortalViewTypeMenuWidthCssVar();
+      schedulePortalViewTypeMenuDimensions();
+      [0, 32, 100, 250].forEach((ms) => {
+        setTimeout(() => {
+          updatePortalViewTypeMenuWidth();
+          applyPortalViewTypeMenuDimensions();
+        }, ms);
+      });
+    });
+  } else {
+    clearPortalViewTypeMenuDimensions();
+  }
+});
 
 // ── Shared section sheet props ────────────────────────────────────────────────
 const sectionProps = computed(() => ({
@@ -457,6 +671,108 @@ const showReports = [
 </script>
 
 <style scoped>
+/* Portal View Type: v-select field styled like SelectField (theme tokens only). */
+.portal-view-type-select .ls-widest {
+  letter-spacing: 0.1em;
+}
+
+.portal-view-type-vselect :deep(.v-field) {
+  border-radius: 12px;
+  min-height: 44px;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  --v-field-padding-start: 12px;
+  --v-field-padding-end: 0;
+  background: rgb(var(--v-theme-select_field_bg)) !important;
+}
+
+/* Outlined border uses currentColor on .v-field__outline (see VField.css). */
+.portal-view-type-vselect :deep(.v-field__outline) {
+  border-radius: 12px;
+  color: rgb(var(--v-theme-select_field_border)) !important;
+  --v-field-border-opacity: 1 !important;
+}
+
+.portal-view-type-vselect :deep(.v-field--focused .v-field__outline) {
+  color: rgb(var(--v-theme-select_field_focus_border)) !important;
+}
+
+.portal-view-type-vselect :deep(.v-field__input) {
+  color: rgb(var(--v-theme-select_field_text)) !important;
+  font-weight: 700;
+}
+
+.portal-view-type-vselect :deep(.v-field__append-inner .v-icon) {
+  color: rgb(var(--v-theme-select_field_chevron)) !important;
+  opacity: 1;
+}
+
+/* Light mode: pale blue field + blue border + blue label (Portal View Type reference). */
+.client-info--light .portal-view-type-select label.text-select_field_label {
+  color: #2563eb !important;
+}
+
+.client-info--light .portal-view-type-vselect :deep(.v-field) {
+  background: #eff6ff !important;
+}
+
+.client-info--light .portal-view-type-vselect :deep(.v-field__outline) {
+  color: #64748b !important;
+  --v-field-border-width: 1px !important;
+}
+
+.client-info--light .portal-view-type-vselect :deep(.v-field--focused .v-field__outline) {
+  color: #475569 !important;
+  --v-field-border-width: 1px !important;
+}
+
+.client-info--light .portal-view-type-vselect :deep(.v-field__input) {
+  color: #1e293b !important;
+}
+
+.client-info--light .portal-view-type-vselect :deep(.v-field__append-inner .v-icon) {
+  color: #64748b !important;
+}
+
+.portal-user-account-sheet :deep(.portal-send-temp-password.v-btn) {
+  border-radius: 12px !important;
+  overflow: hidden;
+}
+
+/* Rounded rectangle (not pill / oval), aligned with Send Temporary Password + portal cards. */
+.portal-add-user-btn {
+  border-radius: 12px !important;
+  overflow: hidden;
+}
+
+/* Add Portal User: same purple (#5b36e3) in light and dark. */
+.portal-add-user-btn.v-btn {
+  background-color: #5b36e3 !important;
+  border: 1px solid #5b36e3 !important;
+  color: #ffffff !important;
+  box-shadow: 0 8px 24px rgba(91, 54, 227, 0.35) !important;
+}
+
+.portal-add-user-btn :deep(.v-btn__prepend .v-icon),
+.portal-add-user-btn :deep(.v-btn__prepend svg) {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
+}
+
+.portal-add-user-btn :deep(.v-btn__overlay) {
+  opacity: 0 !important;
+}
+
+/* Client Portal accordions only (Permissions / Show Fields / Show Reports) — grey slate rings in dark ClientInfo theme. */
+.client-info--dark .client-info-portal-accordions :deep(.checkbox-box:not(.checkbox-box--checked)) {
+  border-width: 1px;
+  border-color: #64748b !important;
+}
+
+.client-info--dark .client-info-portal-accordions :deep(.checkbox-label:hover .checkbox-box:not(.checkbox-box--checked)) {
+  border-color: #60a5fa !important;
+}
+
 .animate-fade {
   animation: fadeIn 0.5s ease both;
 }
@@ -504,20 +820,34 @@ const showReports = [
   width: 360px;
 }
 .drawer-container--closed {
-  width: 32px;
+  width: 0;
+  min-width: 0;
 }
 
 .drawer-handle {
   top: 50%;
-  transform: translateY(-50%);
-  right: 0;
   z-index: 20;
   width: 32px;
   height: 48px;
   border: none;
   cursor: pointer;
   color: #fff;
+  padding: 0;
+}
+
+.drawer-handle--open {
+  right: 0;
+  left: auto;
+  transform: translateY(-50%);
   border-radius: 12px 0 0 12px;
+}
+
+.drawer-handle--closed {
+  left: 0;
+  right: auto;
+  transform: translateY(-50%);
+  border-radius: 0 10px 10px 0;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
 }
 
 .drawer-content {
@@ -618,5 +948,188 @@ const showReports = [
 }
 .drawer-skin--dark .drawer-item--selected:hover {
   background-color: rgba(59, 130, 246, 0.18);
+}
+</style>
+
+<style>
+/* Portal View Type open menu (teleported). Dark: same width + row metrics as light. */
+.portal-view-type-menu--dark.v-overlay__content {
+  width: var(--portal-view-type-menu-width) !important;
+  min-width: var(--portal-view-type-menu-width) !important;
+  max-width: var(--portal-view-type-menu-width) !important;
+}
+
+.v-menu > .v-overlay__content.portal-view-type-menu--dark {
+  box-sizing: border-box !important;
+  border-radius: 0 !important;
+}
+
+.portal-view-type-menu--dark.v-overlay__content .v-sheet,
+.portal-view-type-menu--dark .v-sheet {
+  background: #0a1020 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+.portal-view-type-menu--dark.v-overlay__content,
+.portal-view-type-menu--dark {
+  background: #0a1020 !important;
+  border: 1px solid rgba(100, 116, 139, 0.45);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  border-radius: 0 !important;
+  margin-top: 6px !important;
+  box-sizing: border-box !important;
+  overflow: hidden;
+}
+
+.portal-view-type-menu--dark .v-list {
+  background: transparent !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+/* Same compact rows as light; labels white on dark bg (reference). */
+.portal-view-type-menu--dark .v-list-item {
+  border-radius: 0 !important;
+  min-height: 30px !important;
+  padding-block: 2px !important;
+  padding-inline: 12px !important;
+  color: #ffffff !important;
+  background: transparent !important;
+}
+
+.portal-view-type-menu--dark .v-list-item .v-list-item-title {
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+  font-weight: 400 !important;
+}
+
+.portal-view-type-menu--dark .v-list-item:hover:not(.v-list-item--active):not([aria-selected='true']),
+.portal-view-type-menu--dark .v-list-item:focus-visible:not(.v-list-item--active):not([aria-selected='true']) {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #ffffff !important;
+}
+
+/* Selected: same purple + white as light mode */
+.portal-view-type-menu--dark .v-list-item--active,
+.portal-view-type-menu--dark .v-list-item[aria-selected='true'] {
+  background: #6052a5 !important;
+  color: #ffffff !important;
+}
+
+.portal-view-type-menu--dark .v-list-item--active:hover,
+.portal-view-type-menu--dark .v-list-item[aria-selected='true']:hover,
+.portal-view-type-menu--dark .v-list-item--active:focus-visible,
+.portal-view-type-menu--dark .v-list-item[aria-selected='true']:focus-visible {
+  background: #6052a5 !important;
+  color: #ffffff !important;
+}
+
+.portal-view-type-menu--dark .v-list-item--active .v-list-item-title,
+.portal-view-type-menu--dark .v-list-item[aria-selected='true'] .v-list-item-title {
+  color: #ffffff !important;
+}
+
+.portal-view-type-menu--dark .v-list-item__content {
+  color: inherit !important;
+}
+
+.portal-view-type-menu--dark .v-list-item-title {
+  color: inherit !important;
+}
+
+.portal-view-type-menu--dark .v-list-item:not(.v-list-item--active):not([aria-selected='true']) .v-list-item-title {
+  color: #ffffff !important;
+}
+
+/* Light menu: width — !important beats Vuetify connected strategy inline minWidth (see script). */
+.portal-view-type-menu--light.v-overlay__content {
+  width: var(--portal-view-type-menu-width) !important;
+  min-width: var(--portal-view-type-menu-width) !important;
+  max-width: var(--portal-view-type-menu-width) !important;
+}
+
+/* Light menu: square corners (override VMenu default 4px radius). */
+.v-menu > .v-overlay__content.portal-view-type-menu--light {
+  box-sizing: border-box !important;
+  border-radius: 0 !important;
+}
+
+.portal-view-type-menu--light.v-overlay__content .v-sheet,
+.portal-view-type-menu--light .v-sheet {
+  background: #ffffff !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+.portal-view-type-menu--light.v-overlay__content,
+.portal-view-type-menu--light {
+  box-sizing: border-box !important;
+  background: #ffffff !important;
+  border: 1px solid #64748b !important;
+  border-radius: 0 !important;
+  margin-top: 6px !important;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.1);
+  overflow: hidden;
+}
+
+.portal-view-type-menu--light .v-list {
+  background: transparent !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+/* Unselected: soft charcoal (~#333–#444), normal weight — matches reference. */
+.portal-view-type-menu--light .v-list-item {
+  border-radius: 0 !important;
+  min-height: 30px !important;
+  padding-block: 2px !important;
+  padding-inline: 12px !important;
+  color: #404040 !important;
+  background: transparent !important;
+}
+
+.portal-view-type-menu--light .v-list-item .v-list-item-title {
+  font-size: 13px !important;
+  line-height: 1.25 !important;
+  font-weight: 400 !important;
+}
+
+.portal-view-type-menu--light .v-list-item:hover:not(.v-list-item--active):not([aria-selected='true']),
+.portal-view-type-menu--light .v-list-item:focus-visible:not(.v-list-item--active):not([aria-selected='true']) {
+  background: #f1f5f9 !important;
+  color: #404040 !important;
+}
+
+.portal-view-type-menu--light .v-list-item--active,
+.portal-view-type-menu--light .v-list-item[aria-selected='true'] {
+  background: #6052a5 !important;
+  color: #ffffff !important;
+}
+
+.portal-view-type-menu--light .v-list-item--active .v-list-item-title,
+.portal-view-type-menu--light .v-list-item[aria-selected='true'] .v-list-item-title {
+  color: #ffffff !important;
+}
+
+.portal-view-type-menu--light .v-list-item--active:hover,
+.portal-view-type-menu--light .v-list-item[aria-selected='true']:hover,
+.portal-view-type-menu--light .v-list-item--active:focus-visible,
+.portal-view-type-menu--light .v-list-item[aria-selected='true']:focus-visible {
+  background: #6052a5 !important;
+  color: #ffffff !important;
+}
+
+.portal-view-type-menu--light .v-list-item__content,
+.portal-view-type-menu--light .v-list-item-title {
+  color: inherit !important;
+}
+
+.portal-view-type-menu--light .v-list-item:not(.v-list-item--active):not([aria-selected='true']) .v-list-item-title {
+  color: #404040 !important;
 }
 </style>
