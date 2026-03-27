@@ -1,24 +1,17 @@
 <template>
-  <div class="animate-fade">
+  <div class="animate-fade d-flex flex-column ga-8">
 
     <!-- SECTION 1: JUDGMENT SETTINGS -->
     <v-sheet
-      class="pa-8 mb-8"
-      color="transparent"
-      style="border-radius: 35px !important;"
-      :style="theme === 'dark'
-        ? 'background: rgba(15,23,42,0.6) !important; border: 1px solid rgba(255,255,255,0.10);'
-        : 'background: #f0f9ff !important; border: 1px solid rgba(37,99,235,0.4); box-shadow: 0 1px 4px rgba(0,0,0,0.06);'"
+      class="pa-8 newjudgment-panel bg-newjudgment_bg border border-sm border-custom-blue newjudgment-panel-shadow"
     >
       <!-- Section Header -->
       <div class="d-flex align-center ga-3 mb-8">
-        <div class="pa-2 rounded-xl" style="background: rgba(59,130,246,0.10);">
-          <Scale :size="20" color="#3b82f6" />
+        <div class="pa-2 rounded-xl bg-billing_modal_icon_bg">
+          <Scale :size="20" class="text-newexperianreports_button_hover" />
         </div>
         <h3
-          class="text-h6 font-weight-black text-uppercase"
-          style="letter-spacing: -0.3px;"
-          :style="theme === 'dark' ? 'color: white;' : 'color: #0f172a;'"
+          class="text-h6 font-weight-black text-uppercase text-accounts_summary_value newjudgment-title-tracking"
         >Judgment Settings</h3>
       </div>
 
@@ -43,25 +36,20 @@
 
         <!-- Post-Judgment Interest Section -->
         <v-sheet
-          class="pa-6 rounded-xl"
-          color="transparent"
-          style="border-radius: 16px !important; border-width: 2px; border-style: solid;"
-          :style="theme === 'dark'
-            ? 'background: rgba(255,255,255,0.05) !important; border-color: rgba(255,255,255,0.10);'
-            : 'background: #f8fafc !important; border-color: #e2e8f0;'"
+          class="pa-6 rounded-xl newjudgment-subsection bg-newjudgment_card_bg border border-custom-blue"
         >
-          <div class="d-flex align-center ga-3 mb-6 cursor-pointer" @click="postJudgmentInterest = !postJudgmentInterest">
+          <div class="d-flex align-center ga-3 mb-6 cursor-pointer">
             <v-checkbox
               v-model="postJudgmentInterest"
+              class="newjudgment-checkbox-lg"
               hide-details
-              color="blue"
+              color="summary_stat_total_bg"
+              base-color="judgment_checkbox_border"
               density="compact"
-              @click.stop
+              @click="postJudgmentInterest = !postJudgmentInterest"
             />
             <span
-              class="text-body-2 font-weight-black text-uppercase"
-              style="letter-spacing: 0.15em;"
-              :style="theme === 'dark' ? 'color: white;' : 'color: #334155;'"
+              class="text-body-2 font-weight-black text-uppercase text-accounts_row_text newjudgment-tracking-wide"
             >Apply Post-Judgment Interest</span>
           </div>
 
@@ -83,9 +71,8 @@
             </v-col>
             <v-col cols="12" md="4" class="d-flex align-end">
               <v-btn
-                color="blue-darken-1"
-                class="font-weight-black text-uppercase rounded-xl"
-                style="letter-spacing: 0.15em; font-size: 11px; box-shadow: 0 8px 24px rgba(37,99,235,0.2);"
+                variant="flat"
+                class="newjudgment-add-step-btn px-6 py-3 font-weight-black text-uppercase text-caption bg-newexperianreports_button hover:bg-billing_button_hover text-accounts_cancel_text transition-all"
                 elevation="0"
                 block
               >
@@ -99,39 +86,32 @@
 
     <!-- SECTION 2: PRE-JUDGMENT COMPONENTS -->
     <v-sheet
-      class="pa-8 mb-8"
-      color="transparent"
-      style="border-radius: 35px !important;"
-      :style="theme === 'dark'
-        ? 'background: rgba(15,23,42,0.6) !important; border: 1px solid rgba(255,255,255,0.10);'
-        : 'background: #f0f9ff !important; border: 1px solid rgba(37,99,235,0.4); box-shadow: 0 1px 4px rgba(0,0,0,0.06);'"
+      class="pa-8 newjudgment-panel bg-newjudgment_bg border border-sm border-custom-blue newjudgment-panel-shadow"
     >
       <!-- Section Header -->
       <div class="d-flex align-center ga-3 mb-8">
-        <div class="pa-2 rounded-xl" style="background: rgba(139,92,246,0.10);">
-          <CheckCircle2 :size="20" color="#7c3aed" />
+        <div class="pa-2 rounded-xl bg-newjudgment_iconbg">
+          <CheckCircle2 :size="20" class="text-contact_menu_icon_violet" />
         </div>
         <h3
-          class="text-h6 font-weight-black text-uppercase"
-          style="letter-spacing: -0.3px;"
-          :style="theme === 'dark' ? 'color: white;' : 'color: #0f172a;'"
+          class="text-h6 font-weight-black text-uppercase text-accounts_summary_value newjudgment-title-tracking"
         >Pre-Judgment Components</h3>
       </div>
 
       <div class="d-flex flex-column ga-8">
         <!-- Toggle -->
-        <div class="d-flex align-center ga-3 cursor-pointer" @click="preJudgmentPayments = !preJudgmentPayments">
+        <div class="d-flex align-center ga-3 cursor-pointer">
           <v-checkbox
             v-model="preJudgmentPayments"
+            class="newjudgment-checkbox-lg"
             hide-details
-            color="blue"
+            color="summary_stat_total_bg"
+            base-color="judgment_checkbox_border"
             density="compact"
-            @click.stop
+            @click="preJudgmentPayments = !preJudgmentPayments"
           />
           <span
-            class="text-body-2 font-weight-black text-uppercase"
-            style="letter-spacing: 0.15em;"
-            :style="theme === 'dark' ? 'color: white;' : 'color: #334155;'"
+            class="text-body-2 font-weight-black text-uppercase text-accounts_row_text newjudgment-tracking-wide"
           >Include Pre-Judgment Payments</span>
         </div>
 
@@ -142,47 +122,58 @@
           <v-sheet
             v-for="card in preJudgmentCards"
             :key="card.title"
-            class="pa-6 flex-grow-1"
-            color="transparent"
-            style="border-radius: 16px !important; min-width: 180px;"
-            :style="theme === 'dark'
-              ? 'background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(255,255,255,0.10);'
-              : 'background: #f8fafc !important; border: 1px solid rgba(37,99,235,0.4);'"
+            class="pa-6 flex-grow-1 newjudgment-subcard bg-newjudgment_card_bg border border-sm border-custom-blue"
           >
             <div
-              class="text-body-2 font-weight-black text-uppercase mb-4"
-              style="letter-spacing: 0.15em;"
-              :style="theme === 'dark' ? 'color: #94a3b8;' : 'color: #475569;'"
+              class="text-body-2 font-weight-black text-uppercase mb-4 text-newjudgment_muted_text newjudgment-tracking-wide"
             >{{ card.title }}</div>
 
             <div class="d-flex ga-6 align-center flex-wrap">
               <!-- When preJudgmentPayments: only Remaining Balance -->
               <template v-if="preJudgmentPayments">
                 <div class="d-flex align-center ga-3 cursor-pointer py-2">
-                  <v-checkbox hide-details color="blue" density="compact" />
+                  <v-checkbox
+                    class="newjudgment-checkbox-sm"
+                    hide-details
+                    color="summary_stat_total_bg"
+                    base-color="judgment_checkbox_border"
+                    density="compact"
+                    v-model="preJudgmentSelection[card.title]['Remaining Balance']"
+                    @click="preJudgmentSelection[card.title]['Remaining Balance'] = !preJudgmentSelection[card.title]['Remaining Balance']"
+                  />
                   <span
-                    class="text-caption font-weight-bold text-uppercase"
-                    style="letter-spacing: 0.05em;"
-                    :style="theme === 'dark' ? 'color: #94a3b8;' : 'color: #475569;'"
+                    class="text-caption font-weight-bold text-uppercase text-newjudgment_muted_text newjudgment-tracking-tight"
                   >Remaining Balance</span>
                 </div>
               </template>
               <!-- When not preJudgmentPayments: Total + Remaining Balance -->
               <template v-else>
                 <div class="d-flex align-center ga-3 cursor-pointer py-2">
-                  <v-checkbox hide-details color="blue" density="compact" />
+                  <v-checkbox
+                    class="newjudgment-checkbox-sm"
+                    hide-details
+                    color="summary_stat_total_bg"
+                    base-color="judgment_checkbox_border"
+                    density="compact"
+                    v-model="preJudgmentSelection[card.title]['Total']"
+                    @click="preJudgmentSelection[card.title]['Total'] = !preJudgmentSelection[card.title]['Total']"
+                  />
                   <span
-                    class="text-caption font-weight-bold text-uppercase"
-                    style="letter-spacing: 0.05em;"
-                    :style="theme === 'dark' ? 'color: #94a3b8;' : 'color: #475569;'"
+                    class="text-caption font-weight-bold text-uppercase text-newjudgment_muted_text newjudgment-tracking-tight"
                   >Total</span>
                 </div>
                 <div class="d-flex align-center ga-3 cursor-pointer py-2">
-                  <v-checkbox hide-details color="blue" density="compact" />
+                  <v-checkbox
+                    class="newjudgment-checkbox-sm"
+                    hide-details
+                    color="summary_stat_total_bg"
+                    base-color="judgment_checkbox_border"
+                    density="compact"
+                    v-model="preJudgmentSelection[card.title]['Remaining Balance']"
+                    @click="preJudgmentSelection[card.title]['Remaining Balance'] = !preJudgmentSelection[card.title]['Remaining Balance']"
+                  />
                   <span
-                    class="text-caption font-weight-bold text-uppercase"
-                    style="letter-spacing: 0.05em;"
-                    :style="theme === 'dark' ? 'color: #94a3b8;' : 'color: #475569;'"
+                    class="text-caption font-weight-bold text-uppercase text-newjudgment_muted_text newjudgment-tracking-tight"
                   >Remaining Balance</span>
                 </div>
               </template>
@@ -191,22 +182,14 @@
 
           <!-- Judgment Amount Composition Card -->
           <v-sheet
-            class="pa-6 flex-grow-1"
-            color="transparent"
-            style="border-radius: 16px !important; border-style: dashed !important; border-width: 2px !important; min-width: 240px;"
-            :style="theme === 'dark'
-              ? 'background: rgba(59,130,246,0.05) !important; border-color: rgba(59,130,246,0.20) !important;'
-              : 'background: rgba(239,246,255,0.30) !important; border-color: #93c5fd !important;'"
+            class="pa-6 flex-grow-1 newjudgment-composition bg-newjudgment_composition_bg border border-sm border-custom-blue"
           >
             <div
-              class="text-body-2 font-weight-black text-uppercase mb-6"
-              style="letter-spacing: 0.15em;"
-              :style="theme === 'dark' ? 'color: #60a5fa;' : 'color: #2563eb;'"
+              class="text-body-2 font-weight-black text-uppercase mb-6 text-contact_menu_header_blue_text newjudgment-tracking-wide"
             >Judgment Amount Composition</div>
 
             <p
-              class="text-body-2 font-weight-bold mb-4"
-              :style="theme === 'dark' ? 'color: white;' : 'color: #1e293b;'"
+              class="text-body-2 font-weight-bold mb-4 text-text_strong_light"
             >Judgment Amount = Principal +</p>
 
             <v-row class="ml-1">
@@ -217,15 +200,16 @@
               >
                 <div class="d-flex align-center ga-3 cursor-pointer py-2">
                   <v-checkbox
+                    class="newjudgment-checkbox-sm"
                     hide-details
-                    color="blue"
+                    color="summary_stat_total_bg"
+                    base-color="judgment_checkbox_border"
                     density="compact"
-                    :model-value="item === 'Pre-Judgment Interest'"
+                    v-model="compositionSelection[item]"
+                    @click="compositionSelection[item] = !compositionSelection[item]"
                   />
                   <span
-                    class="text-caption font-weight-bold text-uppercase"
-                    style="letter-spacing: 0.05em;"
-                    :style="theme === 'dark' ? 'color: #94a3b8;' : 'color: #475569;'"
+                    class="text-caption font-weight-bold text-uppercase text-newjudgment_muted_text newjudgment-tracking-tight"
                   >{{ item }}</span>
                 </div>
               </v-col>
@@ -239,13 +223,11 @@
     <!-- Save Button -->
     <div class="d-flex justify-end">
       <v-btn
-        color="blue-darken-1"
-        class="font-weight-medium rounded-xl"
-        style="font-size: 13px; box-shadow: 0 8px 24px rgba(37,99,235,0.2);"
+        variant="flat"
+        class="newjudgment-save-btn d-flex align-center ga-2 px-8 py-3 font-weight-medium text-body-2 bg-newexperianreports_button text-accounts_cancel_text hover:bg-newexperianreports_button_hover transition-all"
         elevation="0"
-        size="large"
       >
-        <template #prepend><Save :size="16" /></template>
+        <template #prepend><Save :size="18" /></template>
         Save Judgment
       </v-btn>
     </div>
@@ -253,7 +235,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 import { Scale, CheckCircle2, Save } from 'lucide-vue-next';
 import DateField from './shared/DateField.vue';
 import InputField from './shared/InputField.vue';
@@ -276,16 +258,160 @@ const preJudgmentCards = [
   { title: 'Pre-Judgment Fees' },
 ];
 
+const preJudgmentSelection = reactive({
+  'Pre-Judgment Interest': { Total: false, 'Remaining Balance': false },
+  'Pre-Judgment Costs': { Total: false, 'Remaining Balance': false },
+  'Pre-Judgment Fees': { Total: false, 'Remaining Balance': false },
+});
+
 const compositionItems = [
   'Pre-Judgment Interest',
   'Pre-Judgment Costs',
   'Pre-Judgment Fees',
 ];
+
+const compositionSelection = reactive({
+  'Pre-Judgment Interest': true,
+  'Pre-Judgment Costs': false,
+  'Pre-Judgment Fees': false,
+});
 </script>
 
 <style scoped>
 .animate-fade {
   animation: fadeSlideIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.newjudgment-panel {
+  border-radius: 35px;
+}
+
+.newjudgment-panel-shadow {
+
+  box-shadow: var(--v-newjudgment_shadow);
+}
+
+.newjudgment-title-tracking {
+  letter-spacing: -0.025em;
+}
+
+.newjudgment-subsection {
+  border-radius: 16px;
+  border-width: 2px;
+}
+
+.newjudgment-subcard {
+  border-radius: 16px;
+  min-width: 180px;
+}
+
+.newjudgment-composition {
+  border-radius: 16px;
+  min-width: 240px;
+  border-width: 2px;
+}
+
+.newjudgment-tracking-wide {
+  letter-spacing: 0.1em;
+}
+
+.newjudgment-tracking-tight {
+  letter-spacing: -0.05em;
+}
+
+.newjudgment-add-step-btn,
+.newjudgment-save-btn {
+  border-radius: 16px;
+  box-shadow:
+    0 10px 15px -3px var(--v-newexperianreports_button_shadow),
+    0 4px 6px -4px var(--v-newexperianreports_button_shadow);
+}
+
+.newjudgment-checkbox-lg,
+.newjudgment-checkbox-sm {
+  margin: 0;
+  padding: 0;
+  box-shadow: none !important;
+}
+
+:deep(.newjudgment-checkbox-lg .v-selection-control),
+:deep(.newjudgment-checkbox-sm .v-selection-control) {
+  min-height: auto;
+}
+
+:deep(.newjudgment-checkbox-lg .v-selection-control__wrapper),
+:deep(.newjudgment-checkbox-lg .v-selection-control__input),
+:deep(.newjudgment-checkbox-lg .v-icon) {
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+}
+
+:deep(.newjudgment-checkbox-lg .v-icon),
+:deep(.newjudgment-checkbox-sm .v-icon) {
+  opacity: 0;
+}
+
+:deep(.newjudgment-checkbox-lg .v-selection-control__input) {
+  border: 2px solid #3b82f6 !important;
+  border-radius: 4px;
+  position: relative;
+  background-color: transparent;
+}
+
+:deep(.newjudgment-checkbox-sm .v-selection-control__wrapper),
+:deep(.newjudgment-checkbox-sm .v-selection-control__input),
+:deep(.newjudgment-checkbox-sm .v-icon) {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+}
+
+:deep(.newjudgment-checkbox-sm .v-selection-control__input) {
+  border: 2px solid #3b82f6 !important;
+  border-radius: 4px;
+  position: relative;
+  background-color: transparent;
+}
+
+:deep(.newjudgment-checkbox-lg .v-selection-control--dirty .v-selection-control__input),
+:deep(.newjudgment-checkbox-sm .v-selection-control--dirty .v-selection-control__input) {
+  background-color: #2563eb;
+  border-color: #2563eb !important;
+}
+
+:deep(.newjudgment-checkbox-lg .v-selection-control__input::after) {
+  content: '';
+}
+
+:deep(.newjudgment-checkbox-sm .v-selection-control__input::after) {
+  content: '';
+}
+
+:deep(.newjudgment-checkbox-lg .v-selection-control--dirty .v-selection-control__input::after) {
+  content: '✔';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+:deep(.newjudgment-checkbox-sm .v-selection-control--dirty .v-selection-control__input::after) {
+  content: '✔';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
 }
 
 @keyframes fadeSlideIn {
@@ -294,4 +420,8 @@ const compositionItems = [
 }
 
 .cursor-pointer { cursor: pointer; }
+
+.border-custom-blue {
+  border-color: rgba(59, 130, 246, 0.5);
+}
 </style>

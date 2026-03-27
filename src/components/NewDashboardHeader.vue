@@ -1,33 +1,13 @@
 <template>
   <v-sheet
-    class="w-100 pa-4 mb-8 position-relative overflow-hidden"
-    color="transparent"
-    style="
-      backdrop-filter: blur(60px);
-      border-radius: 25px;
-      border: 1px solid;
-      transition: all 0.5s ease;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-    "
-    :style="theme === 'dark'
-      ? 'background: rgba(15,23,42,0.6) !important; border-color: rgba(255,255,255,0.10);'
-      : 'background: transparent !important; border-color: #cbd5e1; box-shadow: 0 10px 30px rgba(30,41,59,0.15);'"
+    class="dashboard-sheet w-100 pa-4 mb-8 position-relative overflow-hidden bg-client_accordion_bg border border-sm border-custom-blue"
   >
     <!-- Ambient glow blob -->
-    <div
-      class="position-absolute pointer-events-none rounded-circle"
-      style="
-        top: -96px; right: -96px;
-        width: 256px; height: 256px;
-        background: rgba(37,99,235,0.10);
-        filter: blur(100px);
-      "
-    />
+    <div class="ambient-glow position-absolute pointer-events-none rounded-circle" />
 
     <!-- Row 1: Debtor buttons -->
     <div
-      class="d-flex flex-column flex-lg-row justify-space-between align-start align-lg-center ga-6 mb-6 pb-6"
-      :style="theme === 'dark' ? 'border-bottom: 1px solid rgba(255,255,255,0.05);' : 'border-bottom: 1px solid #f1f5f9;'"
+      class="d-flex flex-column flex-lg-row justify-space-between align-start align-lg-center ga-6 mb-6 pb-6 border-b-sm border-custom-blue"
     >
       <div class="d-flex align-end flex-wrap ga-3">
         <div
@@ -37,8 +17,8 @@
         >
           <v-btn
             color="blue-darken-1"
-            class="font-weight-black text-uppercase rounded-xl"
-            style="letter-spacing: 0.15em; font-size: 11px; box-shadow: 0 8px 24px rgba(37,99,235,0.2);"
+            class="font-weight-black text-uppercase rounded-lg"
+            style="letter-spacing: 0.15em; font-size: 11px;"
             elevation="0"
             size="small"
             @click="isDebtorModalOpen = true"
@@ -47,10 +27,9 @@
           </v-btn>
           <v-btn
             v-if="index > 0"
-            class="font-weight-black text-uppercase rounded-xl"
+            class="font-weight-black text-uppercase rounded-lg bg-debtor_remove_btn_bg text-ac_red_text"
             style="letter-spacing: 0.15em; font-size: 11px;"
-            :color="theme === 'dark' ? 'red-lighten-1' : 'red-darken-1'"
-            :variant="theme === 'dark' ? 'tonal' : 'tonal'"
+            variant="flat"
             elevation="0"
             size="small"
             @click="handleDeleteDebtor(debtor.id)"
@@ -60,9 +39,9 @@
         </div>
 
         <v-btn
-          class="font-weight-black text-uppercase rounded-xl"
+          class="font-weight-black text-uppercase rounded-lg"
           style="letter-spacing: 0.15em; font-size: 11px; border-style: dashed;"
-          :color="theme === 'dark' ? 'blue-lighten-2' : 'blue-darken-1'"
+          color="dh_label"
           variant="outlined"
           elevation="0"
           size="small"
@@ -131,8 +110,8 @@
             <InputField label="Linked Account #" type="text" :theme="theme" />
             <v-btn
               color="blue-darken-1"
-              class="font-weight-black text-uppercase rounded-xl"
-              style="letter-spacing: 0.15em; font-size: 11px; box-shadow: 0 8px 24px rgba(37,99,235,0.2);"
+              class="font-weight-black text-uppercase rounded-lg"
+              style="letter-spacing: 0.15em; font-size: 11px;"
               elevation="0"
               size="small"
             >
@@ -142,8 +121,8 @@
 
           <v-btn
             color="teal-darken-2"
-            class="font-weight-black text-uppercase rounded-xl"
-            style="letter-spacing: 0.15em; font-size: 11px; box-shadow: 0 8px 24px rgba(13,148,136,0.2);"
+            class="font-weight-black text-uppercase rounded-lg"
+            style="letter-spacing: 0.15em; font-size: 11px;"
             elevation="0"
             size="small"
           >
@@ -151,16 +130,14 @@
           </v-btn>
 
           <div
-            class="mt-2 pa-3 rounded-xl d-flex justify-space-between align-center"
+            class="mt-2 pa-3 rounded-lg d-flex justify-space-between align-center"
           >
             <span
-              class="text-body-2 font-weight-black"
+              class="text-body-2 font-weight-black text-debtor_linked_balance_label"
               style="letter-spacing: 0.15em;"
-              :style="theme === 'dark' ? 'color: rgba(255,255,255,0.3);' : 'color: #475569;'"
             >Linked Balance</span>
             <span
-              class="text-body-2 font-weight-black"
-              :style="theme === 'dark' ? 'color: #f87171;' : 'color: #dc2626;'"
+              class="text-body-2 font-weight-black text-ac_red_text"
             >$0.00</span>
           </div>
         </div>
@@ -176,51 +153,37 @@
       scrollable
     >
       <v-sheet
+        class="debtor-modal-shell bg-debtor_modal_bg border border-sm border-custom-blue"
         style="border-radius: 30px; overflow: hidden;"
-        :style="theme === 'dark'
-          ? 'background: #0f172a; border: 1px solid rgba(255,255,255,0.10);'
-          : 'background: white; border: 1px solid #e2e8f0;'"
-        color="transparent"
       >
         <!-- Modal Header -->
         <div
-          class="pa-6 d-flex justify-space-between align-center"
+          class="pa-6 d-flex justify-space-between align-center bg-debtor_modal_bg border-b-sm border-custom-blue"
           style="position: sticky; top: 0; z-index: 10;"
-          :style="theme === 'dark'
-            ? 'background: #0f172a; border-bottom: 1px solid rgba(255,255,255,0.05);'
-            : 'background: white; border-bottom: 1px solid #e2e8f0;'"
         >
           <div class="d-flex align-center ga-3">
-            <div
-              class="pa-2 rounded-lg"
-              style="background: rgba(59,130,246,0.1);"
-            >
-              <User :size="24" color="#3b82f6" />
+            <div class="pa-2 rounded-lg bg-client_header_icon_bg">
+              <User :size="24" class="text-blue" />
             </div>
             <div>
               <div
-                class="text-h6 font-weight-black text-uppercase"
+                class="text-h6 font-weight-black text-uppercase text-debtor_modal_title"
                 style="letter-spacing: -0.3px;"
-                :style="theme === 'dark' ? 'color: white;' : 'color: #0f172a;'"
               >
                 Add a Debtor
               </div>
               <div
-                class="text-caption font-weight-bold text-uppercase"
+                class="text-caption font-weight-bold text-uppercase text-debtor_modal_muted_text"
                 style="letter-spacing: 0.15em;"
-                :style="theme === 'dark' ? 'color: rgba(255,255,255,0.4);' : 'color: #94a3b8;'"
               >
                 Provide detailed debtor information
               </div>
             </div>
           </div>
           <button
-            class="d-flex align-center justify-center rounded-circle"
-            style="width: 32px; height: 32px; border: none; cursor: pointer; background: transparent; transition: background 0.15s ease;"
-            :style="theme === 'dark' ? 'color: rgba(255,255,255,0.4);' : 'color: #94a3b8;'"
+            class="d-flex align-center justify-center rounded-circle text-debtor_modal_muted_text hover:bg-debtor_modal_close_hover"
+            style="width: 32px; height: 32px; border: none; cursor: pointer; transition: background 0.15s ease;"
             @click="isDebtorModalOpen = false"
-            @mouseover="$event.currentTarget.style.background = theme === 'dark' ? 'rgba(255,255,255,0.05)' : '#f1f5f9'"
-            @mouseleave="$event.currentTarget.style.background = 'transparent'"
           >
             <X :size="20" />
           </button>
@@ -231,24 +194,21 @@
           <!-- Tabs -->
           <v-tabs
             v-model="activeTab"
-            class="mb-8 rounded-xl"
-            :style="theme === 'dark'
-              ? 'background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.10);'
-              : 'background: #f1f5f9; border: 1px solid #cbd5e1;'"
-            selected-class="bg-blue-darken-1 text-white"
+            class="mb-8 debtor-type-tabs bg-debtor_tabs_bg border border-sm border-custom-blue"
+            selected-class="debtor-type-tab-active"
             hide-slider
             density="comfortable"
           >
             <v-tab
               value="individual"
-              class="font-weight-black text-uppercase rounded-xl"
+              class="debtor-type-tab font-weight-black text-uppercase"
               style="letter-spacing: 0.15em; font-size: 11px;"
             >
               Individual
             </v-tab>
             <v-tab
               value="company"
-              class="font-weight-black text-uppercase rounded-xl"
+              class="debtor-type-tab font-weight-black text-uppercase"
               style="letter-spacing: 0.15em; font-size: 11px;"
             >
               Company
@@ -271,34 +231,17 @@
 
                 <!-- Deceased -->
                 <v-col cols="12" sm="6" md="3">
-                  <div class="d-flex flex-column ga-2">
-                    <label
-                      class="text-body-2"
-                      style="letter-spacing: 0.1em;"
-                      :style="theme === 'dark' ? 'color: #93c5fd;' : 'color: #2563eb;'"
-                    >Deceased</label>
-                    <div class="d-flex align-center ga-2">
-                      <v-checkbox
-                        v-model="isDeceased"
-                        hide-details
-                        color="blue"
-                        density="compact"
-                      />
-                      <DateField label="" :theme="theme" />
-                    </div>
-                  </div>
+                  <DateField label="Deceased" :theme="theme" />
                 </v-col>
               </v-row>
 
               <!-- Address Section -->
               <div
                 class="pt-4 mt-2"
-                :style="theme === 'dark' ? 'border-top: 1px solid rgba(255,255,255,0.08);' : 'border-top: 1px solid #e2e8f0;'"
               >
                 <div
-                  class="text-caption font-weight-black text-uppercase mb-6"
+                  class="text-caption font-weight-black text-uppercase mb-6 text-ac_blue_text"
                   style="letter-spacing: 0.2em;"
-                  :style="theme === 'dark' ? 'color: #60a5fa;' : 'color: #2563eb;'"
                 >Address Information</div>
                 <v-row>
                   <v-col cols="12" sm="6" md="3"><InputField label="Address 1" type="text" :theme="theme" /></v-col>
@@ -316,26 +259,18 @@
               <!-- Contact Section -->
               <div
                 class="pt-4 mt-2"
-                :style="theme === 'dark' ? 'border-top: 1px solid rgba(255,255,255,0.08);' : 'border-top: 1px solid #e2e8f0;'"
               >
                 <div
-                  class="text-caption font-weight-black text-uppercase mb-6"
+                  class="text-caption font-weight-black text-uppercase mb-6 text-ac_blue_text"
                   style="letter-spacing: 0.2em;"
-                  :style="theme === 'dark' ? 'color: #60a5fa;' : 'color: #2563eb;'"
                 >Contact Information</div>
-                <div class="d-flex flex-wrap ga-6">
-                  <div class="d-flex align-end ga-2">
-                    <InputField label="Cell Number" type="text" :theme="theme" />
-                    <InputField label="Ext" type="text" :theme="theme" />
-                  </div>
-                  <div class="d-flex align-end ga-2">
-                    <InputField label="Home Number" type="text" :theme="theme" />
-                    <InputField label="Ext" type="text" :theme="theme" />
-                  </div>
-                  <div style="width: 160px;">
-                    <InputField label="Fax" type="text" :theme="theme" />
-                  </div>
-                </div>
+                <v-row>
+                  <v-col cols="12" sm="6" md="3"><InputField label="Cell Number" type="text" :theme="theme" /></v-col>
+                  <v-col cols="12" sm="6" md="2"><InputField label="Ext" type="text" :theme="theme" /></v-col>
+                  <v-col cols="12" sm="6" md="3"><InputField label="Home Number" type="text" :theme="theme" /></v-col>
+                  <v-col cols="12" sm="6" md="2"><InputField label="Ext" type="text" :theme="theme" /></v-col>
+                  <v-col cols="12" sm="6" md="2"><InputField label="Fax" type="text" :theme="theme" /></v-col>
+                </v-row>
               </div>
             </v-tabs-window-item>
 
@@ -344,9 +279,8 @@
               <!-- Address Section -->
               <div class="pt-4">
                 <div
-                  class="text-caption font-weight-black text-uppercase mb-6"
+                  class="text-caption font-weight-black text-uppercase mb-6 text-ac_blue_text"
                   style="letter-spacing: 0.2em;"
-                  :style="theme === 'dark' ? 'color: #60a5fa;' : 'color: #2563eb;'"
                 >Address Information</div>
                 <v-row>
                   <v-col cols="12" sm="6" md="3"><InputField label="Company Name" type="text" :theme="theme" /></v-col>
@@ -364,13 +298,11 @@
 
               <!-- Company Contact -->
               <div
-                class="pt-4 mt-2"
-                :style="theme === 'dark' ? 'border-top: 1px solid rgba(255,255,255,0.08);' : 'border-top: 1px solid #e2e8f0;'"
+                class="pt-4 mt-2 border-t-sm border-custom-blue"
               >
                 <div
-                  class="text-caption font-weight-black text-uppercase mb-6"
+                  class="text-caption font-weight-black text-uppercase mb-6 text-ac_blue_text"
                   style="letter-spacing: 0.2em;"
-                  :style="theme === 'dark' ? 'color: #60a5fa;' : 'color: #2563eb;'"
                 >Company Contact Information</div>
                 <div class="d-flex ga-6">
                   <InputField label="Office Number" type="text" :theme="theme" />
@@ -381,13 +313,11 @@
               <!-- Add Contact Section (conditional) -->
               <div
                 v-if="isAddContact"
-                class="pt-4 mt-2"
-                :style="theme === 'dark' ? 'border-top: 1px solid rgba(255,255,255,0.08);' : 'border-top: 1px solid #e2e8f0;'"
+                class="pt-4 mt-2 border-t-sm border-debtor_modal_section_border"
               >
                 <div
-                  class="text-caption font-weight-black text-uppercase mb-6"
+                  class="text-caption font-weight-black text-uppercase mb-6 text-ac_blue_text"
                   style="letter-spacing: 0.2em;"
-                  :style="theme === 'dark' ? 'color: #60a5fa;' : 'color: #2563eb;'"
                 >Contact Information</div>
                 <v-row align="end">
                   <v-col cols="12" sm="6" md="3"><InputField label="First Name" type="text" :theme="theme" /></v-col>
@@ -396,8 +326,8 @@
                   <v-col cols="12" sm="6" md="3">
                     <div class="d-flex flex-column ga-2">
                       <label
-                        class="text-body-2"
-                        style="letter-spacing: 0.08em; color: #7dd3fc;"
+                        class="text-body-2 text-dh_label"
+                        style="letter-spacing: 0.08em;"
                       >Is Personal Guarantor</label>
                       <v-checkbox
                         v-model="isPersonalGuarantor"
@@ -412,7 +342,6 @@
                     <v-btn
                       color="teal"
                       class="font-weight-black rounded-xl mb-1"
-                      style="box-shadow: 0 8px 24px rgba(20,184,166,0.2);"
                       elevation="0"
                       size="small"
                     >+</v-btn>
@@ -426,14 +355,10 @@
                   <v-col cols="12" sm="6" md="3">
                     <div class="d-flex flex-column ga-2">
                       <label
-                        class="text-body-2"
+                        class="text-body-2 text-dh_label"
                         style="letter-spacing: 0.1em;"
-                        :style="theme === 'dark' ? 'color: #93c5fd;' : 'color: #2563eb;'"
                       >Deceased</label>
-                      <div class="d-flex align-center ga-2">
-                        <v-checkbox hide-details color="blue" density="compact" />
-                        <DateField label="" :theme="theme" />
-                      </div>
+                      <DateField label="" :theme="theme" />
                     </div>
                   </v-col>
                   <v-col cols="12" sm="6" md="3" />
@@ -442,7 +367,6 @@
                     <v-btn
                       color="teal"
                       class="font-weight-black rounded-xl mb-1"
-                      style="box-shadow: 0 8px 24px rgba(20,184,166,0.2);"
                       elevation="0"
                       size="small"
                     >+</v-btn>
@@ -454,14 +378,12 @@
 
           <!-- Action Buttons -->
           <div
-            class="d-flex justify-end ga-3 mt-8 pt-6"
-            :style="theme === 'dark' ? 'border-top: 1px solid rgba(255,255,255,0.08);' : 'border-top: 1px solid #e2e8f0;'"
+            class="d-flex justify-end ga-3 mt-8 pt-6 border-t-sm border-custom-blue"
           >
             <v-btn
-              class="font-weight-black text-uppercase rounded-xl"
+              class="font-weight-black text-uppercase rounded-xl bg-debtor_modal_cancel_bg text-debtor_modal_cancel_text hover:bg-debtor_modal_cancel_hover"
               style="letter-spacing: 0.12em; font-size: 11px;"
-              :variant="theme === 'dark' ? 'tonal' : 'tonal'"
-              :color="theme === 'dark' ? 'white' : 'grey-darken-1'"
+              variant="flat"
               elevation="0"
               @click="isDebtorModalOpen = false"
             >
@@ -470,7 +392,7 @@
             <v-btn
               color="teal-darken-1"
               class="font-weight-black text-uppercase rounded-xl"
-              style="letter-spacing: 0.12em; font-size: 11px; box-shadow: 0 8px 24px rgba(13,148,136,0.2);"
+              style="letter-spacing: 0.12em; font-size: 11px;"
               elevation="0"
               @click="handleContact"
             >
@@ -479,7 +401,7 @@
             <v-btn
               color="blue-darken-1"
               class="font-weight-black text-uppercase rounded-xl"
-              style="letter-spacing: 0.12em; font-size: 11px; box-shadow: 0 8px 24px rgba(37,99,235,0.2);"
+              style="letter-spacing: 0.12em; font-size: 11px;"
               elevation="0"
             >
               Save Debtor
@@ -509,7 +431,6 @@ defineProps({
 const isDebtorModalOpen = ref(false);
 const isAddContact = ref(false);
 const isPersonalGuarantor = ref(false);
-const isDeceased = ref(false);
 const activeTab = ref('individual');
 
 const debtors = ref([{ id: 1, name: 'Marcus Thorne' }]);
@@ -531,6 +452,38 @@ function handleContact() {
 </script>
 
 <style scoped>
+.dashboard-sheet {
+  border-radius: 25px;
+}
+
+.border-custom-blue {
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+:deep(.input-field),
+:deep(.select-field) {
+  box-sizing: border-box;
+  padding: 10px 40px 10px 16px !important;
+  border-radius: 12px !important;
+  font-size: 0.75rem;
+}
+
+/* Keep field rows horizontally aligned across columns */
+:deep(.text-fields_label),
+:deep(.text-select_field_label),
+:deep(.text-date_field_label) {
+  min-height: 20px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+:deep(.input-field),
+:deep(.select-field),
+:deep(.date-field) {
+  height: 40px;
+}
+
 /* Scrollbar for modal body */
 div[style*="overflow-y: auto"]::-webkit-scrollbar {
   width: 4px;
@@ -544,5 +497,34 @@ div[style*="overflow-y: auto"]::-webkit-scrollbar-thumb {
 }
 div[style*="overflow-y: auto"]::-webkit-scrollbar-thumb:hover {
   background: rgba(148, 163, 184, 0.5);
+}
+
+.debtor-type-tabs {
+  border-radius: 14px;
+  padding: 3px;
+}
+
+:deep(.debtor-type-tabs .v-slide-group__content) {
+  gap: 4px;
+}
+
+:deep(.debtor-type-tab) {
+  flex: 1 1 0;
+  min-height: 32px;
+  border-radius: 10px;
+  color: #111827;
+  background-color: transparent;
+}
+
+:deep(.debtor-type-tab-active) {
+  background-color: #2563eb !important;
+  color: #ffffff !important;
+}
+
+:deep(.debtor-modal-shell .v-tabs-window),
+:deep(.debtor-modal-shell .v-window__container),
+:deep(.debtor-modal-shell .v-tabs-window-item) {
+  border: none !important;
+  outline: none !important;
 }
 </style>

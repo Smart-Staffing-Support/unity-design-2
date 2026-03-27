@@ -314,16 +314,27 @@ export default createVuetify({
           contact_menu_footer_bg: 'rgba(248, 250, 252, 0.5)',
           contact_menu_footer_icon_bg_blue: '#eff6ff',
           contact_menu_footer_icon_bg_violet: '#f5f3ff',
-          contact_menu_footer_icon_violet: '#8b5cf6',
+          contact_menu_header_blue_text: '#2563eb',
+          contact_menu_card_border: 'rgba(59, 130, 246, 0.5)',
+          contact_menu_footer_border: '#94a3b8',
 
           // New Dashboard
           debtor_header_bg: 'transparent',
           debtor_remove_btn_bg: '#fee2e2',
           debtor_remove_btn_hover: '#fecaca',
           debtor_linked_balance_label: '#475569',
-          debtor_tabs_bg: '#f1f5f9',
+          debtor_tabs_bg: 'rgba(241, 245, 249, 0.8)',
           debtor_tab_inactive_text: '#64748b',
-          debtor_tab_inactive_hover: '#e2e8f0',
+          debtor_tab_inactive_hover: 'rgba(255, 255, 255, 0.5)',
+          debtor_modal_bg: '#ffffff',
+          debtor_modal_title: '#0f172a',
+          debtor_modal_muted_text: '#94a3b8',
+          debtor_modal_header_border: '#f1f5f9',
+          debtor_modal_section_border: '#e2e8f0',
+          debtor_modal_close_hover: '#f1f5f9',
+          debtor_modal_cancel_bg: '#f1f5f9',
+          debtor_modal_cancel_text: '#4b5563',
+          debtor_modal_cancel_hover: '#e2e8f0',
           debtor_modal_teal_bg: '#0d9488',
           debtor_modal_teal_shadow: 'rgba(13, 148, 136, 0.2)',
 
@@ -372,24 +383,29 @@ export default createVuetify({
           // NewExperianReports colors (Light)
           newexperianreports_bg: '#f0f9ff',
           newexperianreports_border: 'rgba(59,130,246,0.5)',
-          newexperianreports_shadow: '0 1px 4px rgba(0,0,0,0.06)',
-          newexperianreports_derogatory_bg: 'rgba(254,242,242,0.50)',
+          newexperianreports_shadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+          newexperianreports_derogatory_bg: 'rgba(202, 165, 165, 0.5)',
           newexperianreports_button: '#2563eb',
           newexperianreports_button_hover: '#3b82f6',
           newexperianreports_button_shadow: 'rgba(37,99,235,0.2)',
           newexperianreports_timeline_bg: 'rgba(15,23,42,0.40)',
+          newexperianreports_timeline_border: 'rgba(59,130,246,0.5)',
+          newexperianreports_timeline_shadow:
+            '0 20px 25px -5px rgba(226,232,240,0.5), 0 8px 10px -6px rgba(226,232,240,0.5)',
           newexperianreports_indicator: '#f59e0b',
 
           // NewJudgement colors (Light)
           newjudgment_bg: '#f0f9ff',
-          newjudgment_border: 'rgba(59,130,246,0.5)',
           newjudgment_iconbg: 'rgba(139,92,246,0.10)',
           newjudgment_card_bg: '#f8fafc',
+          newjudgment_muted_text: '#475569',
+          newjudgment_shadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
           newjudgment_composition_bg: 'rgba(239,246,255,0.30)',
           newjudgment_composition_border: '#93c5fd',
 
           // NewLegalDetails colors (Light)
           newlegaldetails_bg: '#f0f9ff',
+          newlegaldetails_toggle_bg: 'rgba(255,255,255,0.05)',
           newlegaldetails_complaint_iconbg: 'rgba(59,130,246,0.10)',
           newlegaldetails_judgment_iconbg: 'rgba(139,92,246,0.10)',
           newlegaldetails_garnishment_iconbg: 'rgba(245,158,11,0.10)',
@@ -494,7 +510,7 @@ export default createVuetify({
           asset_stat_value_highlight: '#22c55e',
 
           // BalanceRow
-          balance_row_border: '#e2e8f0',
+          balance_row_border: 'rgba(59, 130, 246, 0.5)',
           balance_row_label: '#334155',
           balance_row_value: '#0f172a',
 
@@ -717,7 +733,7 @@ export default createVuetify({
           accounts_cancel_text: '#ffffff',
           accounts_summary_bg: '#0f172a',
           accounts_summary_border: 'rgba(255,255,255,0.1)',
-          accounts_summary_shadow: 'none',
+          accounts_summary_shadow: '#00000000',
           accounts_summary_value: '#ffffff',
           accounts_header_bg: 'rgba(255,255,255,0.05)',
           accounts_header_text: '#7dd3fc',
@@ -840,22 +856,34 @@ export default createVuetify({
           contact_menu_footer_bg: 'rgba(255, 255, 255, 0.02)',
           contact_menu_footer_icon_bg_blue: 'rgba(59, 130, 246, 0.1)',
           contact_menu_footer_icon_bg_violet: 'rgba(139, 92, 246, 0.1)',
-          contact_menu_footer_icon_violet: '#a78bfa',
-
+          contact_menu_header_blue_text: '#60a5fa',
+          contact_menu_card_border: 'rgba(255, 255, 255, 0.1)',
+          contact_menu_footer_border: 'rgba(255, 255, 255, 0.1)',
+          contact_menu_btn_shadow:
+            '0 10px 15px -3px rgba(37, 99, 235, 0.2), 0 4px 6px -4px rgba(37, 99, 235, 0.2)',
 
           // New Dashboard
           debtor_header_bg: 'rgba(15, 23, 42, 0.6)',
           debtor_remove_btn_bg: 'rgba(239, 68, 68, 0.1)',
           debtor_remove_btn_hover: 'rgba(239, 68, 68, 0.2)',
           debtor_linked_balance_label: 'rgba(255, 255, 255, 0.3)',
-          debtor_tabs_bg: 'rgba(255, 255, 255, 0.1)',
-          debtor_tab_inactive_text: '#cbd5e1',
-          debtor_tab_inactive_hover: 'rgba(255, 255, 255, 0.5)',
+          debtor_tabs_bg: 'rgba(0, 0, 0, 0.2)',
+          debtor_tab_inactive_text: 'rgba(255, 255, 255, 0.4)',
+          debtor_tab_inactive_hover: 'rgba(255, 255, 255, 0.05)',
+          debtor_modal_bg: '#0f172a',
+          debtor_modal_title: '#ffffff',
+          debtor_modal_muted_text: 'rgba(255, 255, 255, 0.4)',
+          debtor_modal_header_border: 'rgba(255, 255, 255, 0.05)',
+          debtor_modal_section_border: 'rgba(255, 255, 255, 0.08)',
+          debtor_modal_close_hover: 'rgba(255, 255, 255, 0.05)',
+          debtor_modal_cancel_bg: 'rgba(255, 255, 255, 0.05)',
+          debtor_modal_cancel_text: '#ffffff',
+          debtor_modal_cancel_hover: 'rgba(255, 255, 255, 0.1)',
           debtor_modal_teal_bg: '#0d9488',
           debtor_modal_teal_shadow: 'rgba(13, 148, 136, 0.2)',
 
           // Utility greys for text
-          text_strong_light: '#f9fafb',
+          text_strong_light: '#ffffff',
 
           // IconButton colors (Dark)
           iconbtn_border: '#1e293b',
@@ -899,24 +927,28 @@ export default createVuetify({
           // NewExperianReports colors (Dark)
           newexperianreports_bg: '#1e293b',
           newexperianreports_border: '#1e293b',
-          newexperianreports_shadow: '',
+          newexperianreports_shadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
           newexperianreports_derogatory_bg: 'rgba(239,68,68,0.05)',
           newexperianreports_button: '#2563eb',
           newexperianreports_button_hover: '#3b82f6',
           newexperianreports_indicator: '#f59e0b',
           newexperianreports_timeline_bg: 'rgba(15,23,42,0.40)',
+          newexperianreports_timeline_border: 'rgba(255,255,255,0.05)',
+          newexperianreports_timeline_shadow: '#00000000',
           newexperianreports_button_shadow: 'rgba(37,99,235,0.2)',
 
           // NewJudgment colors (Dark)
           newjudgment_bg: 'rgba(15,23,42,0.60)',
-          newjudgment_border: 'rgba(255,255,255,0.10)',
           newjudgment_iconbg: 'rgba(139,92,246,0.10)',
-          newjudgment_card_bg: '#1e293b',
+          newjudgment_card_bg: 'rgba(255,255,255,0.05)',
+          newjudgment_muted_text: '#94a3b8',
+          newjudgment_shadow: '#00000000',
           newjudgment_composition_bg: 'rgba(59,130,246,0.05)',
           newjudgment_composition_border: 'rgba(59,130,246,0.20)',
 
           // NewLegalDetails colors (Dark)
           newlegaldetails_bg: 'rgba(15,23,42,0.40)',
+          newlegaldetails_toggle_bg: 'rgba(255,255,255,0.05)',
           newlegaldetails_complaint_iconbg: 'rgba(59,130,246,0.15)',
           newlegaldetails_judgment_iconbg: 'rgba(139,92,246,0.15)',
           newlegaldetails_garnishment_iconbg: 'rgba(245,158,11,0.15)',
