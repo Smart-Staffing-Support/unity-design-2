@@ -470,7 +470,7 @@ export default createVuetify({
           plan_placeholder: '#6b7280',
           plan_btn_shadow_green: '0 4px 12px rgba(5,150,105,0.2)',
 
-          // Plan.vue — Payment Plan Architect (Plan.vue only; do not reuse generic plan_* keys)
+          // Plan.vue — Payment Plan Architect
           plan_architect_zone_bg: '#f0f9ff',
           plan_architect_zone_border: 'rgba(37, 99, 235, 0.5)',
           plan_architect_zone_title: '#212121',
@@ -687,7 +687,7 @@ export default createVuetify({
           /* Dark focus: muted navy-blue ( #2196F3) */
           fields_focus_border: '#23498e',
 
-          // Sidebar-specific colors (used by Sidebar.vue)
+          // Sidebar-specific colors 
           sidebar: 'rgba(255, 255, 255, 0.05)',
           sidebarIcons: '#93c5fd',
           sidebarActive: 'rgba(255, 255, 255, 0.1)',
