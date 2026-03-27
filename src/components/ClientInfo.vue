@@ -509,7 +509,7 @@ function updatePortalViewTypeMenuWidth() {
 /**
  * Vuetify's connected overlay overwrites width/minWidth on every layout pass, so props
  * and contentProps.style lose to `contentStyles` from the location strategy. A global
- * CSS rule with !important + a CSS variable is what actually constrains the menu.
+ * A global CSS rule plus a CSS variable constrains the menu width.
  */
 function syncPortalViewTypeMenuWidthCssVar() {
   const px = portalViewTypeMenuWidthPx.value;
@@ -527,7 +527,7 @@ function portalViewTypeMenuContentEl() {
 
 /**
  * Vuetify's connected strategy rewrites inline width/minWidth every frame; stylesheet
- * !important can still lose to timing. Inline `setProperty(..., 'important')` wins.
+ * Stylesheet rules can still lose to timing. Inline `setProperty(..., 'important')` wins.
  */
 function applyPortalViewTypeMenuDimensions() {
   const el = portalViewTypeMenuContentEl();
@@ -683,94 +683,94 @@ const showReports = [
   letter-spacing: 0.02em;
   --v-field-padding-start: 12px;
   --v-field-padding-end: 0;
-  background: rgb(var(--v-theme-select_field_bg)) !important;
+  background: rgb(var(--v-theme-select_field_bg));
 }
 
 /* Outlined border uses currentColor on .v-field__outline (see VField.css). */
 .portal-view-type-vselect :deep(.v-field__outline) {
   border-radius: 12px;
-  color: rgb(var(--v-theme-select_field_border)) !important;
-  --v-field-border-opacity: 1 !important;
+  color: rgb(var(--v-theme-select_field_border));
+  --v-field-border-opacity: 1;
 }
 
 .portal-view-type-vselect :deep(.v-field--focused .v-field__outline) {
-  color: rgb(var(--v-theme-select_field_focus_border)) !important;
+  color: rgb(var(--v-theme-select_field_focus_border));
 }
 
 .portal-view-type-vselect :deep(.v-field__input) {
-  color: rgb(var(--v-theme-select_field_text)) !important;
+  color: rgb(var(--v-theme-select_field_text));
   font-weight: 700;
 }
 
 .portal-view-type-vselect :deep(.v-field__append-inner .v-icon) {
-  color: rgb(var(--v-theme-select_field_chevron)) !important;
+  color: rgb(var(--v-theme-select_field_chevron));
   opacity: 1;
 }
 
 /* Light mode: pale blue field + blue border + blue label (Portal View Type reference). */
 .client-info--light .portal-view-type-select label.text-select_field_label {
-  color: #2563eb !important;
+  color: #2563eb;
 }
 
 .client-info--light .portal-view-type-vselect :deep(.v-field) {
-  background: #eff6ff !important;
+  background: #eff6ff;
 }
 
 .client-info--light .portal-view-type-vselect :deep(.v-field__outline) {
-  color: #64748b !important;
-  --v-field-border-width: 1px !important;
+  color: #64748b;
+  --v-field-border-width: 1px;
 }
 
 .client-info--light .portal-view-type-vselect :deep(.v-field--focused .v-field__outline) {
-  color: #475569 !important;
-  --v-field-border-width: 1px !important;
+  color: #475569;
+  --v-field-border-width: 1px;
 }
 
 .client-info--light .portal-view-type-vselect :deep(.v-field__input) {
-  color: #1e293b !important;
+  color: #1e293b;
 }
 
 .client-info--light .portal-view-type-vselect :deep(.v-field__append-inner .v-icon) {
-  color: #64748b !important;
+  color: #64748b;
 }
 
 .portal-user-account-sheet :deep(.portal-send-temp-password.v-btn) {
-  border-radius: 12px !important;
+  border-radius: 12px;
   overflow: hidden;
 }
 
 /* Rounded rectangle (not pill / oval), aligned with Send Temporary Password + portal cards. */
 .portal-add-user-btn {
-  border-radius: 12px !important;
+  border-radius: 12px;
   overflow: hidden;
 }
 
 /* Add Portal User: same purple (#5b36e3) in light and dark. */
 .portal-add-user-btn.v-btn {
-  background-color: #5b36e3 !important;
-  border: 1px solid #5b36e3 !important;
-  color: #ffffff !important;
-  box-shadow: 0 8px 24px rgba(91, 54, 227, 0.35) !important;
+  background-color: #5b36e3;
+  border: 1px solid #5b36e3;
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(91, 54, 227, 0.35);
 }
 
 .portal-add-user-btn :deep(.v-btn__prepend .v-icon),
 .portal-add-user-btn :deep(.v-btn__prepend svg) {
-  color: #ffffff !important;
-  stroke: #ffffff !important;
+  color: #ffffff;
+  stroke: #ffffff;
 }
 
 .portal-add-user-btn :deep(.v-btn__overlay) {
-  opacity: 0 !important;
+  opacity: 0;
 }
 
 /* Client Portal accordions only (Permissions / Show Fields / Show Reports) — grey slate rings in dark ClientInfo theme. */
 .client-info--dark .client-info-portal-accordions :deep(.checkbox-box:not(.checkbox-box--checked)) {
   border-width: 1px;
-  border-color: #64748b !important;
+  border-color: #64748b;
 }
 
 .client-info--dark .client-info-portal-accordions :deep(.checkbox-label:hover .checkbox-box:not(.checkbox-box--checked)) {
-  border-color: #60a5fa !important;
+  border-color: #60a5fa;
 }
 
 .animate-fade {
@@ -954,182 +954,182 @@ const showReports = [
 <style>
 /* Portal View Type open menu (teleported). Dark: same width + row metrics as light. */
 .portal-view-type-menu--dark.v-overlay__content {
-  width: var(--portal-view-type-menu-width) !important;
-  min-width: var(--portal-view-type-menu-width) !important;
-  max-width: var(--portal-view-type-menu-width) !important;
+  width: var(--portal-view-type-menu-width);
+  min-width: var(--portal-view-type-menu-width);
+  max-width: var(--portal-view-type-menu-width);
 }
 
 .v-menu > .v-overlay__content.portal-view-type-menu--dark {
-  box-sizing: border-box !important;
-  border-radius: 0 !important;
+  box-sizing: border-box;
+  border-radius: 0;
 }
 
 .portal-view-type-menu--dark.v-overlay__content .v-sheet,
 .portal-view-type-menu--dark .v-sheet {
-  background: #0a1020 !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-  width: 100% !important;
-  min-width: 0 !important;
+  background: #0a1020;
+  box-shadow: none;
+  border-radius: 0;
+  width: 100%;
+  min-width: 0;
 }
 
 .portal-view-type-menu--dark.v-overlay__content,
 .portal-view-type-menu--dark {
-  background: #0a1020 !important;
+  background: #0a1020;
   border: 1px solid rgba(100, 116, 139, 0.45);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
-  border-radius: 0 !important;
-  margin-top: 6px !important;
-  box-sizing: border-box !important;
+  border-radius: 0;
+  margin-top: 6px;
+  box-sizing: border-box;
   overflow: hidden;
 }
 
 .portal-view-type-menu--dark .v-list {
-  background: transparent !important;
-  padding: 0 !important;
-  width: 100% !important;
+  background: transparent;
+  padding: 0;
+  width: 100%;
 }
 
 /* Same compact rows as light; labels white on dark bg (reference). */
 .portal-view-type-menu--dark .v-list-item {
-  border-radius: 0 !important;
-  min-height: 30px !important;
-  padding-block: 2px !important;
-  padding-inline: 12px !important;
-  color: #ffffff !important;
-  background: transparent !important;
+  border-radius: 0;
+  min-height: 30px;
+  padding-block: 2px;
+  padding-inline: 12px;
+  color: #ffffff;
+  background: transparent;
 }
 
 .portal-view-type-menu--dark .v-list-item .v-list-item-title {
-  font-size: 13px !important;
-  line-height: 1.25 !important;
-  font-weight: 400 !important;
+  font-size: 13px;
+  line-height: 1.25;
+  font-weight: 400;
 }
 
 .portal-view-type-menu--dark .v-list-item:hover:not(.v-list-item--active):not([aria-selected='true']),
 .portal-view-type-menu--dark .v-list-item:focus-visible:not(.v-list-item--active):not([aria-selected='true']) {
-  background: rgba(255, 255, 255, 0.06) !important;
-  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
 }
 
 /* Selected: same purple + white as light mode */
 .portal-view-type-menu--dark .v-list-item--active,
 .portal-view-type-menu--dark .v-list-item[aria-selected='true'] {
-  background: #6052a5 !important;
-  color: #ffffff !important;
+  background: #6052a5;
+  color: #ffffff;
 }
 
 .portal-view-type-menu--dark .v-list-item--active:hover,
 .portal-view-type-menu--dark .v-list-item[aria-selected='true']:hover,
 .portal-view-type-menu--dark .v-list-item--active:focus-visible,
 .portal-view-type-menu--dark .v-list-item[aria-selected='true']:focus-visible {
-  background: #6052a5 !important;
-  color: #ffffff !important;
+  background: #6052a5;
+  color: #ffffff;
 }
 
 .portal-view-type-menu--dark .v-list-item--active .v-list-item-title,
 .portal-view-type-menu--dark .v-list-item[aria-selected='true'] .v-list-item-title {
-  color: #ffffff !important;
+  color: #ffffff;
 }
 
 .portal-view-type-menu--dark .v-list-item__content {
-  color: inherit !important;
+  color: inherit;
 }
 
 .portal-view-type-menu--dark .v-list-item-title {
-  color: inherit !important;
+  color: inherit;
 }
 
 .portal-view-type-menu--dark .v-list-item:not(.v-list-item--active):not([aria-selected='true']) .v-list-item-title {
-  color: #ffffff !important;
+  color: #ffffff;
 }
 
-/* Light menu: width — !important beats Vuetify connected strategy inline minWidth (see script). */
+/* Light menu: width — matches script inline dimensions; see applyPortalViewTypeMenuDimensions. */
 .portal-view-type-menu--light.v-overlay__content {
-  width: var(--portal-view-type-menu-width) !important;
-  min-width: var(--portal-view-type-menu-width) !important;
-  max-width: var(--portal-view-type-menu-width) !important;
+  width: var(--portal-view-type-menu-width);
+  min-width: var(--portal-view-type-menu-width);
+  max-width: var(--portal-view-type-menu-width);
 }
 
 /* Light menu: square corners (override VMenu default 4px radius). */
 .v-menu > .v-overlay__content.portal-view-type-menu--light {
-  box-sizing: border-box !important;
-  border-radius: 0 !important;
+  box-sizing: border-box;
+  border-radius: 0;
 }
 
 .portal-view-type-menu--light.v-overlay__content .v-sheet,
 .portal-view-type-menu--light .v-sheet {
-  background: #ffffff !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-  width: 100% !important;
-  min-width: 0 !important;
+  background: #ffffff;
+  box-shadow: none;
+  border-radius: 0;
+  width: 100%;
+  min-width: 0;
 }
 
 .portal-view-type-menu--light.v-overlay__content,
 .portal-view-type-menu--light {
-  box-sizing: border-box !important;
-  background: #ffffff !important;
-  border: 1px solid #64748b !important;
-  border-radius: 0 !important;
-  margin-top: 6px !important;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid #64748b;
+  border-radius: 0;
+  margin-top: 6px;
   box-shadow: 0 10px 28px rgba(15, 23, 42, 0.1);
   overflow: hidden;
 }
 
 .portal-view-type-menu--light .v-list {
-  background: transparent !important;
-  padding: 0 !important;
-  width: 100% !important;
+  background: transparent;
+  padding: 0;
+  width: 100%;
 }
 
 /* Unselected: soft charcoal (~#333–#444), normal weight — matches reference. */
 .portal-view-type-menu--light .v-list-item {
-  border-radius: 0 !important;
-  min-height: 30px !important;
-  padding-block: 2px !important;
-  padding-inline: 12px !important;
-  color: #404040 !important;
-  background: transparent !important;
+  border-radius: 0;
+  min-height: 30px;
+  padding-block: 2px;
+  padding-inline: 12px;
+  color: #404040;
+  background: transparent;
 }
 
 .portal-view-type-menu--light .v-list-item .v-list-item-title {
-  font-size: 13px !important;
-  line-height: 1.25 !important;
-  font-weight: 400 !important;
+  font-size: 13px;
+  line-height: 1.25;
+  font-weight: 400;
 }
 
 .portal-view-type-menu--light .v-list-item:hover:not(.v-list-item--active):not([aria-selected='true']),
 .portal-view-type-menu--light .v-list-item:focus-visible:not(.v-list-item--active):not([aria-selected='true']) {
-  background: #f1f5f9 !important;
-  color: #404040 !important;
+  background: #f1f5f9;
+  color: #404040;
 }
 
 .portal-view-type-menu--light .v-list-item--active,
 .portal-view-type-menu--light .v-list-item[aria-selected='true'] {
-  background: #6052a5 !important;
-  color: #ffffff !important;
+  background: #6052a5;
+  color: #ffffff;
 }
 
 .portal-view-type-menu--light .v-list-item--active .v-list-item-title,
 .portal-view-type-menu--light .v-list-item[aria-selected='true'] .v-list-item-title {
-  color: #ffffff !important;
+  color: #ffffff;
 }
 
 .portal-view-type-menu--light .v-list-item--active:hover,
 .portal-view-type-menu--light .v-list-item[aria-selected='true']:hover,
 .portal-view-type-menu--light .v-list-item--active:focus-visible,
 .portal-view-type-menu--light .v-list-item[aria-selected='true']:focus-visible {
-  background: #6052a5 !important;
-  color: #ffffff !important;
+  background: #6052a5;
+  color: #ffffff;
 }
 
 .portal-view-type-menu--light .v-list-item__content,
 .portal-view-type-menu--light .v-list-item-title {
-  color: inherit !important;
+  color: inherit;
 }
 
 .portal-view-type-menu--light .v-list-item:not(.v-list-item--active):not([aria-selected='true']) .v-list-item-title {
-  color: #404040 !important;
+  color: #404040;
 }
 </style>
