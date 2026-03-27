@@ -394,7 +394,7 @@ export default createVuetify({
           newexperianreports_bg: '#f0f9ff',
           newexperianreports_border: 'rgba(59,130,246,0.5)',
           newexperianreports_shadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
-          newexperianreports_derogatory_bg: 'rgba(202, 165, 165, 0.5)',
+          newexperianreports_derogatory_bg: 'rgba(241, 224, 224, 0.5)',
           newexperianreports_button: '#2563eb',
           newexperianreports_button_hover: '#3b82f6',
           newexperianreports_button_shadow: 'rgba(37,99,235,0.2)',
