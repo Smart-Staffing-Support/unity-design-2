@@ -1,6 +1,8 @@
 <template>
   <div class="d-flex flex-column">
-    <span class="text-caption font-weight-black mb-1 text-infobox_label infobox-label">
+    <span
+      class="text-caption font-weight-black mb-1 text-infobox_label infobox-label"
+    >
       {{ label }}
     </span>
     <div class="d-flex align-baseline ga-2">
@@ -9,7 +11,7 @@
       </span>
       <span
         v-if="subValue"
-        class="text-caption font-weight-bold text-infobox_subvalue infobox-subvalue"
+        class="text-caption font-weight-regular text-infobox_subvalue infobox-subvalue"
       >
         / {{ subValue }}
       </span>
@@ -34,4 +36,3 @@ defineProps({
   font-size: 12px;
 }
 </style>
-
