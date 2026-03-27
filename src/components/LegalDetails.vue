@@ -3,18 +3,15 @@
 
     <!-- SECTION 1: Complaint Information -->
     <div
-      class="pa-8"
-      style="border-radius: 30px; border: 1px solid;"
-      :style="isDark
-        ? 'background: rgba(15,23,42,0.4); border-color: rgba(255,255,255,0.05);'
-        : 'background: #f0f9ff; border-color: rgba(37,99,235,0.5); box-shadow: 0 1px 3px rgba(0,0,0,0.08);'"
+      class="pa-8 rounded-xl border-md border-blue-darken-2 bg-secondary_container_bg"
+      
+      :style="!isDark ? 'box-shadow: 0 1px 3px rgba(0,0,0,0.08);' : ''"
     >
       <div class="d-flex align-center ga-2 mb-8">
         <div class="rounded-pill bg-blue-darken-1" style="height: 20px; width: 4px;" />
         <h4
-          class="text-caption font-weight-black text-uppercase"
+          class="text-caption font-weight-black text-uppercase text-blue-darken-2"
           style="letter-spacing: 0.2em;"
-          :class="isDark ? 'text-blue-lighten-2' : 'text-blue-darken-1'"
         >
           Complaint Information
         </h4>
@@ -53,26 +50,21 @@
 
     <!-- SECTION 2: Judgement Information -->
     <div
-      class="pa-8"
-      style="border-radius: 30px; border: 1px solid;"
-      :style="isDark
-        ? 'background: rgba(15,23,42,0.4); border-color: rgba(255,255,255,0.05);'
-        : 'background: #f0f9ff; border-color: rgba(37,99,235,0.5); box-shadow: 0 1px 3px rgba(0,0,0,0.08);'"
+      class="pa-8 rounded-xl border-md bg-secondary_container_bg border-secondary_container_border"
+      :style="!isDark ? 'box-shadow: 0 1px 3px rgba(0,0,0,0.08);' : ''"
     >
       <div class="d-flex align-center ga-2 mb-8">
         <div class="rounded-pill bg-purple-darken-1" style="height: 20px; width: 4px;" />
         <h4
-          class="text-caption font-weight-black text-uppercase"
+          class="text-caption font-weight-black text-uppercase text-purple-darken-1"
           style="letter-spacing: 0.2em;"
-          :class="isDark ? 'text-purple-lighten-2' : 'text-purple-darken-1'"
         >
           Judgement Information
         </h4>
       </div>
 
       <div
-        class="d-flex align-center ga-3 mb-8 pa-4 rounded-lg"
-        style="background: rgba(255,255,255,0.05);"
+        class="d-flex align-center ga-3 mb-8 pa-4 rounded-lg bg-secondary_container_bg"
       >
         <input
           type="checkbox"
@@ -82,9 +74,8 @@
         />
         <label
           for="judgement-checkbox"
-          class="text-sm font-weight-bold text-uppercase cursor-pointer"
+          class="text-sm font-weight-bold text-uppercase cursor-pointer text-fields_text"
           style="letter-spacing: 0.1em;"
-          :class="isDark ? 'text-white' : 'text-grey-darken-4'"
         >
           Judgement Entered
         </label>
@@ -129,18 +120,14 @@
 
     <!-- SECTION 3: Garnishment Information -->
     <div
-      class="pa-8"
-      style="border-radius: 30px; border: 1px solid;"
-      :style="isDark
-        ? 'background: rgba(15,23,42,0.4); border-color: rgba(255,255,255,0.05);'
-        : 'background: #f0f9ff; border-color: rgba(37,99,235,0.5); box-shadow: 0 1px 3px rgba(0,0,0,0.08);'"
+      class="pa-8 rounded-xl border-md bg-secondary_container_bg border-secondary_container_border"
+      :style="!isDark ? 'box-shadow: 0 1px 3px rgba(0,0,0,0.08);' : ''"
     >
       <div class="d-flex align-center ga-2 mb-8">
         <div class="rounded-pill bg-amber-darken-1" style="height: 20px; width: 4px;" />
         <h4
-          class="text-caption font-weight-black text-uppercase"
+          class="text-caption font-weight-black text-uppercase text-amber-darken-2"
           style="letter-spacing: 0.2em;"
-          :class="isDark ? 'text-amber-lighten-2' : 'text-amber-darken-2'"
         >
           Garnishment Information
         </h4>
@@ -203,10 +190,5 @@ import SelectField from './shared/SelectField.vue'
 import DateField from './shared/DateField.vue'
 import InputField from './shared/InputField.vue'
 
-const props = defineProps({
-  theme: { type: String, default: 'light' },
-})
-
-const isDark = computed(() => props.theme === 'dark')
 const judgementEntered = ref(false)
 </script>

@@ -3,20 +3,16 @@
 
     <!-- SECTION 1: JUDGMENT SETTINGS -->
     <div
-      class="pa-8"
-      style="border-radius: 35px; border: 1px solid;"
-      :style="isDark
-        ? 'background: rgba(15,23,42,0.6); border-color: rgba(255,255,255,0.1);'
-        : 'background: #f0f9ff; border-color: rgba(37,99,235,0.5); box-shadow: 0 1px 3px rgba(0,0,0,0.08);'"
+      class="pa-8 rounded-xl border-md bg-secondary_container_bg border-secondary_container_border"
+      :style="!isDark ? 'box-shadow: 0 1px 3px rgba(0,0,0,0.08);' : ''"
     >
       <div class="d-flex align-center ga-3 mb-8">
-        <div class="pa-2 rounded-xl" style="background: rgba(59,130,246,0.1);">
+        <div class="pa-2 rounded-xl bg-blue-lighten-5">
           <Scale class="text-blue" :size="20" />
         </div>
         <h3
-          class="text-h6 font-weight-black text-uppercase"
+          class="text-h6 font-weight-black text-uppercase text-fields_text"
           style="letter-spacing: -0.01em;"
-          :class="isDark ? 'text-white' : 'text-grey-darken-4'"
         >
           Judgment Settings
         </h3>
@@ -44,11 +40,8 @@
 
         <!-- Post-Judgment Interest Section -->
         <div
-          class="pa-6 rounded-xl"
-          style="border: 1px solid;"
-          :style="isDark
-            ? 'background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);'
-            : 'background: #f8fafc; border-color: rgba(37,99,235,0.5); box-shadow: 0 1px 3px rgba(0,0,0,0.08);'"
+          class="pa-6 rounded-xl border-md bg-fields_bg border-secondary_container_border"
+          :style="!isDark ? 'box-shadow: 0 1px 3px rgba(0,0,0,0.08);' : ''"
         >
           <label class="d-flex align-center ga-3 cursor-pointer mb-6">
             <input
@@ -57,9 +50,8 @@
               style="width:20px; height:20px; border-radius:6px; accent-color: #2563eb;"
             />
             <span
-              class="text-sm font-weight-black text-uppercase"
+              class="text-sm font-weight-black text-uppercase text-fields_text"
               style="letter-spacing: 0.1em;"
-              :class="isDark ? 'text-white' : 'text-grey-darken-2'"
             >
               Apply Post-Judgment Interest
             </span>
@@ -81,8 +73,8 @@
               <v-btn
                 color="blue-darken-1"
                 variant="elevated"
-                class="rounded-xl font-weight-black text-uppercase w-100"
-                style="letter-spacing: 0.1em; font-size: 0.7rem; border-radius: 16px; box-shadow: 0 4px 16px rgba(37,99,235,0.2);"
+                class="rounded-sm font-weight-black text-uppercase w-100"
+                style="letter-spacing: 0.1em; font-size: 0.7rem; border-radius: 12px; box-shadow: 0 4px 16px rgba(37,99,235,0.2);"
               >
                 Add Step
               </v-btn>
@@ -95,20 +87,16 @@
 
     <!-- SECTION 2: PRE-JUDGMENT COMPONENTS -->
     <div
-      class="pa-8"
-      style="border-radius: 35px; border: 1px solid;"
-      :style="isDark
-        ? 'background: rgba(15,23,42,0.6); border-color: rgba(255,255,255,0.1);'
-        : 'background: #f0f9ff; border-color: rgba(37,99,235,0.5); box-shadow: 0 1px 3px rgba(0,0,0,0.08);'"
+      class="pa-8 rounded-xl border-md bg-secondary_container_bg border-secondary_container_border"
+      :style="!isDark ? 'box-shadow: 0 1px 3px rgba(0,0,0,0.08);' : ''"
     >
       <div class="d-flex align-center ga-3 mb-8">
-        <div class="pa-2 rounded-xl" style="background: rgba(139,92,246,0.1);">
+        <div class="pa-2 rounded-xl bg-purple-lighten-5">
           <CheckCircle2 class="text-purple" :size="20" />
         </div>
         <h3
-          class="text-h6 font-weight-black text-uppercase"
+          class="text-h6 font-weight-black text-uppercase text-fields_text"
           style="letter-spacing: -0.01em;"
-          :class="isDark ? 'text-white' : 'text-grey-darken-4'"
         >
           Pre-Judgment Components
         </h3>
@@ -124,29 +112,24 @@
             style="width:20px; height:20px; border-radius:6px; accent-color: #2563eb;"
           />
           <span
-            class="text-sm font-weight-black text-uppercase"
+            class="text-sm font-weight-black text-uppercase text-fields_text"
             style="letter-spacing: 0.1em;"
-            :class="isDark ? 'text-white' : 'text-grey-darken-2'"
           >
             Include Pre-Judgment Payments
           </span>
         </label>
 
         <!-- Conditional Panels -->
-        <div class="d-flex flex-wrap ga-4">
+        <div class="d-flex ga-4">
 
           <!-- Pre-Judgment Interest -->
           <div
-            class="pa-6 rounded-xl flex-1"
-            style="border: 2px solid;"
-            :style="isDark
-              ? 'background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);'
-              : 'background: #f8fafc; border-color: #e2e8f0;'"
+            class="pa-6 rounded-xl flex-1 bg-fields_bg border-md border-grey-lighten-3"
+            style="border-radius: 24px;"
           >
             <h4
-              class="text-sm font-weight-black text-uppercase mb-4"
+              class="text-sm font-weight-black text-uppercase mb-4 text-grey-darken-1"
               style="letter-spacing: 0.1em;"
-              :class="isDark ? 'text-grey-lighten-1' : 'text-grey-darken-1'"
             >
               Pre-Judgment Interest
             </h4>
@@ -154,17 +137,17 @@
               <template v-if="preJudgmentPayments">
                 <label class="d-flex align-center ga-3 cursor-pointer checkbox-label">
                   <input type="checkbox" style="width:16px; height:16px; accent-color: #2563eb; cursor:pointer;" />
-                  <span class="text-caption font-weight-bold text-uppercase" :class="isDark ? 'text-grey-lighten-1' : 'text-grey-darken-1'" style="letter-spacing:-0.01em;">Remaining Balance</span>
+                  <span class="text-caption font-weight-bold text-uppercase text-grey-darken-1" style="letter-spacing:-0.01em;">Remaining Balance</span>
                 </label>
               </template>
               <template v-else>
                 <label class="d-flex align-center ga-3 cursor-pointer checkbox-label">
                   <input type="checkbox" style="width:16px; height:16px; accent-color: #2563eb; cursor:pointer;" />
-                  <span class="text-caption font-weight-bold text-uppercase" :class="isDark ? 'text-grey-lighten-1' : 'text-grey-darken-1'" style="letter-spacing:-0.01em;">Total</span>
+                  <span class="text-caption font-weight-bold text-uppercase text-grey-darken-1" style="letter-spacing:-0.01em;">Total</span>
                 </label>
                 <label class="d-flex align-center ga-3 cursor-pointer checkbox-label">
                   <input type="checkbox" style="width:16px; height:16px; accent-color: #2563eb; cursor:pointer;" />
-                  <span class="text-caption font-weight-bold text-uppercase" :class="isDark ? 'text-grey-lighten-1' : 'text-grey-darken-1'" style="letter-spacing:-0.01em;">Remaining Balance</span>
+                  <span class="text-caption font-weight-bold text-uppercase text-grey-darken-1" style="letter-spacing:-0.01em;">Remaining Balance</span>
                 </label>
               </template>
             </div>
@@ -172,16 +155,12 @@
 
           <!-- Pre-Judgment Costs -->
           <div
-            class="pa-6 rounded-xl flex-1"
-            style="border: 2px solid;"
-            :style="isDark
-              ? 'background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);'
-              : 'background: #f8fafc; border-color: #e2e8f0;'"
+            class="pa-6 rounded-xl flex-1 bg-fields_bg border-md border-grey-lighten-3"
+            style="border-radius: 24px;"
           >
             <h4
-              class="text-sm font-weight-black text-uppercase mb-4"
+              class="text-sm font-weight-black text-uppercase mb-4 text-grey-darken-1"
               style="letter-spacing: 0.1em;"
-              :class="isDark ? 'text-grey-lighten-1' : 'text-grey-darken-1'"
             >
               Pre-Judgment Costs
             </h4>
@@ -189,17 +168,17 @@
               <template v-if="preJudgmentPayments">
                 <label class="d-flex align-center ga-3 cursor-pointer checkbox-label">
                   <input type="checkbox" style="width:16px; height:16px; accent-color: #2563eb; cursor:pointer;" />
-                  <span class="text-caption font-weight-bold text-uppercase" :class="isDark ? 'text-grey-lighten-1' : 'text-grey-darken-1'" style="letter-spacing:-0.01em;">Remaining Balance</span>
+                  <span class="text-caption font-weight-bold text-uppercase text-grey-darken-1" style="letter-spacing:-0.01em;">Remaining Balance</span>
                 </label>
               </template>
               <template v-else>
                 <label class="d-flex align-center ga-3 cursor-pointer checkbox-label">
                   <input type="checkbox" style="width:16px; height:16px; accent-color: #2563eb; cursor:pointer;" />
-                  <span class="text-caption font-weight-bold text-uppercase" :class="isDark ? 'text-grey-lighten-1' : 'text-grey-darken-1'" style="letter-spacing:-0.01em;">Total</span>
+                  <span class="text-caption font-weight-bold text-uppercase text-grey-darken-1" style="letter-spacing:-0.01em;">Total</span>
                 </label>
                 <label class="d-flex align-center ga-3 cursor-pointer checkbox-label">
                   <input type="checkbox" style="width:16px; height:16px; accent-color: #2563eb; cursor:pointer;" />
-                  <span class="text-caption font-weight-bold text-uppercase" :class="isDark ? 'text-grey-lighten-1' : 'text-grey-darken-1'" style="letter-spacing:-0.01em;">Remaining Balance</span>
+                  <span class="text-caption font-weight-bold text-uppercase text-grey-darken-1" style="letter-spacing:-0.01em;">Remaining Balance</span>
                 </label>
               </template>
             </div>
@@ -207,16 +186,12 @@
 
           <!-- Pre-Judgment Fees -->
           <div
-            class="pa-6 rounded-xl flex-1"
-            style="border: 2px solid;"
-            :style="isDark
-              ? 'background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1);'
-              : 'background: #f8fafc; border-color: #e2e8f0;'"
+            class="pa-6 rounded-xl flex-1 bg-fields_bg border-md border-grey-lighten-3"
+            style="border-radius: 24px;"
           >
             <h4
-              class="text-sm font-weight-black text-uppercase mb-4"
+              class="text-sm font-weight-black text-uppercase mb-4 text-grey-darken-1"
               style="letter-spacing: 0.1em;"
-              :class="isDark ? 'text-grey-lighten-1' : 'text-grey-darken-1'"
             >
               Pre-Judgment Fees
             </h4>
@@ -224,17 +199,17 @@
               <template v-if="preJudgmentPayments">
                 <label class="d-flex align-center ga-3 cursor-pointer checkbox-label">
                   <input type="checkbox" style="width:16px; height:16px; accent-color: #2563eb; cursor:pointer;" />
-                  <span class="text-caption font-weight-bold text-uppercase" :class="isDark ? 'text-grey-lighten-1' : 'text-grey-darken-1'" style="letter-spacing:-0.01em;">Remaining Balance</span>
+                  <span class="text-caption font-weight-bold text-uppercase text-grey-darken-1" style="letter-spacing:-0.01em;">Remaining Balance</span>
                 </label>
               </template>
               <template v-else>
                 <label class="d-flex align-center ga-3 cursor-pointer checkbox-label">
                   <input type="checkbox" style="width:16px; height:16px; accent-color: #2563eb; cursor:pointer;" />
-                  <span class="text-caption font-weight-bold text-uppercase" :class="isDark ? 'text-grey-lighten-1' : 'text-grey-darken-1'" style="letter-spacing:-0.01em;">Total</span>
+                  <span class="text-caption font-weight-bold text-uppercase text-grey-darken-1" style="letter-spacing:-0.01em;">Total</span>
                 </label>
                 <label class="d-flex align-center ga-3 cursor-pointer checkbox-label">
                   <input type="checkbox" style="width:16px; height:16px; accent-color: #2563eb; cursor:pointer;" />
-                  <span class="text-caption font-weight-bold text-uppercase" :class="isDark ? 'text-grey-lighten-1' : 'text-grey-darken-1'" style="letter-spacing:-0.01em;">Remaining Balance</span>
+                  <span class="text-caption font-weight-bold text-uppercase text-grey-darken-1" style="letter-spacing:-0.01em;">Remaining Balance</span>
                 </label>
               </template>
             </div>
@@ -242,22 +217,16 @@
 
           <!-- Judgment Amount Composition -->
           <div
-            class="pa-6 rounded-xl w-100"
-            style="border: 2px dashed;"
-            :style="isDark
-              ? 'background: rgba(59,130,246,0.05); border-color: rgba(59,130,246,0.2);'
-              : 'background: rgba(239,246,255,0.3); border-color: #93c5fd;'"
-          >
+            class="pa-6 rounded-xl flex-1 bg-secondary_container_bg"
+            style="border: 2px dashed #2563eb;"          >
             <h4
-              class="text-sm font-weight-black text-uppercase mb-6"
+              class="text-sm font-weight-black text-uppercase mb-6 text-blue-darken-1"
               style="letter-spacing: 0.1em;"
-              :class="isDark ? 'text-blue-lighten-2' : 'text-blue-darken-1'"
             >
               Judgment Amount Composition
             </h4>
             <p
-              class="text-sm font-weight-bold mb-4"
-              :class="isDark ? 'text-white' : 'text-grey-darken-3'"
+              class="text-sm font-weight-bold mb-4 text-fields_text"
             >
               Judgment Amount = Principal +
             </p>
@@ -265,19 +234,19 @@
               <v-col cols="12" md="4">
                 <label class="d-flex align-center ga-3 cursor-pointer checkbox-label">
                   <input type="checkbox" checked style="width:16px; height:16px; accent-color: #2563eb; cursor:pointer;" />
-                  <span class="text-caption font-weight-bold text-uppercase" :class="isDark ? 'text-grey-lighten-1' : 'text-grey-darken-1'" style="letter-spacing:-0.01em;">Pre-Judgment Interest</span>
+                  <span class="text-caption font-weight-bold text-uppercase text-grey-darken-1" style="letter-spacing:-0.01em;">Pre-Judgment Interest</span>
                 </label>
               </v-col>
               <v-col cols="12" md="4">
                 <label class="d-flex align-center ga-3 cursor-pointer checkbox-label">
                   <input type="checkbox" style="width:16px; height:16px; accent-color: #2563eb; cursor:pointer;" />
-                  <span class="text-caption font-weight-bold text-uppercase" :class="isDark ? 'text-grey-lighten-1' : 'text-grey-darken-1'" style="letter-spacing:-0.01em;">Pre-Judgment Costs</span>
+                  <span class="text-caption font-weight-bold text-uppercase text-grey-darken-1" style="letter-spacing:-0.01em;">Pre-Judgment Costs</span>
                 </label>
               </v-col>
               <v-col cols="12" md="4">
                 <label class="d-flex align-center ga-3 cursor-pointer checkbox-label">
                   <input type="checkbox" style="width:16px; height:16px; accent-color: #2563eb; cursor:pointer;" />
-                  <span class="text-caption font-weight-bold text-uppercase" :class="isDark ? 'text-grey-lighten-1' : 'text-grey-darken-1'" style="letter-spacing:-0.01em;">Pre-Judgment Fees</span>
+                  <span class="text-caption font-weight-bold text-uppercase text-grey-darken-1" style="letter-spacing:-0.01em;">Pre-Judgment Fees</span>
                 </label>
               </v-col>
             </v-row>
@@ -309,12 +278,10 @@ import { CheckCircle2, Save, Scale } from 'lucide-vue-next'
 import DateField from './shared/DateField.vue'
 import InputField from './shared/InputField.vue'
 import SelectField from './shared/SelectField.vue'
+import { useTheme } from 'vuetify'
 
-const props = defineProps({
-  theme: { type: String, default: 'light' },
-})
-
-const isDark = computed(() => props.theme === 'dark')
+const theme = useTheme()
+const isDark = computed(() => theme.global.current.value.dark)  
 const postJudgmentInterest = ref(false)
 const preJudgmentPayments = ref(false)
 </script>
