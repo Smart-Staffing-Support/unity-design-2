@@ -74,9 +74,17 @@ export default createVuetify({
           sidebarActive: '#e0e0e0',
           sidebarActiveText: '#005ea3',
           toggleThemeIcon: '#005ea3',
-              //
-              
-              
+          
+          // accounting footer
+          accounting_footer_bg: '#dff2fe',
+          accounting_footer_border: '#2563eb',
+          
+          //modals
+          modal_border: '#aaaaaa;',
+          modal_bg: '#fff',
+          modal_conditional_section: '#dff2fe',
+          modal_upload: '#94a3b8',
+          modal_close: '#4e4e4e',
 
           // Checkbox
           checkbox_border_unchecked: '#cbd5e1',
@@ -549,8 +557,8 @@ export default createVuetify({
           exp_mortgage_head: '#7c3aed',
 
           // Financials
-          fin_table_header_text: '#334155',
-          fin_table_header_bar_bg: 'rgba(100, 116, 139, 0.05)',
+          financial_header_bg: '#f0f9ff',
+          financial_header_border: 'rgba(37,99,235,0.5)',
 
           // GlobalNotes
           gn_header_border: 'rgba(59, 130, 246, 0.5)',
@@ -601,6 +609,16 @@ export default createVuetify({
           sidebarActive: 'rgba(255, 255, 255, 0.1)',
           sidebarActiveText: '#ffffff',
 
+          // accounting footer
+          accounting_footer_bg: '#0f172a',
+          accounting_footer_border: '#2563eb',
+
+          //modals
+          modal_border: 'rgba(255,255,255,0.10)',
+          modal_bg: '#0f172a',
+          modal_conditional_section: 'rgba(255,255,255,0.05)',
+          modal_upload: '#64748b',
+          modal_close: 'rgba(255,255,255,0.4)',
 
           // DateField
           date_field_label: '#7dd3fc',
@@ -1075,8 +1093,8 @@ export default createVuetify({
           exp_mortgage_head: '#a78bfa',
 
           // Financials
-          fin_table_header_text: '#7dd3fc',
-          fin_table_header_bar_bg: 'rgba(100, 116, 139, 0.05)',
+          financial_header_bg: 'rgba(15,23,42,0.4)',
+          financial_header_border: 'rgba(255,255,255,0.05)',
 
           // GlobalNotes
           gn_header_border: 'rgba(255, 255, 255, 0.05)',

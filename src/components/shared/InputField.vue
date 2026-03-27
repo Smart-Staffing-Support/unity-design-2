@@ -1,14 +1,14 @@
 <template>
   <div class="d-flex flex-column ga-2 w-100" :class="props.className">
     <label
-      class="text-body-2 text-capitalize text-fields_label ls-input-label"
+      class="text-body-2 text-capitalize text-select_field_label ls-input-label"
     >
       {{ props.label }}
     </label>
     <input
       :type="props.type"
       :placeholder="props.placeholder"
-      class="input-field w-100 px-4 py-2 rounded-lg text-caption font-weight-bold bg-fields_bg border-sm border-opacity-100 border-fields_border text-fields_text hover:bg-fields_hover_bg hover:border-fields_hover_border placeholder:text-fields_placeholder focus:border-fields_focus_border"
+      class="input-field w-100 px-4 rounded-lg text-caption font-weight-bold bg-select_field_bg border-sm border-opacity-100 border-fields_border text-fields_text"
     />
   </div>
 </template>
@@ -28,6 +28,8 @@ const props = defineProps({
   outline: none;
   transition: background-color 0.2s, border-color 0.2s;
   font-size: 0.75rem;
+  padding: 10px 16px;
+  border: 1px solid rgb(var(--v-theme-select_field_border));
 }
 
 .ls-input-label {
