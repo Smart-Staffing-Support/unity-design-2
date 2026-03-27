@@ -1,21 +1,14 @@
 <template>
-  <div class="animate-fade">
+  <div class="animate-fade d-flex flex-column ga-8">
 
     <!-- SECTION 1: Complaint Information -->
     <v-sheet
-      class="pa-8 mb-8"
-      color="transparent"
-      style="border-radius: 30px !important;"
-      :style="theme === 'dark'
-        ? 'background: rgba(15,23,42,0.4) !important; border: 1px solid rgba(255,255,255,0.05);'
-        : 'background: #f0f9ff !important; border: 1px solid rgba(37,99,235,0.4); box-shadow: 0 1px 4px rgba(0,0,0,0.06);'"
+      class="pa-8 newlegaldetails-panel bg-newlegaldetails_bg border border-sm border-custom-blue newlegaldetails-panel-shadow"
     >
       <div class="d-flex align-center ga-2 mb-8">
-        <div class="rounded-pill" style="width: 4px; height: 20px; background: #3b82f6; flex-shrink: 0;" />
+        <div class="rounded-pill bg-newexperianreports_button_hover flex-shrink-0 newlegaldetails-header-indicator" />
         <span
-          class="text-caption font-weight-black text-uppercase"
-          style="letter-spacing: 0.2em;"
-          :style="theme === 'dark' ? 'color: #60a5fa;' : 'color: #2563eb;'"
+          class="text-caption font-weight-black text-uppercase text-contact_menu_header_blue_text newlegaldetails-header-tracking"
         >Complaint Information</span>
       </div>
 
@@ -55,39 +48,31 @@
 
     <!-- SECTION 2: Judgement Information -->
     <v-sheet
-      class="pa-8 mb-8"
+      class="pa-8 newlegaldetails-panel bg-newlegaldetails_bg border border-sm border-custom-blue newlegaldetails-panel-shadow"
       color="transparent"
-      style="border-radius: 30px !important;"
-      :style="theme === 'dark'
-        ? 'background: rgba(15,23,42,0.4) !important; border: 1px solid rgba(255,255,255,0.05);'
-        : 'background: #f0f9ff !important; border: 1px solid rgba(37,99,235,0.4); box-shadow: 0 1px 4px rgba(0,0,0,0.06);'"
     >
       <div class="d-flex align-center ga-2 mb-8">
-        <div class="rounded-pill" style="width: 4px; height: 20px; background: #8b5cf6; flex-shrink: 0;" />
+        <div class="rounded-pill bg-contact_menu_icon_violet flex-shrink-0 newlegaldetails-header-indicator" />
         <span
-          class="text-caption font-weight-black text-uppercase"
-          style="letter-spacing: 0.2em;"
-          :style="theme === 'dark' ? 'color: #a78bfa;' : 'color: #7c3aed;'"
+          class="text-caption font-weight-black text-uppercase text-exp_mortgage_head newlegaldetails-header-tracking"
         >Judgement Information</span>
       </div>
 
       <!-- Judgement Entered Toggle -->
       <div
-        class="d-flex align-center ga-3 mb-8 pa-4 rounded-lg cursor-pointer"
-        style="background: rgba(255,255,255,0.05);"
+        class="d-flex align-center ga-3 mb-8 pa-4 rounded-lg cursor-pointer bg-newlegaldetails_toggle_bg"
         @click="judgementEntered = !judgementEntered"
       >
         <v-checkbox
           v-model="judgementEntered"
+          class="newlegaldetails-checkbox-lg"
           hide-details
-          color="blue"
+          color="summary_stat_total_bg"
+          base-color="judgment_checkbox_border"
           density="compact"
-          @click.stop
         />
         <label
-          class="text-body-2 font-weight-bold text-uppercase cursor-pointer"
-          style="letter-spacing: 0.15em;"
-          :style="theme === 'dark' ? 'color: white;' : 'color: #0f172a;'"
+          class="text-body-2 font-weight-bold text-uppercase cursor-pointer text-accounts_summary_value newlegaldetails-toggle-tracking"
         >Judgement Entered</label>
       </div>
 
@@ -123,19 +108,12 @@
 
     <!-- SECTION 3: Garnishment Information -->
     <v-sheet
-      class="pa-8 mb-8"
-      color="transparent"
-      style="border-radius: 30px !important;"
-      :style="theme === 'dark'
-        ? 'background: rgba(15,23,42,0.4) !important; border: 1px solid rgba(255,255,255,0.05);'
-        : 'background: #f0f9ff !important; border: 1px solid rgba(37,99,235,0.4); box-shadow: 0 1px 4px rgba(0,0,0,0.06);'"
+      class="pa-8 newlegaldetails-panel bg-newlegaldetails_bg border border-sm border-custom-blue newlegaldetails-panel-shadow"
     >
       <div class="d-flex align-center ga-2 mb-8">
-        <div class="rounded-pill" style="width: 4px; height: 20px; background: #f59e0b; flex-shrink: 0;" />
+        <div class="rounded-pill bg-newexperianreports_indicator flex-shrink-0 newlegaldetails-header-indicator" />
         <span
-          class="text-caption font-weight-black text-uppercase"
-          style="letter-spacing: 0.2em;"
-          :style="theme === 'dark' ? 'color: #fbbf24;' : 'color: #d97706;'"
+          class="text-caption font-weight-black text-uppercase text-ac_amber_text newlegaldetails-header-tracking"
         >Garnishment Information</span>
       </div>
 
@@ -170,13 +148,11 @@
     <!-- Save Button -->
     <div class="d-flex justify-end pt-8">
       <v-btn
-        color="blue-darken-1"
-        class="font-weight-medium rounded-xl"
-        style="font-size: 13px; box-shadow: 0 8px 24px rgba(37,99,235,0.2);"
+        variant="flat"
+        class="newlegaldetails-save-btn d-flex align-center ga-2 px-8 py-3 font-weight-medium text-body-2 bg-newexperianreports_button text-accounts_cancel_text hover:bg-newexperianreports_button_hover transition-all"
         elevation="0"
-        size="large"
       >
-        <template #prepend><Save :size="16" /></template>
+        <template #prepend><Save :size="18" /></template>
         Save changes
       </v-btn>
     </div>
@@ -206,10 +182,93 @@ const judgementEntered = ref(false);
   animation: fadeSlideIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+.newlegaldetails-panel {
+  border-radius: 30px;
+}
+
+.newlegaldetails-panel-shadow {
+  box-shadow: var(--v-newjudgment_shadow);
+}
+
+.newlegaldetails-header-indicator {
+  width: 4px;
+  height: 20px;
+}
+
+.newlegaldetails-header-tracking {
+  letter-spacing: 0.2em;
+}
+
+.newlegaldetails-toggle-tracking {
+  letter-spacing: 0.2em;
+}
+
+.newlegaldetails-save-btn {
+  border-radius: 16px;
+  box-shadow:
+    0 10px 15px -3px var(--v-newexperianreports_button_shadow),
+    0 4px 6px -4px var(--v-newexperianreports_button_shadow);
+}
+
+.newlegaldetails-checkbox-lg {
+  margin: 0;
+  padding: 0;
+  box-shadow: none !important;
+}
+
+:deep(.newlegaldetails-checkbox-lg .v-selection-control) {
+  min-height: auto;
+}
+
+:deep(.newlegaldetails-checkbox-lg .v-selection-control__wrapper),
+:deep(.newlegaldetails-checkbox-lg .v-selection-control__input),
+:deep(.newlegaldetails-checkbox-lg .v-icon) {
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
+}
+
+:deep(.newlegaldetails-checkbox-lg .v-icon) {
+  opacity: 0;
+}
+
+:deep(.newlegaldetails-checkbox-lg .v-selection-control__input) {
+  border: 2px solid #3b82f6 !important;
+  border-radius: 4px;
+  position: relative;
+  background-color: transparent;
+}
+
+:deep(.newlegaldetails-checkbox-lg .v-selection-control--dirty .v-selection-control__input) {
+  background-color: #2563eb;
+  border-color: #2563eb !important;
+}
+
+:deep(.newlegaldetails-checkbox-lg .v-selection-control__input::after) {
+  content: '';
+}
+
+:deep(.newlegaldetails-checkbox-lg .v-selection-control--dirty .v-selection-control__input::after) {
+  content: '✔';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+}
+
 @keyframes fadeSlideIn {
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
 .cursor-pointer { cursor: pointer; }
+
+.border-custom-blue {
+  border-color: rgba(59, 130, 246, 0.5);
+}
 </style>
