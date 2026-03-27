@@ -1,24 +1,15 @@
 <template>
   <div
-    class="d-flex flex-column overflow-hidden"
-    style="width: 100%; max-width: 896px; height: 90vh; border-radius: 25px; border: 1px solid;"
-    :style="isDark
-      ? 'background: #0f172a; border-color: rgba(255,255,255,0.1);'
-      : 'background: #ffffff; border-color: #e2e8f0; box-shadow: 0 1px 3px rgba(0,0,0,0.08);'"
+    class="d-flex flex-column overflow-hidden border bg-modal_bg border text-modal_bg"
+    style="width: 100%; max-width: 896px; height: 90vh; border: 1px solid; border-radius: 25px;"
   >
 
     <!-- TOP BAR -->
     <div
-      class="px-8 py-4"
-      style="border-bottom: 1px solid; flex-shrink: 0;"
-      :style="isDark
-        ? 'background: rgba(15,23,42,0.5); border-color: rgba(59,130,246,0.5);'
-        : 'background: #ffffff; border-color: #e2e8f0;'"
+      class="px-8 py-4 border-b text-modal_border bg-modal_bg"
     >
       <h2
-        class="text-h5 font-weight-black text-uppercase"
-        style="letter-spacing: -0.01em;"
-        :class="isDark ? 'text-white' : 'text-grey-darken-2'"
+        class="text-h6 font-weight-black text-uppercase text-checkbox_field_label_checked"
       >
         Add New Reminder
       </h2>
@@ -31,31 +22,31 @@
       <section class="d-flex flex-column ga-6">
         <v-row>
           <v-col cols="12" md="6">
-            <SelectField label="Description" :options="[]" :theme="theme" />
+            <SelectField label="Description" :options="[]" />
           </v-col>
           <v-col cols="12" md="6">
-            <MultiSearchSelect :is-filter="false" label="Department" :theme="theme" />
+            <MultiSearchSelect :is-filter="false" label="Department" />
           </v-col>
           <v-col cols="12" md="6">
-            <MultiSearchSelect :is-filter="false" label="Created For" :theme="theme" />
+            <MultiSearchSelect :is-filter="false" label="Created For" />
           </v-col>
           <v-col cols="12" md="6">
-            <SelectField label="Priority" :options="[]" :theme="theme" />
+            <SelectField label="Priority" :options="[]" />
           </v-col>
           <v-col cols="12" md="6">
-            <SelectField label="Repetition" :options="[]" :theme="theme" />
+            <SelectField label="Repetition" :options="[]" />
           </v-col>
           <v-col cols="12" md="6">
-            <DateField label="Due Date" :theme="theme" />
+            <DateField label="Due Date" />
           </v-col>
           <v-col cols="12" md="6">
-            <DateField label="Days" :theme="theme" />
+            <DateField label="Days" />
           </v-col>
           <v-col cols="12" md="6">
-            <SelectField label="Time" :options="[]" :theme="theme" />
+            <SelectField label="Time" :options="[]" />
           </v-col>
           <v-col cols="12" md="6">
-            <DateField label="End Date" :theme="theme" />
+            <DateField label="End Date" />
           </v-col>
           <v-col cols="12">
             <textarea
@@ -72,15 +63,15 @@
           style="border-top: 1px solid #475569;"
         >
           <div class="w-100">
-            <MultiSearchSelect :is-filter="false" label="Custom Group" :theme="theme" />
+            <MultiSearchSelect :is-filter="false" label="Custom Group" />
           </div>
           <div class="w-100">
-            <InputField label="Group Name" type="text" :theme="theme" />
+            <InputField label="Group Name" type="text" />
           </div>
           <v-btn
             color="blue-darken-1"
             variant="elevated"
-            class="font-weight-black text-uppercase rounded-xl w-100"
+            class="font-weight-black text-uppercase rounded-xl py-5"
             style="letter-spacing: 0.1em; font-size: 0.75rem; border-radius: 16px; box-shadow: 0 4px 16px rgba(37,99,235,0.2); white-space: nowrap;"
           >
             Save as Custom Group
@@ -122,17 +113,16 @@
 
 <script setup>
 import { computed } from 'vue'
+import { useTheme } from 'vuetify'
 import { RotateCcw } from 'lucide-vue-next'
 import SelectField from './shared/SelectField.vue'
 import InputField from './shared/InputField.vue'
 import MultiSearchSelect from './shared/MultiSearchSelect.vue'
 import DateField from './shared/DateField.vue'
 
-const props = defineProps({
-  theme: { type: String, default: 'light' },
-})
+const theme = useTheme()
 
-const isDark = computed(() => props.theme === 'dark')
+const isDark = computed(() => theme.global.current.value.dark)
 </script>
 
 <style scoped>

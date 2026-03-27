@@ -10,7 +10,7 @@
       <select
         :value="modelValue ?? defaultValue"
         @change="handleChange"
-        class="select-field w-100 text-caption font-weight-bold bg-select_field_bg text-select_field_text"
+        class="select-field py-2 px-4 w-100 text-caption font-weight-bold bg-select_field_bg text-select_field_text"
       >
         <option
           v-for="opt in options"
@@ -82,23 +82,14 @@ const handleChange = (e) => {
 
 .select-field {
   -webkit-appearance: none;
-
   appearance: none;
-
   box-sizing: border-box;
-
-  padding: 10px 40px 10px 16px;
-
   border-radius: 12px;
-
   outline: none;
-
   cursor: pointer;
-
   transition:
     background-color 0.2s,
     border-color 0.2s;
-
   border: 1px solid rgb(var(--v-theme-select_field_border));
 }
 

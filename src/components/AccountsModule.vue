@@ -30,12 +30,9 @@
 
     <!-- Summary Grid -->
     <v-sheet
-      class="pa-8 d-flex flex-wrap justify-space-between align-start"
+      class="pa-8 d-flex flex-wrap justify-space-between align-start border bg-secondary_container_bg text-secondary_container_border"
       color="transparent"
-      style="border-radius: 30px !important;"
-      :style="theme === 'dark'
-        ? 'background: #0f172a !important; border: 1px solid rgba(255,255,255,0.10);'
-        : 'background: #f0f9ff !important; border: 1px solid rgba(37,99,235,0.4); box-shadow: 0 1px 4px rgba(0,0,0,0.06);'"
+      style="border-radius: 30px !important; border: 1px solid;"
     >
       <div
         v-for="stat in summaryStats"
@@ -43,12 +40,10 @@
         class="d-flex flex-column align-center ga-1"
       >
         <span
-          class="text-body-2"
-          :style="theme === 'dark' ? 'color: #7dd3fc;' : 'color: #2563eb;'"
+          class="text-body-2 text-select_field_label"
         >{{ stat.label }}</span>
         <span
-          class="text-body-1"
-          :style="theme === 'dark' ? 'color: white;' : 'color: #0f172a;'"
+          class="text-body-1 text-checkbox_field_label_checked"
         >{{ stat.value }}</span>
       </div>
     </v-sheet>
@@ -57,23 +52,25 @@
      <DynamicTable
         :data="data"
         title="Accounts"
-        :icon="ListFilterPlus"
+        :icon="CircleDollarSign"
         icon-bg="rgba(34,197,94,0.1)"
         icon-color="rgb(34,197,94)"
         :columns="columns"
         row-key="id"
         :expanded-fields="expandedDetails"
         show-dialog-button
-        dialog-button-label="Details"
+        dialog-button-label="Go to Account"
         @open-dialog="selectedItem = $event; dialogVisible = true"
+        @open-expandable-dialog="selectedItem = $event; dialogVisible = true"
+        show-expandable-dialog
+        expandableDialogBtn="View Check"
       />
     
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { FileDown, XCircle, ArrowUpRight, FileText } from 'lucide-vue-next';
+import { FileDown, XCircle, CircleDollarSign } from 'lucide-vue-next';
 import DynamicTable from './shared/DynamicTable.vue';
 
 defineProps({
@@ -83,8 +80,6 @@ defineProps({
     validator: (val) => ['dark', 'light'].includes(val),
   },
 });
-
-const expandedRow = ref(null);
 
 const summaryStats = [
   { label: 'Total Accounts',           value: '10' },

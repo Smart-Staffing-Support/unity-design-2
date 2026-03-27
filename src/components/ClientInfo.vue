@@ -1,17 +1,18 @@
 <template>
-  <div class="animate-fade">
+  <div class="animate-fade client-info" :class="`client-info--${theme}`">
     <div class="d-flex ga-6">
 
       <!-- LEFT: Collapsible Drawer -->
       <div
-        class="d-flex flex-shrink-0 position-relative overflow-hidden"
-        style="transition: width 0.3s ease, transform 0.3s ease; height: 100%;"
-        :style="isDrawerOpen ? 'width: 320px; transform: translateX(0);' : 'width: 32px; transform: translateX(0);'"
+        class="drawer-container d-flex flex-shrink-0 position-relative overflow-hidden"
+        :class="[
+          isDrawerOpen ? 'drawer-container--open' : 'drawer-container--closed',
+          `drawer-skin--${drawerSkin}`,
+        ]"
       >
         <!-- Toggle Handle -->
         <button
-          class="position-absolute d-flex align-center justify-center rounded-e-xl transition-colors"
-          style="top: 50%; transform: translateY(-50%); right: 0; z-index: 20; width: 32px; height: 48px; border: none; cursor: pointer; background: #2563eb; color: white;"
+          class="drawer-handle position-absolute d-flex align-center justify-center transition-colors"
           @click="isDrawerOpen = !isDrawerOpen"
         >
           <component :is="isDrawerOpen ? ChevronLeft : ChevronRight" :size="18" />
@@ -19,44 +20,27 @@
 
         <!-- Drawer Content -->
         <div
-          class="w-100 d-flex flex-column overflow-hidden"
-          style="border-radius: 35px;"
-          :style="theme === 'dark'
-            ? 'background: rgba(15,23,42,0.4); border: 1px solid rgba(255,255,255,0.05);'
-            : 'background: #e0f2fe; border: 1px solid #e2e8f0;'"
+          class="w-100 d-flex flex-column overflow-hidden drawer-content"
         >
           <!-- Drawer Header -->
           <div
-            class="pa-5 d-flex justify-space-between align-center"
-            style="background: rgba(59,130,246,0.05);"
-            :style="theme === 'dark' ? 'border-bottom: 1px solid rgba(255,255,255,0.05);' : 'border-bottom: 1px solid #e2e8f0;'"
+            class="pa-5 d-flex justify-space-between align-center drawer-header"
           >
-            <span
-              class="text-body-2 font-weight-black text-uppercase"
-              style="letter-spacing: 0.15em;"
-              :style="theme === 'dark' ? 'color: #7dd3fc;' : 'color: #2563eb;'"
-            >Search Results</span>
-            <v-chip color="blue" size="small" class="font-weight-black">24 Clients</v-chip>
+            <span class="drawer-header-title text-body-2 font-weight-black text-uppercase">
+              Search Results
+            </span>
+            <v-chip size="small" class="drawer-clients-chip font-weight-black">24 Clients</v-chip>
           </div>
 
           <!-- Drawer List -->
-          <div class="flex-grow-1 pa-4 d-flex flex-column ga-3" style="overflow-y: auto;">
+          <div class="flex-grow-1 pa-4 d-flex flex-column ga-2 drawer-list">
             <div
               v-for="i in 5"
               :key="i"
-              class="pa-4 rounded-xl cursor-pointer transition-all"
-              style="border: 1px solid transparent;"
-              :style="i === 1
-                ? 'border-color: #3b82f6; background: rgba(59,130,246,0.10);'
-                : theme === 'dark' ? '' : ''"
-              @mouseover="i !== 1 && ($event.currentTarget.style.background = 'rgba(255,255,255,0.05)')"
-              @mouseleave="i !== 1 && ($event.currentTarget.style.background = '')"
+              class="drawer-item px-4 py-1 rounded-xl cursor-pointer transition-all"
+              :class="{ 'drawer-item--selected': i === 1 }"
             >
-              <p
-                class="text-body-2"
-                style="letter-spacing: -0.2px;"
-                :style="theme === 'dark' ? 'color: white;' : 'color: #0f172a;'"
-              >Global Logistics Inc.</p>
+              <p class="drawer-item-title text-body-2">Global Logistics Inc.</p>
             </div>
           </div>
         </div>
@@ -199,10 +183,10 @@
           <v-sheet
             class="pa-6 rounded-xl mb-6"
             color="transparent"
-            style="border-width: 2px; border-style: solid; border-radius: 16px !important; transition: border-color 0.2s ease;"
+            style="border-width: 2px; border-style: solid; border-radius: 16px; transition: border-color 0.2s ease;"
             :style="theme === 'dark'
-              ? 'background: rgba(15,23,42,0.6) !important; border-color: rgba(255,255,255,0.05);'
-              : 'background: #f8fafc !important; border-color: #e2e8f0;'"
+              ? 'background: rgba(15,23,42,0.6); border-color: rgba(255,255,255,0.05);'
+              : 'background: #f8fafc; border-color: #e2e8f0;'"
           >
             <textarea
               v-model="newNote"
@@ -228,10 +212,10 @@
           <v-sheet
             class="pa-6 rounded-xl"
             color="transparent"
-            style="border-width: 2px; border-style: solid; border-radius: 16px !important; max-height: 256px; overflow-y: auto;"
+            style="border-width: 2px; border-style: solid; border-radius: 16px; max-height: 256px; overflow-y: auto;"
             :style="theme === 'dark'
-              ? 'background: rgba(15,23,42,0.4) !important; border-color: rgba(255,255,255,0.05);'
-              : 'background: #f8fafc !important; border-color: #e2e8f0;'"
+              ? 'background: rgba(15,23,42,0.4); border-color: rgba(255,255,255,0.05);'
+              : 'background: #f8fafc; border-color: #e2e8f0;'"
           >
             <div
               class="d-flex align-center ga-2 text-caption font-weight-black text-uppercase mb-4"
@@ -279,10 +263,10 @@
             <v-sheet
               class="pa-6 rounded-xl"
               color="transparent"
-              style="border-width: 2px; border-style: solid; border-radius: 16px !important;"
+              style="border-width: 2px; border-style: solid; border-radius: 16px;"
               :style="theme === 'dark'
-                ? 'background: rgba(15,23,42,0.6) !important; border-color: rgba(255,255,255,0.05);'
-                : 'background: #f8fafc !important; border-color: #e2e8f0;'"
+                ? 'background: rgba(15,23,42,0.6); border-color: rgba(255,255,255,0.05);'
+                : 'background: #f8fafc; border-color: #e2e8f0;'"
             >
               <h5
                 class="text-body-2 font-weight-black text-uppercase mb-6"
@@ -315,10 +299,10 @@
             >
               <!-- Permissions -->
               <v-expansion-panel
-                style="border-radius: 16px !important; border-width: 2px; border-style: solid; overflow: hidden;"
+                style="border-radius: 16px; border-width: 2px; border-style: solid; overflow: hidden;"
                 :style="theme === 'dark'
-                  ? 'background: rgba(15,23,42,0.6) !important; border-color: rgba(255,255,255,0.05);'
-                  : 'background: #f8fafc !important; border-color: #e2e8f0;'"
+                  ? 'background: rgba(15,23,42,0.6); border-color: rgba(255,255,255,0.05);'
+                  : 'background: #f8fafc; border-color: #e2e8f0;'"
               >
                 <v-expansion-panel-title>
                   <div class="d-flex align-center ga-3">
@@ -338,10 +322,10 @@
 
               <!-- Show Fields -->
               <v-expansion-panel
-                style="border-radius: 16px !important; border-width: 2px; border-style: solid; overflow: hidden;"
+                style="border-radius: 16px; border-width: 2px; border-style: solid; overflow: hidden;"
                 :style="theme === 'dark'
-                  ? 'background: rgba(15,23,42,0.6) !important; border-color: rgba(255,255,255,0.05);'
-                  : 'background: #f8fafc !important; border-color: #e2e8f0;'"
+                  ? 'background: rgba(15,23,42,0.6); border-color: rgba(255,255,255,0.05);'
+                  : 'background: #f8fafc; border-color: #e2e8f0;'"
               >
                 <v-expansion-panel-title>
                   <div class="d-flex align-center ga-3">
@@ -361,10 +345,10 @@
 
               <!-- Show Reports -->
               <v-expansion-panel
-                style="border-radius: 16px !important; border-width: 2px; border-style: solid; overflow: hidden;"
+                style="border-radius: 16px; border-width: 2px; border-style: solid; overflow: hidden;"
                 :style="theme === 'dark'
-                  ? 'background: rgba(15,23,42,0.6) !important; border-color: rgba(255,255,255,0.05);'
-                  : 'background: #f8fafc !important; border-color: #e2e8f0;'"
+                  ? 'background: rgba(15,23,42,0.6); border-color: rgba(255,255,255,0.05);'
+                  : 'background: #f8fafc; border-color: #e2e8f0;'"
               >
                 <v-expansion-panel-title>
                   <div class="d-flex align-center ga-3">
@@ -420,6 +404,7 @@ import InputField        from './shared/InputField.vue';
 import CheckboxField     from './shared/CheckboxField.vue';
 import DynamicContactList from './shared/DynamicContactList.vue';
 import MultiSearchSelect from './shared/MultiSearchSelect.vue';
+import { useTheme } from 'vuetify';
 
 const props = defineProps({
   theme: {
@@ -429,6 +414,10 @@ const props = defineProps({
   },
 });
 
+/** Drawer visuals follow the active Vuetify theme so light mode always matches the app toggle. */
+const vuetifyTheme = useTheme();
+const drawerSkin = computed(() => (vuetifyTheme.global.current.value.dark ? 'dark' : 'light'));
+
 const isDrawerOpen = ref(false);
 const newNote      = ref('');
 const portalEnabled = ref(false);
@@ -436,10 +425,10 @@ const portalEnabled = ref(false);
 // ── Shared section sheet props ────────────────────────────────────────────────
 const sectionProps = computed(() => ({
   color: 'transparent',
-  style: 'border-radius: 30px !important;',
+  style: 'border-radius: 30px;',
   style2: props.theme === 'dark'
-    ? 'background: rgba(15,23,42,0.4) !important; border: 1px solid rgba(255,255,255,0.05);'
-    : 'background: #f0f9ff !important; border: 1px solid rgba(37,99,235,0.4); box-shadow: 0 1px 4px rgba(0,0,0,0.06);',
+    ? 'background: rgba(15,23,42,0.4); border: 1px solid rgba(255,255,255,0.05);'
+    : 'background: #f0f9ff; border: 1px solid rgba(37,99,235,0.4); box-shadow: 0 1px 4px rgba(0,0,0,0.06);',
 }));
 
 const sectionTitleStyle = computed(() =>
@@ -493,4 +482,141 @@ const showReports = [
 .note-textarea--dark::placeholder  { color: #475569; }
 .note-textarea--light       { color: #1e293b; }
 .note-textarea--light::placeholder { color: #94a3b8; }
+
+/* Hide drawer scrollbar while keeping scroll behavior */
+.drawer-list {
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge Legacy */
+}
+.drawer-list::-webkit-scrollbar {
+  width: 0;
+}
+
+/* Drawer layout + theming (no inline styles in the template) */
+.drawer-container {
+  transition: width 0.3s ease, transform 0.3s ease;
+  height: min(460px, calc(100vh - 260px));
+  align-self: flex-start;
+  transform: translateX(0);
+}
+.drawer-container--open {
+  width: 360px;
+}
+.drawer-container--closed {
+  width: 32px;
+}
+
+.drawer-handle {
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  z-index: 20;
+  width: 32px;
+  height: 48px;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  border-radius: 12px 0 0 12px;
+}
+
+.drawer-content {
+  border-radius: 35px;
+}
+
+.drawer-header-title {
+  letter-spacing: 0.15em;
+}
+
+.drawer-clients-chip {
+  border-radius: 12px;
+  height: 34px;
+  padding: 0 16px;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+.drawer-item {
+  border: 0.8px solid transparent;
+  border-radius: 12px;
+}
+.drawer-item-title {
+  letter-spacing: -0.2px;
+  margin: 0;
+}
+
+/* Light: palette aligned to design ref (body #EAF6FF, header #DDF0FF, primary #3B82F6) */
+.drawer-skin--light .drawer-content {
+  background-color: #eaf6ff;
+  border: 1px solid rgba(59, 130, 246, 0.14);
+  border-radius: 32px;
+}
+.drawer-skin--light .drawer-header {
+  background-color: #ddf0ff;
+  border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+}
+.drawer-skin--light .drawer-header-title {
+  color: #2563eb;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+}
+.drawer-skin--light .drawer-handle {
+  background-color: #2563eb;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
+}
+.drawer-skin--light .drawer-handle:hover {
+  background-color: #2563eb;
+}
+.drawer-skin--light .drawer-clients-chip {
+  background-color: #2563eb;
+  color: #ffffff;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  font-size: 12px;
+  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.45);
+}
+.drawer-skin--light .drawer-item-title {
+  color: #1f2937;
+}
+.drawer-skin--light .drawer-item--selected {
+  border-color: #2563eb;
+  background-color: #ddf0ff;
+}
+.drawer-skin--light .drawer-item--selected:hover {
+  background-color: #ddf0ff;
+}
+
+/* Dark: explicit palette (follows Vuetify dark via drawer-skin--dark) */
+.drawer-skin--dark .drawer-content {
+  background-color: rgba(15, 23, 42, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.drawer-skin--dark .drawer-header {
+  background-color: rgba(59, 130, 246, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.drawer-skin--dark .drawer-header-title {
+  color: #7dd3fc;
+}
+.drawer-skin--dark .drawer-handle {
+  background-color: #2563eb;
+}
+.drawer-skin--dark .drawer-handle:hover {
+  background-color: #3b82f6;
+}
+.drawer-skin--dark .drawer-clients-chip {
+  background-color: #2563eb;
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.25);
+}
+.drawer-skin--dark .drawer-item-title {
+  color: #fff;
+}
+.drawer-skin--dark .drawer-item--selected {
+  border-color: #60a5fa;
+  background-color: rgba(59, 130, 246, 0.18);
+}
+.drawer-skin--dark .drawer-item--selected:hover {
+  background-color: rgba(59, 130, 246, 0.18);
+}
 </style>

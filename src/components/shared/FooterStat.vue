@@ -1,8 +1,13 @@
 <script setup>
+import { computed } from 'vue';
+import { useTheme } from 'vuetify';
+
+const theme = useTheme()
+const isDark = computed(() => theme.global.current.value.dark)
+
 const props = defineProps({
   label: { type: String, required: true },
   value: { type: String, required: true },
-  theme: { type: String, default: 'dark' },
   highlight: { type: Boolean, default: false },
 })
 </script>
@@ -14,7 +19,7 @@ const props = defineProps({
       class="text-body-2 font-weight-bold"
       :style="highlight
         ? 'color: #22c55e;'
-        : theme === 'dark' ? 'color: white;' : 'color: #1e293b;'"
+        : isDark  ? 'color: white;' : 'color: #1e293b;'"
     >{{ value }}</span>
   </div>
 </template>
