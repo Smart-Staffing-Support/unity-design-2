@@ -6,19 +6,15 @@
       <div class="d-flex align-center ga-4">
         <v-btn
           v-if="activeFolder"
-          :icon="true"
+          icon
           variant="text"
-          :color="isDark ? 'white' : 'grey-darken-1'"
-          class="rounded-circle"
+          class="rounded-circle text-fields_texts"
           @click="activeFolder = null"
         >
           <ChevronLeft :size="20" />
         </v-btn>
         <div>
-          <h2
-            class="text-h5 font-weight-regular"
-            :class="isDark ? 'text-white' : 'text-grey-darken-3'"
-          >
+          <h2 class="text-h5 font-weight-regular text-fields_texts">
             {{ activeFolder ? activeFolder.name : 'Documents' }}
           </h2>
           <p class="d-flex align-center ga-1 text-caption text-blue">
@@ -31,11 +27,8 @@
 
     <!-- Grid Container -->
     <div
-      class="pa-8"
-      style="border-radius: 35px; border: 1px solid; min-height: 400px; transition: all 0.2s;"
-      :style="isDark
-        ? 'background: rgba(15,23,42,0.6); border-color: rgba(255,255,255,0.1);'
-        : 'background: #f0f9ff; border-color: rgba(37,99,235,0.5); box-shadow: 0 1px 3px rgba(0,0,0,0.08);'"
+      class="pa-8 rounded-xl border-md bg-secondary_container_bg border-secondary_container_border"
+      style="min-height: 400px; transition: all 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.08);"
     >
       <v-row>
 
@@ -53,19 +46,12 @@
               @dblclick="activeFolder = folder"
             >
               <div
-                class="d-flex align-center justify-center rounded-xl folder-icon"
-                style="width: 80px; height: 80px; transition: background 0.2s;"
-                :style="isDark
-                  ? 'background: rgba(255,255,255,0.05);'
-                  : 'background: #ffffff; border: 2px solid rgba(37,99,235,0.5);'"
+                class="d-flex align-center justify-center rounded-xl folder-icon bg-container"
+                style="width: 80px; height: 80px; transition: background 0.2s; border: 2px solid rgba(37,99,235,0.5);"
               >
                 <Folder :size="40" class="text-blue" />
               </div>
-              <span
-                class="text-caption text-center folder-label"
-                style="transition: color 0.2s;"
-                :class="isDark ? 'text-grey-lighten-1' : 'text-grey-darken-1'"
-              >
+              <span class="text-caption text-center folder-label text-grey-darken-1">
                 {{ folder.name }}
               </span>
             </div>
@@ -85,20 +71,13 @@
               style="cursor: pointer; user-select: none;"
             >
               <div
-                class="d-flex align-center justify-center rounded-xl file-icon"
+                class="d-flex align-center justify-center rounded-xl file-icon border-sm border-container_border bg-container"
                 style="width: 80px; height: 80px; transition: background 0.2s;"
-                :style="isDark
-                  ? 'background: rgba(255,255,255,0.05);'
-                  : 'background: #f8fafc;'"
               >
-                <FileText :size="40" class="text-grey file-icon-svg" style="transition: color 0.2s;" />
+                <FileText :size="40" class="text-grey file-icon-svg " />
               </div>
               <div class="text-center">
-                <p
-                  class="text-caption"
-                  style="max-width: 96px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"
-                  :class="isDark ? 'text-grey-lighten-2' : 'text-grey-darken-2'"
-                >
+                <p class="text-caption text-grey-darken-2" style="max-width: 96px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                   {{ file.name }}
                 </p>
                 <p class="text-grey" style="font-size: 10px;">{{ file.size }}</p>
@@ -109,7 +88,7 @@
 
         <!-- Empty Folder -->
         <template v-else>
-          <v-col cols="12" class="d-flex flex-column align-center justify-center py-20" style="opacity: 0.3;">
+          <v-col cols="12" class="d-flex flex-column align-center justify-center py-20 " style="opacity: 0.6;">
             <Folder :size="48" class="mb-2" />
             <p class="text-body-2">This folder is empty</p>
           </v-col>
@@ -123,12 +102,6 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { Folder, FileText, ChevronLeft, HardDrive } from 'lucide-vue-next'
-
-const props = defineProps({
-  theme: { type: String, default: 'light' },
-})
-
-const isDark = computed(() => props.theme === 'dark')
 
 const directory = ref([
   {

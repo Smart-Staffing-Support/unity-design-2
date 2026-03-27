@@ -4,7 +4,7 @@
     :class="
       isTotal
         ? 'bg-summary_stat_total_bg summary-stat--total'
-        : 'bg-summary_stat_card_bg border-sm border-summary_stat_card_border border-opacity-100 summary-stat--card'
+        : 'bg-summary_stat_card_bg border border-summary_stat_card_border border-opacity-100 summary-stat--card'
     "
   >
     <span
@@ -28,7 +28,7 @@ defineProps({
   label: { type: String, required: true },
   value: { type: String, required: true },
   isTotal: { type: Boolean, default: false },
-  theme: { type: String, default: 'light' },
+  
 })
 </script>
 <style scoped>
