@@ -87,6 +87,7 @@
           :icon="Gavel"
           icon-bg="rgba(197, 34, 34,0.1)"
           icon-color="rgb(197, 34, 34)"
+          transactions-key="transactions"
           :columns="legalColumns"
           row-key="id"
           :expanded-fields="legalExpandedDetails"
@@ -379,20 +380,37 @@ const legalData = [
     balance: '$85.00',
     sol: '2-25-2023',
     clientSent: '$500.00',
-    agencySent: '$400.00',
+    agencySpent: '$400.00',
     pending: '$270.00',
     trust: '$370.00',
-    date: '02/18/26',
-    description: 'Payment',
-    checkNum: '#9902',
-    note: 'payment',
-    agent: 'John Doe',
-    amount: '$50.00',
-    agency: '$50.00',
-    client: '$450.00',
-    clientSent: '$350.00',
-    agencySpent: '$50.00',
-    convenienceFees: '$250.00'
+    transactions: [
+      {
+        date: '02/18/26',
+        description: 'Payment',
+        checkNum: '#9902',
+        note: 'payment',
+        agent: 'John Doe',
+        amount: '$50.00',
+        agency: '$50.00',
+        client: '$450.00',
+        clientSent: '$350.00',
+        agencySpent: '$50.00',
+        convenienceFees: '$250.00'
+      },
+      {
+        date: '03/01/26',
+        description: 'Fee',
+        checkNum: '#9903',
+        note: 'late fee',
+        agent: 'Jane Smith',
+        amount: '$25.00',
+        agency: '$10.00',
+        client: '$15.00',
+        clientSent: '$15.00',
+        agencySpent: '$10.00',
+        convenienceFees: '$5.00'
+      }
+    ]
   },
   {
     id: 2,
@@ -402,20 +420,24 @@ const legalData = [
     balance: '$85.00',
     sol: '2-25-2023',
     clientSent: '$500.00',
-    agencySent: '$400.00',
+    agencySpent: '$400.00',
     pending: '$270.00',
     trust: '$370.00',
-    date: '02/18/26',
-    description: 'Payment',
-    checkNum: '#9902',
-    note: 'payment',
-    agent: 'John Doe',
-    amount: '$50.00',
-    agency: '$50.00',
-    client: '$450.00',
-    clientSent: '$350.00',
-    agencySpent: '$50.00',
-    convenienceFees: '$250.00'
+    transactions: [
+      {
+        date: '02/18/26',
+        description: 'Payment',
+        checkNum: '#9902',
+        note: 'payment',
+        agent: 'John Doe',
+        amount: '$50.00',
+        agency: '$50.00',
+        client: '$450.00',
+        clientSent: '$350.00',
+        agencySpent: '$50.00',
+        convenienceFees: '$250.00'
+      },
+    ]
   }
 ]
 
