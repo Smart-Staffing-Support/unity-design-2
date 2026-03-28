@@ -10,6 +10,7 @@ import ActionPanel from '../components/shared/ActionPanel.vue';
 import GlobalNotes from '../components/GlobalNotes.vue';
 
 const activeTab = ref('home');
+const activeCreditor = ref('creditor 1');
 
 </script>
 
@@ -50,7 +51,7 @@ const activeTab = ref('home');
       <PrimaryActionCodes className="mt-4" />
       <div class="flex-1 overflow-y-auto pa-8 pt-4 custom-scrollbar">
         <div class="mx-auto pb-12 d-flex flex-column ga-8" style="max-width: 1800px;">
-          <DashboardHeader :activeTab="activeTab" />
+          <DashboardHeader v-model:activeCreditor="activeCreditor" />
 
           <div class="d-flex flex-column flex-lg-row ga-8 align-start">
             <!-- Central Detailed View -->
