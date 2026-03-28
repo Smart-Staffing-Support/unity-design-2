@@ -1,37 +1,64 @@
-<template>
+  <template>
   <!-- Payment Modal -->
-  <v-dialog v-model="isPaymentModalOpen" max-width="672">
-    <v-card :class="['pa-0 overflow-hidden', isDark ? 'bg-grey-darken-4' : 'bg-white']" style="border-radius: 30px; border: 1px solid; " :style="isDark ? 'border-color: rgba(255,255,255,0.1)' : 'border-color: #e2e8f0'">
-      <v-card-title :class="['d-flex justify-space-between align-center pa-6', isDark ? 'border-b-thin border-white' : 'border-b-thin border-grey-lighten-3']" style="border-bottom: 1px solid;">
+  <v-dialog v-model="isPaymentModalOpen" max-width="672" :scrim-opacity="0.6" style="backdrop-filter: blur(8px);" scrollable>
+    <v-card
+      class="pa-0 overflow-hidden"
+      style="border-radius: 30px;"
+      :style="isDark ? 'background:#0f172a; border: 1px solid rgba(255,255,255,0.1)' : 'background:#fff; border: 1px solid #e2e8f0'"
+    >
+      <v-card-title
+        class="d-flex justify-space-between align-center pa-6"
+        style="border-bottom: 1px solid;"
+        :style="isDark ? 'border-color: rgba(255,255,255,0.05)' : 'border-color: #f1f5f9'"
+      >
         <div class="d-flex align-center ga-3">
-          <div class="pa-2 rounded-lg" style="background: rgba(59,130,246,0.1)">
-            <History class="text-blue" :size="24" />
+          <div class="pa-2 rounded-lg" style="background: rgba(239,68,68,0.1)">
+            <History :size="24" class="text-red" />
           </div>
           <div>
-            <p :class="['text-h6 font-weight-black text-uppercase', isDark ? 'text-white' : 'text-grey-darken-4']">Payment History</p>
-            <p :class="['text-caption font-weight-bold text-uppercase ls-widest', isDark ? 'text-white' : 'text-grey']" style="opacity: 0.4; font-size: 10px;">
+            <p
+              :class="['text-h6 font-weight-black text-uppercase payment-history-title', isDark ? 'text-white' : 'text-grey-darken-4']"
+            >Payment History</p>
+            <p
+              class="text-caption font-weight-bold text-uppercase text-grey payment-history-subtitle"
+            >
               Account: {{ topHeader.accountNumber }}
             </p>
           </div>
         </div>
-        <v-btn :icon="true" variant="text" :class="isDark ? 'text-white' : 'text-grey'" @click="isPaymentModalOpen = false" style="opacity: 0.4">
+        <v-btn
+          :icon="true"
+          variant="text"
+          :class="[isDark ? 'text-white' : 'text-grey', 'payment-history-close']"
+          @click="isPaymentModalOpen = false"
+        >
           <X :size="20" />
         </v-btn>
       </v-card-title>
 
       <v-card-text class="pa-6">
-        <div :class="['rounded-xl overflow-hidden', isDark ? '' : '']" :style="isDark ? 'border: 1px solid rgba(255,255,255,0.05)' : 'border: 1px solid #f1f5f9'">
-          <v-table :theme="theme" density="comfortable">
+        <div
+          class="rounded-xl overflow-hidden"
+          :style="isDark ? 'border: 1px solid rgba(255,255,255,0.05)' : 'border: 1px solid #f1f5f9'"
+        >
+          <v-table :theme="theme" density="comfortable" class="payment-history-table">
             <thead>
               <tr :class="isDark ? 'bg-grey-darken-3' : 'bg-grey-lighten-4'">
-                <th class="text-blue font-weight-black text-uppercase ls-widest" style="font-size:10px;">Post Date</th>
-                <th class="text-blue font-weight-black text-uppercase ls-widest" style="font-size:10px;">Method</th>
-                <th class="text-blue font-weight-black text-uppercase ls-widest text-right" style="font-size:10px;">Amount</th>
-                <th class="text-blue font-weight-black text-uppercase ls-widest text-center" style="font-size:10px;">Status</th>
+                <th class="text-blue font-weight-black text-uppercase ls-widest payment-history-header-cell">Post Date</th>
+                <th class="text-blue font-weight-black text-uppercase ls-widest payment-history-header-cell">Method</th>
+                <th class="text-blue font-weight-black text-uppercase ls-widest text-right payment-history-header-cell">Amount</th>
+                <th class="text-blue font-weight-black text-uppercase ls-widest text-center payment-history-header-cell">Status</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(item, index) in paymentHistory" :key="index" class="payment-row">
+              <tr
+                v-for="(item, index) in paymentHistory"
+                :key="index"
+                :class="[
+                  'payment-row hover:bg-fields_hover_bg',
+                  index !== paymentHistory.length - 1 ? 'border-b border-table_header_border' : '',
+                ]"
+              >
                 <td :class="['text-sm font-weight-bold', isDark ? 'text-white' : 'text-grey-darken-2']">{{ item.date }}</td>
                 <td>
                   <div class="d-flex align-center ga-2">
@@ -41,7 +68,10 @@
                 </td>
                 <td class="text-right text-sm font-weight-black text-green">{{ item.amount }}</td>
                 <td class="text-center">
-                  <span :class="['px-2 py-1 rounded font-weight-black text-uppercase', item.status === 'Cleared' ? 'text-green' : 'text-red']" style="font-size:10px;" :style="item.status === 'Cleared' ? 'background: rgba(72,199,142,0.1)' : 'background: rgba(255,82,82,0.1)'">
+                  <span
+                    :class="['px-2 py-1 rounded font-weight-black text-uppercase payment-history-status', item.status === 'Cleared' ? 'text-green' : 'text-red']"
+                    :style="item.status === 'Cleared' ? 'background: rgba(72,199,142,0.1)' : 'background: rgba(255,82,82,0.1)'"
+                  >
                     {{ item.status }}
                   </span>
                 </td>
@@ -50,12 +80,182 @@
           </v-table>
         </div>
 
-        <v-btn block color="blue-darken-1" class="mt-6 font-weight-black text-uppercase ls-widest rounded-xl" size="large" style="letter-spacing: 0.15em; border-radius: 16px;">
+        <v-btn
+          block
+          class="mt-6 font-weight-black text-uppercase ls-widest rounded-xl bg-rf_accent hover:bg-billing_button_hover text-summary_stat_total_value"
+          size="large"
+          style="letter-spacing: 0.15em; border-radius: 16px;"
+          @click="openPaymentTransactionModal"
+        >
           <Plus :size="18" class="mr-2" />
           New Payment Transaction
         </v-btn>
       </v-card-text>
     </v-card>
+  </v-dialog>
+
+  <!-- New Payment Transaction Modal -->
+  <v-dialog
+    v-model="isPaymentTransactionModalOpen"
+    max-width="680"
+    :scrim-opacity="0.6"
+    style="backdrop-filter: blur(8px);"
+    scrollable
+  >
+    <v-sheet
+      class="overflow-hidden"
+      style="border-radius: 30px; overflow: hidden;"
+      :style="isDark ? 'background:#0f172a; border: 1px solid rgba(255,255,255,0.1)' : 'background:#fff; border: 1px solid #e2e8f0'"
+    >
+      <div
+        class="pa-6 d-flex justify-space-between align-center"
+        style="position: sticky; top: 0; z-index: 10; border-bottom: 1px solid;"
+        :style="isDark ? 'background:#0f172a; border-color: rgba(255,255,255,0.05)' : 'background:#fff; border-color: #f1f5f9'"
+      >
+        <div class="d-flex align-center ga-3">
+          <div class="pa-2 rounded-lg" style="background: rgba(239,68,68,0.1)">
+            <CircleDollarSign :size="24" class="text-red" />
+          </div>
+          <div>
+            <div
+              :class="['text-h6 font-weight-black text-uppercase payment-transaction-title', isDark ? 'text-white' : 'text-grey-darken-4']"
+            >New Transaction</div>
+            <div
+              class="text-caption font-weight-bold text-uppercase text-grey payment-transaction-subtitle"
+            >Account: {{ topHeader.accountNumber }} - {{ topHeader.debtor }}</div>
+          </div>
+        </div>
+        <button
+          :class="['d-flex align-center justify-center rounded-circle payment-transaction-close', isDark ? 'text-white' : 'text-grey']"
+          @click="isPaymentTransactionModalOpen = false"
+        >
+          <X :size="20" />
+        </button>
+      </div>
+
+      <div class="pa-6" style="max-height: 70vh; overflow-y: auto;">
+        <v-row>
+          <v-col cols="12" sm="6"><DateField label="Date" :theme="theme" /></v-col>
+          <v-col cols="12" sm="6">
+            <SelectField
+              label="Payment Type"
+              :options="[
+                { value: 'credit_card', label: 'Credit Card' },
+                { value: 'ach', label: 'ACH' },
+                { value: 'check', label: 'Check' },
+              ]"
+              className="payment-modal-select"
+              :theme="theme"
+              @update:modelValue="paymentType = $event"
+            />
+          </v-col>
+          <v-col cols="12" sm="6"><InputField label="ID/Check Number" :theme="theme" /></v-col>
+          <v-col cols="12" sm="6"><InputField label="Description" :theme="theme" /></v-col>
+          <v-col cols="12" sm="6"><InputField label="Amount" :theme="theme" /></v-col>
+          <v-col cols="12" sm="6"><SelectField label="From" :options="[]" className="payment-modal-select" :theme="theme" /></v-col>
+          <v-col cols="12" sm="6"><SelectField label="To" :options="[]" className="payment-modal-select" :theme="theme" /></v-col>
+          <v-col cols="12" sm="6"><CheckboxField label="Add Conv. Fee" :checked="addConvenienceFee" @update:checked="addConvenienceFee = $event" /></v-col>
+        </v-row>
+
+        <v-sheet
+          v-if="paymentType === 'credit_card'"
+          class="pa-4 rounded-xl mt-6"
+          style="border-radius: 16px !important;"
+          :style="isDark ? 'background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.05)' : 'background: #f8fafc; border: 1px solid #e2e8f0'"
+        >
+          <div
+            class="text-caption font-weight-black text-uppercase mb-4 text-table_cols_title"
+            style="letter-spacing: 0.15em;"
+          >Credit Card Information</div>
+          <v-row>
+            <v-col cols="12" sm="6"><InputField label="First Name" :theme="theme" /></v-col>
+            <v-col cols="12" sm="6"><InputField label="Last Name" :theme="theme" /></v-col>
+            <v-col cols="12" sm="6"><InputField label="Email" :theme="theme" /></v-col>
+            <v-col cols="12" sm="6"><InputField label="Phone Number" :theme="theme" /></v-col>
+            <v-col cols="12"><InputField label="Address" :theme="theme" /></v-col>
+            <v-col cols="12" sm="6"><InputField label="City" :theme="theme" /></v-col>
+            <v-col cols="12" sm="6"><InputField label="State" :theme="theme" /></v-col>
+            <v-col cols="12" sm="6"><InputField label="Zip Code" :theme="theme" /></v-col>
+            <v-col cols="12" sm="6"><InputField label="Credit Card Number" placeholder="1234 5678 9012 3456" :theme="theme" /></v-col>
+            <v-col cols="12" sm="6"><InputField label="Expiration Date" placeholder="MM/YY" :theme="theme" /></v-col>
+            <v-col cols="12" sm="6"><InputField label="CVV" placeholder="123" :theme="theme" /></v-col>
+          </v-row>
+        </v-sheet>
+
+        <v-sheet
+          v-if="paymentType === 'ach'"
+          class="pa-4 rounded-xl mt-6"
+          style="border-radius: 16px !important;"
+          :style="isDark ? 'background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.05)' : 'background: #f8fafc; border: 1px solid #e2e8f0'"
+        >
+          <div
+            class="text-caption font-weight-black text-uppercase mb-4 text-table_cols_title"
+            style="letter-spacing: 0.15em;"
+          >ACH Information</div>
+          <v-row>
+            <v-col cols="12" sm="6">
+              <SelectField
+                label="Account Type"
+                :options="[{ value: 'checking', label: 'Checking' }, { value: 'savings', label: 'Savings' }]"
+                className="payment-modal-select"
+                :theme="theme"
+              />
+            </v-col>
+            <v-col cols="12" sm="6"><InputField label="Account Name" :theme="theme" /></v-col>
+            <v-col cols="12" sm="6"><InputField label="Account Number" :theme="theme" /></v-col>
+            <v-col cols="12" sm="6"><InputField label="Routing Number" :theme="theme" /></v-col>
+          </v-row>
+        </v-sheet>
+
+        <v-sheet
+          v-if="paymentType === 'check'"
+          class="pa-4 rounded-xl mt-6"
+          style="border-radius: 16px !important;"
+          :style="isDark ? 'background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.05)' : 'background: #f8fafc; border: 1px solid #e2e8f0'"
+        >
+          <div
+            class="text-caption font-weight-black text-uppercase mb-4 text-table_cols_title"
+            style="letter-spacing: 0.15em;"
+          >Check Upload</div>
+          <label
+            class="text-caption font-weight-bold text-uppercase text-table_cols_title"
+          >Upload Check Image</label>
+          <div
+            class="mt-2 pa-6 rounded-xl text-center cursor-pointer border-2 border-dashed payment-transaction-upload"
+            :style="isDark ? 'background: rgba(255,255,255,0.02); border-color: rgba(255,255,255,0.1)' : 'background: #f8fafc; border-color: #cbd5e1'"
+          >
+            <input type="file" accept="image/*,.pdf" style="display: none;" id="dashboard-check-upload" />
+            <label for="dashboard-check-upload" class="cursor-pointer d-block">
+              <p class="text-body-2 font-weight-bold text-fields_text">
+                Click to upload or drag and drop
+              </p>
+              <p class="text-caption mt-1 text-billing_upload_hint">
+                PNG, JPG, PDF up to 10MB
+              </p>
+            </label>
+          </div>
+        </v-sheet>
+
+        <div class="d-flex ga-4 mt-6">
+          <button
+            class="flex-grow-1 d-flex align-center justify-center ga-2 py-3 rounded-xl text-caption font-weight-black text-uppercase text-summary_stat_total_value bg-rf_accent hover:bg-billing_button_hover payment-transaction-action"
+            style="border-radius:16px;"
+            @mousedown="$event.currentTarget.style.transform = 'scale(0.97)'"
+            @mouseup="$event.currentTarget.style.transform = 'scale(1)'"
+          >
+            <Plus :size="18" class="mr-2" /> Process Payment
+          </button>
+          <button
+            class="flex-grow-1 d-flex align-center justify-center ga-2 py-3 rounded-xl text-caption font-weight-black text-uppercase text-summary_stat_total_value bg-accounts_export_bg hover:bg-billing_skip_hover payment-transaction-action"
+            style="border-radius:16px;"
+            @mousedown="$event.currentTarget.style.transform = 'scale(0.97)'"
+            @mouseup="$event.currentTarget.style.transform = 'scale(1)'"
+          >
+            <Minus :size="18" class="mr-2" /> Skip Payment Processing
+          </button>
+        </div>
+      </div>
+    </v-sheet>
   </v-dialog>
 
   <!-- Hexagon / Account Status Modal -->
@@ -100,41 +300,37 @@
 
   <!-- Main Card -->
   <v-card
-    class='w-100 pa-4 mb-8 overflow-hidden position-relative border-thin bg-container border-container_border'
-    style="border-radius: 25px; transition: all 0.5s;"
-    :style="isDark ? 'border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(40px);' : 'border: 1px solid #cbd5e1; box-shadow: 0 4px 24px rgba(15,23,42,0.15); backdrop-filter: blur(40px);'"
+    class='w-100 pa-4 mb-8 overflow-hidden position-relative bg-container dashboard-header-shell'
+    style="border-radius: 25px;"
     elevation="0"
   >
-    <div class="position-absolute" style="top:-96px; right:-96px; width:256px; height:256px; background:rgba(37,99,235,0.1); filter:blur(100px); border-radius:50%; pointer-events:none;" />
+    <div class="position-absolute bg-billing_modal_icon_bg" style="top:-96px; right:-96px; width:256px; height:256px; filter:blur(100px); border-radius:50%; pointer-events:none;" />
 
     <!-- Row 1: Identity & Tabs -->
     <div
       class="d-flex flex-column flex-lg-row justify-space-between align-start align-lg-center ga-6 mb-6 pb-6"
-      style="border-bottom: 1px solid;"
-      :style="isDark ? 'border-color: rgba(255,255,255,0.05)' : 'border-color: #f1f5f9'"
     >
       <div class="d-flex align-center ga-4">
         <div>
-          <h2 :class="['text-h4 font-weight-black my-4', isDark ? 'text-white' : 'text-grey-darken-4']" style="letter-spacing:-0.02em; line-height:1;">
+          <h2 class="text-h4 font-weight-black my-4 text-table_title" style="letter-spacing:-0.02em; line-height:1;">
             {{ topHeader.debtor }}
           </h2>
-          <span :class="['text-h6 font-weight-bold', isDark ? 'text-white' : 'text-grey']">{{ topHeader.accountNumber }}</span>
+          <span class="text-h6 font-weight-bold text-billing_modal_subtitle">{{ topHeader.accountNumber }}</span>
         </div>
 
         <!-- Tabs -->
         <div
-          class="d-flex ga-1 pa-2 rounded-xl"
-          :style="isDark ? 'background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(12px);' : 'background: rgba(241,245,249,0.8); border: 1px solid #cbd5e1; box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);'"
+          class="d-flex ga-1 pa-2 rounded-xl bg-dh_tabs_bg dashboard-header-tabs"
         >
           <v-btn
             v-for="tab in tabs"
             :key="tab.id"
             @click="localActiveCreditor = tab.id"
-            :color="localActiveCreditor === tab.id ? 'blue-darken-1' : 'transparent'"
-            :variant="localActiveCreditor === tab.id ? 'elevated' : 'text'"
-            class="font-weight-black text-capitalize rounded-lg"
+            :color="localActiveCreditor === tab.id ? 'rf_accent' : 'billing_modal_subtitle'"
+            :variant="localActiveCreditor === tab.id ? 'flat' : 'text'"
+            class="font-weight-black text-capitalize rounded-lg dashboard-header-tab"
             style="letter-spacing: 0.05em; font-size: 1rem;"
-            :class="localActiveCreditor !== tab.id ? (isDark ? 'text-white' : 'text-grey-darken-1') : 'text-white'"
+            :class="localActiveCreditor === tab.id ? 'text-summary_stat_total_value' : 'hover:bg-fields_hover_bg'"
           >
             {{ tab.label }}
           </v-btn>
@@ -143,23 +339,22 @@
 
       <!-- Hexagon trigger -->
       <div class="position-relative hexagon-trigger" @click="isHexagonDialogOpen = true" style="cursor:pointer;">
-        <Hexagon :size="110" class="text-red hexagon-icon" />
-        <span class="position-absolute text-red font-weight-bold text-uppercase" style="font-size:10px; top:50%; left:50%; transform:translate(-50%,-50%);">reported</span>
+        <Hexagon :size="110" class="text-ac_red_text hexagon-icon" />
+        <span class="position-absolute text-ac_red_text font-weight-bold text-uppercase" style="font-size:10px; top:50%; left:50%; transform:translate(-50%,-50%);">reported</span>
       </div>
 
       <div class="d-flex flex-column align-end ga-2">
         <v-chip
-          :color="isDark ? 'amber-darken-1' : 'amber'"
-          class="font-weight-black text-uppercase px-4"
+          class="font-weight-black text-uppercase px-4 bg-dh_status_bg text-dh_status_text"
           style="letter-spacing: 0.15em; font-size: 1rem; height: 36px; border-radius: 999px;"
-          :text-color="isDark ? 'black' : 'grey-darken-4'"
+          variant="flat"
         >
           {{ topHeader.status }}
         </v-chip>
         <div class="d-flex align-center ga-2">
-          <span :class="['text-subtitle-1 font-weight-black', isDark ? 'text-blue-lighten-1' : 'text-blue-darken-1']" style="letter-spacing:0.1em;">Account Age</span>
-          <Clock :size="20" :class="isDark ? 'text-blue-lighten-1' : 'text-blue-darken-1'" />
-          <span :class="['text-subtitle-1 font-weight-bold', isDark ? 'text-white' : 'text-grey-darken-3']">{{ accountStats[7].value }}</span>
+          <span class="text-subtitle-1 font-weight-black text-dh_age_text" style="letter-spacing:0.1em;">Account Age</span>
+          <Clock :size="20" class="text-dh_age_text" />
+          <span class="text-subtitle-1 font-weight-bold text-table_title">{{ accountStats[7].value }}</span>
         </div>
       </div>
     </div>
@@ -210,57 +405,57 @@
       <!-- Col 5: Balance Cards -->
       <v-col class="d-flex flex-column ga-3">
 
-        <div class="py-2 px-4 rounded-xl d-flex flex-column ga-1 balance-card" :style="isDark ? 'background: rgba(37,99,235,0.4); border: 1px solid rgba(59,130,246,0.2)' : 'background: rgba(239,246,255,0.5); border: 1px solid #dbeafe; box-shadow: 0 1px 2px rgba(0,0,0,0.05)'">
-          <span :class="['font-weight-black text-uppercase', isDark ? 'text-blue-lighten-2' : 'text-blue-darken-2']" style="font-size:10px; letter-spacing:0.1em;">Total Balance</span>
-          <span :class="['text-h6 font-weight-black', isDark ? 'text-white' : 'text-blue-darken-4']">{{ currentCreditor.balance }}</span>
+        <div class="py-2 px-4 rounded-lg dashboard-header-balance-radius d-flex flex-column ga-1 balance-card dashboard-header-balance-card bg-table_header_bg">
+          <span class="font-weight-black text-uppercase text-dh_bal_total_label" style="font-size:10px; letter-spacing:0.1em;">Total Balance</span>
+          <span class="text-h6 font-weight-black text-dh_bal_total_value">{{ currentCreditor.balance }}</span>
         </div>
 
-        <div class="py-2 px-4 rounded-xl d-flex flex-column ga-1 balance-card" :style="isDark ? 'background: rgba(71,85,105,0.6); border: 1px solid rgba(59,130,246,0.2)' : 'background: rgba(239,246,255,0.5); border: 1px solid #dbeafe; box-shadow: 0 1px 2px rgba(0,0,0,0.05)'">
-          <span :class="['font-weight-black text-uppercase', isDark ? 'text-blue-lighten-2' : 'text-blue-darken-2']" style="font-size:10px; letter-spacing:0.1em;">Principal</span>
-          <span :class="['text-subtitle-1 font-weight-black', isDark ? 'text-white' : 'text-blue-darken-4']">{{ principalAmount }}</span>
+        <div class="py-2 px-4 rounded-lg dashboard-header-balance-radius d-flex flex-column ga-1 balance-card dashboard-header-balance-card bg-table_header_bg">
+          <span class="font-weight-black text-uppercase text-dh_bal_total_label" style="font-size:10px; letter-spacing:0.1em;">Principal</span>
+          <span class="text-subtitle-1 font-weight-black text-dh_bal_total_value">{{ principalAmount }}</span>
         </div>
 
-        <div class="py-2 px-4 rounded-xl d-flex flex-column ga-1 balance-card" :style="isDark ? 'background: rgba(71,85,105,0.6); border: 1px solid rgba(59,130,246,0.2)' : 'background: rgba(255,241,242,0.5); border: 1px solid #fee2e2; box-shadow: 0 1px 2px rgba(0,0,0,0.05)'">
-          <span :class="['font-weight-black text-uppercase', isDark ? 'text-blue-lighten-2' : 'text-red-darken-2']" style="font-size:10px; letter-spacing:0.1em;">Interest</span>
-          <span :class="['text-subtitle-1 font-weight-black', isDark ? 'text-white' : 'text-red-darken-4']">{{ interestAmount }}</span>
+        <div class="py-2 px-4 rounded-lg dashboard-header-balance-radius d-flex flex-column ga-1 balance-card dashboard-header-balance-card bg-table_header_bg">
+          <span class="font-weight-black text-uppercase text-dh_bal_interest_label" style="font-size:10px; letter-spacing:0.1em;">Interest</span>
+          <span class="text-subtitle-1 font-weight-black text-dh_bal_interest_value">{{ interestAmount }}</span>
         </div>
 
-        <div class="py-2 px-4 rounded-xl d-flex flex-column ga-1 balance-card" :style="isDark ? 'background: rgba(71,85,105,0.6); border: 1px solid rgba(59,130,246,0.2)' : 'background: rgba(240,253,250,0.5); border: 1px solid #ccfbf1; box-shadow: 0 1px 2px rgba(0,0,0,0.05)'">
-          <span :class="['font-weight-black text-uppercase', isDark ? 'text-blue-lighten-2' : 'text-teal-darken-2']" style="font-size:10px; letter-spacing:0.1em;">Costs/Fees</span>
-          <span :class="['text-subtitle-1 font-weight-black', isDark ? 'text-white' : 'text-teal-darken-4']">{{ feesAmount }}</span>
+        <div class="py-2 px-4 rounded-lg dashboard-header-balance-radius d-flex flex-column ga-1 balance-card dashboard-header-balance-card bg-dh_bal_total_bg">
+          <span class="font-weight-black text-uppercase text-dh_bal_costs_label" style="font-size:10px; letter-spacing:0.1em;">Costs/Fees</span>
+          <span class="text-subtitle-1 font-weight-black text-dh_bal_costs_value">{{ feesAmount }}</span>
         </div>
 
         <!-- Payments -->
-        <div @click="isPaymentModalOpen = true" class="py-2 px-4 rounded-xl d-flex flex-column ga-1 balance-card" style="cursor:pointer;" :style="isDark ? 'background: rgba(71,85,105,0.6); border: 1px solid rgba(59,130,246,0.2)' : 'background: rgba(255,247,237,0.5); border: 1px solid #fed7aa; box-shadow: 0 1px 2px rgba(0,0,0,0.05)'">
+        <div @click="isPaymentModalOpen = true" class="py-2 px-4 rounded-lg dashboard-header-balance-radius d-flex flex-column ga-1 balance-card dashboard-header-balance-card bg-table_header_bg cursor-pointer">
           <div class="d-flex justify-space-between align-center">
-            <span :class="['font-weight-black text-uppercase', isDark ? 'text-blue-lighten-2' : 'text-orange-darken-2']" style="font-size:10px; letter-spacing:0.1em;">Payments</span>
-            <ExternalLink :size="18" class="text-grey-lighten-1" />
+            <span class="font-weight-black text-uppercase text-dh_bal_payments_label" style="font-size:10px; letter-spacing:0.1em;">Payments</span>
+            <ExternalLink :size="18" class="text-dh_ext_icon" />
           </div>
-          <span :class="['text-subtitle-1 font-weight-black', isDark ? 'text-white' : 'text-orange-darken-4']">$1,200.00</span>
+          <span class="text-subtitle-1 font-weight-black text-dh_bal_payments_value">$1,200.00</span>
         </div>
 
         <!-- Make Payments -->
-        <div @click="isPaymentModalOpen = true" class="py-4 px-4 rounded-xl d-flex align-center justify-center balance-card" style="cursor:pointer; background: #eab308; border: 1px solid #dbeafe;">
-          <span class="text-h6 font-weight-black" style="color: #092B9C; letter-spacing: 0.05em;">Make Payments</span>
-        </div>
-
-        <div class="mt-2 pa-3 rounded-xl d-flex justify-space-between align-center" style="border-top: 1px solid;" :style="isDark ? 'border-color: rgba(255,255,255,0.05)' : 'border-color: #f1f5f9'">
-          <span :class="['text-body-2 font-weight-black', isDark ? 'text-white' : 'text-grey-darken-1']" style="opacity:0.3; letter-spacing:0.1em;">Can Settle</span>
-          <span :class="['text-body-2 font-weight-black', isDark ? 'text-green-lighten-1' : 'text-green-darken-1']">$7,445.67</span>
+        <div @click="openPaymentTransactionModal" class="py-4 px-4 rounded-lg dashboard-header-balance-radius d-flex align-center justify-center balance-card bg-dh_status_bg border border-dh_bal_total_border cursor-pointer">
+          <span class="text-h6 font-weight-black text-dh_make_payments_text" style="letter-spacing: 0.05em;">Make Payments</span>
         </div>
 
         <div class="mt-2 pa-3 rounded-xl d-flex justify-space-between align-center">
-          <span :class="['text-body-2 font-weight-black', isDark ? 'text-white' : 'text-grey-darken-1']" style="opacity:0.3; letter-spacing:0.1em;">Linked Balance</span>
-          <span :class="['text-body-2 font-weight-black', isDark ? 'text-red-lighten-1' : 'text-red-darken-1']">$10,000.00</span>
+          <span class="text-body-2 font-weight-black text-billing_modal_subtitle dashboard-header-muted-label">Can Settle</span>
+          <span class="text-body-2 font-weight-black text-ac_green_text">$7,445.67</span>
         </div>
 
-        <div class="px-4 py-2 rounded-xl d-flex justify-space-between align-center linked-row" :style="isDark ? 'border: 1px solid rgba(239,68,68,0.6)' : 'border: 1px solid rgba(239,68,68,0.7)'">
-          <span :class="['text-body-2', isDark ? 'text-white' : 'text-grey-darken-1']" style="letter-spacing:0.05em;">John Doe</span>
-          <span :class="['text-body-2 font-weight-black', isDark ? 'text-red-lighten-1' : 'text-red-darken-1']">#125438-0000</span>
+        <div class="mt-2 pa-3 rounded-xl d-flex justify-space-between align-center">
+          <span class="text-body-2 font-weight-black text-billing_modal_subtitle dashboard-header-muted-label">Linked Balance</span>
+          <span class="text-body-2 font-weight-black text-ac_red_text">$10,000.00</span>
         </div>
-        <div class="px-4 py-2 rounded-xl d-flex justify-space-between align-center linked-row" :style="isDark ? 'border: 1px solid rgba(239,68,68,0.6)' : 'border: 1px solid rgba(239,68,68,0.7)'">
-          <span :class="['text-body-2', isDark ? 'text-white' : 'text-grey-darken-1']" style="letter-spacing:0.05em;">Jane Smith</span>
-          <span :class="['text-body-2 font-weight-black', isDark ? 'text-red-lighten-1' : 'text-red-darken-1']">#125438-0000</span>
+
+        <div class="px-4 py-2 rounded-xl dashboard-header-balance-radius d-flex justify-space-between align-center linked-row border border-dh_linked_border">
+          <span class="text-body-2 text-table_title" style="letter-spacing:0.05em;">John Doe</span>
+          <span class="text-body-2 font-weight-black text-ac_red_text">#125438-0000</span>
+        </div>
+        <div class="px-4 py-2 rounded-xl dashboard-header-balance-radius d-flex justify-space-between align-center linked-row border border-dh_linked_border">
+          <span class="text-body-2 text-table_title" style="letter-spacing:0.05em;">Jane Smith</span>
+          <span class="text-body-2 font-weight-black text-ac_red_text">#125438-0000</span>
         </div>
 
       </v-col>
@@ -270,10 +465,12 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import { Clock, ExternalLink, X, CreditCard, History, Plus, Hexagon } from 'lucide-vue-next'
+import { Clock, ExternalLink, X, CreditCard, History, Plus, Hexagon, CircleDollarSign, Minus } from 'lucide-vue-next'
 import SelectField from './shared/SelectField.vue'
 import DateField from './shared/DateField.vue'
 import StatField from './shared/StatField.vue'
+import InputField from './shared/InputField.vue'
+import CheckboxField from './shared/CheckboxField.vue'
 import { useTheme } from 'vuetify'
 import Metric from './Metric.vue'
 
@@ -286,7 +483,10 @@ import Metric from './Metric.vue'
  
   const isDark = computed(() => theme.global.current.value.dark)
   const isPaymentModalOpen = ref(false)
+  const isPaymentTransactionModalOpen = ref(false)
   const isHexagonDialogOpen = ref(false)
+  const paymentType = ref('')
+  const addConvenienceFee = ref(false)
 
   const localActiveCreditor = computed({
     get: () => props.activeCreditor,
@@ -327,10 +527,10 @@ import Metric from './Metric.vue'
   ])
 
   const tabs = [
-    { id: 'creditor 1', label: 'philip james' },
-    { id: 'creditor 2', label: 'mark hakim' },
-    { id: 'creditor 3', label: 'jason north' },
-    { id: 'creditor 4', label: 'allan jones' },
+    { id: 'creditor 1', label: 'Philip James' },
+    { id: 'creditor 2', label: 'Mark Hakim' },
+    { id: 'creditor 3', label: 'Jason North' },
+    { id: 'creditor 4', label: 'Allan Jones' },
   ]
 
   const paymentHistory = [
@@ -353,20 +553,123 @@ import Metric from './Metric.vue'
 
   const feesAmount = computed(() => localActiveCreditor.value === 'creditor 1' ? '$1,052.32' : '$450.00')
 
+  const openPaymentTransactionModal = () => {
+    isPaymentModalOpen.value = false
+    paymentType.value = ''
+    addConvenienceFee.value = false
+    isPaymentTransactionModalOpen.value = true
+  }
+
 
 </script>
 
 <style scoped>
 .ls-widest { letter-spacing: 0.15em; }
 
+.payment-history-title {
+  letter-spacing: -0.3px;
+}
+
+.payment-history-subtitle {
+  opacity: 0.4;
+  font-size: 10px;
+}
+
+.payment-history-close {
+  opacity: 0.4;
+}
+
+.payment-history-header-cell {
+  font-size: 10px;
+}
+
+.payment-history-status {
+  font-size: 10px;
+}
+
+.payment-history-table {
+  background: transparent;
+}
+
+.payment-history-table :deep(.v-table__wrapper),
+.payment-history-table :deep(table) {
+  background: transparent;
+}
+
+.payment-row {
+  transition: background-color 0.2s;
+}
+
+.payment-transaction-title {
+  letter-spacing: -0.3px;
+}
+
+.payment-transaction-subtitle {
+  opacity: 0.4;
+  letter-spacing: 0.12em;
+}
+
+.payment-transaction-close {
+  width: 32px;
+  height: 32px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.4;
+  background: transparent;
+  transition: background-color 0.15s;
+}
+
+.payment-transaction-upload {
+  transition: background-color 0.15s ease;
+}
+
+.payment-transaction-action {
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  letter-spacing: 0.15em;
+  transition:
+    background-color 0.15s,
+    transform 0.1s;
+  box-shadow: none;
+}
+
+.dashboard-header-shell {
+  transition: all 0.5s;
+  backdrop-filter: blur(40px);
+  box-shadow: var(--v-theme-client_section_shadow);
+}
+
+.dashboard-header-tabs {
+  backdrop-filter: blur(12px);
+  box-shadow: var(--v-theme-add_reminder_textarea_shadow);
+}
+
+.dashboard-header-tab {
+  transition: background-color 0.2s;
+}
+
+.dashboard-header-balance-card {
+  box-shadow: var(--v-theme-client_section_shadow);
+}
+
+.dashboard-header-balance-radius {
+  border-radius: 14px !important;
+}
+
+.dashboard-header-muted-label {
+  opacity: 0.3;
+  letter-spacing: 0.1em;
+}
+
 .balance-card { transition: transform 0.2s; }
 .balance-card:hover { transform: scale(1.02); }
 
-.payment-row:hover { background: rgba(59, 130, 246, 0.05); }
-
-.hexagon-trigger:hover .hexagon-icon { color: #f87171 !important; }
 .hexagon-trigger { transition: transform 0.2s; }
 .hexagon-trigger:hover { transform: scale(1.05); }
 
-.linked-row { transition: background 0.2s; }
+.linked-row {
+  transition: background 0.2s;
+  border: 1px solid rgb(var(--v-theme-dh_linked_border));
+}
 </style>

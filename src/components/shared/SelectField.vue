@@ -127,4 +127,58 @@ const handleChange = (e) => {
 .select-wrapper:focus-within .chevron-icon {
   transform: translateY(-50%) rotate(180deg);
 }
+
+.v-theme--dark .payment-modal-select .text-select_field_label {
+  color: #60a5fa;
+}
+
+.v-theme--light .payment-modal-select .text-select_field_label {
+  color: #2563eb;
+}
+
+.v-theme--dark .payment-modal-select .select-field {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+.v-theme--light .payment-modal-select .select-field {
+  background-color: #f8fafc;
+  border-color: #e2e8f0;
+  color: #0f172a;
+}
+
+.v-theme--dark .payment-modal-select .select-field:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.v-theme--light .payment-modal-select .select-field:hover {
+  background-color: #f1f5f9;
+}
+
+.v-theme--dark .payment-modal-select .select-field:focus {
+  border-color: #3b82f6;
+}
+
+.v-theme--light .payment-modal-select .select-field:focus {
+  border-color: #2563eb;
+}
+
+.v-theme--dark .payment-modal-select .select-field option {
+  background-color: #0f172a;
+  color: #ffffff;
+}
+
+.v-theme--light .payment-modal-select .select-field option {
+  background-color: #ffffff;
+  color: #0f172a;
+}
+
+.v-theme--dark .payment-modal-select .chevron-icon {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.v-theme--light .payment-modal-select .chevron-icon {
+  color: #94a3b8;
+}
 </style>
