@@ -54,9 +54,9 @@ export default createVuetify({
           main_background: '#ffffff',
           container: '#ffffff',
           container_border: '#e2e8f0',
-          secondary_container_bg: '#f0f9ff',
-          secondary_container_border: 'rgba(43, 127, 255, 0.5)',
-          secondary_container_border_hover: 'rgba(43, 127, 255, 0.5)',
+          secondary_container_bg: 'rgba(230, 240, 255, 1)',
+          secondary_container_border: '#2b7fff',
+          secondary_container_border_hover: '#2b7fff',
           toggle_theme_icon: '#fff',
           fields_label: '#005ea3',
           /*  fill #f1f5f9, focus ring #83a8fa, value/placeholder #868e9a */
@@ -74,9 +74,17 @@ export default createVuetify({
           sidebarActive: '#e0e0e0',
           sidebarActiveText: '#005ea3',
           toggleThemeIcon: '#005ea3',
-              //
-              
-              
+          
+          // accounting footer
+          accounting_footer_bg: '#dff2fe',
+          accounting_footer_border: '#2563eb',
+          
+          //modals
+          modal_border: '#aaaaaa;',
+          modal_bg: '#fff',
+          modal_conditional_section: '#dff2fe',
+          modal_upload: '#94a3b8',
+          modal_close: '#4e4e4e',
 
           // Checkbox
           checkbox_border_unchecked: '#cbd5e1',
@@ -314,16 +322,27 @@ export default createVuetify({
           contact_menu_footer_bg: 'rgba(248, 250, 252, 0.5)',
           contact_menu_footer_icon_bg_blue: '#eff6ff',
           contact_menu_footer_icon_bg_violet: '#f5f3ff',
-          contact_menu_footer_icon_violet: '#8b5cf6',
+          contact_menu_header_blue_text: '#2563eb',
+          contact_menu_card_border: 'rgba(59, 130, 246, 0.5)',
+          contact_menu_footer_border: '#94a3b8',
 
           // New Dashboard
           debtor_header_bg: 'transparent',
           debtor_remove_btn_bg: '#fee2e2',
           debtor_remove_btn_hover: '#fecaca',
           debtor_linked_balance_label: '#475569',
-          debtor_tabs_bg: '#f1f5f9',
+          debtor_tabs_bg: 'rgba(241, 245, 249, 0.8)',
           debtor_tab_inactive_text: '#64748b',
-          debtor_tab_inactive_hover: '#e2e8f0',
+          debtor_tab_inactive_hover: 'rgba(255, 255, 255, 0.5)',
+          debtor_modal_bg: '#ffffff',
+          debtor_modal_title: '#0f172a',
+          debtor_modal_muted_text: '#94a3b8',
+          debtor_modal_header_border: '#f1f5f9',
+          debtor_modal_section_border: '#e2e8f0',
+          debtor_modal_close_hover: '#f1f5f9',
+          debtor_modal_cancel_bg: '#f1f5f9',
+          debtor_modal_cancel_text: '#4b5563',
+          debtor_modal_cancel_hover: '#e2e8f0',
           debtor_modal_teal_bg: '#0d9488',
           debtor_modal_teal_shadow: 'rgba(13, 148, 136, 0.2)',
 
@@ -343,7 +362,9 @@ export default createVuetify({
           importance_none_bg: 'rgba(100,116,139,0.1)',
 
           // InfoBox colors (Light)
-          infobox_label: '#334155',
+          infobox_label: '#475569',
+          infobox_value: '#1e293b',
+          infobox_subvalue: '#94a3b8',
 
           // InputField colors (Light)
           inputfield_border: '#94a3b8',
@@ -372,24 +393,29 @@ export default createVuetify({
           // NewExperianReports colors (Light)
           newexperianreports_bg: '#f0f9ff',
           newexperianreports_border: 'rgba(59,130,246,0.5)',
-          newexperianreports_shadow: '0 1px 4px rgba(0,0,0,0.06)',
-          newexperianreports_derogatory_bg: 'rgba(254,242,242,0.50)',
+          newexperianreports_shadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+          newexperianreports_derogatory_bg: 'rgba(241, 224, 224, 0.5)',
           newexperianreports_button: '#2563eb',
           newexperianreports_button_hover: '#3b82f6',
           newexperianreports_button_shadow: 'rgba(37,99,235,0.2)',
           newexperianreports_timeline_bg: 'rgba(15,23,42,0.40)',
+          newexperianreports_timeline_border: 'rgba(59,130,246,0.5)',
+          newexperianreports_timeline_shadow:
+            '0 20px 25px -5px rgba(226,232,240,0.5), 0 8px 10px -6px rgba(226,232,240,0.5)',
           newexperianreports_indicator: '#f59e0b',
 
           // NewJudgement colors (Light)
           newjudgment_bg: '#f0f9ff',
-          newjudgment_border: 'rgba(59,130,246,0.5)',
           newjudgment_iconbg: 'rgba(139,92,246,0.10)',
           newjudgment_card_bg: '#f8fafc',
+          newjudgment_muted_text: '#475569',
+          newjudgment_shadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
           newjudgment_composition_bg: 'rgba(239,246,255,0.30)',
           newjudgment_composition_border: '#93c5fd',
 
           // NewLegalDetails colors (Light)
           newlegaldetails_bg: '#f0f9ff',
+          newlegaldetails_toggle_bg: 'rgba(255,255,255,0.05)',
           newlegaldetails_complaint_iconbg: 'rgba(59,130,246,0.10)',
           newlegaldetails_judgment_iconbg: 'rgba(139,92,246,0.10)',
           newlegaldetails_garnishment_iconbg: 'rgba(245,158,11,0.10)',
@@ -400,21 +426,37 @@ export default createVuetify({
           newskiptracing_iconbg: 'rgba(59,130,246,0.10)',
           newskiptracing_config_border: '#bfdbfe',
 
-          // NewTabsContent colors (Light)
-          newtabscontent_tabbar_bg: 'transparent',
-          newtabscontent_tabbar_border: '#cbd5e1',
+          // NewTabsContent (Light) — NewTabsContent.vue
+          newtabscontent_tabbar_bg: '#ffffff',
+          newtabscontent_tabbar_border: '#e5e7eb',
+          newtabscontent_tabbar_box_shadow: '0 4px 24px rgba(15,23,42,0.06)',
+          newtabscontent_active_tab_bg: '#1a62ff',
+          newtabscontent_active_tab_fg: '#ffffff',
+          newtabscontent_active_tab_box_shadow: '0 4px 16px rgba(26,98,255,0.25)',
           newtabscontent_active_tab_shadow: '0 8px 24px rgba(37,99,235,0.3)',
           newtabscontent_inactive_tab_color: '#475569',
+          newtabscontent_inactive_tab_fg: '#334155',
           newtabscontent_dropdown_bg: 'rgba(255,255,255,0.98)',
           newtabscontent_dropdown_border: '#cbd5e1',
           newtabscontent_dropdown_shadow: '0 24px 48px rgba(0,0,0,0.12)',
           newtabscontent_dropdown_divider: '#e2e8f0',
           newtabscontent_dropdown_color: '#334155',
-          newtabscontent_content_bg: 'transparent',
-          newtabscontent_content_border: '#cbd5e1',
+          newtabscontent_dropdown_active_bg: '#1a62ff',
+          newtabscontent_dropdown_active_fg: '#ffffff',
+          newtabscontent_content_bg: '#ffffff',
+          newtabscontent_content_border: '#e5e7eb',
           newtabscontent_content_shadow: '0 10px 30px rgba(30,41,59,0.15)',
+          newtabscontent_content_box_shadow: '0 12px 40px rgba(15,23,42,0.07)',
           newtabscontent_header_icon_bg: 'rgba(37,99,235,0.20)',
+          newtabscontent_header_icon_tile: '#e8f0fe',
+          newtabscontent_header_icon_lucide: '#2563eb',
+          newtabscontent_title: '#0f172a',
           newtabscontent_fallback_icon_bg: 'rgba(255,255,255,0.10)',
+          newtabscontent_fallback_activity: '#6b7280',
+          newtabscontent_fallback_caption: '#334155',
+          newtabscontent_tab_hover_bg: 'rgba(15,23,42,0.06)',
+          newtabscontent_dropdown_item_hover_bg: 'rgba(15,23,42,0.06)',
+          newtabscontent_save_btn_box_shadow: '0 8px 24px rgba(26,98,255,0.22)',
 
           // Plan colors (Light)
           plan_bg: '#e0f2fe',
@@ -427,6 +469,41 @@ export default createVuetify({
           plan_helper_text: '#6b7280',
           plan_placeholder: '#6b7280',
           plan_btn_shadow_green: '0 4px 12px rgba(5,150,105,0.2)',
+
+          // Plan.vue — Payment Plan Architect
+          plan_architect_zone_bg: '#f0f9ff',
+          plan_architect_zone_border: 'rgba(37, 99, 235, 0.5)',
+          plan_architect_zone_title: '#212121',
+          plan_architect_calc_heading: '#2563eb',
+          plan_architect_frequency_heading: '#2563eb',
+          plan_architect_allocation_hint: '#6b7280',
+          plan_architect_secondary_zone_bg: '#f0f9ff',
+          plan_architect_icon_tile_bg: '#E1EFFE',
+          plan_architect_icon_foreground: '#1C64F2',
+          plan_architect_radio_accent: '#2563EB',
+          plan_architect_radio_label: '#1F2937',
+          plan_architect_compliance_card_bg: '#eef4ff',
+          plan_architect_compliance_card_border: 'rgba(13, 110, 253, 0.14)',
+          plan_architect_compliance_title: '#0d6efd',
+          plan_architect_compliance_sub: '#333e48',
+          plan_architect_checkbox_accent: '#2563eb',
+          plan_architect_installment_shell_bg: '#f2f8ff',
+          plan_architect_installment_shell_border: '#b8d4ff',
+          plan_architect_installment_header_bg: '#f2f8ff',
+          plan_architect_installment_header_border: '#b8d4ff',
+          plan_architect_schedule_title: '#1a6cff',
+          plan_architect_add_btn_bg: '#1a6cff',
+          plan_architect_add_btn_fg: '#ffffff',
+          plan_architect_add_btn_shadow_blue: '#2563eb',
+          plan_architect_installment_row_bg: 'rgba(255, 255, 255, 0.05)',
+          plan_architect_installment_row_border: 'rgba(255, 255, 255, 0.05)',
+          plan_architect_placeholder_dash_border: '#cbd5e1',
+          plan_architect_placeholder_text: '#94a3b8',
+          plan_architect_footer_divider: 'rgba(0, 0, 0, 0.06)',
+          plan_architect_reminder_label: '#374151',
+          plan_architect_activate_btn_glow: '#16a34a',
+          plan_architect_activate_btn_bg: '#2e7d32',
+          plan_architect_activate_btn_fg: '#ffffff',
 
           // RemindersFeed colors (Light)
           remindersfeed_border_default: 'rgba(37,99,235,0.50)',
@@ -494,7 +571,7 @@ export default createVuetify({
           asset_stat_value_highlight: '#22c55e',
 
           // BalanceRow
-          balance_row_border: '#e2e8f0',
+          balance_row_border: 'rgba(59, 130, 246, 0.5)',
           balance_row_label: '#334155',
           balance_row_value: '#0f172a',
 
@@ -549,8 +626,8 @@ export default createVuetify({
           exp_mortgage_head: '#7c3aed',
 
           // Financials
-          fin_table_header_text: '#334155',
-          fin_table_header_bar_bg: 'rgba(100, 116, 139, 0.05)',
+          financial_header_bg: '#f0f9ff',
+          financial_header_border: 'rgba(37,99,235,0.5)',
 
           // GlobalNotes
           gn_header_border: 'rgba(59, 130, 246, 0.5)',
@@ -571,6 +648,21 @@ export default createVuetify({
           tc_dropdown_item_text: '#334155',
           tc_dropdown_hover_bg: '#eff6ff',
 
+          // SettingsModule (Light)
+          settings_primary: '#2563eb',
+          settings_nav_active_bg: '#2563eb',
+          settings_nav_active_fg: '#ffffff',
+          settings_nav_inactive: '#64748b',
+          settings_nav_hover_bg: '#f8fafc',
+          settings_sheet_bg: '#f0f9ff',
+          settings_sheet_border: '#94a3b8',
+          settings_section_title: '#1e293b',
+          settings_medical_label: '#2563eb',
+          settings_save_section_border: '#e2e8f0',
+          settings_alloc_row_border: '#cbd5e1',
+          settings_radio_accent: '#2563eb',
+          settings_radio_focus: '#2563eb',
+
           // TransactionAllocations
         },
       },
@@ -582,8 +674,8 @@ export default createVuetify({
           container: 'rgba(15,23,43,0.6)',
           container_border: 'rgba(255,255,255,0.1)',
           secondary_container_bg: 'rgba(255,255,255,0.05)',
-          secondary_container_border: 'rgba(255,255,255,0.1)',
-          secondary_container_border_hover: 'rgba(43, 127, 255, 0.5)',
+          secondary_container_border: '#2a3a4a',
+          secondary_container_border_hover: '#2b7fff',
           toggle_theme_icon: '#e17100',
           fields_label: '#b8e6fe',
           fields_bg: '#171c2f',
@@ -595,12 +687,22 @@ export default createVuetify({
           /* Dark focus: muted navy-blue ( #2196F3) */
           fields_focus_border: '#23498e',
 
-          // Sidebar-specific colors (used by Sidebar.vue)
+          // Sidebar-specific colors 
           sidebar: 'rgba(255, 255, 255, 0.05)',
           sidebarIcons: '#93c5fd',
           sidebarActive: 'rgba(255, 255, 255, 0.1)',
           sidebarActiveText: '#ffffff',
 
+          // accounting footer
+          accounting_footer_bg: '#0f172a',
+          accounting_footer_border: '#2563eb',
+
+          //modals
+          modal_border: 'rgba(255,255,255,0.10)',
+          modal_bg: '#0f172a',
+          modal_conditional_section: 'rgba(255,255,255,0.05)',
+          modal_upload: '#64748b',
+          modal_close: 'rgba(255,255,255,0.4)',
 
           // DateField
           date_field_label: '#7dd3fc',
@@ -717,7 +819,7 @@ export default createVuetify({
           accounts_cancel_text: '#ffffff',
           accounts_summary_bg: '#0f172a',
           accounts_summary_border: 'rgba(255,255,255,0.1)',
-          accounts_summary_shadow: 'none',
+          accounts_summary_shadow: '#00000000',
           accounts_summary_value: '#ffffff',
           accounts_header_bg: 'rgba(255,255,255,0.05)',
           accounts_header_text: '#7dd3fc',
@@ -840,22 +942,34 @@ export default createVuetify({
           contact_menu_footer_bg: 'rgba(255, 255, 255, 0.02)',
           contact_menu_footer_icon_bg_blue: 'rgba(59, 130, 246, 0.1)',
           contact_menu_footer_icon_bg_violet: 'rgba(139, 92, 246, 0.1)',
-          contact_menu_footer_icon_violet: '#a78bfa',
-
+          contact_menu_header_blue_text: '#60a5fa',
+          contact_menu_card_border: 'rgba(255, 255, 255, 0.1)',
+          contact_menu_footer_border: 'rgba(255, 255, 255, 0.1)',
+          contact_menu_btn_shadow:
+            '0 10px 15px -3px rgba(37, 99, 235, 0.2), 0 4px 6px -4px rgba(37, 99, 235, 0.2)',
 
           // New Dashboard
           debtor_header_bg: 'rgba(15, 23, 42, 0.6)',
           debtor_remove_btn_bg: 'rgba(239, 68, 68, 0.1)',
           debtor_remove_btn_hover: 'rgba(239, 68, 68, 0.2)',
           debtor_linked_balance_label: 'rgba(255, 255, 255, 0.3)',
-          debtor_tabs_bg: 'rgba(255, 255, 255, 0.1)',
-          debtor_tab_inactive_text: '#cbd5e1',
-          debtor_tab_inactive_hover: 'rgba(255, 255, 255, 0.5)',
+          debtor_tabs_bg: 'rgba(0, 0, 0, 0.2)',
+          debtor_tab_inactive_text: 'rgba(255, 255, 255, 0.4)',
+          debtor_tab_inactive_hover: 'rgba(255, 255, 255, 0.05)',
+          debtor_modal_bg: '#0f172a',
+          debtor_modal_title: '#ffffff',
+          debtor_modal_muted_text: 'rgba(255, 255, 255, 0.4)',
+          debtor_modal_header_border: 'rgba(255, 255, 255, 0.05)',
+          debtor_modal_section_border: 'rgba(255, 255, 255, 0.08)',
+          debtor_modal_close_hover: 'rgba(255, 255, 255, 0.05)',
+          debtor_modal_cancel_bg: 'rgba(255, 255, 255, 0.05)',
+          debtor_modal_cancel_text: '#ffffff',
+          debtor_modal_cancel_hover: 'rgba(255, 255, 255, 0.1)',
           debtor_modal_teal_bg: '#0d9488',
           debtor_modal_teal_shadow: 'rgba(13, 148, 136, 0.2)',
 
           // Utility greys for text
-          text_strong_light: '#f9fafb',
+          text_strong_light: '#ffffff',
 
           // IconButton colors (Dark)
           iconbtn_border: '#1e293b',
@@ -871,6 +985,8 @@ export default createVuetify({
 
           // InfoBox colors (Dark)
           infobox_label: '#94a3b8',
+          infobox_value: '#ffffff',
+          infobox_subvalue: '#94a3b8',
 
           // InputField colors (Dark)
           inputfield_border: '#1e293b',
@@ -899,24 +1015,28 @@ export default createVuetify({
           // NewExperianReports colors (Dark)
           newexperianreports_bg: '#1e293b',
           newexperianreports_border: '#1e293b',
-          newexperianreports_shadow: '',
+          newexperianreports_shadow: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
           newexperianreports_derogatory_bg: 'rgba(239,68,68,0.05)',
           newexperianreports_button: '#2563eb',
           newexperianreports_button_hover: '#3b82f6',
           newexperianreports_indicator: '#f59e0b',
           newexperianreports_timeline_bg: 'rgba(15,23,42,0.40)',
+          newexperianreports_timeline_border: 'rgba(255,255,255,0.05)',
+          newexperianreports_timeline_shadow: '#00000000',
           newexperianreports_button_shadow: 'rgba(37,99,235,0.2)',
 
           // NewJudgment colors (Dark)
           newjudgment_bg: 'rgba(15,23,42,0.60)',
-          newjudgment_border: 'rgba(255,255,255,0.10)',
           newjudgment_iconbg: 'rgba(139,92,246,0.10)',
-          newjudgment_card_bg: '#1e293b',
+          newjudgment_card_bg: 'rgba(255,255,255,0.05)',
+          newjudgment_muted_text: '#94a3b8',
+          newjudgment_shadow: '#00000000',
           newjudgment_composition_bg: 'rgba(59,130,246,0.05)',
           newjudgment_composition_border: 'rgba(59,130,246,0.20)',
 
           // NewLegalDetails colors (Dark)
           newlegaldetails_bg: 'rgba(15,23,42,0.40)',
+          newlegaldetails_toggle_bg: 'rgba(255,255,255,0.05)',
           newlegaldetails_complaint_iconbg: 'rgba(59,130,246,0.15)',
           newlegaldetails_judgment_iconbg: 'rgba(139,92,246,0.15)',
           newlegaldetails_garnishment_iconbg: 'rgba(245,158,11,0.15)',
@@ -927,21 +1047,37 @@ export default createVuetify({
           newskiptracing_iconbg: 'rgba(59,130,246,0.10)',
           newskiptracing_config_border: '#1e293b',
 
-          // NewTabsContent colors (Dark)
-          newtabscontent_tabbar_bg: '#1e293b',
-          newtabscontent_tabbar_border: '#1e293b',
+          // NewTabsContent (Dark) — NewTabsContent.vue
+          newtabscontent_tabbar_bg: 'rgba(255,255,255,0.10)',
+          newtabscontent_tabbar_border: 'rgba(255,255,255,0.10)',
+          newtabscontent_tabbar_box_shadow: 'none',
+          newtabscontent_active_tab_bg: '#1a62ff',
+          newtabscontent_active_tab_fg: '#ffffff',
+          newtabscontent_active_tab_box_shadow: '0 4px 16px rgba(26,98,255,0.25)',
           newtabscontent_active_tab_shadow: '0 8px 24px rgba(37,99,235,0.3)',
           newtabscontent_inactive_tab_color: '#bfdbfe',
+          newtabscontent_inactive_tab_fg: '#bfdbfe',
           newtabscontent_dropdown_bg: 'rgba(15,23,42,0.98)',
           newtabscontent_dropdown_border: 'rgba(255,255,255,0.20)',
           newtabscontent_dropdown_shadow: '0 24px 48px rgba(0,0,0,0.4)',
           newtabscontent_dropdown_divider: 'rgba(255,255,255,0.05)',
           newtabscontent_dropdown_color: 'rgba(255,255,255,0.80)',
+          newtabscontent_dropdown_active_bg: '#1a62ff',
+          newtabscontent_dropdown_active_fg: '#ffffff',
           newtabscontent_content_bg: 'rgba(15,23,42,0.60)',
           newtabscontent_content_border: 'rgba(255,255,255,0.10)',
           newtabscontent_content_shadow: '',
+          newtabscontent_content_box_shadow: 'none',
           newtabscontent_header_icon_bg: 'rgba(37,99,235,0.20)',
+          newtabscontent_header_icon_tile: 'rgba(26,98,255,0.22)',
+          newtabscontent_header_icon_lucide: '#1a62ff',
+          newtabscontent_title: '#ffffff',
           newtabscontent_fallback_icon_bg: 'rgba(255,255,255,0.10)',
+          newtabscontent_fallback_activity: '#ffffff',
+          newtabscontent_fallback_caption: '#ffffff',
+          newtabscontent_tab_hover_bg: 'rgba(255,255,255,0.08)',
+          newtabscontent_dropdown_item_hover_bg: 'rgba(255,255,255,0.08)',
+          newtabscontent_save_btn_box_shadow: '0 8px 24px rgba(26,98,255,0.22)',
 
           // Plan colors (Dark)
           plan_bg: 'rgba(15,23,42,0.60)',
@@ -954,6 +1090,41 @@ export default createVuetify({
           plan_placeholder: 'rgba(255,255,255,0.60)',
           plan_helper_text: '#94a3b8',
           plan_btn_shadow_green: '0 4px 12px rgba(5,150,105,0.2)',
+
+          // Plan.vue
+          plan_architect_zone_bg: 'rgba(15, 23, 42, 0.6)',
+          plan_architect_zone_border: 'rgba(255, 255, 255, 0.1)',
+          plan_architect_zone_title: '#ffffff',
+          plan_architect_calc_heading: '#7dd3fc',
+          plan_architect_frequency_heading: '#93c5fd',
+          plan_architect_allocation_hint: '#94a3b8',
+          plan_architect_secondary_zone_bg: 'rgba(15, 23, 42, 0.4)',
+          plan_architect_icon_tile_bg: 'rgba(59, 130, 246, 0.18)',
+          plan_architect_icon_foreground: '#60a5fa',
+          plan_architect_radio_accent: '#2463EB',
+          plan_architect_radio_label: '#ffffff',
+          plan_architect_compliance_card_bg: 'rgba(59, 130, 246, 0.05)',
+          plan_architect_compliance_card_border: 'rgba(59, 130, 246, 0.1)',
+          plan_architect_compliance_title: '#67e8f9',
+          plan_architect_compliance_sub: 'rgba(255, 255, 255, 0.8)',
+          plan_architect_checkbox_accent: '#2563eb',
+          plan_architect_installment_shell_bg: 'rgba(15, 23, 42, 0.4)',
+          plan_architect_installment_shell_border: 'rgba(255, 255, 255, 0.05)',
+          plan_architect_installment_header_bg: 'rgba(255, 255, 255, 0.04)',
+          plan_architect_installment_header_border: 'rgba(255, 255, 255, 0.08)',
+          plan_architect_schedule_title: '#93c5fd',
+          plan_architect_add_btn_bg: '#2563eb',
+          plan_architect_add_btn_fg: '#ffffff',
+          plan_architect_add_btn_shadow_blue: '#2563eb',
+          plan_architect_installment_row_bg: 'rgba(255, 255, 255, 0.05)',
+          plan_architect_installment_row_border: 'rgba(255, 255, 255, 0.05)',
+          plan_architect_placeholder_dash_border: 'rgba(255, 255, 255, 0.2)',
+          plan_architect_placeholder_text: 'rgba(255, 255, 255, 0.6)',
+          plan_architect_footer_divider: 'rgba(255, 255, 255, 0.05)',
+          plan_architect_reminder_label: '#ffffff',
+          plan_architect_activate_btn_glow: '#16a34a',
+          plan_architect_activate_btn_bg: '#43a047',
+          plan_architect_activate_btn_fg: '#ffffff',
 
           // RemindersFeed colors (Dark)
           remindersfeed_border_default: 'rgba(255,255,255,0.10)',
@@ -1075,8 +1246,8 @@ export default createVuetify({
           exp_mortgage_head: '#a78bfa',
 
           // Financials
-          fin_table_header_text: '#7dd3fc',
-          fin_table_header_bar_bg: 'rgba(100, 116, 139, 0.05)',
+          financial_header_bg: 'rgba(15,23,42,0.4)',
+          financial_header_border: 'rgba(255,255,255,0.05)',
 
           // GlobalNotes
           gn_header_border: 'rgba(255, 255, 255, 0.05)',
@@ -1096,6 +1267,21 @@ export default createVuetify({
           tc_dropdown_bg: 'rgba(15, 23, 42, 0.98)',
           tc_dropdown_item_text: 'rgba(255, 255, 255, 0.8)',
           tc_dropdown_hover_bg: 'rgba(255, 255, 255, 0.1)',
+
+          // SettingsModule (Dark)
+          settings_primary: '#2563eb',
+          settings_nav_active_bg: '#2563eb',
+          settings_nav_active_fg: '#ffffff',
+          settings_nav_inactive: '#94a3b8',
+          settings_nav_hover_bg: 'rgba(255, 255, 255, 0.05)',
+          settings_sheet_bg: 'rgba(15, 23, 42, 0.6)',
+          settings_sheet_border: 'rgba(255, 255, 255, 0.1)',
+          settings_section_title: '#ffffff',
+          settings_medical_label: '#7dd3fc',
+          settings_save_section_border: 'rgba(255, 255, 255, 0.85)',
+          settings_alloc_row_border: 'rgba(148, 163, 184, 0.35)',
+          settings_radio_accent: '#2563eb',
+          settings_radio_focus: '#2563eb',
 
           // TransactionAllocations
         },

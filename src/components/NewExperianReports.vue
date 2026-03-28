@@ -1,5 +1,5 @@
 <template>
-  <div class="animate-fade">
+  <div class="animate-fade d-flex flex-column ga-8">
 
     <!-- TOP ROW: Legal & Risk Indicators -->
     <v-row class="mb-8">
@@ -7,12 +7,7 @@
       <!-- Bankruptcy Filing -->
       <v-col cols="12" md="4">
         <v-sheet
-          class="pa-6"
-          color="transparent"
-          style="border-radius: 25px !important;"
-          :style="theme === 'dark'
-            ? 'background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(255,255,255,0.10);'
-            : 'background: #f0f9ff !important; border: 1px solid rgba(37,99,235,0.4); box-shadow: 0 1px 4px rgba(0,0,0,0.06);'"
+          class="pa-6 newexperianreports-card bg-contact_menu_card_bg border border-sm border-custom-blue newexperianreports-card-shadow"
         >
           <SelectField
             label="Bankruptcy Filing"
@@ -31,12 +26,7 @@
       <!-- Judgments / Liens -->
       <v-col cols="12" md="4">
         <v-sheet
-          class="pa-6"
-          color="transparent"
-          style="border-radius: 25px !important;"
-          :style="theme === 'dark'
-            ? 'background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(255,255,255,0.10);'
-            : 'background: #f0f9ff !important; border: 1px solid rgba(37,99,235,0.4); box-shadow: 0 1px 4px rgba(0,0,0,0.06);'"
+          class="pa-6 newexperianreports-card bg-contact_menu_card_bg border border-sm border-custom-blue newexperianreports-card-shadow"
         >
           <SelectField
             label="Judgments / Liens (12M)"
@@ -53,12 +43,7 @@
       <!-- Total Derogatory Accounts -->
       <v-col cols="12" md="4">
         <v-sheet
-          class="pa-6 d-flex flex-column justify-center"
-          color="transparent"
-          style="border-radius: 25px !important; border: 1px solid rgba(239,68,68,0.20);"
-          :style="theme === 'dark'
-            ? 'background: rgba(239,68,68,0.05) !important;'
-            : 'background: rgba(254,242,242,0.50) !important;'"
+          class="pa-6 h-100 d-flex flex-column justify-center bg-newexperianreports_derogatory_bg newexperianreports-card border border-sm border-red-derogatory newexperianreports-card-shadow"
         >
           <InputField label="Total Derogatory Accounts" placeholder="6,380" type="text" :theme="theme" />
         </v-sheet>
@@ -67,27 +52,16 @@
 
     <!-- MIDDLE SECTION: Delinquency Chronology -->
     <v-sheet
-      class="pa-8 mb-8"
-      color="transparent"
-      style="border-radius: 30px !important;"
-      :style="theme === 'dark'
-        ? 'background: rgba(15,23,42,0.4) !important; border: 1px solid rgba(255,255,255,0.05);'
-        : 'background: #f0f9ff !important; border: 1px solid rgba(37,99,235,0.4); box-shadow: 0 8px 32px rgba(148,163,184,0.15);'"
+      class="pa-8 mb-8 newexperianreports-panel bg-newlegaldetails_bg border border-sm border-custom-blue newexperianreports-timeline-shadow"
     >
       <!-- Section Header -->
       <div class="d-flex align-center ga-2 mb-6">
-        <div
-          class="rounded-pill"
-          style="width: 4px; height: 20px; background: #f59e0b; flex-shrink: 0;"
-        />
+        <div class="rounded-pill bg-newexperianreports_indicator flex-shrink-0 newexperianreports-indicator" />
         <span
-          class="text-caption font-weight-black text-uppercase"
-          style="letter-spacing: 0.2em;"
-          :style="theme === 'dark' ? 'color: #fbbf24;' : 'color: #d97706;'"
+          class="text-caption font-weight-black text-uppercase text-ac_amber_text newexperianreports-tracking"
         >Delinquency Chronology (24 Months)</span>
         <span
-          class="ml-10 font-weight-bold text-body-2"
-          :style="theme === 'dark' ? 'color: white;' : 'color: #334155;'"
+          class="ml-10 font-weight-bold text-body-2 text-accounts_cancel_text"
         >As Of 2-25-2026</span>
       </div>
 
@@ -98,22 +72,17 @@
           :key="item.label"
           cols="12" sm="6" md="3"
         >
-          <InputField :label="item.label" type="text" :theme="theme" />
+          <InputField :label="item.label" type="text" :theme="theme" class-name="exp-delinq-label text-accounts_header_text" />
         </v-col>
       </v-row>
 
       <!-- Collections Row -->
-      <v-row
-        class="mt-8 pt-8"
-        :style="theme === 'dark'
-          ? 'border-top: 1px solid rgba(255,255,255,0.05);'
-          : 'border-top: 1px solid #f1f5f9;'"
-      >
+      <v-row class="mt-8 pt-8">
         <v-col cols="12" md="6">
-          <InputField label="Accounts in Collections" :theme="theme" />
+          <InputField label="Accounts in Collections" :theme="theme" class-name="exp-delinq-label text-accounts_header_text" />
         </v-col>
         <v-col cols="12" md="6">
-          <InputField label="Paid Collections (6 Months)" :theme="theme" />
+          <InputField label="Paid Collections (6 Months)" :theme="theme" class-name="exp-delinq-label text-accounts_header_text" />
         </v-col>
       </v-row>
     </v-sheet>
@@ -124,23 +93,16 @@
       <!-- Revolving & Installments -->
       <v-col cols="12" lg="6">
         <v-sheet
-          class="pa-8"
-          color="transparent"
-          style="border-radius: 30px !important;"
-          :style="theme === 'dark'
-            ? 'background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(255,255,255,0.10);'
-            : 'background: #f0f9ff !important; border: 1px solid rgba(37,99,235,0.4); box-shadow: 0 1px 4px rgba(0,0,0,0.06);'"
+          class="pa-8 newexperianreports-panel bg-contact_menu_card_bg border border-sm border-custom-blue newexperianreports-card-shadow"
         >
           <div
-            class="text-caption font-weight-black text-uppercase mb-6"
-            style="letter-spacing: 0.2em;"
-            :style="theme === 'dark' ? 'color: #60a5fa;' : 'color: #2563eb;'"
+            class="text-caption font-weight-black text-uppercase mb-6 text-exp_mortgage_head newexperianreports-tracking"
           >Revolving &amp; Installments</div>
           <div class="d-flex flex-column ga-6">
-            <InputField label="Monthly Payments (12M)" :theme="theme" />
-            <InputField label="Installment Loans" :theme="theme" />
-            <InputField label="Revolving Trades (Credit)" :theme="theme" />
-            <InputField label="Revolving Trades (Balance)" :theme="theme" />
+            <InputField label="Monthly Payments (12M)" :theme="theme" class-name="exp-delinq-label text-accounts_header_text" />
+            <InputField label="Installment Loans" :theme="theme" class-name="exp-delinq-label text-accounts_header_text" />
+            <InputField label="Revolving Trades (Credit)" :theme="theme" class-name="exp-delinq-label text-accounts_header_text" />
+            <InputField label="Revolving Trades (Balance)" :theme="theme" class-name="exp-delinq-label text-accounts_header_text" />
           </div>
         </v-sheet>
       </v-col>
@@ -148,22 +110,15 @@
       <!-- Mortgage & Equity -->
       <v-col cols="12" lg="6">
         <v-sheet
-          class="pa-8"
-          color="transparent"
-          style="border-radius: 30px !important;"
-          :style="theme === 'dark'
-            ? 'background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(255,255,255,0.10);'
-            : 'background: #f0f9ff !important; border: 1px solid rgba(37,99,235,0.4); box-shadow: 0 1px 4px rgba(0,0,0,0.06);'"
+          class="pa-8 newexperianreports-panel bg-contact_menu_card_bg border border-sm border-custom-blue newexperianreports-card-shadow"
         >
           <div
-            class="text-caption font-weight-black text-uppercase mb-6"
-            style="letter-spacing: 0.2em;"
-            :style="theme === 'dark' ? 'color: #a78bfa;' : 'color: #7c3aed;'"
+            class="text-caption font-weight-black text-uppercase mb-6 text-exp_mortgage_head newexperianreports-tracking"
           >Mortgage &amp; Equity</div>
           <div class="d-flex flex-column ga-6">
-            <InputField label="Total Mortgage Credit" :theme="theme" />
-            <InputField label="Home Equity / 2nd Mortgage" :theme="theme" />
-            <InputField label="1st Mortgage Balance" :theme="theme" />
+            <InputField label="Total Mortgage Credit" :theme="theme" class-name="exp-delinq-label text-accounts_header_text" />
+            <InputField label="Home Equity / 2nd Mortgage" :theme="theme" class-name="exp-delinq-label text-accounts_header_text" />
+            <InputField label="1st Mortgage Balance" :theme="theme" class-name="exp-delinq-label text-accounts_header_text" />
           </div>
         </v-sheet>
       </v-col>
@@ -172,13 +127,11 @@
     <!-- Save Button -->
     <div class="d-flex justify-end pt-8">
       <v-btn
-        color="blue-darken-1"
-        class="font-weight-medium rounded-xl"
-        style="font-size: 13px; box-shadow: 0 8px 24px rgba(37,99,235,0.2);"
+        variant="flat"
+        class="newexperianreports-save-btn d-flex align-center ga-2 px-8 py-3 font-weight-medium text-body-2 bg-newexperianreports_button text-accounts_cancel_text hover:bg-newexperianreports_button_hover transition-all"
         elevation="0"
-        size="large"
       >
-        <template #prepend><Save :size="16" /></template>
+        <template #prepend><Save :size="18" /></template>
         Save changes
       </v-btn>
     </div>
@@ -211,8 +164,52 @@ const delinquencyItems = [
   animation: fadeSlideIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+.newexperianreports-card {
+  border-radius: 25px;
+}
+
+.newexperianreports-panel {
+  border-radius: 30px;
+}
+
+.newexperianreports-indicator {
+  width: 4px;
+  height: 20px;
+}
+
+.newexperianreports-tracking {
+  letter-spacing: 0.2em;
+}
+
+.newexperianreports-card-shadow {
+  box-shadow: var(--v-newexperianreports_shadow);
+}
+
+.newexperianreports-timeline-shadow {
+  box-shadow: var(--v-newexperianreports_timeline_shadow);
+}
+
+.newexperianreports-save-btn {
+  border-radius: 16px;
+  box-shadow:
+    0 10px 15px -3px var(--v-newexperianreports_button_shadow),
+    0 4px 6px -4px var(--v-newexperianreports_button_shadow);
+}
+
+:deep(.exp-delinq-label .text-fields_label) {
+  color: inherit !important;
+}
+
 @keyframes fadeSlideIn {
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+.border-custom-blue {
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+.border-red-derogatory {
+  border-color: rgba(239,68,68,0.2);
 }
 </style>
