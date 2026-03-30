@@ -9,8 +9,6 @@
         <Tabs
           :tabs="tabs"
           :theme="theme"
-
-
           tab-bar-class="bg-container"
           active-tab-class="bg-container text-fields-text"
           inactive-tab-class="text-grey-darken-1"

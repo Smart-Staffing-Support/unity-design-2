@@ -8,7 +8,7 @@
     <input
       :type="props.type"
       :placeholder="props.placeholder"
-      class="input-field w-100 px-4 rounded-lg text-caption font-weight-bold bg-select_field_bg border-sm border-opacity-100 border-fields_border text-fields_text"
+      class="input-field w-100 px-4 text-caption font-weight-bold bg-select_field_bg border-sm border-opacity-100 border-fields_border text-fields_text"
     />
   </div>
 </template>
@@ -30,6 +30,7 @@ const props = defineProps({
   font-size: 0.75rem;
   padding: 10px 16px;
   border: 1px solid rgb(var(--v-theme-select_field_border));
+  border-radius: 12px;
 }
 
 .ls-input-label {
