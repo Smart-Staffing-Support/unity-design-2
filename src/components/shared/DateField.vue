@@ -28,7 +28,7 @@ const props = defineProps({
   -webkit-appearance: none;
   appearance: none;
   box-sizing: border-box;
-  padding: 10px 40px 10px 16px;
+  padding: 0.55rem 2.5rem 0.55rem 1rem;
   border-radius: 12px;
   outline: none;
   cursor: pointer;

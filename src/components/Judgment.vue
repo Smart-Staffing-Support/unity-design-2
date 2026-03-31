@@ -7,8 +7,8 @@
       :style="!isDark ? 'box-shadow: 0 1px 3px rgba(0,0,0,0.08);' : ''"
     >
       <div class="d-flex align-center ga-3 mb-8">
-        <div class="pa-2 rounded-xl bg-blue-lighten-5">
-          <Scale class="text-blue" :size="20" />
+        <div class="pt-2 px-2 rounded-xl" style="background: rgba(37,99,235,0.20);">
+          <Scale class="judgment-icon" :size="20" />
         </div>
         <h3
           class="text-h6 font-weight-black text-uppercase text-fields_text"
@@ -73,8 +73,8 @@
               <v-btn
                 color="blue-darken-1"
                 variant="elevated"
-                class="rounded-sm font-weight-black text-uppercase w-100"
-                style="letter-spacing: 0.1em; font-size: 0.7rem; border-radius: 12px; box-shadow: 0 4px 16px rgba(37,99,235,0.2);"
+                class="rounded-sm font-weight-bold text-uppercase w-100"
+                style="letter-spacing: 0.1em; font-size: 0.7rem; border-radius: 12px; padding: 21px 0; box-shadow: 0 4px 16px rgba(37,99,235,0.2);"
               >
                 Add Step
               </v-btn>
@@ -91,14 +91,14 @@
       :style="!isDark ? 'box-shadow: 0 1px 3px rgba(0,0,0,0.08);' : ''"
     >
       <div class="d-flex align-center ga-3 mb-8">
-        <div class="pa-2 rounded-xl bg-purple-lighten-5">
+        <div class="px-2 pt-2 rounded-circle pre-icon">
           <CheckCircle2 class="text-purple" :size="20" />
         </div>
         <h3
           class="text-h6 font-weight-black text-uppercase text-fields_text"
           style="letter-spacing: -0.01em;"
         >
-          Pre-Judgment Components
+          Pre-Judgment
         </h3>
       </div>
 
@@ -112,7 +112,7 @@
             style="width:20px; height:20px; border-radius:6px; accent-color: #2563eb;"
           />
           <span
-            class="text-sm font-weight-black text-uppercase text-fields_text"
+            class="text-sm font-weight-bold text-fields_text"
             style="letter-spacing: 0.1em;"
           >
             Include Pre-Judgment Payments
@@ -124,11 +124,11 @@
 
           <!-- Pre-Judgment Interest -->
           <div
-            class="pa-6 rounded-xl flex-1 bg-fields_bg border-md border-grey-lighten-3"
-            style="border-radius: 24px;"
+            class="pa-6 rounded-xl flex-1 bg-judgment_composition_bg composition-border"
+            style="border-radius: 24px; min-width: 260px;"
           >
             <h4
-              class="text-sm font-weight-black text-uppercase mb-4 text-grey-darken-1"
+              class="text-sm font-weight-bold mb-4 text-judgment_labels"
               style="letter-spacing: 0.1em;"
             >
               Pre-Judgment Interest
@@ -137,17 +137,17 @@
               <template v-if="preJudgmentPayments">
                 <label class="d-flex align-center ga-3 cursor-pointer checkbox-label">
                   <input type="checkbox" style="width:16px; height:16px; accent-color: #2563eb; cursor:pointer;" />
-                  <span class="text-caption font-weight-bold text-uppercase text-grey-darken-1" style="letter-spacing:-0.01em;">Remaining Balance</span>
+                  <span class="text-body-medium text-judgment_labels" style="letter-spacing:-0.01em;">Remaining Balance</span>
                 </label>
               </template>
               <template v-else>
                 <label class="d-flex align-center ga-3 cursor-pointer checkbox-label">
                   <input type="checkbox" style="width:16px; height:16px; accent-color: #2563eb; cursor:pointer;" />
-                  <span class="text-caption font-weight-bold text-uppercase text-grey-darken-1" style="letter-spacing:-0.01em;">Total</span>
+                  <span class="text-body-medium text-judgment_labels" style="letter-spacing:-0.01em;">Total</span>
                 </label>
                 <label class="d-flex align-center ga-3 cursor-pointer checkbox-label">
                   <input type="checkbox" style="width:16px; height:16px; accent-color: #2563eb; cursor:pointer;" />
-                  <span class="text-caption font-weight-bold text-uppercase text-grey-darken-1" style="letter-spacing:-0.01em;">Remaining Balance</span>
+                  <span class="text-body-medium text-judgment_labels" style="letter-spacing:-0.01em;">Remaining Balance</span>
                 </label>
               </template>
             </div>
@@ -155,11 +155,11 @@
 
           <!-- Pre-Judgment Costs -->
           <div
-            class="pa-6 rounded-xl flex-1 bg-fields_bg border-md border-grey-lighten-3"
-            style="border-radius: 24px;"
+            class="pa-6 rounded-xl flex-1 bg-judgment_composition_bg composition-border"
+            style="border-radius: 24px; min-width: 260px;"
           >
             <h4
-              class="text-sm font-weight-black text-uppercase mb-4 text-grey-darken-1"
+              class="text-sm font-weight-bold mb-4 text-judgment_labels"
               style="letter-spacing: 0.1em;"
             >
               Pre-Judgment Costs
@@ -168,17 +168,17 @@
               <template v-if="preJudgmentPayments">
                 <label class="d-flex align-center ga-3 cursor-pointer checkbox-label">
                   <input type="checkbox" style="width:16px; height:16px; accent-color: #2563eb; cursor:pointer;" />
-                  <span class="text-caption font-weight-bold text-uppercase text-grey-darken-1" style="letter-spacing:-0.01em;">Remaining Balance</span>
+                  <span class="text-body-medium text-judgment_labels" style="letter-spacing:-0.01em;">Remaining Balance</span>
                 </label>
               </template>
               <template v-else>
                 <label class="d-flex align-center ga-3 cursor-pointer checkbox-label">
                   <input type="checkbox" style="width:16px; height:16px; accent-color: #2563eb; cursor:pointer;" />
-                  <span class="text-caption font-weight-bold text-uppercase text-grey-darken-1" style="letter-spacing:-0.01em;">Total</span>
+                  <span class="text-body-medium text-judgment_labels" style="letter-spacing:-0.01em;">Total</span>
                 </label>
                 <label class="d-flex align-center ga-3 cursor-pointer checkbox-label">
                   <input type="checkbox" style="width:16px; height:16px; accent-color: #2563eb; cursor:pointer;" />
-                  <span class="text-caption font-weight-bold text-uppercase text-grey-darken-1" style="letter-spacing:-0.01em;">Remaining Balance</span>
+                  <span class="text-body-medium text-judgment_labels" style="letter-spacing:-0.01em;">Remaining Balance</span>
                 </label>
               </template>
             </div>
@@ -186,11 +186,11 @@
 
           <!-- Pre-Judgment Fees -->
           <div
-            class="pa-6 rounded-xl flex-1 bg-fields_bg border-md border-grey-lighten-3"
-            style="border-radius: 24px;"
+            class="pa-6 rounded-xl flex-1 bg-judgment_composition_bg composition-border"
+            style="border-radius: 24px; min-width: 260px;"
           >
             <h4
-              class="text-sm font-weight-black text-uppercase mb-4 text-grey-darken-1"
+              class="text-sm font-weight-bold mb-4 text-judgment_labels"
               style="letter-spacing: 0.1em;"
             >
               Pre-Judgment Fees
@@ -199,17 +199,17 @@
               <template v-if="preJudgmentPayments">
                 <label class="d-flex align-center ga-3 cursor-pointer checkbox-label">
                   <input type="checkbox" style="width:16px; height:16px; accent-color: #2563eb; cursor:pointer;" />
-                  <span class="text-caption font-weight-bold text-uppercase text-grey-darken-1" style="letter-spacing:-0.01em;">Remaining Balance</span>
+                  <span class="text-body-medium text-judgment_labels" style="letter-spacing:-0.01em;">Remaining Balance</span>
                 </label>
               </template>
               <template v-else>
                 <label class="d-flex align-center ga-3 cursor-pointer checkbox-label">
                   <input type="checkbox" style="width:16px; height:16px; accent-color: #2563eb; cursor:pointer;" />
-                  <span class="text-caption font-weight-bold text-uppercase text-grey-darken-1" style="letter-spacing:-0.01em;">Total</span>
+                  <span class="text-body-medium text-judgment_labels" style="letter-spacing:-0.01em;">Total</span>
                 </label>
                 <label class="d-flex align-center ga-3 cursor-pointer checkbox-label">
                   <input type="checkbox" style="width:16px; height:16px; accent-color: #2563eb; cursor:pointer;" />
-                  <span class="text-caption font-weight-bold text-uppercase text-grey-darken-1" style="letter-spacing:-0.01em;">Remaining Balance</span>
+                  <span class="text-body-medium text-judgment_labels" style="letter-spacing:-0.01em;">Remaining Balance</span>
                 </label>
               </template>
             </div>
@@ -220,7 +220,7 @@
             class="pa-6 rounded-xl flex-1 bg-secondary_container_bg"
             style="border: 2px dashed #2563eb;"          >
             <h4
-              class="text-sm font-weight-black text-uppercase mb-6 text-blue-darken-1"
+              class="text-sm font-weight-bold mb-6 text-blue-darken-1"
               style="letter-spacing: 0.1em;"
             >
               Judgment Amount Composition
@@ -234,19 +234,19 @@
               <v-col cols="12" md="4">
                 <label class="d-flex align-center ga-3 cursor-pointer checkbox-label">
                   <input type="checkbox" checked style="width:16px; height:16px; accent-color: #2563eb; cursor:pointer;" />
-                  <span class="text-caption font-weight-bold text-uppercase text-grey-darken-1" style="letter-spacing:-0.01em;">Pre-Judgment Interest</span>
+                  <span class="text-body-medium text-judgment_labels" style="letter-spacing:-0.01em;">Pre-Judgment Interest</span>
                 </label>
               </v-col>
               <v-col cols="12" md="4">
                 <label class="d-flex align-center ga-3 cursor-pointer checkbox-label">
                   <input type="checkbox" style="width:16px; height:16px; accent-color: #2563eb; cursor:pointer;" />
-                  <span class="text-caption font-weight-bold text-uppercase text-grey-darken-1" style="letter-spacing:-0.01em;">Pre-Judgment Costs</span>
+                  <span class="text-body-medium text-judgment_labels" style="letter-spacing:-0.01em;">Pre-Judgment Costs</span>
                 </label>
               </v-col>
               <v-col cols="12" md="4">
                 <label class="d-flex align-center ga-3 cursor-pointer checkbox-label">
                   <input type="checkbox" style="width:16px; height:16px; accent-color: #2563eb; cursor:pointer;" />
-                  <span class="text-caption font-weight-bold text-uppercase text-grey-darken-1" style="letter-spacing:-0.01em;">Pre-Judgment Fees</span>
+                  <span class="text-body-medium text-judgment_labels" style="letter-spacing:-0.01em;">Pre-Judgment Fees</span>
                 </label>
               </v-col>
             </v-row>
@@ -287,6 +287,19 @@ const preJudgmentPayments = ref(false)
 </script>
 
 <style scoped>
+.composition-border {
+  border: 2px solid rgba(var(--v-theme-judgment_composition_border))
+}
+
+.pre-icon {
+  background: rgba(141, 84, 255, .1);
+  color: #8e51ff;
+}
+
+.judgment-icon {
+  color: #3b82f6;
+}
+
 .checkbox-label {
   transition: opacity 0.2s;
 }

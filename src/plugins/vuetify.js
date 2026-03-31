@@ -301,8 +301,9 @@ export default createVuetify({
           // Judgment
           judgment_icon_bg_violet: 'rgba(139, 92, 246, 0.1)',
           judgment_checkbox_border: '#cbd5e1',
-          judgment_composition_bg: 'rgba(59, 130, 246, 0.05)',
-          judgment_composition_border: '#93c5fd',
+          judgment_composition_bg: '#fcf9fa',
+          judgment_composition_border: '#e2e8f0',
+          judgment_labels: '#45556c',
 
           // Legal Details
           legal_judgement_title: '#7c3aed',
@@ -624,6 +625,9 @@ export default createVuetify({
           exp_days_120: '#b91c1c',
           exp_zero_value: '#cbd5e1',
           exp_mortgage_head: '#7c3aed',
+          exp_total_bg: 'rgba(254,242,242,0.5)',
+          exp_delinq_titles: '#314158',
+          exp_delinq_value: '#1d293d',
 
           // Financials
           financial_header_bg: '#f0f9ff',
@@ -919,8 +923,9 @@ export default createVuetify({
           // Judgment
           judgment_icon_bg_violet: 'rgba(139, 92, 246, 0.1)',
           judgment_checkbox_border: '#4b5563',
-          judgment_composition_bg: 'rgba(59, 130, 246, 0.05)',
-          judgment_composition_border: 'rgba(59, 130, 246, 0.2)',
+          judgment_composition_bg: 'rgba(255, 255, 255, 0.05)',
+          judgment_composition_border: 'rgba(255, 255, 255, 0.1)',
+          judgment_labels: '#90a1b9',
 
           // Legal Details
           legal_judgement_title: '#c084fc',
@@ -1244,6 +1249,9 @@ export default createVuetify({
           exp_days_120: '#b91c1c',
           exp_zero_value: 'rgba(255, 255, 255, 0.2)',
           exp_mortgage_head: '#a78bfa',
+          exp_total_bg: 'rgba(251,44,54,0.05)',
+          exp_delinq_titles: 'rgba(255,255,255,0.8)',
+          exp_delinq_value: '#fff',
 
           // Financials
           financial_header_bg: 'rgba(15,23,42,0.4)',
