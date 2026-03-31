@@ -159,10 +159,10 @@
 
     <!-- Footer: Legal / Employment -->
     <v-sheet
-      class="contact-menu-footer-border pa-6 d-flex flex-row flex-wrap justify-start ga-4 bg-contact_menu_footer_bg border border-dashed border-opacity-100 border-custom-blue"
+      class="border-2 rounded-xl pa-6 d-flex flex-row flex-wrap justify-start ga-4 bg-contact_menu_footer_bg border border-dashed border-opacity-100 border-custom-blue"
       elevation="0"
     >
-      <div class="d-flex align-start ga-3 contact-menu-footer-field">
+      <div class="d-flex align-start ga-3 flex-1-1-50 min-w-0">
         <div class="rounded-lg pa-3 bg-contact_menu_footer_icon_bg_blue flex-shrink-0">
           <User :size="20" class="text-billing_footer_label" />
         </div>
@@ -226,16 +226,6 @@ import SelectField from './shared/SelectField.vue';
 
 .contact-menu-section-title {
   letter-spacing: 0.2em;
-}
-
-.contact-menu-footer-field {
-  flex: 1 1 50px;
-  min-width: 0;
-}
-
-.contact-menu-footer-border {
-  border-width: 2px;
-  border-radius: 25px;
 }
 
 .border-custom-blue {
