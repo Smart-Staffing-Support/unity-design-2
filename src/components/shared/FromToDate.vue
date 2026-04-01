@@ -7,9 +7,8 @@
       {{ props.label }}
     </label>
     <div class="d-flex align-center ga-2">
-      <input type="date" class="date-input bg-fields_bg border-fields_border text-fields_text" />
-      <span class="text-grey-darken-1 font-weight-bold">-</span>
-      <input type="date" class="date-input bg-fields_bg border-fields_border text-fields_text" />
+      <input type="date" class="date-input bg-date_field_bg border-date_field_border text-date_field_text" />
+      <input type="date" class="date-input bg-date_field_bg border-date_field_border text-date_field_text" />
     </div>
   </div>
 </template>
