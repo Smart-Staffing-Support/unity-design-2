@@ -65,8 +65,8 @@
       @tab-change="onTabChange"
       @category-change="onCategoryChange"
     >
-      <template #tab-client="{ isDark }">
-        <ClientInfo :theme="isDark ? 'dark' : 'light'" />
+      <template #tab-client>
+        <ClientInfo />
       </template>
       <template #tab-accounts="{ isDark, activeCategory }">
         <AccountsModule :theme="isDark ? 'dark' : 'light'" :category="activeCategory" />

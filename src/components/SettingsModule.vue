@@ -8,7 +8,9 @@
         :key="item.id"
         type="button"
         class="settings-nav-tab d-flex align-center ga-3 px-6 py-3 text-body-2 font-weight-medium w-100 text-left"
-        :class="{ 'settings-nav-tab--active': activeSection === item.id }"
+        :class="activeSection === item.id
+          ? 'settings-nav-tab--active bg-settings_nav_active_bg text-settings_nav_active_fg elevation-2'
+          : 'text-settings_nav_inactive'"
         @click="activeSection = item.id"
       >
         <component :is="item.icon" :size="18" />
@@ -28,7 +30,7 @@
           Company settings
         </h3>
         <v-row>
-          <v-col cols="12" md="6" class="settings-match-select-col"><InputField label="Client ID" placeholder="Enter id..." /></v-col>
+          <v-col cols="12" md="6"><InputField label="Client ID" placeholder="Enter id..." /></v-col>
           <v-col cols="12" md="6"><SelectField label="Sales Agent" :options="[]" /></v-col>
           <v-col cols="12" md="6"><SelectField label="Business Type" :options="[]" /></v-col>
 
@@ -43,7 +45,7 @@
                       type="radio"
                       name="commercialConsumer"
                       value="commercial"
-                      class="radio-input"
+                      class="radio-input text-settings_radio_accent"
                       :checked="commercialConsumer === 'commercial'"
                       @change="commercialConsumer = 'commercial'"
                     />
@@ -54,7 +56,7 @@
                       type="radio"
                       name="commercialConsumer"
                       value="consumer"
-                      class="radio-input"
+                      class="radio-input text-settings_radio_accent"
                       :checked="commercialConsumer === 'consumer'"
                       @change="commercialConsumer = 'consumer'"
                     />
@@ -74,11 +76,11 @@
             </div>
           </v-col>
 
-          <v-col cols="12" md="6" class="settings-match-select-col"><InputField label="Username" /></v-col>
+          <v-col cols="12" md="6"><InputField label="Username" /></v-col>
           <v-col cols="12" md="6" class="d-flex align-end">
             <v-btn
               color="settings_primary"
-              class="font-weight-medium text-body-2 settings-primary-btn settings-round-12 w-100"
+              class="font-weight-medium text-body-2 settings-round-12 w-100"
               elevation="0"
               block
             >
@@ -117,7 +119,7 @@
         <v-row>
           <v-col cols="12" md="6"><SelectField label="Credit reporting" :options="[]" /></v-col>
           <v-col cols="12" md="6"><SelectField label="Legal authorization" :options="[]" /></v-col>
-          <v-col cols="12" md="6" class="settings-match-select-col"><InputField label="Settlement authorization %" /></v-col>
+          <v-col cols="12" md="6"><InputField label="Settlement authorization %" /></v-col>
         </v-row>
       </div>
 
@@ -136,16 +138,14 @@
 
       <!-- TRANSACTION ALLOCATIONS -->
       <div v-else-if="activeSection === 'allocations'" class="d-flex flex-column ga-8 animate-slide">
-        <div class="settings-transaction-alloc">
-          <TransactionAllocations :theme="themeMode" />
-        </div>
+        <TransactionAllocations />
       </div>
 
       <!-- Save Button -->
-      <div class="settings-save-footer mt-12 pt-8 d-flex justify-end border-t border-opacity-100 border-settings_save_section_border">
+      <div class="mt-12 pt-8 d-flex justify-end border-t border-opacity-100 border-settings_save_section_border">
         <v-btn
           color="settings_primary"
-          class="font-weight-medium text-body-2 settings-primary-btn settings-round-12"
+          class="font-weight-medium text-body-2 settings-round-12"
           elevation="0"
           size="large"
         >
@@ -159,11 +159,10 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 
 defineOptions({ inheritAttrs: false });
 import { Building2, Settings, ShieldCheck, XCircle, Calculator, Save } from 'lucide-vue-next';
-import { useTheme } from 'vuetify';
 import RadioField from './shared/RadioField.vue';
 import SelectField from './shared/SelectField.vue';
 import InputField from './shared/InputField.vue';
@@ -171,9 +170,6 @@ import TransactionAllocations from './TransactionAllocations.vue';
 
 const activeSection = ref('company');
 const commercialConsumer = ref(null);
-
-const vuetifyTheme = useTheme();
-const themeMode = computed(() => (vuetifyTheme.global.current.value.dark ? 'dark' : 'light'));
 
 const navItems = [
   { id: 'company', label: 'Company Settings', icon: Building2 },
@@ -234,28 +230,24 @@ const navItems = [
   transition:
     background-color 0.2s ease,
     color 0.2s ease,
-    box-shadow 0.2s ease;
+    opacity 0.2s ease;
   min-height: 48px;
-  background: transparent;
-  color: rgb(var(--v-theme-settings_nav_inactive));
+}
+
+.settings-nav-tab:not(.settings-nav-tab--active) {
+  background-color: transparent;
 }
 
 .settings-nav-tab:hover:not(.settings-nav-tab--active) {
-  background-color: rgb(var(--v-theme-settings_nav_hover_bg));
+  opacity: 0.92;
 }
 
 .settings-nav-tab--active {
-  background-color: rgb(var(--v-theme-settings_nav_active_bg));
-  color: rgb(var(--v-theme-settings_nav_active_fg));
-  box-shadow: 0 8px 24px rgb(var(--v-theme-settings_primary) / 0.25);
+  opacity: 1;
 }
 
 .settings-sheet {
   border-radius: 40px;
-}
-
-:global(.v-theme--light) .settings-sheet {
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
 .settings-rate-col {
@@ -266,55 +258,17 @@ const navItems = [
   border-radius: 12px;
 }
 
-.settings-primary-btn {
-  box-shadow: 0 8px 24px rgb(var(--v-theme-settings_primary) / 0.2);
-}
-
 .radio-input {
   width: 16px;
   height: 16px;
-  accent-color: rgb(var(--v-theme-settings_radio_accent));
+  accent-color: currentColor;
   cursor: pointer;
   flex-shrink: 0;
 }
 
 .radio-input:focus {
-  outline: 2px solid rgb(var(--v-theme-settings_radio_focus) / 0.4);
+  outline: 2px solid currentColor;
   outline-offset: 2px;
 }
 
-:deep(.settings-match-select-col .input-field) {
-  background-color: rgb(var(--v-theme-select_field_bg));
-  border-color: rgb(var(--v-theme-select_field_border));
-  color: rgb(var(--v-theme-select_field_text));
-}
-
-:deep(.settings-match-select-col .input-field:hover) {
-  background-color: rgb(var(--v-theme-select_field_hover_bg));
-}
-
-:deep(.settings-match-select-col .input-field:focus),
-:deep(.settings-match-select-col .input-field:focus-visible) {
-  border-color: rgb(var(--v-theme-select_field_focus_border));
-}
-
-.settings-match-select-col {
-  --v-theme-date_field_bg: var(--v-theme-select_field_bg);
-  --v-theme-date_field_border: var(--v-theme-select_field_border);
-  --v-theme-date_field_text: var(--v-theme-select_field_text);
-  --v-theme-date_field_hover_bg: var(--v-theme-select_field_hover_bg);
-  --v-theme-date_field_focus_border: var(--v-theme-select_field_focus_border);
-}
-
-.settings-transaction-alloc :deep(.allocation-row) {
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  border-bottom-color: rgb(var(--v-theme-settings_alloc_row_border));
-}
-
-.settings-transaction-alloc :deep(.allocation-row:last-child) {
-  border-bottom-width: 1px;
-  border-bottom-style: solid;
-  border-bottom-color: rgb(var(--v-theme-settings_alloc_row_border));
-}
 </style>

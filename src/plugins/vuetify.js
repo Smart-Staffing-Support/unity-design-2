@@ -267,6 +267,7 @@ export default createVuetify({
           client_icon_amber: '#d97706',
           client_icon_indigo_bg: 'rgba(99, 102, 241, 0.1)',
           client_icon_indigo: '#4f46e5',
+          client_icon_cyan: '#0891b2',
           client_header_icon_bg: 'rgba(37, 99, 235, 0.1)',
           client_header_title: '#1f2937',
           client_header_subtitle: '#475569',
@@ -643,6 +644,13 @@ export default createVuetify({
           // SkipTracing
           st_hero_bg: '#f0f9ff',
           st_hero_border: 'rgba(59, 130, 246, 0.5)',
+          st_skip_surface_credit: '#f4f9ff',
+          st_skip_surface_property: '#f0f7ff',
+          st_skip_hero_score_text: '#55647a',
+          st_skip_save_btn_bg: '#1a5fff',
+          st_skip_save_btn_bg_hover: '#1547d9',
+          st_skip_menu_active_bg: '#6d5ae6',
+          st_skip_menu_row_fg: '#f8fafc',
 
           // TabsContent
           tc_tabbar_bg: 'transparent',
@@ -889,6 +897,7 @@ export default createVuetify({
           client_icon_amber: '#f59e0b',
           client_icon_indigo_bg: 'rgba(99, 102, 241, 0.1)',
           client_icon_indigo: '#818cf8',
+          client_icon_cyan: '#22d3ee',
           client_header_icon_bg: 'rgba(37, 99, 235, 0.1)',
           client_header_title: '#ffffff',
           client_header_subtitle: '#94a3b8',
@@ -1267,6 +1276,13 @@ export default createVuetify({
           // SkipTracing
           st_hero_bg: 'rgba(37, 99, 235, 0.1)',
           st_hero_border: 'rgba(59, 130, 246, 0.2)',
+          st_skip_surface_credit: '#0b1430',
+          st_skip_surface_property: '#0b1430',
+          st_skip_hero_score_text: '#8e98ac',
+          st_skip_save_btn_bg: '#1664ff',
+          st_skip_save_btn_bg_hover: '#1254d6',
+          st_skip_menu_active_bg: '#6d5ae6',
+          st_skip_menu_row_fg: '#f8fafc',
 
           // TabsContent
           tc_tabbar_bg: 'rgba(255, 255, 255, 0.1)',
