@@ -1,6 +1,6 @@
 <template>
-  <label class="d-flex align-center ga-3 cursor-pointer select-none checkbox-label position-relative">
-    <!-- Covers the full row so clicks always hit the native control (expansion panels / stacking-safe). -->
+  <label class="d-flex align-center ga-3 cursor-pointer select-none position-relative">
+    <!-- Covers the full row so clicks always hit the native control -->
     <input
       type="checkbox"
       :checked="checked"
@@ -8,12 +8,12 @@
       @change="$emit('update:checked', $event.target.checked)"
     />
 
-    <div class="checkbox-control-wrap flex-shrink-0">
+    <div class="flex-shrink-0" style="width: 20px; height: 20px;">
       <div
-        class="rounded-circle checkbox-box"
+        class="rounded-circle"
         :class="[
           checked
-            ? 'bg-checkbox_field_box_checked checkbox-box--checked'
+            ? 'bg-checkbox_field_box_checked'
             : 'bg-checkbox_field_box_bg border-checkbox_field_box_border_unchecked',
         ]"
         style="width: 20px; height: 20px; border-radius: 50%; transition: background 0.15s, border-color 0.15s, border-width 0.15s;"
@@ -54,19 +54,13 @@
   appearance: none;
 }
 
-.checkbox-control-wrap,
 .checkbox-text {
   position: relative;
   z-index: 0;
   pointer-events: none;
 }
 
-.checkbox-control-wrap {
-  width: 20px;
-  height: 20px;
-}
-
-/* Unchecked: ring uses theme border; checked: solid blue fill (theme). */
+/* Unchecked: ring uses theme border */
 .checkbox-box:not(.checkbox-box--checked) {
   border: 2px solid;
 }
@@ -77,7 +71,7 @@
   box-shadow: none;
 }
 
-/* Unchecked: blue border on hover only (no extra ring on click — see .checkbox-hit below). */
+/* Unchecked: blue border on hover */
 .checkbox-label:hover .checkbox-box:not(.checkbox-box--checked) {
   border-color: #60a5fa;
 }
@@ -86,7 +80,7 @@
   color: rgb(var(--v-theme-checkbox_field_label_hover));
 }
 
-/* Remove focus ring after click / keyboard; hover styling stays on .checkbox-label:hover above. */
+/* Remove focus ring after click */
 .checkbox-hit:focus,
 .checkbox-hit:focus-visible,
 .checkbox-hit:active {

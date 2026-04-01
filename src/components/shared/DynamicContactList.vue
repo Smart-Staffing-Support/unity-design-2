@@ -7,7 +7,7 @@
         style="letter-spacing: 0.1em;"
       >{{ label }}</label>
       <button
-        class="d-flex align-center justify-center pa-1 rounded-md text-primary"
+        class="d-flex align-center justify-center pa-1 rounded-sm text-primary"
         style="background: transparent; border: none; cursor: pointer;"
         @click="addItem"
       >
@@ -35,8 +35,8 @@
           :type="type"
           :value="item"
           @input="items[index] = $event.target.value"
-          class="w-100 font-weight-bold text-caption pa-2 rounded-xl bg-fields_bg border-fields_border text-fields_text"
-          style="padding-left: 36px; padding-right: 40px; border-width: 1px; border-style: solid; outline: none;"
+          class="w-100 font-weight-bold text-caption pa-2 rounded-lg border-select_field_border bg-select_field_bg text-select_field_text "
+          style="padding-left: 36px; padding-right: 40px; border-width: 1px; border-style: solid; outline: none; "
         />
 
         <!-- Trailing delete button (visible on hover) -->
