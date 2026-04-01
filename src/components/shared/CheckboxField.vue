@@ -3,28 +3,31 @@
     <!-- Covers the full row so clicks always hit the native control -->
     <input
       type="checkbox"
-      :checked="checked"
+      :checked="modelValue"
       class="checkbox-hit ma-0 border-0"
-      @change="$emit('update:checked', $event.target.checked)"
+      @change="$emit('update:modelValue', $event.target.checked)"
     />
 
     <div class="flex-shrink-0" style="width: 20px; height: 20px;">
       <div
-        class="rounded-circle"
-        :class="[
-          checked
-            ? 'bg-checkbox_field_box_checked'
-            : 'bg-checkbox_field_box_bg border-checkbox_field_box_border_unchecked',
-        ]"
-        style="width: 20px; height: 20px; border-radius: 50%; transition: background 0.15s, border-color 0.15s, border-width 0.15s;"
+        class="rounded-md checkbox-box border-checkbox_field_box_border_unchecked d-flex align-center justify-center"
+        :class="{ 'checkbox-box--checked': modelValue }"
+        style="width: 20px; height: 20px; transition: background 0.15s, border-color 0.15s, border-width 0.15s;"
         aria-hidden="true"
-      />
+      >
+        <Check
+          v-if="modelValue"
+          :size="16"
+          stroke-width="4"
+          class="checkbox-check-icon"
+        />
+      </div>
     </div>
 
     <span
       class="checkbox-text"
       style="font-size: 14px; letter-spacing: 0.1em; transition: color 0.15s;"
-      :class="checked ? 'text-checkbox_field_label_checked' : 'text-checkbox_field_label'"
+      :class="modelValue ? 'text-checkbox_field_label_checked' : 'text-checkbox_field_label'"
     >
       {{ label }}
     </span>
@@ -32,13 +35,14 @@
 </template>
 
 <script setup>
-  const props = defineProps ({
-    label:   { type: String,  required: true  },
-    checked: { type: Boolean, default: false  },
-  })
+import { Check } from 'lucide-vue-next';
 
-  const emits = defineEmits (['update:checked'])
+defineProps({
+  label: { type: String, required: true },
+  modelValue: { type: Boolean, default: false },
+})
 
+defineEmits(['update:modelValue'])
 </script>
 
 <style scoped>
@@ -66,9 +70,12 @@
 }
 
 .checkbox-box--checked {
-  border: none;
-  outline: none;
-  box-shadow: none;
+  border: 1px solid rgb(var(--v-theme-checkbox_field_box_checked));
+  background: rgb(var(--v-theme-checkbox_field_box_checked));
+}
+
+.checkbox-check-icon {
+  color: #ffffff;
 }
 
 /* Unchecked: blue border on hover */
@@ -84,8 +91,8 @@
 .checkbox-hit:focus,
 .checkbox-hit:focus-visible,
 .checkbox-hit:active {
-  outline: none !important;
-  box-shadow: none !important;
+  outline: none;
+  box-shadow: none;
 }
 
 .checkbox-box,

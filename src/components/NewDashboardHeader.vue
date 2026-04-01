@@ -1,6 +1,6 @@
 <template>
   <v-sheet
-    class="dashboard-sheet w-100 pa-4 mb-8 position-relative overflow-hidden bg-client_accordion_bg border border-sm border-custom-blue"
+    class="rounded-xl w-100 pa-4 mb-8 position-relative overflow-hidden bg-client_accordion_bg border border-sm border-custom-blue"
   >
     <!-- Ambient glow blob -->
     <div class="ambient-glow position-absolute pointer-events-none rounded-circle" />
@@ -57,57 +57,57 @@
       <!-- Column 1 -->
       <v-col cols="12" md="6" lg="3" xl="2">
         <div class="d-flex flex-column ga-6">
-          <SelectField label="Client's Name" :options="[]" :theme="theme" />
-          <SelectField label="Creditor" :options="[]" :theme="theme" />
-          <InputField label="Client #" :theme="theme" />
-          <InputField label="Court Case #" :theme="theme" />
+          <SelectField label="Client's Name" :options="[]"/>
+          <SelectField label="Creditor" :options="[]"/>
+          <InputField label="Client #"/>
+          <InputField label="Court Case #"/>
         </div>
       </v-col>
 
       <!-- Column 2 -->
       <v-col cols="12" md="6" lg="3" xl="2">
         <div class="d-flex flex-column ga-6">
-          <SelectField label="Status Type" :options="[{value:'open',label:'Open'},{value:'close',label:'Close'},{value:'legal',label:'Legal'}]" default-value="open" :theme="theme" />
-          <SelectField label="Main Status" :options="[{value:'stat1',label:'Processing'},{value:'stat2',label:'Escalated'},{value:'stat3',label:'Final Notice'}]" default-value="stat1" :theme="theme" />
-          <SelectField label="Sub-Status" :options="[{value:'sec-stat1',label:'Skip Tracing'},{value:'sec-stat2',label:'Asset Verify'},{value:'sec-stat3',label:'Legal Prep'}]" default-value="sec-stat1" :theme="theme" />
-          <SelectField label="Sub-sub-Status" :options="[{value:'sec-stat1',label:'Field Agent'},{value:'sec-stat2',label:'Mail Return'},{value:'sec-stat3',label:'Call Refused'}]" default-value="sec-stat1" :theme="theme" />
+          <SelectField label="Status Type" :options="[{value:'open',label:'Open'},{value:'close',label:'Close'},{value:'legal',label:'Legal'}]" default-value="open" />
+          <SelectField label="Main Status" :options="[{value:'stat1',label:'Processing'},{value:'stat2',label:'Escalated'},{value:'stat3',label:'Final Notice'}]" default-value="stat1"/>
+          <SelectField label="Sub-Status" :options="[{value:'sec-stat1',label:'Skip Tracing'},{value:'sec-stat2',label:'Asset Verify'},{value:'sec-stat3',label:'Legal Prep'}]" default-value="sec-stat1"/>
+          <SelectField label="Sub-sub-Status" :options="[{value:'sec-stat1',label:'Field Agent'},{value:'sec-stat2',label:'Mail Return'},{value:'sec-stat3',label:'Call Refused'}]" default-value="sec-stat1"/>
         </div>
       </v-col>
 
       <!-- Column 3 -->
       <v-col cols="12" md="6" lg="3" xl="2">
         <div class="d-flex flex-column ga-6">
-          <SelectField label="Account Type" :options="[{value:'comm',label:'Commercial'},{value:'cons',label:'Consumer'}]" default-value="comm" :theme="theme" />
-          <SelectField label="Medical" :options="[{value:'1',label:'Medical'},{value:'2',label:'Non-Medical'}]" default-value="1" :theme="theme" />
-          <SelectField label="Primary Collector" :options="[{value:'john',label:'John Doe'},{value:'jane',label:'Sarah Jenkins'}]" default-value="jane" :theme="theme" />
-          <SelectField label="Co-Collector" :options="[{value:'jane',label:'Jane Smith'},{value:'john',label:'John Doe'}]" default-value="jane" :theme="theme" />
-          <SelectField label="Agreement Arrangement" :options="[]" :theme="theme" />
-          <SelectField label="Last Date of Service" :options="[]" :theme="theme" />
+          <SelectField label="Account Type" :options="[{value:'comm',label:'Commercial'},{value:'cons',label:'Consumer'}]" default-value="comm"/>
+          <SelectField label="Medical" :options="[{value:'1',label:'Medical'},{value:'2',label:'Non-Medical'}]" default-value="1"/>
+          <SelectField label="Primary Collector" :options="[{value:'john',label:'John Doe'},{value:'jane',label:'Sarah Jenkins'}]" default-value="jane"/>
+          <SelectField label="Co-Collector" :options="[{value:'jane',label:'Jane Smith'},{value:'john',label:'John Doe'}]" default-value="jane"/>
+          <SelectField label="Agreement Arrangement" :options="[]" />
+          <SelectField label="Last Date of Service" :options="[]" />
         </div>
       </v-col>
 
       <!-- Column 4 -->
       <v-col cols="12" md="6" lg="3" xl="2">
         <div class="d-flex flex-column ga-6">
-          <DateField label="Charged Off" :theme="theme" />
-          <DateField label="Referring" :theme="theme" />
-          <DateField label="Originated" :theme="theme" />
-          <DateField label="Next Work" :theme="theme" />
-          <DateField label="1st Delinq" :theme="theme" />
-          <DateField label="Statute of Limitation" :theme="theme" />
+          <DateField label="Charged Off"/>
+          <DateField label="Referring"/>
+          <DateField label="Originated"/>
+          <DateField label="Next Work"/>
+          <DateField label="1st Delinq"/>
+          <DateField label="Statute of Limitation"/>
         </div>
       </v-col>
 
       <!-- Column 5 -->
       <v-col cols="12" md="6" lg="12" xl="2">
         <div class="d-flex flex-column ga-6">
-          <InputField label="Principal" type="number" :theme="theme" />
-          <InputField label="Costs/Fees" type="text" :theme="theme" />
-          <DateField label="Interest Start Date" :theme="theme" />
-          <InputField label="Interest Rate" type="text" :theme="theme" />
+          <InputField label="Principal" type="number"/>
+          <InputField label="Costs/Fees" type="text"/>
+          <DateField label="Interest Start Date"/>
+          <InputField label="Interest Rate" type="text"/>
 
           <div class="d-flex align-end ga-4">
-            <InputField label="Linked Account #" type="text" :theme="theme" />
+            <InputField label="Linked Account #" type="text"/>
             <v-btn
               color="blue-darken-1"
               class="font-weight-black text-uppercase rounded-lg"
@@ -194,7 +194,7 @@
           <!-- Tabs -->
           <v-tabs
             v-model="activeTab"
-            class="mb-8 debtor-type-tabs bg-debtor_tabs_bg border border-sm border-custom-blue"
+            class="mb-8 bg-debtor_tabs_bg border border-sm border-custom-blue"
             selected-class="debtor-type-tab-active"
             hide-slider
             density="comfortable"
@@ -219,19 +219,19 @@
             <!-- Individual Tab -->
             <v-tabs-window-item value="individual">
               <v-row class="mb-2">
-                <v-col cols="12" sm="6" md="3"><InputField label="First Name" type="text" :theme="theme" /></v-col>
-                <v-col cols="12" sm="6" md="3"><InputField label="Middle Name" type="text" :theme="theme" /></v-col>
-                <v-col cols="12" sm="6" md="3"><InputField label="Last Name" type="text" :theme="theme" /></v-col>
-                <v-col cols="12" sm="6" md="3"><InputField label="AKA" type="text" :theme="theme" /></v-col>
-                <v-col cols="12" sm="6" md="3"><InputField label="Prefix" type="text" :theme="theme" /></v-col>
-                <v-col cols="12" sm="6" md="3"><InputField label="Suffix" type="text" :theme="theme" /></v-col>
-                <v-col cols="12" sm="6" md="3"><InputField label="SSN" type="text" :theme="theme" /></v-col>
-                <v-col cols="12" sm="6" md="3"><DateField label="DOB" :theme="theme" /></v-col>
-                <v-col cols="12" sm="6" md="3"><InputField label="Type" type="text" :theme="theme" /></v-col>
+                <v-col cols="12" sm="6" md="3"><InputField label="First Name" type="text"/></v-col>
+                <v-col cols="12" sm="6" md="3"><InputField label="Middle Name" type="text"/></v-col>
+                <v-col cols="12" sm="6" md="3"><InputField label="Last Name" type="text"/></v-col>
+                <v-col cols="12" sm="6" md="3"><InputField label="AKA" type="text"/></v-col>
+                <v-col cols="12" sm="6" md="3"><InputField label="Prefix" type="text"/></v-col>
+                <v-col cols="12" sm="6" md="3"><InputField label="Suffix" type="text"/></v-col>
+                <v-col cols="12" sm="6" md="3"><InputField label="SSN" type="text"/></v-col>
+                <v-col cols="12" sm="6" md="3"><DateField label="DOB"/></v-col>
+                <v-col cols="12" sm="6" md="3"><InputField label="Type" type="text"/></v-col>
 
                 <!-- Deceased -->
                 <v-col cols="12" sm="6" md="3">
-                  <DateField label="Deceased" :theme="theme" />
+                  <DateField label="Deceased"/>
                 </v-col>
               </v-row>
 
@@ -244,15 +244,15 @@
                   style="letter-spacing: 0.2em;"
                 >Address Information</div>
                 <v-row>
-                  <v-col cols="12" sm="6" md="3"><InputField label="Address 1" type="text" :theme="theme" /></v-col>
-                  <v-col cols="12" sm="6" md="3"><InputField label="Address 2" type="text" :theme="theme" /></v-col>
-                  <v-col cols="12" sm="6" md="3"><InputField label="City" type="text" :theme="theme" /></v-col>
+                  <v-col cols="12" sm="6" md="3"><InputField label="Address 1" type="text"/></v-col>
+                  <v-col cols="12" sm="6" md="3"><InputField label="Address 2" type="text"/></v-col>
+                  <v-col cols="12" sm="6" md="3"><InputField label="City" type="text"/></v-col>
                   <v-col cols="12" sm="6" md="3">
-                    <SelectField label="State" :options="[{value:'ca',label:'CA'},{value:'ny',label:'NY'},{value:'tx',label:'TX'}]" :theme="theme" />
+                    <SelectField label="State" :options="[{value:'ca',label:'CA'},{value:'ny',label:'NY'},{value:'tx',label:'TX'}]"/>
                   </v-col>
-                  <v-col cols="12" sm="6" md="3"><InputField label="Zip Code" type="text" :theme="theme" /></v-col>
-                  <v-col cols="12" sm="6" md="3"><InputField label="County" type="text" :theme="theme" /></v-col>
-                  <v-col cols="12" sm="6" md="3"><InputField label="Country" type="text" :theme="theme" /></v-col>
+                  <v-col cols="12" sm="6" md="3"><InputField label="Zip Code" type="text"/></v-col>
+                  <v-col cols="12" sm="6" md="3"><InputField label="County" type="text"/></v-col>
+                  <v-col cols="12" sm="6" md="3"><InputField label="Country" type="text"/></v-col>
                 </v-row>
               </div>
 
@@ -265,11 +265,11 @@
                   style="letter-spacing: 0.2em;"
                 >Contact Information</div>
                 <v-row>
-                  <v-col cols="12" sm="6" md="3"><InputField label="Cell Number" type="text" :theme="theme" /></v-col>
-                  <v-col cols="12" sm="6" md="2"><InputField label="Ext" type="text" :theme="theme" /></v-col>
-                  <v-col cols="12" sm="6" md="3"><InputField label="Home Number" type="text" :theme="theme" /></v-col>
-                  <v-col cols="12" sm="6" md="2"><InputField label="Ext" type="text" :theme="theme" /></v-col>
-                  <v-col cols="12" sm="6" md="2"><InputField label="Fax" type="text" :theme="theme" /></v-col>
+                  <v-col cols="12" sm="6" md="3"><InputField label="Cell Number" type="text"/></v-col>
+                  <v-col cols="12" sm="6" md="2"><InputField label="Ext" type="text"/></v-col>
+                  <v-col cols="12" sm="6" md="3"><InputField label="Home Number" type="text"/></v-col>
+                  <v-col cols="12" sm="6" md="2"><InputField label="Ext" type="text"/></v-col>
+                  <v-col cols="12" sm="6" md="2"><InputField label="Fax" type="text"/></v-col>
                 </v-row>
               </div>
             </v-tabs-window-item>
@@ -283,16 +283,16 @@
                   style="letter-spacing: 0.2em;"
                 >Address Information</div>
                 <v-row>
-                  <v-col cols="12" sm="6" md="3"><InputField label="Company Name" type="text" :theme="theme" /></v-col>
-                  <v-col cols="12" sm="6" md="3"><InputField label="Address 1" type="text" :theme="theme" /></v-col>
-                  <v-col cols="12" sm="6" md="3"><InputField label="Address 2" type="text" :theme="theme" /></v-col>
-                  <v-col cols="12" sm="6" md="3"><InputField label="City" type="text" :theme="theme" /></v-col>
+                  <v-col cols="12" sm="6" md="3"><InputField label="Company Name" type="text"/></v-col>
+                  <v-col cols="12" sm="6" md="3"><InputField label="Address 1" type="text"/></v-col>
+                  <v-col cols="12" sm="6" md="3"><InputField label="Address 2" type="text"/></v-col>
+                  <v-col cols="12" sm="6" md="3"><InputField label="City" type="text"/></v-col>
                   <v-col cols="12" sm="6" md="3">
-                    <SelectField label="State" :options="[{value:'ca',label:'CA'},{value:'ny',label:'NY'},{value:'tx',label:'TX'}]" :theme="theme" />
+                    <SelectField label="State" :options="[{value:'ca',label:'CA'},{value:'ny',label:'NY'},{value:'tx',label:'TX'}]"/>
                   </v-col>
-                  <v-col cols="12" sm="6" md="3"><InputField label="Zip Code" type="text" :theme="theme" /></v-col>
-                  <v-col cols="12" sm="6" md="3"><InputField label="County" type="text" :theme="theme" /></v-col>
-                  <v-col cols="12" sm="6" md="3"><InputField label="Country" type="text" :theme="theme" /></v-col>
+                  <v-col cols="12" sm="6" md="3"><InputField label="Zip Code" type="text"/></v-col>
+                  <v-col cols="12" sm="6" md="3"><InputField label="County" type="text"/></v-col>
+                  <v-col cols="12" sm="6" md="3"><InputField label="Country" type="text"/></v-col>
                 </v-row>
               </div>
 
@@ -305,8 +305,8 @@
                   style="letter-spacing: 0.2em;"
                 >Company Contact Information</div>
                 <div class="d-flex ga-6">
-                  <InputField label="Office Number" type="text" :theme="theme" />
-                  <InputField label="Fax" type="text" :theme="theme" />
+                  <InputField label="Office Number" type="text"/>
+                  <InputField label="Fax" type="text"/>
                 </div>
               </div>
 
@@ -320,9 +320,9 @@
                   style="letter-spacing: 0.2em;"
                 >Contact Information</div>
                 <v-row align="end">
-                  <v-col cols="12" sm="6" md="3"><InputField label="First Name" type="text" :theme="theme" /></v-col>
-                  <v-col cols="12" sm="6" md="3"><InputField label="Last Name" type="text" :theme="theme" /></v-col>
-                  <v-col cols="12" sm="6" md="3"><InputField label="Contact Title" type="text" :theme="theme" /></v-col>
+                  <v-col cols="12" sm="6" md="3"><InputField label="First Name" type="text"/></v-col>
+                  <v-col cols="12" sm="6" md="3"><InputField label="Last Name" type="text"/></v-col>
+                  <v-col cols="12" sm="6" md="3"><InputField label="Contact Title" type="text"/></v-col>
                   <v-col cols="12" sm="6" md="3">
                     <div class="d-flex flex-column ga-2">
                       <label
@@ -337,7 +337,7 @@
                       />
                     </div>
                   </v-col>
-                  <v-col cols="12" sm="6" md="3"><InputField label="Phone Number" type="tel" :theme="theme" /></v-col>
+                  <v-col cols="12" sm="6" md="3"><InputField label="Phone Number" type="tel"/></v-col>
                   <v-col cols="auto" class="d-flex align-end">
                     <v-btn
                       color="teal"
@@ -350,19 +350,19 @@
 
                 <!-- Personal Guarantor fields -->
                 <v-row v-if="isPersonalGuarantor" align="end" class="mt-2">
-                  <v-col cols="12" sm="6" md="3"><InputField label="SSN" type="text" :theme="theme" /></v-col>
-                  <v-col cols="12" sm="6" md="3"><DateField label="DOB" :theme="theme" /></v-col>
+                  <v-col cols="12" sm="6" md="3"><InputField label="SSN" type="text"/></v-col>
+                  <v-col cols="12" sm="6" md="3"><DateField label="DOB"/></v-col>
                   <v-col cols="12" sm="6" md="3">
                     <div class="d-flex flex-column ga-2">
                       <label
                         class="text-body-2 text-dh_label"
                         style="letter-spacing: 0.1em;"
                       >Deceased</label>
-                      <DateField label="" :theme="theme" />
+                      <DateField label=""/>
                     </div>
                   </v-col>
                   <v-col cols="12" sm="6" md="3" />
-                  <v-col cols="12" sm="6" md="3"><InputField label="Address" type="text" :theme="theme" /></v-col>
+                  <v-col cols="12" sm="6" md="3"><InputField label="Address" type="text"/></v-col>
                   <v-col cols="auto" class="d-flex align-end">
                     <v-btn
                       color="teal"
@@ -420,13 +420,6 @@ import SelectField from './shared/SelectField.vue';
 import DateField from './shared/DateField.vue';
 import InputField from './shared/InputField.vue';
 
-defineProps({
-  theme: {
-    type: String,
-    default: 'dark',
-    validator: (val) => ['dark', 'light'].includes(val),
-  },
-});
 
 const isDebtorModalOpen = ref(false);
 const isAddContact = ref(false);
@@ -452,36 +445,8 @@ function handleContact() {
 </script>
 
 <style scoped>
-.dashboard-sheet {
-  border-radius: 25px;
-}
-
 .border-custom-blue {
   border-color: rgba(59, 130, 246, 0.5);
-}
-
-:deep(.input-field),
-:deep(.select-field) {
-  box-sizing: border-box;
-  padding: 10px 40px 10px 16px !important;
-  border-radius: 12px !important;
-  font-size: 0.75rem;
-}
-
-/* Keep field rows horizontally aligned across columns */
-:deep(.text-fields_label),
-:deep(.text-select_field_label),
-:deep(.text-date_field_label) {
-  min-height: 20px;
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-}
-
-:deep(.input-field),
-:deep(.select-field),
-:deep(.date-field) {
-  height: 40px;
 }
 
 /* Scrollbar for modal body */
@@ -497,34 +462,5 @@ div[style*="overflow-y: auto"]::-webkit-scrollbar-thumb {
 }
 div[style*="overflow-y: auto"]::-webkit-scrollbar-thumb:hover {
   background: rgba(148, 163, 184, 0.5);
-}
-
-.debtor-type-tabs {
-  border-radius: 14px;
-  padding: 3px;
-}
-
-:deep(.debtor-type-tabs .v-slide-group__content) {
-  gap: 4px;
-}
-
-:deep(.debtor-type-tab) {
-  flex: 1 1 0;
-  min-height: 32px;
-  border-radius: 10px;
-  color: #111827;
-  background-color: transparent;
-}
-
-:deep(.debtor-type-tab-active) {
-  background-color: #2563eb !important;
-  color: #ffffff !important;
-}
-
-:deep(.debtor-modal-shell .v-tabs-window),
-:deep(.debtor-modal-shell .v-window__container),
-:deep(.debtor-modal-shell .v-tabs-window-item) {
-  border: none !important;
-  outline: none !important;
 }
 </style>

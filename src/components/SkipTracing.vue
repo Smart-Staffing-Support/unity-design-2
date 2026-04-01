@@ -50,7 +50,6 @@
                 label="TRW Bureau Status"
                 :options="[{value:'reported', label:'Reported'},{value:'not reported', label:'Not Reported'}]"
                 default-value="reported"
-                :theme="theme"
               />
             </v-col>
 
@@ -96,20 +95,19 @@
             label="Property Ownership"
             :options="[{value:'none',label:'None'},{value:'own',label:'Own'},{value:'rent',label:'Rent'}]"
             default-value="none"
-            :theme="theme"
           />
         </v-col>
         <v-col cols="12" md="6" lg="auto" class="flex-grow-1">
-          <AssetStat label="Mortgage Amount" :value="null" :theme="theme" />
+          <AssetStat label="Mortgage Amount" :value="null" />
         </v-col>
         <v-col cols="12" md="6" lg="auto" class="flex-grow-1">
-          <AssetStat label="Available Equity" value="$0.00" :theme="theme" :highlight="true" />
+          <AssetStat label="Available Equity" value="$0.00" :highlight="true" />
         </v-col>
         <v-col cols="12" md="6" lg="auto" class="flex-grow-1">
-          <AssetStat label="Zillow Valuation" :value="null" :theme="theme" />
+          <AssetStat label="Zillow Valuation" :value="null" />
         </v-col>
         <v-col cols="12" md="6" lg="auto" class="flex-grow-1">
-          <AssetStat label="Est. Monthly Rent" value="$6,380" :theme="theme" />
+          <AssetStat label="Est. Monthly Rent" value="$6,380"/>
         </v-col>
       </v-row>
     </div>
