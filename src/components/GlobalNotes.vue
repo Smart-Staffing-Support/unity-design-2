@@ -6,29 +6,27 @@
 
     <!-- Header -->
     <div
-      class="d-flex align-center justify-space-between px-8 py-6 border-lg border-secondary_container_border"
+      class="d-flex align-center justify-space-between px-8 py-1 border border-secondary_container_border"
     >
       <div class="d-flex align-center ga-3">
         <div
-          class="rounded-xl d-flex align-center justify-center"
-          style="width:40px; height:40px; background: rgba(37,99,235,0.2);"
+          class="rounded-xl d-flex align-center justify-center msg-icon"
         >
           <MessageSquare :size="20" class="text-blue" />
         </div>
         <div>
           <h3
-            class="text-sm font-weight-black text-uppercase text-fields_text"
+            class="text-sm font-weight-bold text-uppercase text-fields_text"
             style="letter-spacing: 0.1em;"
           >
             Account Interaction Notes
-          
+          </h3>
           <p
-            class="font-weight-bold text-uppercase text-grey-lighten-1"
+            class="font-weight-bold text-grey-lighten-1"
             style="font-size: 15px; letter-spacing: 0.1em;"
           >
             Chronological log of collector activity
           </p>
-          </h3>
         </div>
       </div>
 
@@ -105,7 +103,7 @@
           <textarea
             v-model="newNote"
             placeholder="Record call outcome or system update..."
-            class="note-input w-100 bg-fields_bg text-fields_text border-lg border-secondary_container_border"
+            class="note-input w-100 bg-main_background text-fields_text border border-secondary_container_border"
             style="flex: 1; min-height: 280px; border-radius: 24px; padding: 24px; font-size: 0.875rem; resize: none; outline: none; transition: border-color 0.2s, box-shadow 0.2s; width: 100%;"
           />
         </div>
@@ -141,12 +139,19 @@ const mockNotes = [
 </script>
 
 <style scoped>
+
+.msg-icon {
+  width:40px; 
+  height:40px; 
+  background: rgba(37,99,235,0.2);
+}
+
 .note-card:hover {
   transform: scale(1.01);
 }
 
 .input-area-lg {
-  width: 800px;
+  width: 600px;
   border-left: 2px solid rgb(var(--v-theme-secondary_container_border)) !important;
 }
 

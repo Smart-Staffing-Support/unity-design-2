@@ -6,7 +6,7 @@
       <v-col cols="12" md="4">
         <div
           class="pa-6 h-100 rounded-xl bg-secondary_container_bg"
-          style="border: 2px solid rgba(43,127,255,0.5); box-shadow: 0 1px 3px rgba(0,0,0,0.08);"
+          style="border: 1px solid rgba(43,127,255,0.5); box-shadow: 0 1px 3px rgba(0,0,0,0.08);"
         >
           <SelectField
             label="Bankruptcy Filing"
@@ -20,7 +20,7 @@
       <v-col cols="12" md="4">
         <div
           class="pa-6 h-100 rounded-xl bg-secondary_container_bg"
-          style="border: 2px solid rgba(43,127,255,0.5); box-shadow: 0 1px 3px rgba(0,0,0,0.08);"
+          style="border: 1px solid rgba(43,127,255,0.5); box-shadow: 0 1px 3px rgba(0,0,0,0.08);"
         >
           <SelectField
             label="Judgments / Liens (12M)"
@@ -33,7 +33,7 @@
 
       <v-col cols="12" md="4">
         <div
-          class="pa-6 h-100 d-flex flex-column justify-center rounded-xl border-md bg-red-lighten-5"
+          class="pa-6 h-100 d-flex flex-column justify-center rounded-xl border bg-exp_total_bg"
           style="border-color: rgba(239,68,68,1);"
         >
           <span
@@ -52,7 +52,7 @@
     <!-- Middle Section: Delinquency Timeline -->
     <div
       class="pa-8 rounded-xl bg-secondary_container_bg"
-      style="border: 2px solid rgba(43,127,255,0.5); box-shadow: 0 1px 3px rgba(0,0,0,0.08);"
+      style="border: 1px solid rgba(43,127,255,0.5); box-shadow: 0 1px 3px rgba(0,0,0,0.08);"
     >
       <div class="d-flex align-center ga-2 mb-6">
         <div class="rounded-pill bg-amber-darken-1" style="height: 20px; width: 4px;" />
@@ -73,7 +73,7 @@
         >
           <div class="d-flex flex-column">
             <span
-              class="font-weight-black text-uppercase mb-2 text-caption text-grey-darken-2"
+              class="font-weight-black text-uppercase mb-2 text-caption text-exp_delinq_titles"
               style="letter-spacing: 0.1em; opacity: 0.8;"
             >
               {{ item.label }}
@@ -105,7 +105,7 @@
       <v-col cols="12" lg="6">
         <div
           class="pa-8 h-100 rounded-xl bg-secondary_container_bg"
-          style="border: 2px solid rgba(43,127,255,0.5); box-shadow: 0 1px 3px rgba(0,0,0,0.08);"
+          style="border: 1px solid rgba(43,127,255,0.5); box-shadow: 0 1px 3px rgba(0,0,0,0.08);"
         >
           <h4
             class="text-caption font-weight-black text-uppercase mb-6 text-blue-darken-2"
@@ -126,7 +126,7 @@
       <v-col cols="12" lg="6">
         <div
           class="pa-8 h-100 rounded-xl bg-secondary_container_bg"
-          style="border: 2px solid rgba(43,127,255,0.5); box-shadow: 0 1px 3px rgba(0,0,0,0.08);"
+          style="border: 1px solid rgba(43,127,255,0.5); box-shadow: 0 1px 3px rgba(0,0,0,0.08);"
         >
           <h4
             class="text-caption font-weight-black text-uppercase mb-6 text-purple-darken-1"

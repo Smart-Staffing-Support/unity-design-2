@@ -267,6 +267,7 @@ export default createVuetify({
           client_icon_amber: '#d97706',
           client_icon_indigo_bg: 'rgba(99, 102, 241, 0.1)',
           client_icon_indigo: '#4f46e5',
+          client_icon_cyan: '#0891b2',
           client_header_icon_bg: 'rgba(37, 99, 235, 0.1)',
           client_header_title: '#1f2937',
           client_header_subtitle: '#475569',
@@ -301,8 +302,9 @@ export default createVuetify({
           // Judgment
           judgment_icon_bg_violet: 'rgba(139, 92, 246, 0.1)',
           judgment_checkbox_border: '#cbd5e1',
-          judgment_composition_bg: 'rgba(59, 130, 246, 0.05)',
-          judgment_composition_border: '#93c5fd',
+          judgment_composition_bg: '#fcf9fa',
+          judgment_composition_border: '#e2e8f0',
+          judgment_labels: '#45556c',
 
           // Legal Details
           legal_judgement_title: '#7c3aed',
@@ -624,6 +626,9 @@ export default createVuetify({
           exp_days_120: '#b91c1c',
           exp_zero_value: '#cbd5e1',
           exp_mortgage_head: '#7c3aed',
+          exp_total_bg: 'rgba(254,242,242,0.5)',
+          exp_delinq_titles: '#314158',
+          exp_delinq_value: '#1d293d',
 
           // Financials
           financial_header_bg: '#f0f9ff',
@@ -639,6 +644,13 @@ export default createVuetify({
           // SkipTracing
           st_hero_bg: '#f0f9ff',
           st_hero_border: 'rgba(59, 130, 246, 0.5)',
+          st_skip_surface_credit: '#f4f9ff',
+          st_skip_surface_property: '#f0f7ff',
+          st_skip_hero_score_text: '#55647a',
+          st_skip_save_btn_bg: '#1a5fff',
+          st_skip_save_btn_bg_hover: '#1547d9',
+          st_skip_menu_active_bg: '#6d5ae6',
+          st_skip_menu_row_fg: '#f8fafc',
 
           // TabsContent
           tc_tabbar_bg: 'transparent',
@@ -885,6 +897,7 @@ export default createVuetify({
           client_icon_amber: '#f59e0b',
           client_icon_indigo_bg: 'rgba(99, 102, 241, 0.1)',
           client_icon_indigo: '#818cf8',
+          client_icon_cyan: '#22d3ee',
           client_header_icon_bg: 'rgba(37, 99, 235, 0.1)',
           client_header_title: '#ffffff',
           client_header_subtitle: '#94a3b8',
@@ -919,8 +932,9 @@ export default createVuetify({
           // Judgment
           judgment_icon_bg_violet: 'rgba(139, 92, 246, 0.1)',
           judgment_checkbox_border: '#4b5563',
-          judgment_composition_bg: 'rgba(59, 130, 246, 0.05)',
-          judgment_composition_border: 'rgba(59, 130, 246, 0.2)',
+          judgment_composition_bg: 'rgba(255, 255, 255, 0.05)',
+          judgment_composition_border: 'rgba(255, 255, 255, 0.1)',
+          judgment_labels: '#90a1b9',
 
           // Legal Details
           legal_judgement_title: '#c084fc',
@@ -1244,6 +1258,9 @@ export default createVuetify({
           exp_days_120: '#b91c1c',
           exp_zero_value: 'rgba(255, 255, 255, 0.2)',
           exp_mortgage_head: '#a78bfa',
+          exp_total_bg: 'rgba(251,44,54,0.05)',
+          exp_delinq_titles: 'rgba(255,255,255,0.8)',
+          exp_delinq_value: '#fff',
 
           // Financials
           financial_header_bg: 'rgba(15,23,42,0.4)',
@@ -1259,6 +1276,13 @@ export default createVuetify({
           // SkipTracing
           st_hero_bg: 'rgba(37, 99, 235, 0.1)',
           st_hero_border: 'rgba(59, 130, 246, 0.2)',
+          st_skip_surface_credit: '#0b1430',
+          st_skip_surface_property: '#0b1430',
+          st_skip_hero_score_text: '#8e98ac',
+          st_skip_save_btn_bg: '#1664ff',
+          st_skip_save_btn_bg_hover: '#1254d6',
+          st_skip_menu_active_bg: '#6d5ae6',
+          st_skip_menu_row_fg: '#f8fafc',
 
           // TabsContent
           tc_tabbar_bg: 'rgba(255, 255, 255, 0.1)',

@@ -1,5 +1,5 @@
 <template>
-  <div class="animate-fade client-info" :class="`client-info--${theme}`">
+  <div class="animate-fade client-info">
     <div class="d-flex ga-6">
 
       <!-- LEFT: Collapsible Drawer -->
