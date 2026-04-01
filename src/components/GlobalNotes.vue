@@ -152,15 +152,15 @@ const mockNotes = [
 
 .input-area-lg {
   width: 600px;
-  border-left: 2px solid rgb(var(--v-theme-secondary_container_border)) !important;
+  border-left: 1px solid rgb(var(--v-theme-secondary_container_border)) ;
 }
 
 .input-area-sm {
-  border-top: 2px solid rgb(var(--v-theme-secondary_container_border)) !important;
+  border-top: 1px solid rgb(var(--v-theme-secondary_container_border)) ;
 }
 
 .note-input:focus {
-  border-color: rgb(var(--v-theme-secondary_container_border)) !important;
+  border-color: rgb(var(--v-theme-secondary_container_border)) ;
   box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
 }
 

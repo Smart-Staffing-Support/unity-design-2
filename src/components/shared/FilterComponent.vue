@@ -10,7 +10,7 @@
     >
       <div>
         <h2
-          class="text-h5 font-weight-black text-uppercase text-fields_text"
+          class="text-base font-weight-bold text-uppercase text-fields_text"
           style="letter-spacing: -0.01em;"
         >
           Advanced Parameters
@@ -27,7 +27,7 @@
           color="blue-darken-1"
           variant="elevated"
           class="font-weight-black text-uppercase rounded-xl"
-          style="min-width: 288px; letter-spacing: 0.1em; font-size: 0.7rem; box-shadow: 0 4px 16px rgba(37,99,235,0.2);"
+          style="min-width: 150px; letter-spacing: 0.1em; font-size: 0.7rem; box-shadow: 0 4px 16px rgba(37,99,235,0.2);"
         >
           Save Filter
         </v-btn>
@@ -262,9 +262,7 @@ import CheckboxField from './CheckboxField.vue'
 import FromToDate from './FromToDate.vue'
 import DateField from './DateField.vue'
 
-const props = defineProps({
-  theme: { type: String, default: 'light' },
-})
+
 
 const multiSelects = [
   'Collectors', 'Co-Collectors', 'Creditors', 'Clients',

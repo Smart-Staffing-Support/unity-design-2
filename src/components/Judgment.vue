@@ -261,10 +261,11 @@
       <v-btn
         color="blue-darken-1"
         variant="elevated"
+        size="x-large"
         class="rounded-xl ga-2"
         style="border-radius: 16px; box-shadow: 0 4px 16px rgba(37,99,235,0.2);"
       >
-        <Save :size="18" class="mr-2" />
+        <Save :size="20" class="mr-2" />
         Save Judgment
       </v-btn>
     </div>

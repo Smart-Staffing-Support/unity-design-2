@@ -5,7 +5,7 @@
     <div
       class="pa-8 rounded-xl border-md border-blue-darken-2 bg-secondary_container_bg"
       
-      :style="!isDark ? 'box-shadow: 0 1px 3px rgba(0,0,0,0.08);' : ''"
+      :style="'box-shadow: 0 1px 3px rgba(0,0,0,0.08);'"
     >
       <div class="d-flex align-center ga-2 mb-8">
         <div class="rounded-pill bg-blue-darken-1" style="height: 20px; width: 4px;" />
@@ -51,7 +51,7 @@
     <!-- SECTION 2: Judgement Information -->
     <div
       class="pa-8 rounded-xl border-md bg-secondary_container_bg border-secondary_container_border"
-      :style="!isDark ? 'box-shadow: 0 1px 3px rgba(0,0,0,0.08);' : ''"
+      :style="'box-shadow: 0 1px 3px rgba(0,0,0,0.08);'"
     >
       <div class="d-flex align-center ga-2 mb-8">
         <div class="rounded-pill bg-purple-darken-1" style="height: 20px; width: 4px;" />
@@ -121,7 +121,7 @@
     <!-- SECTION 3: Garnishment Information -->
     <div
       class="pa-8 rounded-xl border-md bg-secondary_container_bg border-secondary_container_border"
-      :style="!isDark ? 'box-shadow: 0 1px 3px rgba(0,0,0,0.08);' : ''"
+      :style=" 'box-shadow: 0 1px 3px rgba(0,0,0,0.08);'"
     >
       <div class="d-flex align-center ga-2 mb-8">
         <div class="rounded-pill bg-amber-darken-1" style="height: 20px; width: 4px;" />
@@ -172,6 +172,7 @@
       <v-btn
         color="blue-darken-1"
         variant="elevated"
+        size ="x-large"
         class="rounded-xl"
         style="border-radius: 16px; box-shadow: 0 4px 16px rgba(37,99,235,0.2);"
       >
