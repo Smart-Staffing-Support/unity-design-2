@@ -21,8 +21,8 @@
       </div>
 
       <div class="d-flex align-end ga-4">
-        <SelectField label="Pre-Defined Filters" :options="[]" :theme="theme" />
-        <InputField label="Name" placeholder="" :theme="theme" type="number" />
+        <SelectField label="Pre-Defined Filters" :options="[]"   />
+        <InputField label="Name" placeholder=""   type="number" />
         <v-btn
           color="blue-darken-1"
           variant="elevated"
@@ -66,16 +66,16 @@
             Assignment & Status
           </h4>
           <div style="width: 120px;">
-            <SelectField label="Open Status" :options="[]" :theme="theme" />
+            <SelectField label="Open Status" :options="[]"   />
           </div>
         </div>
 
         <v-row>
           <v-col v-for="label in multiSelects" :key="label" cols="12" md="4" lg="3">
-            <MultiSearchSelect :label="label" :theme="theme" />
+            <MultiSearchSelect :label="label"   />
           </v-col>
           <v-col v-for="item in statusSelects" :key="item.label" cols="12" md="4" lg="3">
-            <SelectField :label="item.label" :options="[]" :theme="theme" />
+            <SelectField :label="item.label" :options="[]"   />
           </v-col>
         </v-row>
       </section>
@@ -92,28 +92,28 @@
             <div
               class="px-6 py-3 d-flex flex-column ga-4 rounded-xl border bg-main_background border-secondary_container_border"
             >
-              <CheckboxField v-for="l in consentGroup1" :key="l" :label="l" :theme="theme" />
+              <CheckboxField v-for="l in consentGroup1" :key="l" :label="l"   />
             </div>
           </v-col>
           <v-col cols="12" md="6" lg="3">
             <div
               class="px-6 py-3 d-flex flex-column ga-4 rounded-xl border bg-main_background border-secondary_container_border"
             >
-              <CheckboxField v-for="l in consentGroup2" :key="l" :label="l" :theme="theme" />
+              <CheckboxField v-for="l in consentGroup2" :key="l" :label="l"   />
             </div>
           </v-col>
           <v-col cols="12" md="6" lg="3">
             <div
               class="px-6 py-3 d-flex flex-column ga-4 rounded-xl border bg-main_background border-secondary_container_border"
             >
-              <CheckboxField v-for="l in consentGroup3" :key="l" :label="l" :theme="theme" />
+              <CheckboxField v-for="l in consentGroup3" :key="l" :label="l"   />
             </div>
           </v-col>
           <v-col cols="12" md="6" lg="3">
             <div
               class="px-6 py-3 d-flex flex-column ga-4 rounded-xl border bg-main_background border-secondary_container_border"
             >
-              <CheckboxField v-for="l in consentGroup4" :key="l" :label="l" :theme="theme" />
+              <CheckboxField v-for="l in consentGroup4" :key="l" :label="l"   />
             </div>
           </v-col>
         </v-row>
@@ -128,34 +128,34 @@
 
         <v-row class="flex-nowrap">
           <v-col v-for="label in fromToDates" :key="label" style="flex: 1; min-width: 0;">
-            <FromToDate :label="label" :theme="theme" />
+            <FromToDate :label="label"   />
           </v-col>
           <v-col style="flex: 2; min-width: 0;">
             <div class="d-flex ga-2">
               <div style="flex: 1; min-width: 0;">
-                <FromToDate label="Last Updated" :theme="theme" />
+                <FromToDate label="Last Updated"   />
               </div>
               <div style="flex: 1; min-width: 0;">
-                <FromToDate label="Last Skip Traced" :theme="theme" />
+                <FromToDate label="Last Skip Traced"   />
               </div>
             </div>
           </v-col>
         </v-row>
         <v-row class="flex-nowrap">
           <v-col style="flex: 1; min-width: 0;">
-            <FromToDate label="Reminder Due" :theme="theme" />
+            <FromToDate label="Reminder Due"   />
           </v-col>
           <v-col style="flex: 1; min-width: 0;">
-            <DateField label="No Payment Made Since" :theme="theme" />
+            <DateField label="No Payment Made Since"   />
           </v-col>
           <v-col style="flex: 1; min-width: 0;">
-            <InputField label="Acc Not Worked in X Days" placeholder="" :theme="theme" type="number" />
+            <InputField label="Acc Not Worked in X Days" placeholder=""   type="number" />
           </v-col>
           <v-col style="flex: 1; min-width: 0;">
-            <InputField label="No Disposition in X Days" placeholder="" :theme="theme" type="number" />
+            <InputField label="No Disposition in X Days" placeholder=""   type="number" />
           </v-col>
           <v-col style="flex: 1; min-width: 0;">
-            <InputField label="Days Assigned" placeholder="" :theme="theme" type="number" />
+            <InputField label="Days Assigned" placeholder=""   type="number" />
           </v-col>
         </v-row>
         <v-row>
@@ -165,11 +165,11 @@
                 <SelectField
                   label="Account Age"
                   :options="[{value:'less',label:'Less Than'},{value:'greater',label:'Greater Than'}]"
-                  :theme="theme"
+                   
                 />
               </div>
               <div style="flex: 1; min-width: 0;">
-                <InputField label="" placeholder="" :theme="theme" type="number" />
+                <InputField label="" placeholder=""   type="number" />
               </div>
             </div>
           </v-col>
@@ -185,7 +185,7 @@
 
         <v-row>
           <v-col cols="12" md="6" lg="auto" style="flex: 1;">
-            <FromToDate label="Amount Due" :theme="theme" />
+            <FromToDate label="Amount Due"   />
           </v-col>
           <v-col cols="12" md="6" lg="auto" style="flex: 1;">
             <div class="d-flex align-end ga-4 position-relative">
@@ -195,16 +195,16 @@
               >
                 Total Amount
               </span>
-              <InputField label="" placeholder="" :theme="theme" type="number" />
+              <InputField label="" placeholder=""   type="number" />
               <span class="text-grey-lighten-1 d-flex align-center font-weight-bold">-</span>
-              <InputField label="" placeholder="" :theme="theme" type="number" />
+              <InputField label="" placeholder=""   type="number" />
             </div>
           </v-col>
           <v-col cols="12" md="6" lg="auto" style="flex: 1;">
-            <FromToDate label="Charge Off Date" :theme="theme" />
+            <FromToDate label="Charge Off Date"   />
           </v-col>
           <v-col cols="12" md="6" lg="auto" style="flex: 1;">
-            <FromToDate label="Last Payment" :theme="theme" />
+            <FromToDate label="Last Payment"   />
           </v-col>
           <v-col cols="12" md="6" lg="auto" style="flex: 1;">
             <div class="d-flex align-end ga-4 position-relative">
@@ -214,9 +214,9 @@
               >
                 Cumulative Delinquent Days
               </span>
-              <InputField label="" placeholder="" :theme="theme" type="number" />
+              <InputField label="" placeholder=""   type="number" />
               <span class="text-grey-lighten-1 d-flex align-center font-weight-bold">-</span>
-              <InputField label="" placeholder="" :theme="theme" type="number" />
+              <InputField label="" placeholder=""   type="number" />
             </div>
           </v-col>
         </v-row>
@@ -229,20 +229,20 @@
       >
         <v-row align="end">
           <v-col cols="12" lg="4">
-            <SelectField label="Select Custom Field" :options="[]" :theme="theme" />
+            <SelectField label="Select Custom Field" :options="[]"   />
           </v-col>
           <v-col cols="12" lg="4">
             <SelectField
               label="Order Results By"
               :options="[{value:'date',label:'Date Received'},{value:'amt',label:'Total Amount'},{value:'name',label:'Debtor Name'}]"
-              :theme="theme"
+               
             />
           </v-col>
           <v-col cols="12" lg="4">
             <SelectField
               label="Sort Direction"
               :options="[{value:'asc',label:'Ascending (A-Z)'},{value:'desc',label:'Descending (Z-A)'}]"
-              :theme="theme"
+               
             />
           </v-col>
         </v-row>

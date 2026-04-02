@@ -134,15 +134,15 @@ const activeFolder = ref(null)
 
 <style scoped>
 .folder-item:hover .folder-icon {
-  background: rgba(59, 130, 246, 0.1) !important;
+  background: rgba(59, 130, 246, 0.1) ;
 }
 .folder-item:hover .folder-label {
   color: #1e293b;
 }
 .file-item:hover .file-icon {
-  background: #f1f5f9 !important;
+  background: #f1f5f9 ;
 }
 .file-item:hover .file-icon-svg {
-  color: #3b82f6 !important;
+  color: #3b82f6 ;
 }
 </style>

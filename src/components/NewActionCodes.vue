@@ -20,7 +20,7 @@
       </div>
 
       <!-- MultiSearchSelect -->
-      <MultiSearchSelect label="Select Action Codes" :theme="theme" />
+      <MultiSearchSelect label="Select Action Codes"   />
     </v-sheet>
   </div>
 </template>
