@@ -1,5 +1,5 @@
 <template>
-  <div class="animate-fade client-info">
+  <div class="animate-fade w-100 client-info">
     <div class="d-flex ga-6">
 
       <!-- LEFT: Collapsible Drawer -->
@@ -13,7 +13,7 @@
         <!-- Toggle Handle (only visible UI when closed — tab flush left, rounded on the right) -->
         <button
           type="button"
-          class="drawer-handle position-absolute d-flex align-center justify-center transition-colors"
+          class="drawer-handle position-absolute d-flex align-center justify-center bg-summary_stat_total_bg transition-colors"
           :class="isDrawerOpen ? 'drawer-handle--open' : 'drawer-handle--closed'"
           :aria-expanded="isDrawerOpen"
           aria-label="Toggle search results drawer"
@@ -25,16 +25,16 @@
         <!-- Drawer Content -->
         <div
           v-show="isDrawerOpen"
-          class="w-100 d-flex flex-column overflow-hidden drawer-content"
+          class="w-100 d-flex flex-column overflow-hidden drawer-content border rounded-xl border-custom-blue"
         >
           <!-- Drawer Header -->
           <div
             class="pa-5 d-flex justify-space-between align-center drawer-header"
           >
-            <span class="drawer-header-title text-body-2 font-weight-black text-uppercase">
+            <span class="drawer-header-title text-body-2 font-weight-black text-uppercase text-select_field_label">
               Search Results
             </span>
-            <v-chip size="small" class="drawer-clients-chip font-weight-black">24 Clients</v-chip>
+            <v-chip size="small" class="drawer-clients-chip rounded-lg bg-summary_stat_total_bg font-weight-black">24 Clients</v-chip>
           </div>
 
           <!-- Drawer List -->
@@ -45,87 +45,101 @@
               class="drawer-item px-4 py-1 rounded-xl cursor-pointer transition-all"
               :class="{ 'drawer-item--selected': i === 1 }"
             >
-              <p class="drawer-item-title text-body-2">Global Logistics Inc.</p>
+              <p
+                class="drawer-item-title drawer-item-title--hoverable text-body-2 rounded-lg border border-custom-blue py-3 px-3 transition-all"
+              >Global Logistics Inc.</p>
             </div>
           </div>
         </div>
       </div>
 
       <!-- RIGHT: Client Dossier -->
-      <div class="w-100" style="overflow-y: auto;">
+      <div class="w-100 client-info-dossier-scroll">
 
         <!-- Header -->
-        <div class="d-flex align-center ga-3 mb-8">
-          <div class="pa-3 rounded-xl" style="background: rgba(37,99,235,0.10);">
-            <UserPlus :size="24" color="#2563eb" />
+        <div class="d-flex align-center ga-3 mb-8 client-info-page-header">
+          <div class="client-info-page-header-icon pa-3 rounded-lg d-flex align-center justify-center bg-billing_modal_icon_bg">
+            <UserPlus :size="24" class="client-info-page-header-icon-svg text-primary" />
           </div>
           <div>
-            <h3
-              class="text-h5"
-              style="letter-spacing: -0.5px;"
-              :style="theme === 'dark' ? 'color: white;' : 'color: #1f2937;'"
-            >Client Profile</h3>
-            <p
-              class="text-caption font-weight-bold text-uppercase"
-              style="letter-spacing: 0.15em;"
-              :style="theme === 'dark' ? 'color: #64748b;' : 'color: #475569;'"
-            >Complete client information &amp; configuration</p>
+            <h3 class="text-h5 text-high-emphasis client-info-page-title">Client Profile</h3>
+            <p class="text-caption font-weight-bold text-uppercase text-medium-emphasis client-info-page-subtitle">
+              Complete client information &amp; configuration
+            </p>
           </div>
         </div>
 
         <!-- SECTION 1: Firm Identity -->
-        <v-sheet v-bind="sectionProps" class="pa-8 mb-8">
-          <div class="d-flex align-center ga-3 mb-6">
-            <div class="pa-2 rounded-xl" style="background: rgba(59,130,246,0.10);">
-              <Briefcase :size="18" color="#2563eb" />
-            </div>
-            <h4 class="text-h6" style="letter-spacing: -0.3px;" :style="sectionTitleStyle">Firm Identity</h4>
+        <v-sheet
+          class="client-info-section-sheet pa-8 mb-8 rounded-xl bg-contact_menu_card_bg"
+          color="surface"
+          border
+        >
+          <div class="d-flex align-center ga-2 mb-6 client-info-section-header">
+            <div
+              class="client-info-section-accent flex-shrink-0 rounded-sm bg-contact_menu_icon_violet"
+            />
+            <span
+              class="client-info-section-title font-weight-black text-uppercase text-high-emphasis"
+            >Firm Identity</span>
           </div>
           <v-row>
-            <v-col cols="12" md="4"><InputField label="Name" placeholder="e.g. Global Logistics Inc." :theme="theme" /></v-col>
+            <v-col cols="12" md="4"><InputField label="Name" placeholder="e.g. Global Logistics Inc." /></v-col>
             <v-col cols="12" md="4">
-              <SelectField label="Business Type" :options="[{label:'Corporation',value:'corp'},{label:'LLC',value:'llc'},{label:'Partnership',value:'partnership'}]" :theme="theme" />
+              <SelectField label="Business Type" :options="[{label:'Corporation',value:'corp'},{label:'LLC',value:'llc'},{label:'Partnership',value:'partnership'}]" />
             </v-col>
-            <v-col cols="12" md="4"><InputField label="Tax ID (Custom)" placeholder="XX-XXXXXXX" :theme="theme" /></v-col>
-            <v-col cols="12" md="4"><InputField label="SSN (Custom)" placeholder="XX-XXX-XXXX" :theme="theme" /></v-col>
+            <v-col cols="12" md="4"><InputField label="Tax ID (Custom)" placeholder="XX-XXXXXXX" /></v-col>
+            <v-col cols="12" md="4"><InputField label="SSN (Custom)" placeholder="XX-XXX-XXXX" /></v-col>
             <v-col cols="12" md="4">
-              <CheckboxField v-model:checked="convenienceFeeEnabled" label="Enable Convenience Fee" :theme="theme" />
+              <CheckboxField v-model="convenienceFeeEnabled" label="Enable Convenience Fee" />
             </v-col>
           </v-row>
         </v-sheet>
 
         <!-- SECTION 2: Corporate Address -->
-        <v-sheet v-bind="sectionProps" class="pa-8 mb-8">
-          <div class="d-flex align-center ga-3 mb-6">
-            <div class="pa-2 rounded-xl" style="background: rgba(34,197,94,0.10);">
-              <MapPin :size="18" color="#16a34a" />
-            </div>
-            <h4 class="text-h6" style="letter-spacing: -0.3px;" :style="sectionTitleStyle">Corporate Address</h4>
+        <v-sheet
+          class="client-info-section-sheet pa-8 mb-8 rounded-xl bg-contact_menu_card_bg"
+          color="surface"
+          border
+        >
+          <div class="d-flex align-center ga-2 mb-6 client-info-section-header">
+            <div
+              class="client-info-section-accent flex-shrink-0 rounded-sm bg-contact_menu_icon_violet"
+            />
+            <span
+              class="client-info-section-title font-weight-black text-uppercase text-high-emphasis"
+            >Corporate Address</span>
           </div>
           <v-row>
-            <v-col cols="12" md="4"><InputField label="Address Line 1" placeholder="Street address" :theme="theme" /></v-col>
-            <v-col cols="12" md="4"><InputField label="Address Line 2" placeholder="Suite, apartment, etc." :theme="theme" /></v-col>
-            <v-col cols="12" md="4"><InputField label="City" :theme="theme" /></v-col>
-            <v-col cols="12" md="4"><InputField label="State/Province" :theme="theme" /></v-col>
-            <v-col cols="12" md="4"><InputField label="Zip/Postal Code" :theme="theme" /></v-col>
-            <v-col cols="12" md="4"><InputField label="Country" :theme="theme" /></v-col>
-            <v-col cols="12" md="4"><InputField label="Phone" placeholder="+1 (555) 000-0000" :theme="theme" /></v-col>
-            <v-col cols="12" md="4"><InputField label="Fax" placeholder="+1 (555) 000-0000" :theme="theme" /></v-col>
+            <v-col cols="12" md="4"><InputField label="Address Line 1" placeholder="Street address" /></v-col>
+            <v-col cols="12" md="4"><InputField label="Address Line 2" placeholder="Suite, apartment, etc." /></v-col>
+            <v-col cols="12" md="4"><InputField label="City" /></v-col>
+            <v-col cols="12" md="4"><InputField label="State/Province" /></v-col>
+            <v-col cols="12" md="4"><InputField label="Zip/Postal Code" /></v-col>
+            <v-col cols="12" md="4"><InputField label="Country" /></v-col>
+            <v-col cols="12" md="4"><InputField label="Phone" placeholder="+1 (555) 000-0000" /></v-col>
+            <v-col cols="12" md="4"><InputField label="Fax" placeholder="+1 (555) 000-0000" /></v-col>
           </v-row>
         </v-sheet>
 
         <!-- SECTION 3: Primary Contact -->
-        <v-sheet v-bind="sectionProps" class="pa-8 mb-8">
-          <div class="d-flex align-center justify-space-between mb-6">
-            <div class="d-flex align-center ga-3">
-              <div class="pa-2 rounded-xl" style="background: rgba(168,85,247,0.10);">
-                <User :size="18" color="#9333ea" />
-              </div>
-              <h4 class="text-h6" style="letter-spacing: -0.3px;" :style="sectionTitleStyle">Primary Contact</h4>
+        <v-sheet
+          class="client-info-section-sheet pa-8 mb-8 rounded-xl bg-contact_menu_card_bg"
+          color="surface"
+          border
+        >
+          <div class="d-flex align-center justify-space-between mb-6 flex-wrap ga-3">
+            <div class="d-flex align-center ga-2 client-info-section-header">
+              <div
+                class="client-info-section-accent flex-shrink-0 rounded-sm bg-contact_menu_icon_violet"
+              />
+              <span
+                class="client-info-section-title font-weight-black text-uppercase text-high-emphasis"
+              >Primary Contact</span>
             </div>
             <v-btn
               variant="tonal"
-              color="blue"
+              color="primary"
               class="font-weight-black text-uppercase rounded-xl"
               style="letter-spacing: 0.12em; font-size: 11px;"
               size="small"
@@ -135,81 +149,90 @@
             </v-btn>
           </div>
           <v-row>
-            <v-col cols="12" md="6"><InputField label="First Name" :theme="theme" /></v-col>
-            <v-col cols="12" md="6"><InputField label="Last Name" :theme="theme" /></v-col>
+            <v-col cols="12" md="6"><InputField label="First Name" /></v-col>
+            <v-col cols="12" md="6"><InputField label="Last Name" /></v-col>
             <v-col cols="12" md="6">
-              <SelectField label="Title/Position" :options="[{label:'CEO',value:'ceo'},{label:'CFO',value:'cfo'},{label:'Manager',value:'manager'}]" :theme="theme" />
+              <SelectField label="Title/Position" :options="[{label:'CEO',value:'ceo'},{label:'CFO',value:'cfo'},{label:'Manager',value:'manager'}]" />
             </v-col>
             <v-col cols="12" md="6">
-              <SelectField label="Department (Custom)" :options="[{label:'Finance',value:'finance'},{label:'Operations',value:'ops'}]" :theme="theme" />
+              <SelectField label="Department (Custom)" :options="[{label:'Finance',value:'finance'},{label:'Operations',value:'ops'}]" />
             </v-col>
             <v-col cols="12">
-              <DynamicContactList label="Email Addresses" :icon="MailIcon" type="email" :theme="theme" />
+              <DynamicContactList label="Email Addresses" :icon="MailIcon" type="email" />
             </v-col>
             <v-col cols="12">
-              <DynamicContactList label="Phone Numbers" :icon="PhoneIcon" type="tel" :theme="theme" />
+              <DynamicContactList label="Phone Numbers" :icon="PhoneIcon" type="tel" />
             </v-col>
           </v-row>
         </v-sheet>
 
         <!-- SECTION 4: Account Configuration -->
-        <v-sheet v-bind="sectionProps" class="pa-8 mb-8">
-          <div class="d-flex align-center ga-3 mb-6">
-            <div class="pa-2 rounded-xl" style="background: rgba(59,130,246,0.10);">
-              <LayoutGrid :size="18" color="#2563eb" />
-            </div>
-            <h4 class="text-h6" style="letter-spacing: -0.3px;" :style="sectionTitleStyle">Account Configuration</h4>
+        <v-sheet
+          class="client-info-section-sheet pa-8 mb-8 rounded-xl bg-contact_menu_card_bg"
+          color="surface"
+          border
+        >
+          <div class="d-flex align-center ga-2 mb-6 client-info-section-header">
+            <div
+              class="client-info-section-accent flex-shrink-0 rounded-sm bg-contact_menu_icon_violet"
+            />
+            <span
+              class="client-info-section-title font-weight-black text-uppercase text-high-emphasis"
+            >Account Configuration</span>
           </div>
           <v-row>
             <v-col cols="12" md="4">
-              <SelectField label="Account Type" :options="[{label:'Standard',value:'standard'},{label:'Premium',value:'premium'}]" :theme="theme" />
+              <SelectField label="Account Type" :options="[{label:'Standard',value:'standard'},{label:'Premium',value:'premium'}]" />
             </v-col>
             <v-col cols="12" md="4">
-              <SelectField label="Account Status" :options="[{label:'Active',value:'active'},{label:'Inactive',value:'inactive'}]" :theme="theme" />
+              <SelectField label="Account Status" :options="[{label:'Active',value:'active'},{label:'Inactive',value:'inactive'}]" />
             </v-col>
             <v-col cols="12" md="4">
-              <SelectField label="Assigned Sales Rep" :options="[]" :theme="theme" />
+              <SelectField label="Assigned Sales Rep" :options="[]" />
             </v-col>
-            <v-col cols="12" md="4"><InputField label="Account Age (Custom)" placeholder="0" :theme="theme" /></v-col>
+            <v-col cols="12" md="4"><InputField label="Account Age (Custom)" placeholder="0" /></v-col>
             <v-col cols="12" md="4">
-              <SelectField label="Collection Priority (Custom)" :options="[{label:'High',value:'high'},{label:'Medium',value:'medium'},{label:'Low',value:'low'}]" :theme="theme" />
+              <SelectField label="Collection Priority (Custom)" :options="[{label:'High',value:'high'},{label:'Medium',value:'medium'},{label:'Low',value:'low'}]" />
             </v-col>
           </v-row>
         </v-sheet>
 
         <!-- SECTION 5: Notes & Communication -->
-        <v-sheet v-bind="sectionProps" class="pa-8 mb-8">
-          <div class="d-flex align-center ga-3 mb-6">
-            <div class="pa-2 rounded-xl" style="background: rgba(245,158,11,0.10);">
-              <MessageSquare :size="18" color="#d97706" />
-            </div>
-            <h4 class="text-h6" style="letter-spacing: -0.3px;" :style="sectionTitleStyle">Notes &amp; Communication</h4>
+        <v-sheet
+          class="client-info-section-sheet pa-8 mb-8 rounded-xl bg-contact_menu_card_bg"
+          color="surface"
+          border
+        >
+          <div class="d-flex align-center ga-2 mb-6 client-info-section-header">
+            <div
+              class="client-info-section-accent flex-shrink-0 rounded-sm bg-contact_menu_icon_violet"
+            />
+            <span
+              class="client-info-section-title font-weight-black text-uppercase text-high-emphasis"
+            >Notes &amp; Communication</span>
           </div>
 
           <!-- Note Entry -->
           <v-sheet
-            class="pa-6 rounded-xl mb-6"
-            color="transparent"
-            style="border-width: 2px; border-style: solid; border-radius: 16px; transition: border-color 0.2s ease;"
-            :style="theme === 'dark'
-              ? 'background: rgba(15,23,42,0.6); border-color: rgba(255,255,255,0.05);'
-              : 'background: #f8fafc; border-color: #e2e8f0;'"
+            class="pa-6 rounded-xl mb-6 bg-table_container_bg"
+            color="surface-variant"
+            border
           >
             <textarea
               v-model="newNote"
-              class="note-textarea"
-              :class="theme === 'dark' ? 'note-textarea--dark' : 'note-textarea--light'"
+              class="note-textarea text-high-emphasis w-100"
               placeholder="Add a note to this client..."
             />
             <div class="d-flex justify-end mt-4">
               <v-btn
-                color="blue-darken-1"
-                class="font-weight-bold text-uppercase rounded-xl"
-                style="letter-spacing: 0.12em; font-size: 11px; box-shadow: 0 8px 24px rgba(37,99,235,0.2);"
+                color="primary"
+                variant="flat"
+                class="d-inline-flex align-center px-6 text-none font-weight-semibold"
+                style="letter-spacing: 0.12em; font-size: 11px; border-radius: 12px; min-height: 36px;"
                 elevation="0"
                 size="small"
               >
-                <template #prepend><Send :size="14" /></template>
+                <template #prepend><Send :size="14" :stroke-width="2" /></template>
                 Save Note
               </v-btn>
             </div>
@@ -217,17 +240,11 @@
 
           <!-- Notes History -->
           <v-sheet
-            class="pa-6 rounded-xl"
-            color="transparent"
-            style="border-width: 2px; border-style: solid; border-radius: 16px; max-height: 256px; overflow-y: auto;"
-            :style="theme === 'dark'
-              ? 'background: rgba(15,23,42,0.4); border-color: rgba(255,255,255,0.05);'
-              : 'background: #f8fafc; border-color: #e2e8f0;'"
+            class="pa-6 rounded-xl client-info-notes-history border bg-table_container_bg"
+            color="surface-variant"
           >
             <div
-              class="d-flex align-center ga-2 text-caption font-weight-black text-uppercase mb-4"
-              style="letter-spacing: 0.15em;"
-              :style="theme === 'dark' ? 'color: #64748b;' : 'color: #475569;'"
+              class="d-flex align-center ga-2 text-caption font-weight-black text-uppercase text-medium-emphasis mb-4 client-info-notes-history-heading"
             >
               <ClipboardList :size="14" /> Recent Notes
             </div>
@@ -235,17 +252,13 @@
               <div
                 v-for="i in 2"
                 :key="i"
-                class="pa-4 rounded-xl transition-all"
-                style="border: 1px solid;"
-                :style="theme === 'dark'
-                  ? 'background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.05);'
-                  : 'background: white; border-color: #94a3b8;'"
+                class="pa-4 rounded-xl border"
               >
                 <div class="d-flex justify-space-between align-start ga-2 mb-2">
-                  <span class="text-caption font-weight-bold" :style="theme === 'dark' ? 'color: #7dd3fc;' : 'color: #2563eb;'">System Admin</span>
-                  <span class="text-caption" :style="theme === 'dark' ? 'color: #475569;' : 'color: #94a3b8;'" style="font-size: 10px;">Feb 20, 2026</span>
+                  <span class="text-caption font-weight-bold text-primary client-info-note-card-author">System Admin</span>
+                  <span class="text-caption text-medium-emphasis client-info-note-card-date">Feb 20, 2026</span>
                 </div>
-                <p class="text-caption" :style="theme === 'dark' ? 'color: #cbd5e1;' : 'color: #475569;'">
+                <p class="text-caption text-medium-emphasis client-info-note-card-body">
                   Revised account configuration and updated collection settings per client request.
                 </p>
               </div>
@@ -254,63 +267,43 @@
         </v-sheet>
 
         <!-- SECTION 6: Client Portal Settings -->
-        <v-sheet v-bind="sectionProps" class="pa-8 mb-8">
-          <div class="d-flex align-center ga-3 mb-8">
-            <div class="pa-2 rounded-xl" style="background: rgba(99,102,241,0.10);">
-              <Lock :size="18" color="#4f46e5" />
-            </div>
-            <h4 class="text-h6" style="letter-spacing: -0.3px;" :style="sectionTitleStyle">Client Portal Settings</h4>
+        <v-sheet
+          class="client-info-section-sheet pa-8 mb-8 rounded-xl bg-contact_menu_card_bg"
+          color="surface"
+          border
+        >
+          <div class="d-flex align-center ga-2 mb-8 client-info-section-header">
+            <div
+              class="client-info-section-accent flex-shrink-0 rounded-sm bg-contact_menu_icon_violet"
+            />
+            <span
+              class="client-info-section-title font-weight-black text-uppercase text-high-emphasis"
+            >Client Portal Settings</span>
           </div>
 
           <CheckboxField
-            v-model:checked="portalEnabled"
+            v-model="portalEnabled"
             label="Enable Client Portal Access"
-            :theme="theme"
           />
 
           <div v-if="portalEnabled" class="d-flex flex-column ga-6 mt-6">
 
             <!-- Portal User Account -->
-            <v-sheet
-              class="pa-6 rounded-xl portal-user-account-sheet"
-              color="transparent"
-              style="border-width: 2px; border-style: solid; border-radius: 16px;"
-              :style="theme === 'dark'
-                ? 'background: rgba(15,23,42,0.6); border-color: rgba(255,255,255,0.05);'
-                : 'background: #f8fafc; border-color: #e2e8f0;'"
-            >
+            <v-sheet class="pa-6 rounded-xl portal-user-account-sheet border" color="surface-variant bg-table_container_bg">
               <h5
-                class="text-body-2 font-weight-black text-uppercase mb-6"
-                style="letter-spacing: 0.12em;"
-                :style="theme === 'dark' ? 'color: white;' : 'color: #1f2937;'"
+                class="text-body-2 font-weight-black text-uppercase text-high-emphasis mb-6 portal-user-account-heading"
               >Portal User Account</h5>
               <v-row align="end">
                 <v-col cols="12" md="6">
-                  <div class="d-flex flex-column ga-2 w-100 portal-view-type-select">
-                    <label class="text-body-2 text-capitalize text-select_field_label ls-widest">
-                      Portal View Type
-                    </label>
-                    <div ref="portalViewTypeSelectWrap" class="w-100">
-                      <v-select
-                        v-model="portalViewType"
-                        v-model:menu="portalViewTypeMenuOpen"
-                        :items="portalViewTypeItems"
-                        item-title="title"
-                        item-value="value"
-                        variant="outlined"
-                        density="comfortable"
-                        hide-details
-                        color="surface"
-                        menu-icon="chevron-down"
-                        :menu-props="portalViewTypeMenuProps"
-                        :list-props="portalViewTypeListProps"
-                        class="portal-view-type-vselect"
-                      />
-                    </div>
-                  </div>
+                  <SelectField
+                    v-model="portalViewType"
+                    label="Portal View Type"
+                    :options="portalViewTypeOptions"
+                    class-name="portal-view-type-select-field text-primary"
+                  />
                 </v-col>
-                <v-col cols="12" md="6"><InputField label="Email Address" placeholder="contact@example.com" :theme="theme" /></v-col>
-                <v-col cols="12" md="6"><InputField label="Username" placeholder="client_username" :theme="theme" /></v-col>
+                <v-col cols="12" md="6"><InputField label="Email Address" placeholder="contact@example.com" /></v-col>
+                <v-col cols="12" md="6"><InputField label="Username" placeholder="client_username" /></v-col>
                 <v-col cols="12" md="6" class="d-flex align-end">
                   <v-btn
                     color="blue-darken-1"
@@ -328,95 +321,65 @@
             <v-expansion-panels
               variant="accordion"
               class="d-flex flex-column ga-3 client-info-portal-accordions"
-              style="border-radius: 16px;"
             >
               <!-- Permissions -->
-              <v-expansion-panel
-                style="border-radius: 16px; border-width: 2px; border-style: solid; overflow: hidden;"
-                :style="theme === 'dark'
-                  ? 'background: rgba(15,23,42,0.6); border-color: rgba(255,255,255,0.05);'
-                  : 'background: #f8fafc; border-color: #e2e8f0;'"
-              >
+              <v-expansion-panel class="client-info-expansion-panel rounded-lg border border-custom-blue bg-contact_menu_card_bg">
                 <v-expansion-panel-title>
-                  <div class="d-flex align-center ga-3">
+                  <div class="d-flex align-center ga-3 rounde-lg">
                     <Shield :size="16" color="#4f46e5" />
-                    <span class="text-body-2 font-weight-black text-uppercase" style="letter-spacing: 0.12em;" :style="theme === 'dark' ? 'color: white;' : 'color: #0f172a;'">Permissions</span>
+                    <span class="text-body-2 font-weight-black text-uppercase text-high-emphasis client-info-expansion-title">Permissions</span>
                   </div>
                 </v-expansion-panel-title>
                 <v-expansion-panel-text>
-                  <div
-                    class="d-flex flex-column ga-4 pt-4"
-                    :style="theme === 'dark' ? 'border-top: 1px solid rgba(255,255,255,0.05);' : 'border-top: 1px solid #e2e8f0;'"
-                  >
+                  <div class="d-flex flex-column ga-4 pt-4 border-t">
                     <CheckboxField
                       v-for="perm in permissions"
                       :key="perm"
-                      :checked="!!portalPermissionChecked[perm]"
+                      v-model="portalPermissionChecked[perm]"
                       :label="perm"
-                      :theme="theme"
-                      @update:checked="(v) => (portalPermissionChecked[perm] = v)"
                     />
                   </div>
                 </v-expansion-panel-text>
               </v-expansion-panel>
+            
 
               <!-- Show Fields -->
-              <v-expansion-panel
-                style="border-radius: 16px; border-width: 2px; border-style: solid; overflow: hidden;"
-                :style="theme === 'dark'
-                  ? 'background: rgba(15,23,42,0.6); border-color: rgba(255,255,255,0.05);'
-                  : 'background: #f8fafc; border-color: #e2e8f0;'"
-              >
+              <v-expansion-panel class="client-info-expansion-panel rounded-lg border border-custom-blue bg-contact_menu_card_bg">
                 <v-expansion-panel-title>
                   <div class="d-flex align-center ga-3">
                     <Eye :size="16" color="#16a34a" />
-                    <span class="text-body-2 font-weight-black text-uppercase" style="letter-spacing: 0.12em;" :style="theme === 'dark' ? 'color: white;' : 'color: #0f172a;'">Show Fields</span>
+                    <span class="text-body-2 font-weight-black text-uppercase text-high-emphasis client-info-expansion-title">Show Fields</span>
                   </div>
                 </v-expansion-panel-title>
                 <v-expansion-panel-text>
-                  <div
-                    class="d-flex flex-column ga-4 pt-4"
-                    :style="theme === 'dark' ? 'border-top: 1px solid rgba(255,255,255,0.05);' : 'border-top: 1px solid #e2e8f0;'"
-                  >
+                  <div class="d-flex flex-column ga-4 pt-4 border-t">
                     <CheckboxField
                       v-for="field in showFields"
                       :key="field"
-                      :checked="!!portalShowFieldChecked[field]"
+                      v-model="portalShowFieldChecked[field]"
                       :label="field"
-                      :theme="theme"
-                      @update:checked="(v) => (portalShowFieldChecked[field] = v)"
                     />
                   </div>
                 </v-expansion-panel-text>
               </v-expansion-panel>
 
               <!-- Show Reports -->
-              <v-expansion-panel
-                style="border-radius: 16px; border-width: 2px; border-style: solid; overflow: hidden;"
-                :style="theme === 'dark'
-                  ? 'background: rgba(15,23,42,0.6); border-color: rgba(255,255,255,0.05);'
-                  : 'background: #f8fafc; border-color: #e2e8f0;'"
-              >
+              <v-expansion-panel class="client-info-expansion-panel rounded-lg border border-custom-blue bg-contact_menu_card_bg">
                 <v-expansion-panel-title>
                   <div class="d-flex align-center ga-3">
                     <ClipboardMinus :size="16" color="#0891b2" />
-                    <span class="text-body-2 font-weight-black text-uppercase" style="letter-spacing: 0.12em;" :style="theme === 'dark' ? 'color: white;' : 'color: #0f172a;'">Show Reports</span>
+                    <span class="text-body-2 font-weight-black text-uppercase text-high-emphasis client-info-expansion-title">Show Reports</span>
                   </div>
                 </v-expansion-panel-title>
                 <v-expansion-panel-text>
-                  <div
-                    class="d-flex flex-column ga-4 pt-4"
-                    :style="theme === 'dark' ? 'border-top: 1px solid rgba(255,255,255,0.05);' : 'border-top: 1px solid #e2e8f0;'"
-                  >
+                  <div class="d-flex flex-column ga-4 pt-4 border-t">
                     <CheckboxField
                       v-for="report in showReports"
                       :key="report"
-                      :checked="!!portalShowReportChecked[report]"
+                      v-model="portalShowReportChecked[report]"
                       :label="report"
-                      :theme="theme"
-                      @update:checked="(v) => (portalShowReportChecked[report] = v)"
                     />
-                    <MultiSearchSelect label="Reports" :theme="theme" />
+                    <MultiSearchSelect label="Reports" />
                   </div>
                 </v-expansion-panel-text>
               </v-expansion-panel>
@@ -444,14 +407,13 @@
 </template>
 
 <script setup>
-import { ref, computed, reactive, onMounted, onBeforeUnmount, nextTick, watch } from 'vue';
+import { ref, computed, reactive } from 'vue'
 import {
   ChevronLeft, ChevronRight,
-  UserPlus, User,
-  Briefcase, MapPin,
-  Plus, LayoutGrid,
-  MessageSquare, Send, ClipboardList,
-  Lock, Shield, Eye, ClipboardMinus,
+  UserPlus,
+  Plus,
+  Send, ClipboardList,
+  Shield, Eye, ClipboardMinus,
   Mail as MailIcon, Phone as PhoneIcon,
 } from 'lucide-vue-next';
 import SelectField       from './shared/SelectField.vue';
@@ -461,16 +423,9 @@ import DynamicContactList from './shared/DynamicContactList.vue';
 import MultiSearchSelect from './shared/MultiSearchSelect.vue';
 import { useTheme } from 'vuetify';
 
-const props = defineProps({
-  theme: {
-    type: String,
-    default: 'dark',
-    validator: (val) => ['dark', 'light'].includes(val),
-  },
-});
-
-/** Drawer visuals follow the active Vuetify theme so light mode always matches the app toggle. */
 const vuetifyTheme = useTheme();
+
+
 const drawerSkin = computed(() => (vuetifyTheme.global.current.value.dark ? 'dark' : 'light'));
 
 const isDrawerOpen = ref(false);
@@ -478,178 +433,20 @@ const newNote      = ref('');
 const portalEnabled = ref(false);
 const convenienceFeeEnabled = ref(false);
 
-/** Checked state for portal accordion lists (must be bound or :checked never becomes true / blue). */
+
 const portalPermissionChecked = reactive({});
 const portalShowFieldChecked = reactive({});
 const portalShowReportChecked = reactive({});
 
-/** Portal View Type: v-select only so the open menu can be styled in dark mode (native select cannot). Field CSS matches SelectField tokens. */
+
 const portalViewType = ref('readonly');
-const portalViewTypeItems = [
-  { title: 'Read-Only', value: 'readonly' },
-  { title: 'Standard', value: 'standard' },
-  { title: 'Full Access', value: 'full' },
+const portalViewTypeOptions = [
+  { label: 'Read-Only', value: 'readonly' },
+  { label: 'Standard', value: 'standard' },
+  { label: 'Full Access', value: 'full' },
 ];
 
-const portalViewTypeSelectWrap = ref(null);
-/** Synced with v-select menu open state so we can resize the teleported overlay reliably. */
-const portalViewTypeMenuOpen = ref(false);
-/** Portal menu width (px), light + dark; matches field + small extension — set from ResizeObserver. */
-const portalViewTypeMenuWidthPx = ref(null);
 
-function updatePortalViewTypeMenuWidth() {
-  const wrap = portalViewTypeSelectWrap.value;
-  if (!wrap) return;
-  const field = wrap.querySelector('.v-field');
-  const w = field instanceof HTMLElement ? field.offsetWidth : wrap.offsetWidth;
-  /** Align with header width and extend slightly (reference: menu a bit longer than tight text). */
-  portalViewTypeMenuWidthPx.value = w > 28 ? w + 12 : w;
-}
-
-/**
- * Vuetify's connected overlay overwrites width/minWidth on every layout pass, so props
- * and contentProps.style lose to `contentStyles` from the location strategy. A global
- * A global CSS rule plus a CSS variable constrains the menu width.
- */
-function syncPortalViewTypeMenuWidthCssVar() {
-  const px = portalViewTypeMenuWidthPx.value;
-  if (px != null) {
-    document.documentElement.style.setProperty('--portal-view-type-menu-width', `${px}px`);
-  } else {
-    document.documentElement.style.removeProperty('--portal-view-type-menu-width');
-  }
-}
-
-/** Overlay content node (teleported) — query via data attr set in menu contentProps. */
-function portalViewTypeMenuContentEl() {
-  return document.querySelector('.v-overlay__content[data-portal-view-type-menu="1"]');
-}
-
-/**
- * Vuetify's connected strategy rewrites inline width/minWidth every frame; stylesheet
- * Stylesheet rules can still lose to timing. Inline `setProperty(..., 'important')` wins.
- */
-function applyPortalViewTypeMenuDimensions() {
-  const el = portalViewTypeMenuContentEl();
-  const px = portalViewTypeMenuWidthPx.value;
-  if (!el || px == null) return;
-  const s = `${Math.round(px)}px`;
-  el.style.setProperty('width', s, 'important');
-  el.style.setProperty('min-width', s, 'important');
-  el.style.setProperty('max-width', s, 'important');
-  el.style.setProperty('box-sizing', 'border-box', 'important');
-}
-
-function clearPortalViewTypeMenuDimensions() {
-  const el = portalViewTypeMenuContentEl();
-  if (!el) return;
-  el.style.removeProperty('width');
-  el.style.removeProperty('min-width');
-  el.style.removeProperty('max-width');
-  el.style.removeProperty('box-sizing');
-}
-
-/** Re-apply for several frames — location strategy keeps resetting inline size after open. */
-function schedulePortalViewTypeMenuDimensions() {
-  let n = 0;
-  const run = () => {
-    updatePortalViewTypeMenuWidth();
-    syncPortalViewTypeMenuWidthCssVar();
-    applyPortalViewTypeMenuDimensions();
-    if (n++ < 12) requestAnimationFrame(run);
-  };
-  requestAnimationFrame(run);
-}
-
-/**
- * Merge must include `v-select__content` — VSelect merges menuProps *after* a default
- * contentClass; if we only pass our classes, the default is replaced and the menu breaks.
- */
-const portalViewTypeMenuProps = computed(() => {
-  const isDark = vuetifyTheme.global.current.value.dark;
-  return {
-    contentClass: [
-      'v-select__content',
-      'portal-view-type-menu',
-      isDark ? 'portal-view-type-menu--dark' : 'portal-view-type-menu--light',
-    ].join(' '),
-    contentProps: {
-      'data-portal-view-type-menu': '1',
-    },
-  };
-});
-
-/** Tighter list rows inside the open menu (Read-Only / Standard / Full Access). */
-const portalViewTypeListProps = { density: 'compact', class: 'portal-view-type-vselect-list' };
-
-let portalViewTypeResizeObserver = null;
-
-onMounted(() => {
-  updatePortalViewTypeMenuWidth();
-  syncPortalViewTypeMenuWidthCssVar();
-  const el = portalViewTypeSelectWrap.value;
-  if (el && typeof ResizeObserver !== 'undefined') {
-    portalViewTypeResizeObserver = new ResizeObserver(() => {
-      updatePortalViewTypeMenuWidth();
-      syncPortalViewTypeMenuWidthCssVar();
-      applyPortalViewTypeMenuDimensions();
-    });
-    portalViewTypeResizeObserver.observe(el);
-  }
-});
-
-onBeforeUnmount(() => {
-  portalViewTypeResizeObserver?.disconnect();
-  clearPortalViewTypeMenuDimensions();
-  document.documentElement.style.removeProperty('--portal-view-type-menu-width');
-});
-
-watch(portalViewTypeMenuWidthPx, () => {
-  syncPortalViewTypeMenuWidthCssVar();
-  applyPortalViewTypeMenuDimensions();
-});
-
-watch(
-  () => vuetifyTheme.global.current.value.dark,
-  () => {
-    nextTick(updatePortalViewTypeMenuWidth);
-    syncPortalViewTypeMenuWidthCssVar();
-    applyPortalViewTypeMenuDimensions();
-  },
-);
-
-watch(portalViewTypeMenuOpen, (open) => {
-  if (open) {
-    nextTick(() => {
-      updatePortalViewTypeMenuWidth();
-      syncPortalViewTypeMenuWidthCssVar();
-      schedulePortalViewTypeMenuDimensions();
-      [0, 32, 100, 250].forEach((ms) => {
-        setTimeout(() => {
-          updatePortalViewTypeMenuWidth();
-          applyPortalViewTypeMenuDimensions();
-        }, ms);
-      });
-    });
-  } else {
-    clearPortalViewTypeMenuDimensions();
-  }
-});
-
-// ── Shared section sheet props ────────────────────────────────────────────────
-const sectionProps = computed(() => ({
-  color: 'transparent',
-  style: 'border-radius: 30px;',
-  style2: props.theme === 'dark'
-    ? 'background: rgba(15,23,42,0.4); border: 1px solid rgba(255,255,255,0.05);'
-    : 'background: #f0f9ff; border: 1px solid rgba(37,99,235,0.4); box-shadow: 0 1px 4px rgba(0,0,0,0.06);',
-}));
-
-const sectionTitleStyle = computed(() =>
-  props.theme === 'dark' ? 'color: white; letter-spacing: -0.3px;' : 'color: #1f2937; letter-spacing: -0.3px;'
-);
-
-// ── Accordion data ─────────────────────────────────────────────────────────────
 const permissions = [
   'Select All', 'Edit Collection Status', 'Edit Account Manually',
   'Upload Bulk Files', 'Search for Accounts', 'Enter Payments',
@@ -671,81 +468,64 @@ const showReports = [
 </script>
 
 <style scoped>
-/* Portal View Type: v-select field styled like SelectField (theme tokens only). */
-.portal-view-type-select .ls-widest {
-  letter-spacing: 0.1em;
+.border-custom-blue {
+  border-color: rgba(59, 130, 246, 0.5);
 }
 
-.portal-view-type-vselect :deep(.v-field) {
-  border-radius: 12px;
-  min-height: 44px;
-  font-size: 13px;
-  letter-spacing: 0.02em;
-  --v-field-padding-start: 12px;
-  --v-field-padding-end: 0;
-  background: rgb(var(--v-theme-select_field_bg));
+.client-info-section-header .client-info-section-title {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  line-height: 1.25;
 }
 
-/* Outlined border uses currentColor on .v-field__outline (see VField.css). */
-.portal-view-type-vselect :deep(.v-field__outline) {
-  border-radius: 12px;
-  color: rgb(var(--v-theme-select_field_border));
-  --v-field-border-opacity: 1;
+.client-info-section-accent {
+  width: 5px;
+  height: 19px;
 }
 
-.portal-view-type-vselect :deep(.v-field--focused .v-field__outline) {
-  color: rgb(var(--v-theme-select_field_focus_border));
+.client-info-notes-history {
+  max-height: 256px;
+  overflow-y: auto;
 }
 
-.portal-view-type-vselect :deep(.v-field__input) {
-  color: rgb(var(--v-theme-select_field_text));
-  font-weight: 700;
+.client-info-notes-history-heading {
+  letter-spacing: 0.15em;
 }
 
-.portal-view-type-vselect :deep(.v-field__append-inner .v-icon) {
-  color: rgb(var(--v-theme-select_field_chevron));
-  opacity: 1;
+.client-info-note-card-date {
+  font-size: 10px;
 }
 
-/* Light mode: pale blue field + blue border + blue label (Portal View Type reference). */
-.client-info--light .portal-view-type-select label.text-select_field_label {
-  color: #2563eb;
+
+
+.client-info-expansion-title {
+  letter-spacing: 0.12em;
 }
 
-.client-info--light .portal-view-type-vselect :deep(.v-field) {
-  background: #eff6ff;
+.portal-user-account-heading {
+  letter-spacing: 0.12em;
 }
 
-.client-info--light .portal-view-type-vselect :deep(.v-field__outline) {
-  color: #64748b;
-  --v-field-border-width: 1px;
-}
-
-.client-info--light .portal-view-type-vselect :deep(.v-field--focused .v-field__outline) {
-  color: #475569;
-  --v-field-border-width: 1px;
-}
-
-.client-info--light .portal-view-type-vselect :deep(.v-field__input) {
-  color: #1e293b;
-}
-
-.client-info--light .portal-view-type-vselect :deep(.v-field__append-inner .v-icon) {
-  color: #64748b;
-}
-
-.portal-user-account-sheet :deep(.portal-send-temp-password.v-btn) {
-  border-radius: 12px;
+.client-info .portal-user-account-sheet .portal-send-temp-password.v-btn {
+  /* border-radius: 12px; */
   overflow: hidden;
 }
 
-/* Rounded rectangle (not pill / oval), aligned with Send Temporary Password + portal cards. */
+.client-info .portal-add-user-btn .v-btn__prepend .v-icon,
+.client-info .portal-add-user-btn .v-btn__prepend svg {
+  color: #ffffff;
+  stroke: #ffffff;
+}
+
+.client-info .portal-add-user-btn .v-btn__overlay {
+  opacity: 0;
+}
+
 .portal-add-user-btn {
   border-radius: 12px;
   overflow: hidden;
 }
 
-/* Add Portal User: same purple (#5b36e3) in light and dark. */
 .portal-add-user-btn.v-btn {
   background-color: #5b36e3;
   border: 1px solid #5b36e3;
@@ -753,38 +533,29 @@ const showReports = [
   box-shadow: 0 8px 24px rgba(91, 54, 227, 0.35);
 }
 
-.portal-add-user-btn :deep(.v-btn__prepend .v-icon),
-.portal-add-user-btn :deep(.v-btn__prepend svg) {
-  color: #ffffff;
-  stroke: #ffffff;
+.client-info-dossier-scroll {
+  overflow-y: auto;
 }
 
-.portal-add-user-btn :deep(.v-btn__overlay) {
-  opacity: 0;
+.client-info-page-title {
+  letter-spacing: -0.5px;
 }
 
-/* Client Portal accordions only (Permissions / Show Fields / Show Reports) — grey slate rings in dark ClientInfo theme. */
-.client-info--dark .client-info-portal-accordions :deep(.checkbox-box:not(.checkbox-box--checked)) {
-  border-width: 1px;
-  border-color: #64748b;
-}
-
-.client-info--dark .client-info-portal-accordions :deep(.checkbox-label:hover .checkbox-box:not(.checkbox-box--checked)) {
-  border-color: #60a5fa;
+.client-info-page-subtitle {
+  letter-spacing: 0.15em;
 }
 
 .animate-fade {
-  animation: fadeIn 0.5s ease both;
+  animation: fadeSlideIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
 }
 
-/* Textarea */
+
 .note-textarea {
-  width: 100%;
   height: 80px;
   background: transparent;
   border: none;
@@ -794,22 +565,22 @@ const showReports = [
   line-height: 1.6;
   font-weight: 500;
 }
-.note-textarea--dark        { color: white; }
-.note-textarea--dark::placeholder  { color: #475569; }
-.note-textarea--light       { color: #1e293b; }
-.note-textarea--light::placeholder { color: #94a3b8; }
 
-/* Hide drawer scrollbar while keeping scroll behavior */
+.note-textarea::placeholder {
+  opacity: 0.55;
+}
+
+
 .drawer-list {
   overflow-y: auto;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge Legacy */
+  scrollbar-width: none; 
+  -ms-overflow-style: none; 
 }
 .drawer-list::-webkit-scrollbar {
   width: 0;
 }
 
-/* Drawer layout + theming (no inline styles in the template) */
+
 .drawer-container {
   transition: width 0.3s ease, transform 0.3s ease;
   height: min(460px, calc(100vh - 260px));
@@ -859,7 +630,6 @@ const showReports = [
 }
 
 .drawer-clients-chip {
-  border-radius: 12px;
   height: 34px;
   padding: 0 16px;
   font-size: 13px;
@@ -867,269 +637,27 @@ const showReports = [
 }
 
 .drawer-item {
-  border: 0.8px solid transparent;
   border-radius: 12px;
 }
+
+.drawer-item--selected .drawer-item-title--hoverable {
+  border-color: rgba(59, 130, 246, 0.85);
+  background-color: rgba(59, 130, 246, 0.08);
+}
+
+.drawer-item:hover:not(.drawer-item--selected) .drawer-item-title--hoverable {
+  border-color: rgba(59, 130, 246, 0.55);
+  background-color: rgba(59, 130, 246, 0.05);
+}
+
+.drawer-item--selected:hover .drawer-item-title--hoverable {
+  border-color: rgba(59, 130, 246, 0.92);
+  background-color: rgba(59, 130, 246, 0.12);
+}
+
 .drawer-item-title {
   letter-spacing: -0.2px;
   margin: 0;
 }
 
-/* Light: palette aligned to design ref (body #EAF6FF, header #DDF0FF, primary #3B82F6) */
-.drawer-skin--light .drawer-content {
-  background-color: #eaf6ff;
-  border: 1px solid rgba(59, 130, 246, 0.14);
-  border-radius: 32px;
-}
-.drawer-skin--light .drawer-header {
-  background-color: #ddf0ff;
-  border-bottom: 1px solid rgba(59, 130, 246, 0.1);
-}
-.drawer-skin--light .drawer-header-title {
-  color: #2563eb;
-  font-weight: 900;
-  letter-spacing: 0.16em;
-}
-.drawer-skin--light .drawer-handle {
-  background-color: #2563eb;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.4);
-}
-.drawer-skin--light .drawer-handle:hover {
-  background-color: #2563eb;
-}
-.drawer-skin--light .drawer-clients-chip {
-  background-color: #2563eb;
-  color: #ffffff;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  font-size: 12px;
-  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.45);
-}
-.drawer-skin--light .drawer-item-title {
-  color: #1f2937;
-}
-.drawer-skin--light .drawer-item--selected {
-  border-color: #2563eb;
-  background-color: #ddf0ff;
-}
-.drawer-skin--light .drawer-item--selected:hover {
-  background-color: #ddf0ff;
-}
-
-/* Dark: explicit palette (follows Vuetify dark via drawer-skin--dark) */
-.drawer-skin--dark .drawer-content {
-  background-color: rgba(15, 23, 42, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-.drawer-skin--dark .drawer-header {
-  background-color: rgba(59, 130, 246, 0.05);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-.drawer-skin--dark .drawer-header-title {
-  color: #7dd3fc;
-}
-.drawer-skin--dark .drawer-handle {
-  background-color: #2563eb;
-}
-.drawer-skin--dark .drawer-handle:hover {
-  background-color: #3b82f6;
-}
-.drawer-skin--dark .drawer-clients-chip {
-  background-color: #2563eb;
-  color: #fff;
-  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.25);
-}
-.drawer-skin--dark .drawer-item-title {
-  color: #fff;
-}
-.drawer-skin--dark .drawer-item--selected {
-  border-color: #60a5fa;
-  background-color: rgba(59, 130, 246, 0.18);
-}
-.drawer-skin--dark .drawer-item--selected:hover {
-  background-color: rgba(59, 130, 246, 0.18);
-}
-</style>
-
-<style>
-/* Portal View Type open menu (teleported). Dark: same width + row metrics as light. */
-.portal-view-type-menu--dark.v-overlay__content {
-  width: var(--portal-view-type-menu-width);
-  min-width: var(--portal-view-type-menu-width);
-  max-width: var(--portal-view-type-menu-width);
-}
-
-.v-menu > .v-overlay__content.portal-view-type-menu--dark {
-  box-sizing: border-box;
-  border-radius: 0;
-}
-
-.portal-view-type-menu--dark.v-overlay__content .v-sheet,
-.portal-view-type-menu--dark .v-sheet {
-  background: #0a1020;
-  box-shadow: none;
-  border-radius: 0;
-  width: 100%;
-  min-width: 0;
-}
-
-.portal-view-type-menu--dark.v-overlay__content,
-.portal-view-type-menu--dark {
-  background: #0a1020;
-  border: 1px solid rgba(100, 116, 139, 0.45);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
-  border-radius: 0;
-  margin-top: 6px;
-  box-sizing: border-box;
-  overflow: hidden;
-}
-
-.portal-view-type-menu--dark .v-list {
-  background: transparent;
-  padding: 0;
-  width: 100%;
-}
-
-/* Same compact rows as light; labels white on dark bg (reference). */
-.portal-view-type-menu--dark .v-list-item {
-  border-radius: 0;
-  min-height: 30px;
-  padding-block: 2px;
-  padding-inline: 12px;
-  color: #ffffff;
-  background: transparent;
-}
-
-.portal-view-type-menu--dark .v-list-item .v-list-item-title {
-  font-size: 13px;
-  line-height: 1.25;
-  font-weight: 400;
-}
-
-.portal-view-type-menu--dark .v-list-item:hover:not(.v-list-item--active):not([aria-selected='true']),
-.portal-view-type-menu--dark .v-list-item:focus-visible:not(.v-list-item--active):not([aria-selected='true']) {
-  background: rgba(255, 255, 255, 0.06);
-  color: #ffffff;
-}
-
-/* Selected: same purple + white as light mode */
-.portal-view-type-menu--dark .v-list-item--active,
-.portal-view-type-menu--dark .v-list-item[aria-selected='true'] {
-  background: #6052a5;
-  color: #ffffff;
-}
-
-.portal-view-type-menu--dark .v-list-item--active:hover,
-.portal-view-type-menu--dark .v-list-item[aria-selected='true']:hover,
-.portal-view-type-menu--dark .v-list-item--active:focus-visible,
-.portal-view-type-menu--dark .v-list-item[aria-selected='true']:focus-visible {
-  background: #6052a5;
-  color: #ffffff;
-}
-
-.portal-view-type-menu--dark .v-list-item--active .v-list-item-title,
-.portal-view-type-menu--dark .v-list-item[aria-selected='true'] .v-list-item-title {
-  color: #ffffff;
-}
-
-.portal-view-type-menu--dark .v-list-item__content {
-  color: inherit;
-}
-
-.portal-view-type-menu--dark .v-list-item-title {
-  color: inherit;
-}
-
-.portal-view-type-menu--dark .v-list-item:not(.v-list-item--active):not([aria-selected='true']) .v-list-item-title {
-  color: #ffffff;
-}
-
-/* Light menu: width — matches script inline dimensions; see applyPortalViewTypeMenuDimensions. */
-.portal-view-type-menu--light.v-overlay__content {
-  width: var(--portal-view-type-menu-width);
-  min-width: var(--portal-view-type-menu-width);
-  max-width: var(--portal-view-type-menu-width);
-}
-
-/* Light menu: square corners (override VMenu default 4px radius). */
-.v-menu > .v-overlay__content.portal-view-type-menu--light {
-  box-sizing: border-box;
-  border-radius: 0;
-}
-
-.portal-view-type-menu--light.v-overlay__content .v-sheet,
-.portal-view-type-menu--light .v-sheet {
-  background: #ffffff;
-  box-shadow: none;
-  border-radius: 0;
-  width: 100%;
-  min-width: 0;
-}
-
-.portal-view-type-menu--light.v-overlay__content,
-.portal-view-type-menu--light {
-  box-sizing: border-box;
-  background: #ffffff;
-  border: 1px solid #64748b;
-  border-radius: 0;
-  margin-top: 6px;
-  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.1);
-  overflow: hidden;
-}
-
-.portal-view-type-menu--light .v-list {
-  background: transparent;
-  padding: 0;
-  width: 100%;
-}
-
-/* Unselected: soft charcoal (~#333–#444), normal weight — matches reference. */
-.portal-view-type-menu--light .v-list-item {
-  border-radius: 0;
-  min-height: 30px;
-  padding-block: 2px;
-  padding-inline: 12px;
-  color: #404040;
-  background: transparent;
-}
-
-.portal-view-type-menu--light .v-list-item .v-list-item-title {
-  font-size: 13px;
-  line-height: 1.25;
-  font-weight: 400;
-}
-
-.portal-view-type-menu--light .v-list-item:hover:not(.v-list-item--active):not([aria-selected='true']),
-.portal-view-type-menu--light .v-list-item:focus-visible:not(.v-list-item--active):not([aria-selected='true']) {
-  background: #f1f5f9;
-  color: #404040;
-}
-
-.portal-view-type-menu--light .v-list-item--active,
-.portal-view-type-menu--light .v-list-item[aria-selected='true'] {
-  background: #6052a5;
-  color: #ffffff;
-}
-
-.portal-view-type-menu--light .v-list-item--active .v-list-item-title,
-.portal-view-type-menu--light .v-list-item[aria-selected='true'] .v-list-item-title {
-  color: #ffffff;
-}
-
-.portal-view-type-menu--light .v-list-item--active:hover,
-.portal-view-type-menu--light .v-list-item[aria-selected='true']:hover,
-.portal-view-type-menu--light .v-list-item--active:focus-visible,
-.portal-view-type-menu--light .v-list-item[aria-selected='true']:focus-visible {
-  background: #6052a5;
-  color: #ffffff;
-}
-
-.portal-view-type-menu--light .v-list-item__content,
-.portal-view-type-menu--light .v-list-item-title {
-  color: inherit;
-}
-
-.portal-view-type-menu--light .v-list-item:not(.v-list-item--active):not([aria-selected='true']) .v-list-item-title {
-  color: #404040;
-}
 </style>
