@@ -221,7 +221,7 @@ import SelectField from './shared/SelectField.vue';
 }
 
 .contact-menu-card:hover {
-  border-color: rgba(59, 130, 246, 0.5) !important;
+  border-color: rgba(59, 130, 246, 0.5)
 }
 
 .contact-menu-section-title {

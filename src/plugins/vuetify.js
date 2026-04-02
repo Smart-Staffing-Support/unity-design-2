@@ -100,7 +100,7 @@ export default createVuetify({
 
           // Datefield
           // CheckboxField
-          checkbox_field_box_bg: '#f1f5f9',
+          checkbox_field_box_bg: '#ffffff',
           checkbox_field_box_border_unchecked: '#cbd5e1',
           checkbox_field_box_checked: '#2563eb',
           checkbox_field_label: '#334155',
@@ -765,8 +765,9 @@ export default createVuetify({
           rf_bg: '#f8fafc',
           rf_accent: '#2563eb',
           rf_focus: 'rgba(37, 99, 235, 0.4)',
+
           // CheckboxField
-          checkbox_field_box_bg: 'rgba(255, 255, 255, 0.05)',
+          checkbox_field_box_bg: '#ffffff',
           checkbox_field_box_border_unchecked: 'rgba(255, 255, 255, 0.1)',
           checkbox_field_box_checked: '#2563eb',
           checkbox_field_label: '#ffffff',

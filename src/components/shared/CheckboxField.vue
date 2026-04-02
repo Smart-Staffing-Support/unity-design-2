@@ -10,7 +10,7 @@
 
     <div class="checkbox-control-wrap flex-shrink-0">
       <div
-        class="rounded-md checkbox-box border-checkbox_field_box_border_unchecked d-flex align-center justify-center"
+        class="rounded-md checkbox-box bg-checkbox_field_box_bg border-checkbox_field_box_border_unchecked d-flex align-center justify-center"
         :class="{ 'checkbox-box--checked': modelValue }"
         style="width: 20px; height: 20px; transition: background 0.15s, border-color 0.15s, border-width 0.15s;"
         aria-hidden="true"
@@ -72,12 +72,12 @@ defineEmits(['update:modelValue'])
 
 /* Unchecked: ring uses theme border; checked: solid blue fill (theme). */
 .checkbox-box:not(.checkbox-box--checked) {
-  border: 2px solid;
+  border: 1px solid;
 }
 
 .checkbox-box--checked {
-  border: 1px solid rgb(var(--v-theme-checkbox_field_box_checked));
-  background: rgb(var(--v-theme-checkbox_field_box_checked));
+  border: rgb(var(--v-theme-checkbox_field_box_checked));
+  background: #2563eb;
 }
 
 .checkbox-check-icon {
