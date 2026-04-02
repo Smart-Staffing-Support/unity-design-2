@@ -90,10 +90,10 @@
 
       <v-row class="mt-8 pt-8 border-top border-grey-lighten-3">
         <v-col cols="12" md="6">
-          <InfoBox label="Accounts in Collections" value="2,130" sub-value="N/A" :theme="theme" />
+          <InfoBox label="Accounts in Collections" value="2,130" sub-value="N/A"   />
         </v-col>
         <v-col cols="12" md="6">
-          <InfoBox label="Paid Collections (6 Months)" value="0" :theme="theme" />
+          <InfoBox label="Paid Collections (6 Months)" value="0"   />
         </v-col>
       </v-row>
     </div>
@@ -114,10 +114,10 @@
             Revolving & Installments
           </h4>
           <div class="d-flex flex-column ga-6">
-            <BalanceRow label="Monthly Payments (12M)"       value="$6,380" :theme="theme" />
-            <BalanceRow label="Installment Loans"            value="$6,380" :theme="theme" />
-            <BalanceRow label="Revolving Trades (Credit)"    value="$6,380" :theme="theme" />
-            <BalanceRow label="Revolving Trades (Balance)"   value="$6,380" :theme="theme" />
+            <BalanceRow label="Monthly Payments (12M)"       value="$6,380"   />
+            <BalanceRow label="Installment Loans"            value="$6,380"   />
+            <BalanceRow label="Revolving Trades (Credit)"    value="$6,380"   />
+            <BalanceRow label="Revolving Trades (Balance)"   value="$6,380"   />
           </div>
         </div>
       </v-col>
@@ -135,9 +135,9 @@
             Mortgage & Equity
           </h4>
           <div class="d-flex flex-column ga-6">
-            <BalanceRow label="Total Mortgage Credit"        value="$6,380" :theme="theme" />
-            <BalanceRow label="Home Equity / 2nd Mortgage"   value="$6,380" :theme="theme" />
-            <BalanceRow label="1st Mortgage Balance"         value="$6,380" :theme="theme" />
+            <BalanceRow label="Total Mortgage Credit"        value="$6,380"   />
+            <BalanceRow label="Home Equity / 2nd Mortgage"   value="$6,380"   />
+            <BalanceRow label="1st Mortgage Balance"         value="$6,380"   />
           </div>
         </div>
       </v-col>

@@ -19,31 +19,31 @@
 
       <v-row>
         <v-col cols="12" md="6" lg="4">
-          <SelectField label="County" :options="[{value:'la',label:'Los Angeles'},{value:'sf',label:'San Francisco'},{value:'sd',label:'San Diego'}]" default-value="la" :theme="theme" />
+          <SelectField label="County" :options="[{value:'la',label:'Los Angeles'},{value:'sf',label:'San Francisco'},{value:'sd',label:'San Diego'}]" default-value="la"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <SelectField label="Court" :options="[{value:'superior',label:'Superior Court'},{value:'district',label:'District Court'},{value:'municipal',label:'Municipal Court'}]" default-value="superior" :theme="theme" />
+          <SelectField label="Court" :options="[{value:'superior',label:'Superior Court'},{value:'district',label:'District Court'},{value:'municipal',label:'Municipal Court'}]" default-value="superior"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <DateField label="Complaint Sent Date" :theme="theme" />
+          <DateField label="Complaint Sent Date"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <DateField label="Complaint Filed Date" :theme="theme" />
+          <DateField label="Complaint Filed Date"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <InputField label="Court Number" placeholder="" type="text" :theme="theme" />
+          <InputField label="Court Number" placeholder="" type="text"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <DateField label="Sent For Service Date" :theme="theme" />
+          <DateField label="Sent For Service Date"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <SelectField label="Process Server" :options="[{value:'server1',label:'Server 1'},{value:'server2',label:'Server 2'}]" default-value="server1" :theme="theme" />
+          <SelectField label="Process Server" :options="[{value:'server1',label:'Server 1'},{value:'server2',label:'Server 2'}]" default-value="server1"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <DateField label="Complaint Served Date" :theme="theme" />
+          <DateField label="Complaint Served Date"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <DateField label="Answer Filed Date" :theme="theme" />
+          <DateField label="Answer Filed Date"   />
         </v-col>
       </v-row>
     </div>
@@ -83,37 +83,37 @@
 
       <v-row v-if="judgementEntered">
         <v-col cols="12" md="6" lg="4">
-          <DateField label="Judgement Sent Date" :theme="theme" />
+          <DateField label="Judgement Sent Date"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <DateField label="Judgement Entered Date" :theme="theme" />
+          <DateField label="Judgement Entered Date"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <DateField label="Abstract Recorded Date" :theme="theme" />
+          <DateField label="Abstract Recorded Date"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <DateField label="Satisfaction of Judgement Sent Date" :theme="theme" />
+          <DateField label="Satisfaction of Judgement Sent Date"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <InputField label="Attorney Fees Sought" placeholder="$0.00" type="text" :theme="theme" />
+          <InputField label="Attorney Fees Sought" placeholder="$0.00" type="text"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <InputField label="Attorney Fees Awarded" placeholder="$0.00" type="text" :theme="theme" />
+          <InputField label="Attorney Fees Awarded" placeholder="$0.00" type="text"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <InputField label="Name of Judge" placeholder="" type="text" :theme="theme" />
+          <InputField label="Name of Judge" placeholder="" type="text"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <SelectField label="County Abstracted" :options="[{value:'la',label:'Los Angeles'},{value:'sf',label:'San Francisco'},{value:'sd',label:'San Diego'}]" default-value="la" :theme="theme" />
+          <SelectField label="County Abstracted" :options="[{value:'la',label:'Los Angeles'},{value:'sf',label:'San Francisco'},{value:'sd',label:'San Diego'}]" default-value="la"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <SelectField label="Court Abstracted" :options="[{value:'superior',label:'Superior Court'},{value:'district',label:'District Court'}]" default-value="superior" :theme="theme" />
+          <SelectField label="Court Abstracted" :options="[{value:'superior',label:'Superior Court'},{value:'district',label:'District Court'}]" default-value="superior"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <DateField label="Judgement Expiration Date" :theme="theme" />
+          <DateField label="Judgement Expiration Date"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <DateField label="Judgement Reminder Date" :theme="theme" />
+          <DateField label="Judgement Reminder Date"   />
         </v-col>
       </v-row>
     </div>
@@ -135,34 +135,34 @@
 
       <v-row>
         <v-col cols="12" md="6" lg="4">
-          <DateField label="Writ Sent For Filing Date" :theme="theme" />
+          <DateField label="Writ Sent For Filing Date"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <DateField label="Writ Returned Date" :theme="theme" />
+          <DateField label="Writ Returned Date"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <DateField label="Garnish Wages Sent Date" :theme="theme" />
+          <DateField label="Garnish Wages Sent Date"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <DateField label="Garnish Wages Received Date" :theme="theme" />
+          <DateField label="Garnish Wages Received Date"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <DateField label="Bank Garnish Sent Date" :theme="theme" />
+          <DateField label="Bank Garnish Sent Date"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <DateField label="Bank Garnish Received Date" :theme="theme" />
+          <DateField label="Bank Garnish Received Date"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <DateField label="Unsatisfied Return Rec'd Date" :theme="theme" />
+          <DateField label="Unsatisfied Return Rec'd Date"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <DateField label="Garnish Recheck Date" :theme="theme" />
+          <DateField label="Garnish Recheck Date"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <SelectField label="County Executed" :options="[{value:'la',label:'Los Angeles'},{value:'sf',label:'San Francisco'},{value:'sd',label:'San Diego'}]" default-value="la" :theme="theme" />
+          <SelectField label="County Executed" :options="[{value:'la',label:'Los Angeles'},{value:'sf',label:'San Francisco'},{value:'sd',label:'San Diego'}]" default-value="la"   />
         </v-col>
         <v-col cols="12" md="6" lg="4">
-          <SelectField label="Court Executed" :options="[{value:'superior',label:'Superior Court'},{value:'district',label:'District Court'}]" default-value="superior" :theme="theme" />
+          <SelectField label="Court Executed" :options="[{value:'superior',label:'Superior Court'},{value:'district',label:'District Court'}]" default-value="superior"   />
         </v-col>
       </v-row>
     </div>

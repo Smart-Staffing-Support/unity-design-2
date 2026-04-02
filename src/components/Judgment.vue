@@ -23,17 +23,17 @@
         <!-- Base Judgment Fields -->
         <v-row>
           <v-col cols="12" md="4">
-            <DateField label="Judgment Date" :theme="theme" />
+            <DateField label="Judgment Date"  />
           </v-col>
           <v-col cols="12" md="4">
-            <InputField label="Judgment Amount" placeholder="$0.00" type="number" :theme="theme" />
+            <InputField label="Judgment Amount" placeholder="$0.00" type="number"  />
           </v-col>
           <v-col cols="12" md="4">
             <SelectField
               label="Pre-Judgment Interest"
               :options="[{value:'simple',label:'Simple Interest'},{value:'compound',label:'Compound Interest'},{value:'none',label:'None'}]"
               default-value="simple"
-              :theme="theme"
+              
             />
           </v-col>
         </v-row>
@@ -59,14 +59,14 @@
 
           <v-row v-if="!postJudgmentInterest" align="end">
             <v-col cols="12" md="4">
-              <InputField label="Interest Amount" placeholder="0.00%" type="text" :theme="theme" />
+              <InputField label="Interest Amount" placeholder="0.00%" type="text" />
             </v-col>
             <v-col cols="12" md="4">
               <SelectField
                 label="Compounding"
                 :options="[{value:'daily',label:'Daily'},{value:'monthly',label:'Monthly'},{value:'annually',label:'Annually'}]"
                 default-value="daily"
-                :theme="theme"
+                
               />
             </v-col>
             <v-col cols="12" md="4">
@@ -281,8 +281,7 @@ import InputField from './shared/InputField.vue'
 import SelectField from './shared/SelectField.vue'
 import { useTheme } from 'vuetify'
 
-const theme = useTheme()
-const isDark = computed(() => theme.global.current.value.dark)  
+
 const postJudgmentInterest = ref(false)
 const preJudgmentPayments = ref(false)
 </script>
